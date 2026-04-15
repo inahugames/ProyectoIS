@@ -24,20 +24,20 @@ namespace ProyectoIS
         {
             MPPUsuarios DBUsuarios = new MPPUsuarios();
             List<Usuario> ListUsuarios = DBUsuarios.ObtenerUsuarios();
-            if (txtUser.Text != "" && txtPassword.Text != "")
+            if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;
                 string Password = txtPassword.Text;
                 foreach (Usuario user in ListUsuarios)
                 {
-                    if (User == user.Login && Password == user.Password)
+                    if (User == user.Login.Trim() && Password == user.Password.Trim())
                     {
                         if (user.Block == false && user.Activo == true)
                         { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                         else
                         { MessageBox.Show("Usuario Bloqueado, Contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                     }
-                    else if (User == user.Login && Password != user.Password)
+                    else if (User == user.Login.Trim() && Password != user.Password.Trim())
                     {
                         Login = Login - 1;
                         MessageBox.Show("Contraseña Incorrecta, Intentos Restantes:" + Login);
