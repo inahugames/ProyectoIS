@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="ProyectoIS/ProyectoIS.csproj" />
+  <Project Path="BE/BE.csproj" Id="80b7a884-794b-45fe-afdf-764be3b99fd0" />
+  <Project Path="DAL/DAL.csproj" Id="d9c6cac1-e13a-4222-a46f-321c8ef93eea" />
+  <Project Path="ProyectoIS/UI.csproj" Id="e94cd9a8-e8a4-4fdc-bf8e-351742c07f24" />
+  <Project Path="Servicios/Servicios.csproj" Id="366df5b8-7f80-45bf-b0a7-9c7fb0be9d73" />
 </Solution>

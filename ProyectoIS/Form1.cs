@@ -16,5 +16,15 @@ namespace ProyectoIS
         {
             InitializeComponent();
         }
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
