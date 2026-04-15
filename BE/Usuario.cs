@@ -8,8 +8,9 @@ namespace BE
 {
     public class Usuario
     {
+        // Atributos iniciales del usuario
         private int _dni;
-        public int DNI
+        public int DNI // Encapsulamiento
         {
             get { return _dni; }
             set { _dni = value; }
