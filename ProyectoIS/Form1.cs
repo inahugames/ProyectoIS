@@ -24,6 +24,7 @@ namespace ProyectoIS
         {
             MPPUsuarios DBUsuarios = new MPPUsuarios();
             List<Usuario> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            bool Success = false; // Se utiliza solamente para determinar si el usuario existe en la Base de Datos
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;
@@ -33,16 +34,19 @@ namespace ProyectoIS
                     if (User == user.Login.Trim() && Password == user.Password.Trim())
                     {
                         if (user.Block == false && user.Activo == true)
-                        { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                        { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
                         else
-                        { MessageBox.Show("Usuario Bloqueado, Contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                        { MessageBox.Show("Usuario Bloqueado, Contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); Success = true; }
                     }
                     else if (User == user.Login.Trim() && Password != user.Password.Trim())
                     {
                         Login = Login - 1;
                         MessageBox.Show("Contraseña Incorrecta, Intentos Restantes:" + Login);
                     }
+                    
                 }
+                if ( Success == false )
+                { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 if (Login == 0)
                 {
                     MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
