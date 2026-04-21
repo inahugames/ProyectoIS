@@ -35,5 +35,11 @@ namespace MPP
             }
             return usuarios;
         }
+
+        public bool BloquearUsuario(string login)
+        {
+            bool block = true;
+            return usuariossql.EditarUsuario(login, block) > 0;
+        }
     }
 }

@@ -31,7 +31,29 @@ namespace ProyectoIS
                 string Password = txtPassword.Text;
                 foreach (Usuario user in ListUsuarios)
                 {
-                    if (User == user.Login.Trim() && Password == user.Password.Trim())
+                    if (User == user.Login.Trim())
+                    {
+                        Success = true;
+                        if (user.Block == true)
+                        {
+                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                        else
+                        {
+                            if (Password != user.Password.Trim())
+                            {
+                                Login = Login - 1;
+                                MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            if (Password == user.Password.Trim())
+                            {
+                                { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
+                            }
+                        }
+
+                    }
+                    /*if (User == user.Login.Trim() && Password == user.Password.Trim())
                     {
                         if (user.Block == false && user.Activo == true)
                         { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
@@ -41,21 +63,25 @@ namespace ProyectoIS
                     else if (User == user.Login.Trim() && Password != user.Password.Trim())
                     {
                         Login = Login - 1;
-                        MessageBox.Show("Contraseña Incorrecta, Intentos Restantes:" + Login);
+                        MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Success = true;
                     }
                     
-                }
+                }*/
                 if ( Success == false )
-                { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                if (Login == 0)
-                {
-                    MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //Añadir lógica de bloqueo en BD más adelante
+                { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                    if (Login == 0)
+                    {
+                        MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MPPUsuarios mpp = new MPPUsuarios();
+                        mpp.BloquearUsuario(User);
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Complete los campos de Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Complete los campos de Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
