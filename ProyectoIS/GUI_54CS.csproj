@@ -91,17 +91,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BE\BE_74CS.csproj">
+    <ProjectReference Include="..\BE\BE_54CS.csproj">
       <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
-      <Name>BE_74CS</Name>
+      <Name>BE_54CS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MPP\MPP_74CS.csproj">
+    <ProjectReference Include="..\MPP\MPP_54CS.csproj">
       <Project>{3ab23c43-54fb-42b6-abb8-3efef745794b}</Project>
-      <Name>MPP_74CS</Name>
+      <Name>MPP_54CS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Servicios\Services_74CS.csproj">
+    <ProjectReference Include="..\Servicios\Services_54CS.csproj">
       <Project>{366df5b8-7f80-45bf-b0a7-9c7fb0be9d73}</Project>
-      <Name>Services_74CS</Name>
+      <Name>Services_54CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

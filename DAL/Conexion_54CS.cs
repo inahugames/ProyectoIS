@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class Conexion_74CS
+    public class Conexion_54CS
     {
         private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
     

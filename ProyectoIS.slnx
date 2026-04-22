@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="BE/BE_74CS.csproj" Id="80b7a884-794b-45fe-afdf-764be3b99fd0" />
-  <Project Path="DAL/DAL_74CS.csproj" Id="d9c6cac1-e13a-4222-a46f-321c8ef93eea" />
-  <Project Path="MPP/MPP_74CS.csproj" Id="3ab23c43-54fb-42b6-abb8-3efef745794b" />
-  <Project Path="ProyectoIS/GUI_74CS.csproj" Id="e94cd9a8-e8a4-4fdc-bf8e-351742c07f24" />
-  <Project Path="Servicios/Services_74CS.csproj" Id="366df5b8-7f80-45bf-b0a7-9c7fb0be9d73" />
+  <Project Path="BE/BE_54CS.csproj" Id="80b7a884-794b-45fe-afdf-764be3b99fd0" />
+  <Project Path="DAL/DAL_54CS.csproj" Id="d9c6cac1-e13a-4222-a46f-321c8ef93eea" />
+  <Project Path="MPP/MPP_54CS.csproj" Id="3ab23c43-54fb-42b6-abb8-3efef745794b" />
+  <Project Path="ProyectoIS/GUI_54CS.csproj" Id="e94cd9a8-e8a4-4fdc-bf8e-351742c07f24" />
+  <Project Path="Servicios/Services_54CS.csproj" Id="366df5b8-7f80-45bf-b0a7-9c7fb0be9d73" />
 </Solution>

@@ -22,14 +22,14 @@ namespace ProyectoIS
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            MPPUsuarios_74CS DBUsuarios = new MPPUsuarios_74CS();
-            List<Usuario_74CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
+            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
             bool Success = false; // Se utiliza solamente para determinar si el usuario existe en la Base de Datos
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;
                 string Password = txtPassword.Text;
-                foreach (Usuario_74CS user in ListUsuarios)
+                foreach (Usuario_54CS user in ListUsuarios)
                 {
                     if (User == user.Login_74CS.Trim())
                     {
@@ -49,10 +49,22 @@ namespace ProyectoIS
                             if (Password == user.Password_74CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
-                                SessionManager_74CS.Nombre_74CS = user.Nombre_74CS;
-                                SessionManager_74CS.Rol_74CS = user.Rol_74CS;
-                                SessionManager_74CS.Login_74CS = user.Login_74CS;
-                                SessionManager_74CS.Logged_74CS = true;
+                                SessionManager_54CS.Nombre_74CS = user.Nombre_74CS;
+                                SessionManager_54CS.Rol_74CS = user.Rol_74CS;
+                                SessionManager_54CS.Login_74CS = user.Login_74CS;
+                                SessionManager_54CS.Logged_74CS = true;
+                                Eventos_54CS Evento = new Eventos_54CS()
+                                {
+                                    Login_74CS = user.Login_74CS,
+                                    Fecha_74CS = System.DateTime.Today.ToString(),
+                                    Hora_74CS = System.DateTime.Now.ToString(),
+                                    Modulo_74CS = "Login",
+                                    Evento_74CS = "Login",
+                                    Criticidad_74CS = "1"
+                                };
+                                MPPEventos_54CS mppe = new MPPEventos_54CS();
+                                mppe.GuardarEvento(Evento);
+                                break;
                             }
                         }
 
@@ -77,7 +89,7 @@ namespace ProyectoIS
                     if (Login == 0)
                     {
                         MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        MPPUsuarios_74CS mpp = new MPPUsuarios_74CS();
+                        MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                         mpp.BloquearUsuario(User);
                     }
 

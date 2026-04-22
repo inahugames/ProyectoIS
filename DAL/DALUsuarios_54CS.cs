@@ -8,17 +8,17 @@ using Servicios;
 
 namespace DAL
 {
-    public class DALUsuarios_74CS
+    public class DALUsuarios_54CS
     {
-        private Conexion_74CS conexionSQL = new Conexion_74CS();
+        private Conexion_54CS conexionSQL = new Conexion_54CS();
         public DataTable ObtenerUsuarios()
         {
-            string query = "SELECT * FROM Usuarios_0724";
+            string query = "SELECT * FROM Usuarios_54CS";
             return conexionSQL.Leer(query);
         }
         public int BloquearUsuario(string usuario,bool bloqueo)
         {
-            string query = $"UPDATE Usuarios_0724 SET Block_0724=@Block WHERE Login_0724 = @Login";
+            string query = $"UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
 
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
@@ -28,19 +28,19 @@ namespace DAL
             return conexionSQL.Escribir(query, parametros);
         }
 
-        public int ActualizarUsuarios(List<Usuario_74CS> lista)
+        public int ActualizarUsuarios(List<Usuario_54CS> lista)
         {
-            foreach ( Usuario_74CS user in lista )
+            foreach ( Usuario_54CS user in lista )
             {
-                string query = $"UPDATE Usuarios_0724 SET Rol_0724=@Rol,Activo_0724=@Activo,Email_0724=@Email,Block_0724=@Block WHERE DNI_0724 = @DNI";
+                string query = $"UPDATE Usuarios_54CS SET Rol_54CS=@Rol,Activo_54CS=@Activo,Email_54CS=@Email,Block_54CS=@Block WHERE DNI_54CS = @DNI";
 
                 Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
-                    { "@Rol", user.Rol_74CS},
-                    { "@Activo", user.Activo_74CS },
-                    { "@Email", user.Email_74CS },
-                    { "@Block", user.Block_74CS },
-                    { "@DNI", user.DNI_74cs }
+                    { "@Rol", user.Rol_54CS},
+                    { "@Activo", user.Activo_54CS },
+                    { "@Email", user.Email_54CS },
+                    { "@Block", user.Block_54CS },
+                    { "@DNI", user.DNI_54cs }
                 };
                 return conexionSQL.Escribir(query, parametros);
             }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{366DF5B8-7F80-45BF-B0A7-9C7FB0BE9D73}</ProjectGuid>
+    <ProjectGuid>{3AB23C43-54FB-42B6-ABB8-3EFEF745794B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Servicios</RootNamespace>
-    <AssemblyName>Servicios</AssemblyName>
+    <RootNamespace>MPP</RootNamespace>
+    <AssemblyName>MPP</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,9 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MPPEventos_54CS.cs" />
+    <Compile Include="MPPUsuarios_54CS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionManager_74CS.cs" />
-    <Compile Include="Usuario_74CS.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BE\BE_54CS.csproj">
+      <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
+      <Name>BE_54CS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL_54CS.csproj">
+      <Project>{d9c6cac1-e13a-4222-a46f-321c8ef93eea}</Project>
+      <Name>DAL_54CS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servicios\Services_54CS.csproj">
+      <Project>{366df5b8-7f80-45bf-b0a7-9c7fb0be9d73}</Project>
+      <Name>Services_54CS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
