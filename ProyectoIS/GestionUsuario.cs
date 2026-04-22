@@ -29,7 +29,7 @@ namespace ProyectoIS
             string[] datos = dgvUsuarios.CurrentRow.AccessibilityObject.Value.Split(';');
             foreach (Usuario_54CS user in lista)
             {
-                if ( Convert.ToString(user.DNI_74cs) == datos[0])
+                if ( Convert.ToString(user.DNI_54cs) == datos[0])
                 {
                     seleccionado = user; break;
                 }
@@ -40,9 +40,9 @@ namespace ProyectoIS
         {
             foreach (Usuario_54CS user in lista)
             {
-                if (user.Login_74CS == seleccionado.Login_74CS)
+                if (user.Login_54CS == seleccionado.Login_54CS)
                 {
-                    user.Block_74CS = false;
+                    user.Block_54CS = false;
                     MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                     mpp.ActualizarUsuarios(lista);
                     break;
