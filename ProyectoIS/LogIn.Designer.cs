@@ -1,6 +1,6 @@
 ﻿namespace ProyectoIS
 {
-    partial class Form1
+    partial class LogIn
     {
         /// <summary>
         /// Variable del diseñador necesaria.

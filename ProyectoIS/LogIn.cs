@@ -10,13 +10,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Servicios;
 
 namespace ProyectoIS
 {
-    public partial class Form1 : Form
+    public partial class LogIn : Form
     {
         public int Login = 3;
-        public Form1()
+        public LogIn()
         {
             InitializeComponent();
         }
