@@ -22,31 +22,31 @@ namespace ProyectoIS
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            MPPUsuarios DBUsuarios = new MPPUsuarios();
-            List<Usuario> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            MPPUsuarios_74CS DBUsuarios = new MPPUsuarios_74CS();
+            List<Usuario_74CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
             bool Success = false; // Se utiliza solamente para determinar si el usuario existe en la Base de Datos
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;
                 string Password = txtPassword.Text;
-                foreach (Usuario user in ListUsuarios)
+                foreach (Usuario_74CS user in ListUsuarios)
                 {
-                    if (User == user.Login.Trim())
+                    if (User == user.Login_74CS.Trim())
                     {
                         Success = true;
-                        if (user.Block == true)
+                        if (user.Block_74CS == true)
                         {
                             MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
                         else
                         {
-                            if (Password != user.Password.Trim())
+                            if (Password != user.Password_74CS.Trim())
                             {
                                 Login = Login - 1;
                                 MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            if (Password == user.Password.Trim())
+                            if (Password == user.Password_74CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
                             }
@@ -73,7 +73,7 @@ namespace ProyectoIS
                     if (Login == 0)
                     {
                         MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        MPPUsuarios mpp = new MPPUsuarios();
+                        MPPUsuarios_74CS mpp = new MPPUsuarios_74CS();
                         mpp.BloquearUsuario(User);
                     }
 

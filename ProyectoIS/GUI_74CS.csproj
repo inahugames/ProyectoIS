@@ -82,13 +82,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BE\BE.csproj">
+    <ProjectReference Include="..\BE\BE_74CS.csproj">
       <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
-      <Name>BE</Name>
+      <Name>BE_74CS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MPP\MPP.csproj">
+    <ProjectReference Include="..\MPP\MPP_74CS.csproj">
       <Project>{3ab23c43-54fb-42b6-abb8-3efef745794b}</Project>
-      <Name>MPP</Name>
+      <Name>MPP_74CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

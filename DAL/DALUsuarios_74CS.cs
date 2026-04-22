@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALUsuarios
+    public class DALUsuarios_74CS
     {
-        private Conexion conexionSQL = new Conexion();
+        private Conexion_74CS conexionSQL = new Conexion_74CS();
         public DataTable ObtenerUsuarios()
         {
             string query = "SELECT * FROM Usuarios_0724";

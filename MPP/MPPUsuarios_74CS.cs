@@ -10,16 +10,16 @@ using DAL;
 
 namespace MPP
 {
-    public class MPPUsuarios
+    public class MPPUsuarios_74CS
     {
-        private DALUsuarios usuariossql = new DALUsuarios();
-        public List<Usuario> ObtenerUsuarios()
+        private DALUsuarios_74CS usuariossql = new DALUsuarios_74CS();
+        public List<Usuario_74CS> ObtenerUsuarios()
         {
             DataTable tabla = usuariossql.ObtenerUsuarios();
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Usuario_74CS> usuarios = new List<Usuario_74CS>();
             foreach (DataRow row in tabla.Rows)
             {
-                Usuario usuario= new Usuario()
+                Usuario_74CS usuario= new Usuario_74CS()
                 {
                     DNI = int.Parse(row["DNI_0724"].ToString()),
                     Nombre = row["Nombre_0724"].ToString(),
