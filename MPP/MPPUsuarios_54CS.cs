@@ -21,15 +21,15 @@ namespace MPP
             {
                 Usuario_54CS usuario = new Usuario_54CS()
                 {
-                    DNI_74cs = int.Parse(row["DNI_74CS"].ToString()),
-                    Nombre_74CS = row["Nombre_74CS"].ToString(),
-                    Apellido_74CS = row["Apellido_74CS"].ToString(),
-                    Login_74CS = row["Login_74CS"].ToString(),
-                    Password_74CS = row["Password_74CS"].ToString(),
-                    Rol_74CS = row["Rol_74CS"].ToString(),
-                    Email_74CS = row["Email_74CS"].ToString(),
-                    Block_74CS = Convert.ToBoolean(row["Block_74CS"].ToString()),
-                    Activo_74CS = Convert.ToBoolean(row["Activo_74CS"].ToString())
+                    DNI_54cs = int.Parse(row["DNI_54CS"].ToString()),
+                    Nombre_54CS = row["Nombre_54CS"].ToString(),
+                    Apellido_54CS = row["Apellido_54CS"].ToString(),
+                    Login_54CS = row["Login_54CS"].ToString(),
+                    Password_54CS = row["Password_54CS"].ToString(),
+                    Rol_54CS = row["Rol_54CS"].ToString(),
+                    Email_54CS = row["Email_54CS"].ToString(),
+                    Block_54CS = Convert.ToBoolean(row["Block_54CS"].ToString()),
+                    Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString())
                 };
                 usuarios.Add(usuario);
             }

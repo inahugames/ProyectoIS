@@ -31,36 +31,36 @@ namespace ProyectoIS
                 string Password = txtPassword.Text;
                 foreach (Usuario_54CS user in ListUsuarios)
                 {
-                    if (User == user.Login_74CS.Trim())
+                    if (User == user.Login_54CS.Trim())
                     {
                         Success = true;
-                        if (user.Block_74CS == true)
+                        if (user.Block_54CS == true)
                         {
                             MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
                         else
                         {
-                            if (Password != user.Password_74CS.Trim())
+                            if (Password != user.Password_54CS.Trim())
                             {
                                 Login = Login - 1;
                                 MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            if (Password == user.Password_74CS.Trim())
+                            if (Password == user.Password_54CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
-                                SessionManager_54CS.Nombre_74CS = user.Nombre_74CS;
-                                SessionManager_54CS.Rol_74CS = user.Rol_74CS;
-                                SessionManager_54CS.Login_74CS = user.Login_74CS;
-                                SessionManager_54CS.Logged_74CS = true;
+                                SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
+                                SessionManager_54CS.Rol_54CS = user.Rol_54CS;
+                                SessionManager_54CS.Login_54CS = user.Login_54CS;
+                                SessionManager_54CS.Logged_54CS = true;
                                 Eventos_54CS Evento = new Eventos_54CS()
                                 {
-                                    Login_74CS = user.Login_74CS,
-                                    Fecha_74CS = System.DateTime.Today.ToString(),
-                                    Hora_74CS = System.DateTime.Now.ToString(),
-                                    Modulo_74CS = "Login",
-                                    Evento_74CS = "Login",
-                                    Criticidad_74CS = "1"
+                                    Login_54CS = user.Login_54CS,
+                                    Fecha_54CS = System.DateTime.Today.ToString(),
+                                    Hora_54CS = System.DateTime.Now.ToString(),
+                                    Modulo_54CS = "Login",
+                                    Evento_54CS = "Login",
+                                    Criticidad_54CS = "1"
                                 };
                                 MPPEventos_54CS mppe = new MPPEventos_54CS();
                                 mppe.GuardarEvento(Evento);
