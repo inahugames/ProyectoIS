@@ -1,5 +1,4 @@
-﻿using BE;
-using MPP;
+﻿using MPP;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +49,10 @@ namespace ProyectoIS
                             if (Password == user.Password_74CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
+                                SessionManager_74CS.Nombre_74CS = user.Nombre_74CS;
+                                SessionManager_74CS.Rol_74CS = user.Rol_74CS;
+                                SessionManager_74CS.Login_74CS = user.Login_74CS;
+                                SessionManager_74CS.Logged_74CS = true;
                             }
                         }
 

@@ -73,5 +73,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Servicios\Services_74CS.csproj">
+      <Project>{366df5b8-7f80-45bf-b0a7-9c7fb0be9d73}</Project>
+      <Name>Services_74CS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

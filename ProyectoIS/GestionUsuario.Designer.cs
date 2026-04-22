@@ -67,6 +67,7 @@
             this.btnDesbloquear.TabIndex = 2;
             this.btnDesbloquear.Text = "button2";
             this.btnDesbloquear.UseVisualStyleBackColor = true;
+            this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
             // btnModificar
             // 
