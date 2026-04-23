@@ -36,12 +36,16 @@
             this.btnAplicar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.cbUsuario = new System.Windows.Forms.CheckBox();
+            this.CSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvUsuarios
             // 
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CSeleccionar});
             this.dgvUsuarios.Location = new System.Drawing.Point(13, 13);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.RowHeadersWidth = 51;
@@ -49,6 +53,7 @@
             this.dgvUsuarios.Size = new System.Drawing.Size(900, 572);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
+            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
             // 
             // btnCrear
             // 
@@ -84,7 +89,7 @@
             this.btnAct.Name = "btnAct";
             this.btnAct.Size = new System.Drawing.Size(181, 64);
             this.btnAct.TabIndex = 4;
-            this.btnAct.Text = "button4";
+            this.btnAct.Text = "Activo/Desactivar";
             this.btnAct.UseVisualStyleBackColor = true;
             // 
             // btnAplicar
@@ -114,11 +119,30 @@
             this.btnSalir.Text = "button7";
             this.btnSalir.UseVisualStyleBackColor = true;
             // 
+            // cbUsuario
+            // 
+            this.cbUsuario.AutoSize = true;
+            this.cbUsuario.Location = new System.Drawing.Point(26, 609);
+            this.cbUsuario.Name = "cbUsuario";
+            this.cbUsuario.Size = new System.Drawing.Size(113, 20);
+            this.cbUsuario.TabIndex = 8;
+            this.cbUsuario.Text = "Seleccionado";
+            this.cbUsuario.UseVisualStyleBackColor = true;
+            this.cbUsuario.CheckedChanged += new System.EventHandler(this.cbUsuario_CheckedChanged);
+            // 
+            // CSeleccionar
+            // 
+            this.CSeleccionar.HeaderText = "Seleccionado";
+            this.CSeleccionar.MinimumWidth = 6;
+            this.CSeleccionar.Name = "CSeleccionar";
+            this.CSeleccionar.Width = 125;
+            // 
             // GestionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 597);
+            this.ClientSize = new System.Drawing.Size(1129, 699);
+            this.Controls.Add(this.cbUsuario);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAplicar);
@@ -131,6 +155,7 @@
             this.Text = "GestionUsuario";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -144,5 +169,7 @@
         private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.CheckBox cbUsuario;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CSeleccionar;
     }
 }

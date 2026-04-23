@@ -14,6 +14,7 @@ namespace ProyectoIS
 {
     public partial class GestionUsuario : Form
     {
+        
         public Usuario_54CS seleccionado = new Usuario_54CS();
         public List<Usuario_54CS> lista = new List<Usuario_54CS>();
         public GestionUsuario()
@@ -22,6 +23,8 @@ namespace ProyectoIS
             MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
             dgvUsuarios.DataSource = mpp.ObtenerUsuarios();
             lista = mpp.ObtenerUsuarios();
+            dgvUsuarios.Columns[0].Visible = false;
+            cbUsuario.Checked=false;
         }
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -48,6 +51,31 @@ namespace ProyectoIS
                     break;
                 }
             }
+        }
+
+        private void cbUsuario_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbUsuario.Checked)
+            {
+                dgvUsuarios.Columns[0].Visible = true;
+                btnAct.Visible = true;
+            }
+            else
+            {
+                dgvUsuarios.Columns[0].Visible = false;
+                btnAct.Visible = false;
+            }
+           
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvUsuarios.Columns["CSeleccionar"].Index)
+            {
+                DataGridViewCheckBoxCell cbActivar = (DataGridViewCheckBoxCell)dgvUsuarios.Rows[e.RowIndex].Cells["CSeleccionar"];
+                cbActivar.Value = !Convert.ToBoolean(cbActivar.Value);
+            }
+        
         }
     }
 }

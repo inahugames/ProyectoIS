@@ -99,7 +99,7 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "¡BIENVENIDO!";
             // 
-            // Form1
+            // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,8 +111,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUser);
-            this.Name = "Form1";
+            this.Name = "LogIn";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.LogIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

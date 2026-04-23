@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormularioPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioPrincipal.Designer.cs">
+      <DependentUpon>FormularioPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestionUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormularioPrincipal.resx">
+      <DependentUpon>FormularioPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario.resx">
       <DependentUpon>GestionUsuario.cs</DependentUpon>
     </EmbeddedResource>

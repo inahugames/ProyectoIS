@@ -49,13 +49,15 @@ namespace ProyectoIS
                             if (Password == user.Password_54CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
+                                FormularioPrincipal frm = new FormularioPrincipal();
+                                frm.Show();
                                 SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
                                 SessionManager_54CS.Rol_54CS = user.Rol_54CS;
                                 SessionManager_54CS.Login_54CS = user.Login_54CS.Trim();
                                 SessionManager_54CS.Logged_54CS = true;
-                                Eventos_54CS Evento = new Eventos_54CS()
+                                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
                                 {
-                                    Login_54CS = SessionManager_54CS.Login_54CS,
+                                    Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
                                     Fecha_54CS = System.DateTime.Today,
                                     Hora_54CS = System.DateTime.Now,
                                     Modulo_54CS = "Login",
@@ -102,6 +104,11 @@ namespace ProyectoIS
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LogIn_Load(object sender, EventArgs e)
         {
 
         }
