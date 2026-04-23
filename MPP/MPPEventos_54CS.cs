@@ -21,8 +21,8 @@ namespace MPP
                 Eventos_54CS evento = new Eventos_54CS()
                 {
                     Login_54CS = row["Login_54CS"].ToString(),
-                    Fecha_54CS = row["Fecha_54CS"].ToString(),
-                    Hora_54CS = row["Hora_54CS"].ToString(),
+                    Fecha_54CS = Convert.ToDateTime(row["Fecha_54CS"]),
+                    Hora_54CS = Convert.ToDateTime(row["Hora_54CS"]),
                     Modulo_54CS = row["Modulo_54CS"].ToString(),
                     Evento_54CS = row["Evento_54CS"].ToString(),
                     Criticidad_54CS = row["Criticidad_54CS"].ToString()
