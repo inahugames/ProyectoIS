@@ -14,5 +14,10 @@ namespace Servicios
         public string Modulo_54CS;
         public string Evento_54CS;
         public string Criticidad_54CS;
+
+        public object[] GenerarObjeto()
+        {
+            return new object[] { Fecha_54CS, Hora_54CS, Modulo_54CS,Evento_54CS,Criticidad_54CS };
+        }
     }
 }

@@ -49,8 +49,6 @@ namespace ProyectoIS
                             if (Password == user.Password_54CS.Trim())
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
-                                FormularioPrincipal frm = new FormularioPrincipal();
-                                frm.Show();
                                 SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
                                 SessionManager_54CS.Rol_54CS = user.Rol_54CS;
                                 SessionManager_54CS.Login_54CS = user.Login_54CS.Trim();
@@ -66,6 +64,9 @@ namespace ProyectoIS
                                 };
                                 MPPEventos_54CS mppe = new MPPEventos_54CS();
                                 mppe.GuardarEvento(Evento);
+                                FormularioPrincipal frm = new FormularioPrincipal();
+                                frm.Show();
+                                this.Hide();
                                 break;
                             }
                         }

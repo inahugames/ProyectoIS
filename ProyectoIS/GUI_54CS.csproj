@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitacoraEventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BitacoraEventos.Designer.cs">
+      <DependentUpon>BitacoraEventos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormularioPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BitacoraEventos.resx">
+      <DependentUpon>BitacoraEventos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormularioPrincipal.resx">
       <DependentUpon>FormularioPrincipal.cs</DependentUpon>
     </EmbeddedResource>

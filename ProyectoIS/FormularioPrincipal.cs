@@ -100,5 +100,12 @@ namespace ProyectoIS
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BitacoraEventos formulario = new BitacoraEventos();
+            formulario.MdiParent = this;
+            formulario.Show();
+        }
     }
 }
