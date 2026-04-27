@@ -68,7 +68,7 @@
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(181, 64);
             this.btnCrear.TabIndex = 1;
-            this.btnCrear.Text = "button1";
+            this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
@@ -99,6 +99,7 @@
             this.btnAct.TabIndex = 4;
             this.btnAct.Text = "Activo/Desactivar";
             this.btnAct.UseVisualStyleBackColor = true;
+            this.btnAct.Click += new System.EventHandler(this.btnAct_Click);
             // 
             // btnAplicar
             // 

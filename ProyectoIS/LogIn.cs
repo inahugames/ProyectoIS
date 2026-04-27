@@ -24,7 +24,7 @@ namespace ProyectoIS
         {
             MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
             List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
-            bool Existe = false;
+            bool Existe = false; // se usa para determinar si existe el usuario en la bd
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;

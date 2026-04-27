@@ -38,6 +38,7 @@ namespace ProyectoIS
                     nuevo.Login_54CS = nuevo.Nombre_54CS + primeramitad;
                     nuevo.Password_54CS = encripta.EncriptarContraseña(nuevo.Apellido_54CS + segundamitad);
                     nuevo.Activo_54CS = true;
+                    nuevo.Block_54CS = false;
                 }
                 MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                 mpp.GuardarUsuario(nuevo);

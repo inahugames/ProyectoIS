@@ -107,5 +107,10 @@ namespace ProyectoIS
             formulario.MdiParent = this;
             formulario.Show();
         }
+
+        private void FormularioPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

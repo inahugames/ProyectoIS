@@ -83,5 +83,42 @@ namespace ProyectoIS
             CrearUsuario nuevo = new CrearUsuario();
             nuevo.Show();
         }
+
+        private void btnAct_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvUsuarios.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[0].Value) == true)
+                {
+                    DialogResult opcion;
+                    opcion = MessageBox.Show("Realmente quiere activar/desactivar el usuario?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (opcion == DialogResult.OK)
+                    {
+                        MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
+                        List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+                        foreach (Usuario_54CS user in lista)
+                        {
+                            if (user.DNI_54cs == Convert.ToInt32(row.Cells[1].Value))
+                            {
+                                if (user.Activo_54CS == true)
+                                {
+                                    user.Activo_54CS = false;
+                                    mpp.ActualizarUsuarios(lista);
+                                    MessageBox.Show("Se activo/desactivo el usuario", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    break;
+                                }
+                                else
+                                {
+                                    user.Activo_54CS = true;
+                                    mpp.ActualizarUsuarios(lista);
+                                    MessageBox.Show("Se activo/desactivo el usuario", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
