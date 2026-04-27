@@ -54,6 +54,12 @@
     <Compile Include="BitacoraEventos.Designer.cs">
       <DependentUpon>BitacoraEventos.cs</DependentUpon>
     </Compile>
+    <Compile Include="CrearUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearUsuario.Designer.cs">
+      <DependentUpon>CrearUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormularioPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BitacoraEventos.resx">
       <DependentUpon>BitacoraEventos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearUsuario.resx">
+      <DependentUpon>CrearUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormularioPrincipal.resx">
       <DependentUpon>FormularioPrincipal.cs</DependentUpon>

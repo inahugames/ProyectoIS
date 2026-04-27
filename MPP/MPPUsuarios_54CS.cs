@@ -46,5 +46,10 @@ namespace MPP
         {
             return usuariossql.ActualizarUsuarios(lista) > 0;
         }
+
+        public bool GuardarUsuario(Usuario_54CS user)
+        {
+            return usuariossql.GuardarUsuario(user) > 0;
+        }
     }
 }

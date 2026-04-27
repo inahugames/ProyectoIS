@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.CSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnCrear = new System.Windows.Forms.Button();
             this.btnDesbloquear = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.cbUsuario = new System.Windows.Forms.CheckBox();
-            this.CSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +55,13 @@
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
             // 
+            // CSeleccionar
+            // 
+            this.CSeleccionar.HeaderText = "Seleccionado";
+            this.CSeleccionar.MinimumWidth = 6;
+            this.CSeleccionar.Name = "CSeleccionar";
+            this.CSeleccionar.Width = 125;
+            // 
             // btnCrear
             // 
             this.btnCrear.Location = new System.Drawing.Point(936, 45);
@@ -63,6 +70,7 @@
             this.btnCrear.TabIndex = 1;
             this.btnCrear.Text = "button1";
             this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // btnDesbloquear
             // 
@@ -129,13 +137,6 @@
             this.cbUsuario.Text = "Seleccionado";
             this.cbUsuario.UseVisualStyleBackColor = true;
             this.cbUsuario.CheckedChanged += new System.EventHandler(this.cbUsuario_CheckedChanged);
-            // 
-            // CSeleccionar
-            // 
-            this.CSeleccionar.HeaderText = "Seleccionado";
-            this.CSeleccionar.MinimumWidth = 6;
-            this.CSeleccionar.Name = "CSeleccionar";
-            this.CSeleccionar.Width = 125;
             // 
             // GestionUsuario
             // 

@@ -41,12 +41,14 @@ namespace ProyectoIS
                         }
                         else
                         {
-                            if (Password != user.Password_54CS.Trim())
+                            Seguridad_54CS seg = new Seguridad_54CS();
+                            bool login = seg.VerificarContraseña(Password, user.Password_54CS);
+                            if (login == false)
                             {
                                 Login = Login - 1;
                                 MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            if (Password == user.Password_54CS.Trim())
+                            else if (login == true)
                             {
                                 { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
                                 SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
@@ -87,19 +89,20 @@ namespace ProyectoIS
                     }
                     
                 }*/
-                if ( Success == false )
-                { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
-                    if (Login == 0)
-                    {
-                        MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                        mpp.BloquearUsuario(User);
-                    }
+                    /*if ( Success == false )
+                    { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        if (Login == 0)
+                        {
+                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
+                            mpp.BloquearUsuario(User);
+                        }
 
-                    else
-                    {
-                        MessageBox.Show("Complete los campos de Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        else
+                        {
+                            MessageBox.Show("Complete los campos de Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }*/
                 }
             }
         }

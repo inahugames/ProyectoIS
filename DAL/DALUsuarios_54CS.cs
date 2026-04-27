@@ -46,5 +46,11 @@ namespace DAL
             }
             return 1;
         }
+
+        public int GuardarUsuario(Usuario_54CS user)
+        {
+            string query = $"INSERT INTO Usuarios_54CS VALUES ('{user.DNI_54cs}','{user.Apellido_54CS}','{user.Nombre_54CS}','{user.Login_54CS}','{user.Password_54CS}','{user.Rol_54CS}','{user.Email_54CS}','{user.Block_54CS}','{user.Activo_54CS}')";
+            return conexionSQL.Escribir(query);
+        }
     }
 }

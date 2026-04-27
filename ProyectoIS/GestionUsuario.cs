@@ -77,5 +77,11 @@ namespace ProyectoIS
             }
         
         }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            CrearUsuario nuevo = new CrearUsuario();
+            nuevo.Show();
+        }
     }
 }
