@@ -56,8 +56,8 @@ namespace ProyectoIS
                                 Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
                                 {
                                     Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
-                                    Fecha_54CS = System.DateTime.Today,
-                                    Hora_54CS = System.DateTime.Now,
+                                    Fecha_54CS = System.DateTime.Now,
+                                    //Hora_54CS = System.DateTime.Now,
                                     Modulo_54CS = "Login",
                                     Evento_54CS = "Login",
                                     Criticidad_54CS = "1"

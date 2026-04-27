@@ -10,14 +10,14 @@ namespace Servicios
     {
         public string Login_54CS;
         public DateTime Fecha_54CS { get; set; }
-        public DateTime Hora_54CS;
+        //public DateTime Hora_54CS;
         public string Modulo_54CS;
         public string Evento_54CS;
         public string Criticidad_54CS;
 
         public object[] GenerarObjeto()
         {
-            return new object[] { Fecha_54CS, Hora_54CS, Modulo_54CS,Evento_54CS,Criticidad_54CS };
+            return new object[] { Fecha_54CS, Modulo_54CS,Evento_54CS,Criticidad_54CS };
         }
     }
 }
