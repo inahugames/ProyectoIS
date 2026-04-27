@@ -24,7 +24,7 @@ namespace ProyectoIS
         {
             MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
             List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
-            bool Success = false; // Se utiliza solamente para determinar si el usuario existe en la Base de Datos
+            bool Existe = false;
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
                 string User = txtUser.Text;
@@ -33,77 +33,65 @@ namespace ProyectoIS
                 {
                     if (User == user.Login_54CS.Trim())
                     {
-                        Success = true;
                         if (user.Block_54CS == true)
                         {
                             MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Existe = true;
                             break;
                         }
                         else
                         {
                             Seguridad_54CS seg = new Seguridad_54CS();
-                            bool login = seg.VerificarContraseña(Password, user.Password_54CS);
-                            if (login == false)
+                            try
                             {
-                                Login = Login - 1;
-                                MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else if (login == true)
-                            {
-                                { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
-                                SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
-                                SessionManager_54CS.Rol_54CS = user.Rol_54CS;
-                                SessionManager_54CS.Login_54CS = user.Login_54CS.Trim();
-                                SessionManager_54CS.Logged_54CS = true;
-                                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
+                                bool login = seg.VerificarContraseña(Password, user.Password_54CS);
+                                if (login == false)
                                 {
-                                    Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
-                                    Fecha_54CS = System.DateTime.Now,
-                                    //Hora_54CS = System.DateTime.Now,
-                                    Modulo_54CS = "Login",
-                                    Evento_54CS = "Login",
-                                    Criticidad_54CS = "1"
-                                };
-                                MPPEventos_54CS mppe = new MPPEventos_54CS();
-                                mppe.GuardarEvento(Evento);
-                                FormularioPrincipal frm = new FormularioPrincipal();
-                                frm.Show();
-                                this.Hide();
-                                break;
+                                    Login = Login - 1;
+                                    MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Existe = true;
+                                    break;
+                                }
+                                else if (login == true)
+                                {
+                                    { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
+                                    SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
+                                    SessionManager_54CS.Rol_54CS = user.Rol_54CS;
+                                    SessionManager_54CS.Login_54CS = user.Login_54CS.Trim();
+                                    SessionManager_54CS.Logged_54CS = true;
+                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
+                                    {
+                                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                                        Fecha_54CS = System.DateTime.Now,
+                                        //Hora_54CS = System.DateTime.Now,
+                                        Modulo_54CS = "Login",
+                                        Evento_54CS = "Login",
+                                        Criticidad_54CS = "1"
+                                    };
+                                    MPPEventos_54CS mppe = new MPPEventos_54CS();
+                                    mppe.GuardarEvento(Evento);
+                                    FormularioPrincipal frm = new FormularioPrincipal();
+                                    frm.Show();
+                                    this.Hide();
+                                    break;
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Error al autenticar.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                             }
                         }
 
                     }
-                    /*if (User == user.Login.Trim() && Password == user.Password.Trim())
-                    {
-                        if (user.Block == false && user.Activo == true)
-                        { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Success = true; }
-                        else
-                        { MessageBox.Show("Usuario Bloqueado, Contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); Success = true; }
-                    }
-                    else if (User == user.Login.Trim() && Password != user.Password.Trim())
-                    {
-                        Login = Login - 1;
-                        MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Success = true;
-                    }
-                    
-                }*/
-                    /*if ( Success == false )
-                    { MessageBox.Show("Usuario no encontrado en la Base de Datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
-                        if (Login == 0)
-                        {
-                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                            mpp.BloquearUsuario(User);
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("Complete los campos de Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }*/
                 }
+            }
+            else
+            {
+                MessageBox.Show("Complete los campos de usuario y contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Existe == false)
+            {
+                MessageBox.Show("Usuario no encontrado en la Base de Datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
