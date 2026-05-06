@@ -78,7 +78,7 @@
             this.btnDesbloquear.Name = "btnDesbloquear";
             this.btnDesbloquear.Size = new System.Drawing.Size(181, 64);
             this.btnDesbloquear.TabIndex = 2;
-            this.btnDesbloquear.Text = "button2";
+            this.btnDesbloquear.Text = "Desbloquear";
             this.btnDesbloquear.UseVisualStyleBackColor = true;
             this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
@@ -88,7 +88,7 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(181, 64);
             this.btnModificar.TabIndex = 3;
-            this.btnModificar.Text = "button3";
+            this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // btnAct
@@ -107,7 +107,7 @@
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(181, 64);
             this.btnAplicar.TabIndex = 5;
-            this.btnAplicar.Text = "button5";
+            this.btnAplicar.Text = "Aplicar";
             this.btnAplicar.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
@@ -116,7 +116,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(181, 64);
             this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "button6";
+            this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // btnSalir
@@ -125,7 +125,7 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(181, 64);
             this.btnSalir.TabIndex = 7;
-            this.btnSalir.Text = "button7";
+            this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             // 
             // cbUsuario

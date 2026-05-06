@@ -16,6 +16,15 @@ namespace DAL
             string query = "SELECT * FROM Usuarios_54CS";
             return conexionSQL.Leer(query);
         }
+        public int EliminarUsuario(int dni)
+        {
+            string query = $"DELETE FROM Usuarios_54CS WHERE DNI_54CS = @DNI";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@DNI",dni }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
         public int BloquearUsuario(string usuario,bool bloqueo)
         {
             string query = $"UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";

@@ -36,6 +36,10 @@ namespace MPP
             return usuarios;
         }
 
+        public bool EliminarUsuario(int id)
+        {
+            return usuariossql.EliminarUsuario(id)>0;
+        }
         public bool BloquearUsuario(string login)
         {
             bool block = true;
