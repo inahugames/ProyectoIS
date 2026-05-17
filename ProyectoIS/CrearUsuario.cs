@@ -43,6 +43,16 @@ namespace ProyectoIS
                 MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                 mpp.GuardarUsuario(nuevo);
                 MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                {
+                    Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                    Fecha_54CS = System.DateTime.Now,
+                    Modulo_54CS = "Gestión de Usuario",
+                    Evento_54CS = "Usuario Creado",
+                    Criticidad_54CS = "3"
+                };
+                MPPEventos_54CS mppe = new MPPEventos_54CS();
+                mppe.GuardarEvento(Evento);
             }
             else
             {
@@ -51,6 +61,51 @@ namespace ProyectoIS
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nombre_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtRol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
         {
 
         }

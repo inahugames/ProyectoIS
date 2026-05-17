@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E94CD9A8-E8A4-4FDC-BF8E-351742C07F24}</ProjectGuid>
+    <ProjectGuid>{EF902D8B-DBE0-4991-9EB9-A5C23F7419EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ProyectoIS</RootNamespace>
-    <AssemblyName>ProyectoIS</AssemblyName>
+    <RootNamespace>ModificarUsuario</RootNamespace>
+    <AssemblyName>ModificarUsuario</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,62 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitacoraEventos.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BitacoraEventos.Designer.cs">
-      <DependentUpon>BitacoraEventos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CrearUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CrearUsuario.Designer.cs">
-      <DependentUpon>CrearUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormularioPrincipal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormularioPrincipal.Designer.cs">
-      <DependentUpon>FormularioPrincipal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GestionUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GestionUsuario.Designer.cs">
-      <DependentUpon>GestionUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogIn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogIn.Designer.cs">
-      <DependentUpon>LogIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModificarUsuario.Designer.cs">
-      <DependentUpon>ModificarUsuario.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BitacoraEventos.resx">
-      <DependentUpon>BitacoraEventos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrearUsuario.resx">
-      <DependentUpon>CrearUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormularioPrincipal.resx">
-      <DependentUpon>FormularioPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GestionUsuario.resx">
-      <DependentUpon>GestionUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LogIn.resx">
-      <DependentUpon>LogIn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModificarUsuario.resx">
-      <DependentUpon>ModificarUsuario.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -125,20 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BE\BE_54CS.csproj">
-      <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
-      <Name>BE_54CS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MPP\MPP_54CS.csproj">
-      <Project>{3ab23c43-54fb-42b6-abb8-3efef745794b}</Project>
-      <Name>MPP_54CS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Servicios\Services_54CS.csproj">
-      <Project>{366df5b8-7f80-45bf-b0a7-9c7fb0be9d73}</Project>
-      <Name>Services_54CS</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

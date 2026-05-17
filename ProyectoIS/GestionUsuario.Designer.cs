@@ -34,8 +34,7 @@
             this.btnDesbloquear = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAct = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.cbUsuario = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
@@ -46,11 +45,12 @@
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CSeleccionar});
-            this.dgvUsuarios.Location = new System.Drawing.Point(13, 13);
+            this.dgvUsuarios.Location = new System.Drawing.Point(10, 11);
+            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(2);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.RowHeadersWidth = 51;
             this.dgvUsuarios.RowTemplate.Height = 24;
-            this.dgvUsuarios.Size = new System.Drawing.Size(900, 572);
+            this.dgvUsuarios.Size = new System.Drawing.Size(675, 465);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
@@ -64,9 +64,10 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(936, 45);
+            this.btnCrear.Location = new System.Drawing.Point(702, 37);
+            this.btnCrear.Margin = new System.Windows.Forms.Padding(2);
             this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(181, 64);
+            this.btnCrear.Size = new System.Drawing.Size(136, 52);
             this.btnCrear.TabIndex = 1;
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
@@ -74,66 +75,70 @@
             // 
             // btnDesbloquear
             // 
-            this.btnDesbloquear.Location = new System.Drawing.Point(936, 115);
+            this.btnDesbloquear.Location = new System.Drawing.Point(702, 93);
+            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesbloquear.Name = "btnDesbloquear";
-            this.btnDesbloquear.Size = new System.Drawing.Size(181, 64);
+            this.btnDesbloquear.Size = new System.Drawing.Size(136, 52);
             this.btnDesbloquear.TabIndex = 2;
             this.btnDesbloquear.Text = "Desbloquear";
             this.btnDesbloquear.UseVisualStyleBackColor = true;
+            this.btnDesbloquear.Visible = false;
             this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(936, 185);
+            this.btnModificar.Location = new System.Drawing.Point(702, 150);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(181, 64);
+            this.btnModificar.Size = new System.Drawing.Size(136, 52);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Visible = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnAct
             // 
-            this.btnAct.Location = new System.Drawing.Point(936, 255);
+            this.btnAct.Location = new System.Drawing.Point(702, 207);
+            this.btnAct.Margin = new System.Windows.Forms.Padding(2);
             this.btnAct.Name = "btnAct";
-            this.btnAct.Size = new System.Drawing.Size(181, 64);
+            this.btnAct.Size = new System.Drawing.Size(136, 52);
             this.btnAct.TabIndex = 4;
-            this.btnAct.Text = "Activo/Desactivar";
+            this.btnAct.Text = "Activar/Desactivar";
             this.btnAct.UseVisualStyleBackColor = true;
+            this.btnAct.Visible = false;
             this.btnAct.Click += new System.EventHandler(this.btnAct_Click);
             // 
-            // btnAplicar
+            // btnEliminar
             // 
-            this.btnAplicar.Location = new System.Drawing.Point(936, 325);
-            this.btnAplicar.Name = "btnAplicar";
-            this.btnAplicar.Size = new System.Drawing.Size(181, 64);
-            this.btnAplicar.TabIndex = 5;
-            this.btnAplicar.Text = "Aplicar";
-            this.btnAplicar.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(936, 395);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(181, 64);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Location = new System.Drawing.Point(702, 264);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(136, 52);
+            this.btnEliminar.TabIndex = 5;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(936, 465);
+            this.btnSalir.Location = new System.Drawing.Point(702, 320);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(181, 64);
+            this.btnSalir.Size = new System.Drawing.Size(136, 52);
             this.btnSalir.TabIndex = 7;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // cbUsuario
             // 
             this.cbUsuario.AutoSize = true;
-            this.cbUsuario.Location = new System.Drawing.Point(26, 609);
+            this.cbUsuario.Location = new System.Drawing.Point(20, 495);
+            this.cbUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.cbUsuario.Name = "cbUsuario";
-            this.cbUsuario.Size = new System.Drawing.Size(113, 20);
+            this.cbUsuario.Size = new System.Drawing.Size(91, 17);
             this.cbUsuario.TabIndex = 8;
             this.cbUsuario.Text = "Seleccionado";
             this.cbUsuario.UseVisualStyleBackColor = true;
@@ -141,18 +146,18 @@
             // 
             // GestionUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 699);
+            this.ClientSize = new System.Drawing.Size(847, 568);
             this.Controls.Add(this.cbUsuario);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAplicar);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAct);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnDesbloquear);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.dgvUsuarios);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GestionUsuario";
             this.Text = "GestionUsuario";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
@@ -168,8 +173,7 @@
         private System.Windows.Forms.Button btnDesbloquear;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAct;
-        private System.Windows.Forms.Button btnAplicar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.CheckBox cbUsuario;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CSeleccionar;
