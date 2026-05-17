@@ -39,6 +39,12 @@ namespace ProyectoIS
                             Existe = true;
                             break;
                         }
+                        if (user.Activo_54CS == false)
+                        {
+                            MessageBox.Show("Usuario desactivado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Existe = true;
+                            break;
+                        }
                         else
                         {
                             MPPEventos_54CS mppev = new MPPEventos_54CS();
