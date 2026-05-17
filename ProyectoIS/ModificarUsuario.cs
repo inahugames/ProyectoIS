@@ -45,7 +45,7 @@ namespace ProyectoIS
                     mpp.ActualizarUsuarios(lista);
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
-                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                         Fecha_54CS = System.DateTime.Now,
                         Modulo_54CS = "Gestión de Usuario",
                         Evento_54CS = "Usuario Modificado",
@@ -53,6 +53,7 @@ namespace ProyectoIS
                     };
                     MPPEventos_54CS mppe = new MPPEventos_54CS();
                     mppe.GuardarEvento(Evento);
+                    MessageBox.Show($"Usuario con DNI {user.DNI_54cs} modificado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

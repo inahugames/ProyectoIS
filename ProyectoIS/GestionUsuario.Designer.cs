@@ -43,6 +43,8 @@
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Block = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,23 +58,25 @@
             this.Nombre,
             this.Apellido,
             this.Email,
-            this.Rol});
-            this.dgvUsuarios.Location = new System.Drawing.Point(13, 14);
-            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Rol,
+            this.Block,
+            this.Activo});
+            this.dgvUsuarios.Location = new System.Drawing.Point(10, 11);
+            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.RowHeadersWidth = 51;
             this.dgvUsuarios.RowTemplate.Height = 24;
-            this.dgvUsuarios.Size = new System.Drawing.Size(900, 572);
+            this.dgvUsuarios.Size = new System.Drawing.Size(675, 465);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(936, 46);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCrear.Location = new System.Drawing.Point(702, 37);
+            this.btnCrear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(181, 64);
+            this.btnCrear.Size = new System.Drawing.Size(136, 52);
             this.btnCrear.TabIndex = 1;
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
@@ -80,10 +84,10 @@
             // 
             // btnDesbloquear
             // 
-            this.btnDesbloquear.Location = new System.Drawing.Point(936, 114);
-            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDesbloquear.Location = new System.Drawing.Point(702, 93);
+            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDesbloquear.Name = "btnDesbloquear";
-            this.btnDesbloquear.Size = new System.Drawing.Size(181, 64);
+            this.btnDesbloquear.Size = new System.Drawing.Size(136, 52);
             this.btnDesbloquear.TabIndex = 2;
             this.btnDesbloquear.Text = "Desbloquear";
             this.btnDesbloquear.UseVisualStyleBackColor = true;
@@ -92,10 +96,10 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(936, 185);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnModificar.Location = new System.Drawing.Point(702, 150);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(181, 64);
+            this.btnModificar.Size = new System.Drawing.Size(136, 52);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -104,10 +108,10 @@
             // 
             // btnAct
             // 
-            this.btnAct.Location = new System.Drawing.Point(936, 255);
-            this.btnAct.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAct.Location = new System.Drawing.Point(702, 207);
+            this.btnAct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAct.Name = "btnAct";
-            this.btnAct.Size = new System.Drawing.Size(181, 64);
+            this.btnAct.Size = new System.Drawing.Size(136, 52);
             this.btnAct.TabIndex = 4;
             this.btnAct.Text = "Activar/Desactivar";
             this.btnAct.UseVisualStyleBackColor = true;
@@ -116,10 +120,10 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(936, 325);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEliminar.Location = new System.Drawing.Point(702, 264);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(181, 64);
+            this.btnEliminar.Size = new System.Drawing.Size(136, 52);
             this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -128,10 +132,10 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(936, 394);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSalir.Location = new System.Drawing.Point(702, 320);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(181, 64);
+            this.btnSalir.Size = new System.Drawing.Size(136, 52);
             this.btnSalir.TabIndex = 7;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -140,10 +144,10 @@
             // cbUsuario
             // 
             this.cbUsuario.AutoSize = true;
-            this.cbUsuario.Location = new System.Drawing.Point(27, 609);
-            this.cbUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbUsuario.Location = new System.Drawing.Point(20, 495);
+            this.cbUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbUsuario.Name = "cbUsuario";
-            this.cbUsuario.Size = new System.Drawing.Size(113, 20);
+            this.cbUsuario.Size = new System.Drawing.Size(91, 17);
             this.cbUsuario.TabIndex = 8;
             this.cbUsuario.Text = "Seleccionado";
             this.cbUsuario.UseVisualStyleBackColor = true;
@@ -198,11 +202,25 @@
             this.Rol.Name = "Rol";
             this.Rol.Width = 125;
             // 
+            // Block
+            // 
+            this.Block.HeaderText = "Block";
+            this.Block.Name = "Block";
+            this.Block.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Block.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Activo
+            // 
+            this.Activo.HeaderText = "Activo";
+            this.Activo.Name = "Activo";
+            this.Activo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Activo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // GestionUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 699);
+            this.ClientSize = new System.Drawing.Size(847, 568);
             this.Controls.Add(this.cbUsuario);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnEliminar);
@@ -211,7 +229,7 @@
             this.Controls.Add(this.btnDesbloquear);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.dgvUsuarios);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GestionUsuario";
             this.Text = "GestionUsuario";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
@@ -237,5 +255,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Block;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Activo;
     }
 }

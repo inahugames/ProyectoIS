@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.dgvEventos = new System.Windows.Forms.DataGridView();
-            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Módulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Criticidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCriticidad = new System.Windows.Forms.TextBox();
             this.btnFiltraCrit = new System.Windows.Forms.Button();
             this.fechaPicker = new System.Windows.Forms.DateTimePicker();
             this.btnFiltraFecha = new System.Windows.Forms.Button();
             this.btnFiltraLogin = new System.Windows.Forms.Button();
             this.txtLogin = new System.Windows.Forms.TextBox();
+            this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Módulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Criticidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             this.Login,
             this.Fecha,
             this.Módulo,
+            this.Evento,
             this.Criticidad});
             this.dgvEventos.Location = new System.Drawing.Point(10, 11);
             this.dgvEventos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -58,34 +60,6 @@
             this.dgvEventos.Size = new System.Drawing.Size(594, 445);
             this.dgvEventos.TabIndex = 0;
             this.dgvEventos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Login
-            // 
-            this.Login.HeaderText = "Login";
-            this.Login.MinimumWidth = 6;
-            this.Login.Name = "Login";
-            this.Login.Width = 125;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.MinimumWidth = 6;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Width = 125;
-            // 
-            // Módulo
-            // 
-            this.Módulo.HeaderText = "Módulo";
-            this.Módulo.MinimumWidth = 6;
-            this.Módulo.Name = "Módulo";
-            this.Módulo.Width = 125;
-            // 
-            // Criticidad
-            // 
-            this.Criticidad.HeaderText = "Criticidad";
-            this.Criticidad.MinimumWidth = 6;
-            this.Criticidad.Name = "Criticidad";
-            this.Criticidad.Width = 125;
             // 
             // txtCriticidad
             // 
@@ -143,6 +117,39 @@
             this.txtLogin.Size = new System.Drawing.Size(107, 20);
             this.txtLogin.TabIndex = 5;
             // 
+            // Login
+            // 
+            this.Login.HeaderText = "Login";
+            this.Login.MinimumWidth = 6;
+            this.Login.Name = "Login";
+            this.Login.Width = 125;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.MinimumWidth = 6;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.Width = 125;
+            // 
+            // Módulo
+            // 
+            this.Módulo.HeaderText = "Módulo";
+            this.Módulo.MinimumWidth = 6;
+            this.Módulo.Name = "Módulo";
+            this.Módulo.Width = 125;
+            // 
+            // Evento
+            // 
+            this.Evento.HeaderText = "Evento";
+            this.Evento.Name = "Evento";
+            // 
+            // Criticidad
+            // 
+            this.Criticidad.HeaderText = "Criticidad";
+            this.Criticidad.MinimumWidth = 6;
+            this.Criticidad.Name = "Criticidad";
+            this.Criticidad.Width = 125;
+            // 
             // BitacoraEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,13 +176,14 @@
         private System.Windows.Forms.DataGridView dgvEventos;
         private System.Windows.Forms.TextBox txtCriticidad;
         private System.Windows.Forms.Button btnFiltraCrit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Módulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Criticidad;
         private System.Windows.Forms.DateTimePicker fechaPicker;
         private System.Windows.Forms.Button btnFiltraFecha;
         private System.Windows.Forms.Button btnFiltraLogin;
         private System.Windows.Forms.TextBox txtLogin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Módulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Evento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Criticidad;
     }
 }

@@ -15,7 +15,7 @@ namespace ProyectoIS
 {
     public partial class LogIn : Form
     {
-        public int Login = 3;
+        public int Login = 4;
         public LogIn()
         {
             InitializeComponent();
@@ -41,27 +41,59 @@ namespace ProyectoIS
                         }
                         else
                         {
+                            MPPEventos_54CS mppev = new MPPEventos_54CS();
+                            List<Eventos_54CS> listaeventos = mppev.ObtenerEventos();
+                            foreach (Eventos_54CS ev in listaeventos)
+                            {
+                                if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea" && DateTime.Now < ev.Fecha_54CS.AddHours(3))
+                                {
+                                    Login = Login - 1;
+                                }
+                            }
                             Seguridad_54CS seg = new Seguridad_54CS();
                             try
                             {
                                 bool login = seg.VerificarContraseña(Password, user.Password_54CS);
                                 if (login == false)
                                 {
-                                    Login = Login - 1;
-                                    MessageBox.Show("Contraseña Incorrecta, Intentos Restantes: " + Login, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                                    {
+                                        Login_54CS = User, // mismo login que el usuario que se logeo
+                                        Fecha_54CS = System.DateTime.Now,
+                                        Modulo_54CS = "Login",
+                                        Evento_54CS = "Contraseña Errónea",
+                                        Criticidad_54CS = "1"
+                                    };
+                                    mppev.GuardarEvento(Evento);
+                                    listaeventos = mppev.ObtenerEventos();  
+                                    if ( Login <= 0 )
+                                    {
+                                                user.Block_54CS = true;
+                                                MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                Existe = true;
+                                                Eventos_54CS Eventito = new Eventos_54CS() //Crear un evento
+                                                {
+                                                    Login_54CS = User, // mismo login que el usuario que se logeo
+                                                    Fecha_54CS = System.DateTime.Now,
+                                                    Modulo_54CS = "Login",
+                                                    Evento_54CS = "Usuario Bloqueado",
+                                                    Criticidad_54CS = "2"
+                                                };
+                                                mppev.GuardarEvento(Eventito);
+                                                MPPUsuarios_54CS mppuser = new MPPUsuarios_54CS();
+                                                mppuser.BloquearUsuario(user.Login_54CS);
+                                                break;
+                                     }
+                                    else if (Login >= 1) { MessageBox.Show("Contraseña Incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                                     Existe = true;
-                                    break;
                                 }
                                 else if (login == true)
                                 {
                                     { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
-                                    SessionManager_54CS.Nombre_54CS = user.Nombre_54CS;
-                                    SessionManager_54CS.Rol_54CS = user.Rol_54CS;
-                                    SessionManager_54CS.Login_54CS = user.Login_54CS.Trim();
-                                    SessionManager_54CS.Logged_54CS = true;
+                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
                                     {
-                                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                                         Fecha_54CS = System.DateTime.Now,
                                         Modulo_54CS = "Login",
                                         Evento_54CS = "Login",
@@ -102,6 +134,11 @@ namespace ProyectoIS
         private void LogIn_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void LogIn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

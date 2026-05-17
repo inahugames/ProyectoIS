@@ -40,7 +40,7 @@ namespace ProyectoIS
             {
                 if (txtCriticidad.Text == evento.Criticidad_54CS)
                 {
-                    dgvEventos.Rows.Add(evento.Login_54CS, evento.Fecha_54CS, evento.Modulo_54CS, evento.Criticidad_54CS);
+                    dgvEventos.Rows.Add(evento.Login_54CS, evento.Fecha_54CS, evento.Modulo_54CS, evento.Evento_54CS, evento.Criticidad_54CS);
                 }
             }
         }

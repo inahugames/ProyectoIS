@@ -48,7 +48,14 @@ namespace MPP
 
         public bool ActualizarUsuarios(List<Usuario_54CS> lista)
         {
-            return usuariossql.ActualizarUsuarios(lista) > 0;
+            if (lista != null)
+            {
+                foreach (Usuario_54CS user in lista)
+                {
+                    usuariossql.ActualizarUsuarios(user);
+                }
+            }
+            return true;
         }
 
         public bool GuardarUsuario(Usuario_54CS user)

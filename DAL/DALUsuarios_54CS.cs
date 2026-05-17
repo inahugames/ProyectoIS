@@ -37,10 +37,8 @@ namespace DAL
             return conexionSQL.Escribir(query, parametros);
         }
 
-        public int ActualizarUsuarios(List<Usuario_54CS> lista)
+        public int ActualizarUsuarios(Usuario_54CS user)
         {
-            foreach ( Usuario_54CS user in lista )
-            {
                 string query = $"UPDATE Usuarios_54CS SET Rol_54CS=@Rol,Activo_54CS=@Activo,Email_54CS=@Email,Block_54CS=@Block WHERE DNI_54CS = @DNI";
 
                 Dictionary<string, object> parametros = new Dictionary<string, object>()
@@ -52,8 +50,6 @@ namespace DAL
                     { "@DNI", user.DNI_54cs }
                 };
                 return conexionSQL.Escribir(query, parametros);
-            }
-            return 1;
         }
 
         public int GuardarUsuario(Usuario_54CS user)

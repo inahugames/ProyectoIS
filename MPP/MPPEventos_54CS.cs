@@ -38,5 +38,9 @@ namespace MPP
             return DAL.GuardarEvento(eventito) > 0;
         }
 
+        public bool EliminarEvento(Eventos_54CS evento)
+        {
+            return DAL.EliminarEvento(evento) > 0;
+        }
     }
 }

@@ -41,14 +41,14 @@ namespace ProyectoIS
         {
             foreach (Usuario_54CS user in lista)
             {
-                if (user.Login_54CS == seleccionado.Login_54CS)
+                if (user.Login_54CS == seleccionado.Login_54CS && user.Block_54CS == true)
                 {
                     user.Block_54CS = false;
                     MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                     mpp.ActualizarUsuarios(lista);
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
-                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                         Fecha_54CS = System.DateTime.Now,
                         Modulo_54CS = "Gestión de Usuario",
                         Evento_54CS = "Usuario Desbloqueado",
@@ -56,9 +56,23 @@ namespace ProyectoIS
                     };
                     MPPEventos_54CS mppe = new MPPEventos_54CS();
                     mppe.GuardarEvento(Evento);
+                    MessageBox.Show($"Usuario con DNI {user.DNI_54cs} desbloqueado exitosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    List<Eventos_54CS> listaev = mppe.ObtenerEventos();
+                    foreach (Eventos_54CS ev in listaev)
+                    {
+                        if (DateTime.Now < ev.Fecha_54CS.AddHours(3))
+                        {
+                            mppe.EliminarEvento(ev);
+                        }
+                    }        
                     break;
                 }
+                else if (user.Login_54CS == seleccionado.Login_54CS && user.Block_54CS == false)
+                {
+                    MessageBox.Show("El usuario seleccionado no se encuentra bloqueado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+            Actualizar();
         }
 
         private void cbUsuario_CheckedChanged(object sender, EventArgs e)
@@ -122,7 +136,7 @@ namespace ProyectoIS
                                     MessageBox.Show($"Se desactivó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
-                                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                                         Fecha_54CS = System.DateTime.Now,
                                         Modulo_54CS = "Gestión de Usuario",
                                         Evento_54CS = "Desactivación de usuario",
@@ -139,7 +153,7 @@ namespace ProyectoIS
                                     MessageBox.Show($"Se activó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
-                                        Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                                         Fecha_54CS = System.DateTime.Now,
                                         Modulo_54CS = "Gestión de Usuario",
                                         Evento_54CS = "Activación de usuario",
@@ -165,11 +179,12 @@ namespace ProyectoIS
 
         public void Actualizar()
         {
+            dgvUsuarios.Rows.Clear();
             MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
             lista = mpp.ObtenerUsuarios();
             foreach (Usuario_54CS v in lista)
             {
-                dgvUsuarios.Rows.Add(v.Activo_54CS, v.DNI_54cs,v.Login_54CS, v.Nombre_54CS, v.Apellido_54CS, v.Email_54CS, v.Rol_54CS);
+                dgvUsuarios.Rows.Add(false, v.DNI_54cs,v.Login_54CS, v.Nombre_54CS, v.Apellido_54CS, v.Email_54CS, v.Rol_54CS, v.Block_54CS, v.Activo_54CS);
             }
             dgvUsuarios.Columns[0].Visible = false;
             cbUsuario.Checked = false;
@@ -191,7 +206,7 @@ namespace ProyectoIS
                         MessageBox.Show("Usuario eliminado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                         {
-                            Login_54CS = SessionManager_54CS.Login_54CS, // mismo login que el usuario que se logeo
+                            Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
                             Fecha_54CS = System.DateTime.Now,
                             Modulo_54CS = "Gestión de Usuario",
                             Evento_54CS = "Eliminación de Usuario",
