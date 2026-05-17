@@ -24,6 +24,7 @@ namespace ProyectoIS
             Actualizar();
         }
 
+
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string[] datos = dgvUsuarios.CurrentRow.AccessibilityObject.Value.Split(';');
@@ -165,8 +166,11 @@ namespace ProyectoIS
         public void Actualizar()
         {
             MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-            dgvUsuarios.DataSource = mpp.ObtenerUsuarios();
             lista = mpp.ObtenerUsuarios();
+            foreach (Usuario_54CS v in lista)
+            {
+                dgvUsuarios.Rows.Add(v.Activo_54CS, v.DNI_54cs,v.Login_54CS, v.Nombre_54CS, v.Apellido_54CS, v.Email_54CS, v.Rol_54CS);
+            }
             dgvUsuarios.Columns[0].Visible = false;
             cbUsuario.Checked = false;
         }
