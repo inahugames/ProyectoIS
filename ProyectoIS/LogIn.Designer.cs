@@ -34,23 +34,25 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnCambiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(290, 141);
-            this.txtUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(2);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(76, 20);
             this.txtUser.TabIndex = 0;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(290, 207);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Location = new System.Drawing.Point(290, 176);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(76, 20);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -65,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(228, 212);
+            this.label2.Location = new System.Drawing.Point(228, 181);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
@@ -74,8 +76,8 @@
             // 
             // btnLogIn
             // 
-            this.btnLogIn.Location = new System.Drawing.Point(182, 254);
-            this.btnLogIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogIn.Location = new System.Drawing.Point(36, 259);
+            this.btnLogIn.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.Size = new System.Drawing.Size(253, 70);
             this.btnLogIn.TabIndex = 4;
@@ -94,18 +96,30 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "¡BIENVENIDO!";
             // 
+            // btnCambiar
+            // 
+            this.btnCambiar.Location = new System.Drawing.Point(336, 259);
+            this.btnCambiar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCambiar.Name = "btnCambiar";
+            this.btnCambiar.Size = new System.Drawing.Size(253, 70);
+            this.btnCambiar.TabIndex = 7;
+            this.btnCambiar.Text = "Cambiar Clave";
+            this.btnCambiar.UseVisualStyleBackColor = true;
+            this.btnCambiar.Click += new System.EventHandler(this.btnCambiar_Click);
+            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btnCambiar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUser);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LogIn";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogIn_FormClosed);
@@ -123,6 +137,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnCambiar;
     }
 }
 

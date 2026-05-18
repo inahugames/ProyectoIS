@@ -57,5 +57,11 @@ namespace DAL
             string query = $"INSERT INTO Usuarios_54CS VALUES ('{user.DNI_54cs}','{user.Apellido_54CS}','{user.Nombre_54CS}','{user.Login_54CS}','{user.Password_54CS}','{user.Rol_54CS}','{user.Email_54CS}','{user.Block_54CS}','{user.Activo_54CS}')";
             return conexionSQL.Escribir(query);
         }
+
+        public int ActualizarContraseña(string usuario, string contraseña)
+        {
+            string query = $"UPDATE Usuarios_54CS SET Password_54CS='{contraseña}' WHERE Login_54CS='{usuario}'";
+            return conexionSQL.Escribir(query);
+        }
     }
 }

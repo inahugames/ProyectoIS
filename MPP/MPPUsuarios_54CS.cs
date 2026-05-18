@@ -62,5 +62,10 @@ namespace MPP
         {
             return usuariossql.GuardarUsuario(user) > 0;
         }
+
+        public bool ActualizarContraseña(string usuario, string password)
+        {
+            return usuariossql.ActualizarContraseña(usuario, password) > 0;
+        }
     }
 }

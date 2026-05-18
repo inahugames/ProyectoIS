@@ -15,7 +15,6 @@ namespace ProyectoIS
 {
     public partial class LogIn : Form
     {
-        public int Login = 4;
         public LogIn()
         {
             InitializeComponent();
@@ -49,6 +48,7 @@ namespace ProyectoIS
                         {
                             MPPEventos_54CS mppev = new MPPEventos_54CS();
                             List<Eventos_54CS> listaeventos = mppev.ObtenerEventos();
+                            int Login = 4;
                             foreach (Eventos_54CS ev in listaeventos)
                             {
                                 if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea" && DateTime.Now < ev.Fecha_54CS.AddHours(3))
@@ -145,6 +145,108 @@ namespace ProyectoIS
         private void LogIn_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnCambiar_Click(object sender, EventArgs e)
+        {
+            MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
+            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            bool Existe = false; // se usa para determinar si existe el usuario en la bd
+            if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
+            {
+                string User = txtUser.Text;
+                string Password = txtPassword.Text;
+                foreach (Usuario_54CS user in ListUsuarios)
+                {
+                    if (User == user.Login_54CS.Trim())
+                    {
+                        if (user.Block_54CS == true)
+                        {
+                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Existe = true;
+                            break;
+                        }
+                        if (user.Activo_54CS == false)
+                        {
+                            MessageBox.Show("Usuario desactivado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Existe = true;
+                            break;
+                        }
+                        else
+                        {
+                            MPPEventos_54CS mppev = new MPPEventos_54CS();
+                            Seguridad_54CS seg = new Seguridad_54CS();
+                            try
+                            {
+                                bool contracorrecta = seg.VerificarContraseña(Password, user.Password_54CS);
+                                if (contracorrecta == false)
+                                {
+                                    int intentos = 3;
+                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                                    {
+                                        Login_54CS = User, // mismo login que el usuario que se logeo
+                                        Fecha_54CS = System.DateTime.Now,
+                                        Modulo_54CS = "Login",
+                                        Evento_54CS = "Contraseña Errónea",
+                                        Criticidad_54CS = "2"
+                                    };
+                                    mppev.GuardarEvento(Evento);
+                                    List<Eventos_54CS> listev = mppev.ObtenerEventos();
+                                    foreach (Eventos_54CS ev in listev)
+                                    {
+                                        if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea")
+                                        {
+                                            intentos = intentos - 1;
+                                        }
+                                    }
+                                    Existe = true;
+                                    MessageBox.Show("Contraseña incorrecta.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if ( intentos <= 0)
+                                    {
+                                        user.Block_54CS = true;
+                                        Eventos_54CS Eventito = new Eventos_54CS() //Crear un evento
+                                        {
+                                            Login_54CS = User, // mismo login que el usuario que se logeo
+                                            Fecha_54CS = System.DateTime.Now,
+                                            Modulo_54CS = "Login",
+                                            Evento_54CS = "Usuario Bloqueado",
+                                            Criticidad_54CS = "2"
+                                        };
+                                        mppev.GuardarEvento(Eventito);
+                                        MPPUsuarios_54CS mppuser = new MPPUsuarios_54CS();
+                                        mppuser.BloquearUsuario(user.Login_54CS);
+                                        ListUsuarios = mppuser.ObtenerUsuarios();
+                                        MessageBox.Show("Usuario bloqueado, contacte a un administrador.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    break;
+                                }
+                                else if (contracorrecta == true)
+                                {
+                                    CambiarContraseña cambia = new CambiarContraseña(user);
+                                    cambia.ShowDialog();
+                                    ListUsuarios = DBUsuarios.ObtenerUsuarios();
+                                    Existe = true;
+                                    break;
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Error al autenticar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Complete los campos de usuario y contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Existe == false)
+            {
+                MessageBox.Show("Usuario no encontrado en la Base de Datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

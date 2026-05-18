@@ -54,6 +54,12 @@
     <Compile Include="BitacoraEventos.Designer.cs">
       <DependentUpon>BitacoraEventos.cs</DependentUpon>
     </Compile>
+    <Compile Include="CambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarContraseña.Designer.cs">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="CrearUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BitacoraEventos.resx">
       <DependentUpon>BitacoraEventos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CambiarContraseña.resx">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CrearUsuario.resx">
       <DependentUpon>CrearUsuario.cs</DependentUpon>
