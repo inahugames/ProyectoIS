@@ -31,14 +31,6 @@ namespace ProyectoIS
                     string rolIngresado = txtRol.Text.Trim();
                     MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                     List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
-                    /*foreach (Usuario_54CS user in lista)
-                    {
-                        if (Convert.ToString(user.DNI_54cs) == txtDNI.Text.Replace(".", "").Trim() || user.Email_54CS.ToLower() == emailIngresado)
-                        {
-                            MessageBox.Show("El usuario ya se encuentra registrado. No es necesario que se vuelva a registrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            this.Close();
-                        }
-                    }*/
                     Seguridad_54CS encripta = new Seguridad_54CS();
                     string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios
                     int Mitad = dni.Length / 2;

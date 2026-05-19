@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MPP;
 
 namespace ProyectoIS
 {
@@ -36,12 +37,33 @@ namespace ProyectoIS
 
         private void FormularioPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
+            MPPEventos_54CS mppev = new MPPEventos_54CS();
+            Eventos_54CS evento = new Eventos_54CS()
+            {
+                Criticidad_54CS = "1",
+                Evento_54CS = "Logout",
+                Modulo_54CS = "Login",
+                Fecha_54CS = DateTime.Now,
+                Login_54CS = SessionManager_54CS.Instancia.Login_54CS
+            };
+            mppev.GuardarEvento(evento);
+            SessionManager_54CS.Logout();
             Application.Exit();
         }
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MPPEventos_54CS mppev = new MPPEventos_54CS();
+            Eventos_54CS evento = new Eventos_54CS()
+            {
+                Criticidad_54CS = "1",
+                Evento_54CS = "Logout",
+                Modulo_54CS = "Login",
+                Fecha_54CS = DateTime.Now,
+                Login_54CS = SessionManager_54CS.Instancia.Login_54CS
+            };
             SessionManager_54CS.Logout();
+            mppev.GuardarEvento(evento);
             LogIn nuevo = new LogIn();
             this.Hide();
             nuevo.Show();
