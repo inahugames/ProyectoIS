@@ -403,7 +403,7 @@
             this.Controls.Add(this.dgvUsuarios);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GestionUsuario";
-            this.Text = "GestionUsuario";
+            this.Text = "Gestión de Usuarios";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
