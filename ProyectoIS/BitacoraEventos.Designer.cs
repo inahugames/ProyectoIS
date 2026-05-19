@@ -34,7 +34,7 @@
             this.Módulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Criticidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaPicker = new System.Windows.Forms.DateTimePicker();
+            this.fechaPickerInicio = new System.Windows.Forms.DateTimePicker();
             this.btnAplicarFiltros = new System.Windows.Forms.Button();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.btnCancelarFiltros = new System.Windows.Forms.Button();
@@ -45,6 +45,8 @@
             this.comboCriticidad = new System.Windows.Forms.ComboBox();
             this.comboMódulo = new System.Windows.Forms.ComboBox();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.fechaPickerFin = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,13 +101,13 @@
             this.Criticidad.Name = "Criticidad";
             this.Criticidad.Width = 125;
             // 
-            // fechaPicker
+            // fechaPickerInicio
             // 
-            this.fechaPicker.Location = new System.Drawing.Point(749, 42);
-            this.fechaPicker.Name = "fechaPicker";
-            this.fechaPicker.ShowCheckBox = true;
-            this.fechaPicker.Size = new System.Drawing.Size(200, 20);
-            this.fechaPicker.TabIndex = 3;
+            this.fechaPickerInicio.Location = new System.Drawing.Point(749, 42);
+            this.fechaPickerInicio.Name = "fechaPickerInicio";
+            this.fechaPickerInicio.ShowCheckBox = true;
+            this.fechaPickerInicio.Size = new System.Drawing.Size(200, 20);
+            this.fechaPickerInicio.TabIndex = 3;
             // 
             // btnAplicarFiltros
             // 
@@ -120,7 +122,7 @@
             // 
             // txtLogin
             // 
-            this.txtLogin.Location = new System.Drawing.Point(749, 67);
+            this.txtLogin.Location = new System.Drawing.Point(749, 92);
             this.txtLogin.Margin = new System.Windows.Forms.Padding(2);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(200, 20);
@@ -151,14 +153,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(648, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Fecha";
+            this.label2.Text = "Fecha inicio";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(648, 74);
+            this.label3.Location = new System.Drawing.Point(648, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 10;
@@ -167,7 +169,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(648, 98);
+            this.label4.Location = new System.Drawing.Point(648, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 12;
@@ -191,7 +193,7 @@
             this.comboMódulo.Items.AddRange(new object[] {
             "Login",
             "Gestión de Usuario"});
-            this.comboMódulo.Location = new System.Drawing.Point(749, 90);
+            this.comboMódulo.Location = new System.Drawing.Point(749, 115);
             this.comboMódulo.Name = "comboMódulo";
             this.comboMódulo.Size = new System.Drawing.Size(199, 21);
             this.comboMódulo.TabIndex = 14;
@@ -207,11 +209,30 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(648, 75);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Fecha fin";
+            // 
+            // fechaPickerFin
+            // 
+            this.fechaPickerFin.Location = new System.Drawing.Point(749, 68);
+            this.fechaPickerFin.Name = "fechaPickerFin";
+            this.fechaPickerFin.ShowCheckBox = true;
+            this.fechaPickerFin.Size = new System.Drawing.Size(200, 20);
+            this.fechaPickerFin.TabIndex = 16;
+            // 
             // BitacoraEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 466);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.fechaPickerFin);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.comboMódulo);
             this.Controls.Add(this.comboCriticidad);
@@ -222,7 +243,7 @@
             this.Controls.Add(this.btnCancelarFiltros);
             this.Controls.Add(this.btnAplicarFiltros);
             this.Controls.Add(this.txtLogin);
-            this.Controls.Add(this.fechaPicker);
+            this.Controls.Add(this.fechaPickerInicio);
             this.Controls.Add(this.dgvEventos);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BitacoraEventos";
@@ -236,7 +257,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvEventos;
-        private System.Windows.Forms.DateTimePicker fechaPicker;
+        private System.Windows.Forms.DateTimePicker fechaPickerInicio;
         private System.Windows.Forms.Button btnAplicarFiltros;
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Login;
@@ -252,5 +273,7 @@
         private System.Windows.Forms.ComboBox comboCriticidad;
         private System.Windows.Forms.ComboBox comboMódulo;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker fechaPickerFin;
     }
 }

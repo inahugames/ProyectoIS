@@ -27,51 +27,20 @@ namespace ProyectoIS
 
         private void btnFiltraCrit_Click(object sender, EventArgs e)
         {
-            /*dgvEventos.Rows.Clear();
-            MPPEventos_54CS mpp = new MPPEventos_54CS();
-            List<Eventos_54CS> lista = mpp.ObtenerEventos();
-            foreach (Eventos_54CS evento in lista )
-            {
-                if (txtCriticidad.Text == evento.Criticidad_54CS)
-                {
-                    dgvEventos.Rows.Add(evento.Login_54CS, evento.Fecha_54CS, evento.Modulo_54CS, evento.Evento_54CS, evento.Criticidad_54CS);
-                }
-            }*/
         }
 
         private void btnFiltraFecha_Click(object sender, EventArgs e)
         {
-            /*dgvEventos.Rows.Clear();
-            DateTime fecha = Convert.ToDateTime(fechaPicker.Value.Date);
-            MPPEventos_54CS mpp = new MPPEventos_54CS();
-            List<Eventos_54CS> lista = mpp.ObtenerEventos();
-            foreach (Eventos_54CS v in lista)
-            {
-                if (v.Fecha_54CS.Date == fecha)
-                {
-                    dgvEventos.Rows.Add(v.Login_54CS, v.Fecha_54CS, v.Modulo_54CS, v.Evento_54CS, v.Criticidad_54CS);
-                }
-            }*/
         }
 
         private void btnFiltraLogin_Click(object sender, EventArgs e)
         {
-            /*dgvEventos.Rows.Clear();
-            string login = txtLogin.Text;
-            MPPEventos_54CS mpp = new MPPEventos_54CS();
-            List<Eventos_54CS> lista = mpp.ObtenerEventos();
-            foreach (Eventos_54CS v in lista)
-            {
-                if (v.Login_54CS == login)
-                {
-                    dgvEventos.Rows.Add(v.Login_54CS, v.Fecha_54CS, v.Modulo_54CS, v.Evento_54CS, v.Criticidad_54CS);
-                }
-            }*/
-            if ( comboCriticidad.Text != "" || txtLogin.Text != "" || fechaPicker.Text != "" || comboMódulo.Text != "")
+            if ( comboCriticidad.Text != "" || txtLogin.Text != "" || fechaPickerInicio.Text != "" || comboMódulo.Text != "")
             {
                 string filtroCriticidad = comboCriticidad.Text.ToLower();
                 string filtroLogin = txtLogin.Text.ToLower();
-                DateTime filtroFecha = fechaPicker.Value.Date;
+                DateTime filtroFechaInicio = fechaPickerInicio.Value.Date;
+                DateTime filtroFechaFin = fechaPickerFin.Value.Date.AddDays(1).AddTicks(-1); // añado un dia y le resto un segundo para cubrir hasta las 23:59:59 del dia seleccionado
                 string filtroModulo = comboMódulo.Text.ToLower();
                 MPPEventos_54CS mpp = new MPPEventos_54CS();
                 List<Eventos_54CS> lista = mpp.ObtenerEventos();
@@ -85,11 +54,11 @@ namespace ProyectoIS
                 {
                     consulta = consulta.Where(ev => ev.Login_54CS.ToLower().Contains(filtroLogin.ToLower()));
                 }
-                if (fechaPicker.Checked)
+                if (fechaPickerInicio.Checked && fechaPickerFin.Checked)
                 {
-                    if (string.IsNullOrEmpty(filtroFecha.ToString()) == false)
+                    if (string.IsNullOrEmpty(filtroFechaInicio.ToString()) == false && string.IsNullOrEmpty(filtroFechaFin.ToString()) == false)
                     {
-                        consulta = consulta.Where(ev => ev.Fecha_54CS.Date == filtroFecha);
+                        consulta = consulta.Where(evento => evento.Fecha_54CS >= filtroFechaInicio && evento.Fecha_54CS <= filtroFechaFin);
                     }
                 }
                 if (string.IsNullOrEmpty(filtroModulo) == false)
