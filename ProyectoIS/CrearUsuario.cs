@@ -21,7 +21,7 @@ namespace ProyectoIS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text != null && txtDNI.Text != null && txtEmail.Text != null && txtNombre.Text != null && txtRol.Text != null)
+            if (txtApellido.Text != "" && txtDNI.Text != "" && txtEmail.Text != "" && txtNombre.Text != "" && txtRol.Text != "")
             {
                 Seguridad_54CS encripta = new Seguridad_54CS();
                 string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios

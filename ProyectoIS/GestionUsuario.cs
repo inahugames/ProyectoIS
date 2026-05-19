@@ -22,6 +22,7 @@ namespace ProyectoIS
         {
             InitializeComponent();
             Actualizar();
+            TxtModoConsulta();
         }
 
 
@@ -84,6 +85,8 @@ namespace ProyectoIS
                 btnDesbloquear.Visible = true;
                 btnModificar.Visible = true;
                 btnEliminar.Visible = true;
+                btnCrear.Visible = true;
+                TxtModoModificar();
             }
             else
             {
@@ -92,6 +95,8 @@ namespace ProyectoIS
                 btnModificar.Visible = false;
                 btnDesbloquear.Visible = false;
                 btnEliminar.Visible = false;
+                btnCrear.Visible = false;
+                TxtModoConsulta();
             }
            
         }
@@ -227,6 +232,76 @@ namespace ProyectoIS
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void TxtModoConsulta()
+        {
+            txtMsj.Text = "\t\tMODO CONSULTA. \r\n \r\nEn modo consulta, usted puede definir los parámetros que desea utilizar para realizar una búsqueda de los usuarios de la base de datos. \r\n \r\nCuando llene todos los parámetros, aprete el botón Aplicar para realizar el filtrado.";
+        }
+
+        private void TxtModoModificar()
+        {
+            txtMsj.Text = "\t\tMODO MODIFICAR. \r\n \r\n En modo modificar, usted puede seleccionar a un usuario en la grilla de arriba, sobre el cual puede realizar las acciones de modificación, eliminación, desbloqueo, y desactivación. \r\n \r\n También puede crear un usuario nuevo si así lo desea."; 
+        }
+
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+            if (txtDNI.Text != ""|| txtApellido.Text != "" || txtNombre.Text != "" || txtEmail.Text != "" || txtLogin.Text != "" || txtRol.Text != "")
+            {
+                // limpio todos los txt para evitar espacios q rompan el código
+                string filtroDNI = txtDNI.Text.Trim();
+                string filtroNombre = txtNombre.Text.Trim();
+                string filtroApellido = txtApellido.Text.Trim();
+                string filtroEmail = txtEmail.Text.Trim();
+                string filtroLogin = txtLogin.Text.Trim();
+                string filtroRol = txtRol.Text.Trim();
+
+                MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
+                List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+                // aplico linq
+                IEnumerable<Usuario_54CS> consulta = lista; 
+
+                if (string.IsNullOrEmpty(filtroDNI) == false)
+                {
+                    consulta = consulta.Where(u => u.DNI_54cs.ToString().Contains(filtroDNI));
+                }
+
+                if (string.IsNullOrEmpty(filtroNombre) == false)
+                {
+                    consulta = consulta.Where(u => u.Nombre_54CS.ToLower().Contains(filtroNombre.ToLower()));
+                }
+
+                if (string.IsNullOrEmpty(filtroApellido) == false)
+                {
+                    consulta = consulta.Where(u => u.Apellido_54CS.ToLower().Contains(filtroApellido.ToLower()));
+                }
+
+                if (string.IsNullOrEmpty(filtroEmail) == false)
+                {
+                    consulta = consulta.Where(u => u.Email_54CS.ToLower().Contains(filtroEmail.ToLower()));
+                }
+
+                if (string.IsNullOrEmpty(filtroLogin) == false)
+                {
+                    consulta = consulta.Where(u => u.Login_54CS.ToLower().Contains(filtroLogin.ToLower()));
+                }
+
+                if (string.IsNullOrEmpty(filtroRol) == false)
+                {
+                    consulta = consulta.Where(u => u.Rol_54CS.ToLower().Contains(filtroRol.ToLower()));
+                }
+                List<Usuario_54CS> usuariosFiltrados = consulta.ToList();
+                dgvUsuarios.Rows.Clear();
+                foreach (Usuario_54CS v in usuariosFiltrados)
+                {
+                    dgvUsuarios.Rows.Add(false, v.DNI_54cs, v.Login_54CS, v.Nombre_54CS, v.Apellido_54CS, v.Email_54CS, v.Rol_54CS, v.Block_54CS, v.Activo_54CS);
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Actualizar();
         }
     }
 }
