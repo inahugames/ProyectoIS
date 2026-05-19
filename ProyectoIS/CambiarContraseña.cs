@@ -34,7 +34,7 @@ namespace ProyectoIS
             if (txtPass.Text.Trim() != "")
             {
                 string password = txtPass.Text.Trim();
-                Seguridad_54CS seg = new Seguridad_54CS();
+                Encriptador_54CS seg = new Encriptador_54CS();
                 bool misma = seg.VerificarContraseña(password, contraseña);
                 if (misma == false)
                 {

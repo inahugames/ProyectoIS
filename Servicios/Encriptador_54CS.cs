@@ -8,7 +8,7 @@ using BCrypt.Net;
 
 namespace Servicios
 {
-    public class Seguridad_54CS
+    public class Encriptador_54CS
     {
         public string EncriptarContraseña(string contra)
         {

@@ -31,7 +31,7 @@ namespace ProyectoIS
                     string rolIngresado = txtRol.Text.Trim();
                     MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
                     List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
-                    Seguridad_54CS encripta = new Seguridad_54CS();
+                    Encriptador_54CS encripta = new Encriptador_54CS();
                     string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios
                     int Mitad = dni.Length / 2;
                     string primeramitad = dni.Substring(0, Mitad);

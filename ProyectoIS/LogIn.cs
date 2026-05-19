@@ -56,7 +56,7 @@ namespace ProyectoIS
                                     Login = Login - 1;
                                 }
                             }
-                            Seguridad_54CS seg = new Seguridad_54CS();
+                            Encriptador_54CS seg = new Encriptador_54CS();
                             try
                             {
                                 bool login = seg.VerificarContraseña(Password, user.Password_54CS);
@@ -175,7 +175,7 @@ namespace ProyectoIS
                         else
                         {
                             MPPEventos_54CS mppev = new MPPEventos_54CS();
-                            Seguridad_54CS seg = new Seguridad_54CS();
+                            Encriptador_54CS seg = new Encriptador_54CS();
                             try
                             {
                                 bool contracorrecta = seg.VerificarContraseña(Password, user.Password_54CS);
