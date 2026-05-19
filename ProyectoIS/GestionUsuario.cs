@@ -31,9 +31,16 @@ namespace ProyectoIS
             string[] datos = dgvUsuarios.CurrentRow.AccessibilityObject.Value.Split(';');
             foreach (Usuario_54CS user in lista)
             {
-                if ( Convert.ToString(user.DNI_54cs) == datos[1])
+                try
                 {
-                    seleccionado = user; break;
+                    if (Convert.ToString(user.DNI_54cs) == datos[1])
+                    {
+                        seleccionado = user; break;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("El usuario seleccionado es inválido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -134,6 +141,11 @@ namespace ProyectoIS
                         {
                             if (user.DNI_54cs == Convert.ToInt32(row.Cells[1].Value))
                             {
+                                if (user.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
+                                {
+                                    MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
+                                }
                                 if (user.Activo_54CS == true)
                                 {
                                     user.Activo_54CS = false;
@@ -173,13 +185,21 @@ namespace ProyectoIS
                     }
                 }
             }
+            Actualizar();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarUsuario nuevo = new ModificarUsuario(seleccionado);
-            nuevo.ShowDialog();
-            Actualizar();
+            if (seleccionado.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
+            {
+                MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                ModificarUsuario nuevo = new ModificarUsuario(seleccionado);
+                nuevo.ShowDialog();
+                Actualizar();
+            }
         }
 
         public void Actualizar()
@@ -202,6 +222,11 @@ namespace ProyectoIS
             {
                 if (user.DNI_54cs == seleccionado.DNI_54cs)
                 {
+                    if (seleccionado.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
+                    {
+                        MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
                     DialogResult opcion;
                     opcion = MessageBox.Show($"Realmente quiere eliminar al usuario con DNI: {user.DNI_54cs}?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if ( opcion == DialogResult.OK)
