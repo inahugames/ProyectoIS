@@ -46,6 +46,104 @@ namespace BLL_54CS
                 return false;
             }
         }
+        public bool EliminarUsuario(int id, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.EliminarUsuario(id);
+                if (!resultado)
+                {
+                    mensaje = "No se elimino correctamente";
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+        public bool BloquearUsuario(string login,out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.BloquearUsuario(login); // No se si agregar la variable block
+                if(!resultado)
+                {
+                    mensaje = "No se bloqueo correctamente";
+                    return false;
+                }
+                return true;
 
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+        public bool ActualizarUsuario(List<Usuario_54CS> lista, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.ActualizarUsuarios(lista); 
+                if (!resultado)
+                {
+                    mensaje = "No se actualizo el usuario correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+        public bool GuardarUsuario(Usuario_54CS usuario, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.GuardarUsuario(usuario);
+                if (!resultado)
+                {
+                    mensaje = "No se guardo correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+        public bool ActualizarContraseña(string usuario,string password, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.ActualizarContraseña(usuario,password);
+                if (!resultado)
+                {
+                    mensaje = "No se actualizo la contraseña correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
     } 
 }
