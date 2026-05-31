@@ -21,7 +21,7 @@ namespace MPP
             {
                 Usuario_54CS usuario = new Usuario_54CS()
                 {
-                    DNI_54cs = int.Parse(row["DNI_54CS"].ToString()),
+                    DNI_54cs = int.Parse(row["DNI_54CS"].ToString()), // Si no corre el codigo revisar el orden xq en la DAL va primero el apellido
                     Nombre_54CS = row["Nombre_54CS"].ToString(),
                     Apellido_54CS = row["Apellido_54CS"].ToString(),
                     Login_54CS = row["Login_54CS"].ToString(),
@@ -36,6 +36,11 @@ namespace MPP
             return usuarios;
         }
 
+        public bool CrearUsuarios(Usuario_54CS usuario) 
+        {
+            return usuariossql.CrearUsuario(usuario.DNI_54cs, usuario.Apellido_54CS, usuario.Nombre_54CS, usuario.Rol_54CS, usuario.Email_54CS) > 0;
+        }
+        
         public bool EliminarUsuario(int id)
         {
             return usuariossql.EliminarUsuario(id)>0;

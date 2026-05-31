@@ -16,6 +16,12 @@ namespace DAL
             string query = "SELECT * FROM Usuarios_54CS";
             return conexionSQL.Leer(query);
         }
+        public int CrearUsuario(int dni, string Apellido, string Nombre, string Rol, string Email)
+        {
+            string query = $"INSERT INTO Usuarios_54CS (DNI_54CS,Apellido_54CS,Nombre_54CS,Rol_54CS,Email_54CS) Values ('{dni}','{Apellido}','{Nombre}','{Rol}','{Email}')";
+            return conexionSQL.Escribir(query);
+        }
+
         public int EliminarUsuario(int dni)
         {
             string query = $"DELETE FROM Usuarios_54CS WHERE DNI_54CS = @DNI";
