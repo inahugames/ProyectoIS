@@ -1,4 +1,4 @@
-﻿using MPP;
+﻿using BLL_54CS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -29,37 +29,33 @@ namespace ProyectoIS
                     string emailIngresado = txtEmail.Text.ToLower().Trim();
                     string nombreIngresado = txtNombre.Text.Trim();
                     string rolIngresado = txtRol.Text.Trim();
-                    MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                    List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                    List<Usuario_54CS> lista = bll.ObtenerTodos();
                     Encriptador_54CS encripta = new Encriptador_54CS();
                     string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios
                     int Mitad = dni.Length / 2;
                     string primeramitad = dni.Substring(0, Mitad);
                     string segundamitad = dni.Substring(Mitad);
                     Usuario_54CS nuevo = new Usuario_54CS();
+                    bll.CrearUsuario(Convert.ToInt32(txtDNI.Text),apellidoIngresado,nombreIngresado,nombreIngresado + primeramitad,encripta.EncriptarContraseña(apellidoIngresado + segundamitad),rolIngresado,emailIngresado,false,true, out string msj);
+                    if (string.IsNullOrEmpty(msj) == true)
                     {
-                        nuevo.Apellido_54CS = apellidoIngresado;
-                        nuevo.Nombre_54CS = nombreIngresado;
-                        nuevo.DNI_54cs = Convert.ToInt32(txtDNI.Text);
-                        nuevo.Email_54CS = emailIngresado;
-                        nuevo.Rol_54CS = rolIngresado;
-                        nuevo.Login_54CS = nuevo.Nombre_54CS + primeramitad;
-                        nuevo.Password_54CS = encripta.EncriptarContraseña(nuevo.Apellido_54CS + segundamitad);
-                        nuevo.Activo_54CS = true;
-                        nuevo.Block_54CS = false;
+                        MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                        {
+                            Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                            Fecha_54CS = System.DateTime.Now,
+                            Modulo_54CS = "Gestión de Usuario",
+                            Evento_54CS = "Usuario Creado",
+                            Criticidad_54CS = "3"
+                        };
+                        BLLEventos_54CS blle = new BLLEventos_54CS();
+                        blle.GuardarEvento(Evento, out string mens);
                     }
-                    mpp.GuardarUsuario(nuevo);
-                    MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                    else
                     {
-                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
-                        Fecha_54CS = System.DateTime.Now,
-                        Modulo_54CS = "Gestión de Usuario",
-                        Evento_54CS = "Usuario Creado",
-                        Criticidad_54CS = "3"
-                    };
-                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                    mppe.GuardarEvento(Evento);
+                        MessageBox.Show(msj,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch
                 {

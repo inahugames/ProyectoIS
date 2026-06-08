@@ -38,9 +38,19 @@ namespace MPP
 
         public bool CrearUsuarios(Usuario_54CS usuario) 
         {
-            return usuariossql.CrearUsuario(usuario.DNI_54cs, usuario.Apellido_54CS, usuario.Nombre_54CS, usuario.Rol_54CS, usuario.Email_54CS) > 0;
+            return usuariossql.CrearUsuario(usuario.DNI_54cs,usuario.Apellido_54CS,usuario.Nombre_54CS,usuario.Login_54CS,usuario.Password_54CS,usuario.Rol_54CS,usuario.Email_54CS,usuario.Block_54CS,usuario.Activo_54CS) > 0;
+        }
+
+        public bool ActivarUsuario(string login)
+        {
+            return usuariossql.ActivarUsuario(login) > 0;
         }
         
+        public bool DesactivarUsuario(string login)
+        {
+            return usuariossql.DesactivarUsuario(login) > 0;
+        }
+
         public bool EliminarUsuario(int id)
         {
             return usuariossql.EliminarUsuario(id)>0;
@@ -49,6 +59,12 @@ namespace MPP
         {
             bool block = true;
             return usuariossql.BloquearUsuario(login, block) > 0;
+        }
+
+        public bool DesbloquearUsuario(string login)
+        {
+            bool block = false;
+            return usuariossql.DesbloquearUsuario(login, block) > 0;
         }
 
         public bool ActualizarUsuarios(List<Usuario_54CS> lista)

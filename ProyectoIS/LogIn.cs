@@ -1,4 +1,4 @@
-﻿using MPP;
+﻿using BLL_54CS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +21,8 @@ namespace ProyectoIS
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
-            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            BLLUsuarios_54CS DBUsuarios = new BLLUsuarios_54CS();
+            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerTodos();
             bool Existe = false; // se usa para determinar si existe el usuario en la bd
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
@@ -46,8 +46,8 @@ namespace ProyectoIS
                         }
                         else
                         {
-                            MPPEventos_54CS mppev = new MPPEventos_54CS();
-                            List<Eventos_54CS> listaeventos = mppev.ObtenerEventos();
+                            BLLEventos_54CS bllev = new BLLEventos_54CS();
+                            List<Eventos_54CS> listaeventos = bllev.ObtenerTodos();
                             int Login = 4;
                             foreach (Eventos_54CS ev in listaeventos)
                             {
@@ -70,8 +70,8 @@ namespace ProyectoIS
                                         Evento_54CS = "Contraseña Errónea",
                                         Criticidad_54CS = "1"
                                     };
-                                    mppev.GuardarEvento(Evento);
-                                    listaeventos = mppev.ObtenerEventos();  
+                                    bllev.GuardarEvento(Evento, out string msj);
+                                    listaeventos = bllev.ObtenerTodos();  
                                     if ( Login <= 0 )
                                     {
                                                 user.Block_54CS = true;
@@ -85,9 +85,9 @@ namespace ProyectoIS
                                                     Evento_54CS = "Usuario Bloqueado",
                                                     Criticidad_54CS = "2"
                                                 };
-                                                mppev.GuardarEvento(Eventito);
-                                                MPPUsuarios_54CS mppuser = new MPPUsuarios_54CS();
-                                                mppuser.BloquearUsuario(user.Login_54CS);
+                                                bllev.GuardarEvento(Eventito, out string mens);
+                                                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                                                bll.BloquearUsuario(user.Login_54CS, out string mensj);
                                                 break;
                                      }
                                     else if (Login >= 1) { MessageBox.Show("Contraseña Incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -105,8 +105,7 @@ namespace ProyectoIS
                                         Evento_54CS = "Login",
                                         Criticidad_54CS = "1"
                                     };
-                                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                                    mppe.GuardarEvento(Evento);
+                                    bllev.GuardarEvento(Evento, out string msj);
                                     FormularioPrincipal frm = new FormularioPrincipal();
                                     frm.Show();
                                     this.Hide();
@@ -149,8 +148,8 @@ namespace ProyectoIS
 
         private void btnCambiar_Click(object sender, EventArgs e)
         {
-            MPPUsuarios_54CS DBUsuarios = new MPPUsuarios_54CS();
-            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerUsuarios();
+            BLLUsuarios_54CS DBUsuarios = new BLLUsuarios_54CS();
+            List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerTodos();
             bool Existe = false; // se usa para determinar si existe el usuario en la bd
             if (txtUser.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
@@ -174,7 +173,7 @@ namespace ProyectoIS
                         }
                         else
                         {
-                            MPPEventos_54CS mppev = new MPPEventos_54CS();
+                            BLLEventos_54CS bllev = new BLLEventos_54CS();
                             Encriptador_54CS seg = new Encriptador_54CS();
                             try
                             {
@@ -190,8 +189,8 @@ namespace ProyectoIS
                                         Evento_54CS = "Contraseña Errónea",
                                         Criticidad_54CS = "2"
                                     };
-                                    mppev.GuardarEvento(Evento);
-                                    List<Eventos_54CS> listev = mppev.ObtenerEventos();
+                                    bllev.GuardarEvento(Evento, out string msj);
+                                    List<Eventos_54CS> listev = bllev.ObtenerTodos();
                                     foreach (Eventos_54CS ev in listev)
                                     {
                                         if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea")
@@ -212,10 +211,10 @@ namespace ProyectoIS
                                             Evento_54CS = "Usuario Bloqueado",
                                             Criticidad_54CS = "2"
                                         };
-                                        mppev.GuardarEvento(Eventito);
-                                        MPPUsuarios_54CS mppuser = new MPPUsuarios_54CS();
-                                        mppuser.BloquearUsuario(user.Login_54CS);
-                                        ListUsuarios = mppuser.ObtenerUsuarios();
+                                        bllev.GuardarEvento(Eventito, out string mens);
+                                        BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                                        bll.BloquearUsuario(user.Login_54CS, out string m);
+                                        ListUsuarios = bll.ObtenerTodos();
                                         MessageBox.Show("Usuario bloqueado, contacte a un administrador.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                     break;
@@ -224,7 +223,7 @@ namespace ProyectoIS
                                 {
                                     CambiarContraseña cambia = new CambiarContraseña(user);
                                     cambia.ShowDialog();
-                                    ListUsuarios = DBUsuarios.ObtenerUsuarios();
+                                    ListUsuarios = DBUsuarios.ObtenerTodos();
                                     Existe = true;
                                     break;
                                 }

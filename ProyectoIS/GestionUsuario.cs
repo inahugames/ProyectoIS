@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MPP;
+using BLL_54CS;
 using Servicios;
 
 namespace ProyectoIS
@@ -51,9 +51,9 @@ namespace ProyectoIS
             {
                 if (user.Login_54CS == seleccionado.Login_54CS && user.Block_54CS == true)
                 {
-                    user.Block_54CS = false;
-                    MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                    mpp.ActualizarUsuarios(lista);
+                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                    bll.DesbloquearUsuario(user.Login_54CS, out string msj);
+                    lista = bll.ObtenerTodos();
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -62,15 +62,15 @@ namespace ProyectoIS
                         Evento_54CS = "Usuario Desbloqueado",
                         Criticidad_54CS = "2"
                     };
-                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                    mppe.GuardarEvento(Evento);
+                    BLLEventos_54CS bllev = new BLLEventos_54CS();
+                    bllev.GuardarEvento(Evento, out string mens);
                     MessageBox.Show($"Usuario con DNI {user.DNI_54cs} desbloqueado exitosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    List<Eventos_54CS> listaev = mppe.ObtenerEventos();
+                    List<Eventos_54CS> listaev = bllev.ObtenerTodos();
                     foreach (Eventos_54CS ev in listaev)
                     {
                         if (DateTime.Now < ev.Fecha_54CS.AddHours(3))
                         {
-                            mppe.EliminarEvento(ev);
+                            bllev.EliminarEvento(ev, out string me);
                         }
                     }        
                     break;
@@ -135,8 +135,8 @@ namespace ProyectoIS
                     opcion = MessageBox.Show("Realmente quiere activar/desactivar el usuario?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (opcion == DialogResult.OK)
                     {
-                        MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                        List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+                        BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                        List<Usuario_54CS> lista = bll.ObtenerTodos();
                         foreach (Usuario_54CS user in lista)
                         {
                             if (user.DNI_54cs == Convert.ToInt32(row.Cells[1].Value))
@@ -148,8 +148,7 @@ namespace ProyectoIS
                                 }
                                 if (user.Activo_54CS == true)
                                 {
-                                    user.Activo_54CS = false;
-                                    mpp.ActualizarUsuarios(lista);
+                                    bll.DesactivarUsuario(user.Login_54CS, out string msj);
                                     MessageBox.Show($"Se desactivó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
@@ -159,14 +158,14 @@ namespace ProyectoIS
                                         Evento_54CS = "Desactivación de usuario",
                                         Criticidad_54CS = "2"
                                     };
-                                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                                    mppe.GuardarEvento(Evento);
+                                    BLLEventos_54CS bllev = new BLLEventos_54CS();
+                                    bllev.GuardarEvento(Evento, out string mens);
+                                    lista = bll.ObtenerTodos();
                                     break;
                                 }
                                 else
                                 {
-                                    user.Activo_54CS = true;
-                                    mpp.ActualizarUsuarios(lista);
+                                    bll.ActivarUsuario(user.Login_54CS, out string msj);
                                     MessageBox.Show($"Se activó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
@@ -176,8 +175,8 @@ namespace ProyectoIS
                                         Evento_54CS = "Activación de usuario",
                                         Criticidad_54CS = "2"
                                     };
-                                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                                    mppe.GuardarEvento(Evento);
+                                    BLLEventos_54CS bllev = new BLLEventos_54CS();
+                                    bllev.GuardarEvento(Evento, out string mens);
                                     break;
                                 }
                             }
@@ -205,8 +204,8 @@ namespace ProyectoIS
         public void Actualizar()
         {
             dgvUsuarios.Rows.Clear();
-            MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-            lista = mpp.ObtenerUsuarios();
+            BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+            lista = bll.ObtenerTodos();
             foreach (Usuario_54CS v in lista)
             {
                 dgvUsuarios.Rows.Add(false, v.DNI_54cs,v.Login_54CS, v.Nombre_54CS, v.Apellido_54CS, v.Email_54CS, v.Rol_54CS, v.Block_54CS, v.Activo_54CS);
@@ -217,7 +216,7 @@ namespace ProyectoIS
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
+            BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
             foreach ( Usuario_54CS user in lista )
             {
                 if (user.DNI_54cs == seleccionado.DNI_54cs)
@@ -231,7 +230,7 @@ namespace ProyectoIS
                     opcion = MessageBox.Show($"Realmente quiere eliminar al usuario con DNI: {user.DNI_54cs}?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if ( opcion == DialogResult.OK)
                     {
-                        mpp.EliminarUsuario(user.DNI_54cs);
+                        bll.EliminarUsuario(user.DNI_54cs, out string msj);
                         Actualizar();
                         MessageBox.Show("Usuario eliminado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
@@ -242,8 +241,8 @@ namespace ProyectoIS
                             Evento_54CS = "Eliminación de Usuario",
                             Criticidad_54CS = "3"
                         };
-                        MPPEventos_54CS mppe = new MPPEventos_54CS();
-                        mppe.GuardarEvento(Evento);
+                        BLLEventos_54CS bllev = new BLLEventos_54CS();
+                        bllev.GuardarEvento(Evento, out string mens);
                         break;
                     }
                     else
@@ -281,8 +280,8 @@ namespace ProyectoIS
                 string filtroLogin = txtLogin.Text.Trim();
                 string filtroRol = txtRol.Text.Trim();
 
-                MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                List<Usuario_54CS> lista = bll.ObtenerTodos();
                 // aplico linq
                 IEnumerable<Usuario_54CS> consulta = lista; 
 

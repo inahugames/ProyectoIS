@@ -15,7 +15,7 @@ namespace BLL_54CS
 
         public List<Eventos_54CS> ObtenerTodos() => MPPeventos.ObtenerEventos();
 
-        public bool GuardarUsuario(Eventos_54CS evento, out string mensaje)
+        public bool GuardarEvento(Eventos_54CS evento, out string mensaje)
         {
             mensaje = string.Empty;
             try

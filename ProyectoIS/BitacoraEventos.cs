@@ -1,4 +1,4 @@
-﻿using MPP;
+﻿using BLL_54CS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -42,8 +42,8 @@ namespace ProyectoIS
                 DateTime filtroFechaInicio = fechaPickerInicio.Value.Date;
                 DateTime filtroFechaFin = fechaPickerFin.Value.Date.AddDays(1).AddTicks(-1); // añado un dia y le resto un segundo para cubrir hasta las 23:59:59 del dia seleccionado
                 string filtroModulo = comboMódulo.Text.ToLower();
-                MPPEventos_54CS mpp = new MPPEventos_54CS();
-                List<Eventos_54CS> lista = mpp.ObtenerEventos();
+                BLLEventos_54CS blle = new BLLEventos_54CS();
+                List<Eventos_54CS> lista = blle.ObtenerTodos();
                 IEnumerable<Eventos_54CS> consulta = lista;
                 
                 if (string.IsNullOrEmpty(filtroCriticidad) == false)
@@ -82,8 +82,8 @@ namespace ProyectoIS
         private void Actualizar()
         {
             dgvEventos.Rows.Clear();
-            MPPEventos_54CS mpp = new MPPEventos_54CS();
-            List<Eventos_54CS> lista = mpp.ObtenerEventos();
+            BLLEventos_54CS blle = new BLLEventos_54CS();
+            List<Eventos_54CS> lista = blle.ObtenerTodos();
             foreach (Eventos_54CS v in lista)
             {
                 dgvEventos.Rows.Add(v.Login_54CS, v.Fecha_54CS, v.Modulo_54CS, v.Evento_54CS, v.Criticidad_54CS);

@@ -13,10 +13,10 @@ namespace BLL_54CS
         MPPUsuarios_54CS MPPusuario = new MPPUsuarios_54CS();
         public List<Usuario_54CS> ObtenerTodos() => MPPusuario.ObtenerUsuarios();
     
-        public bool CrearUsuario(int dni,string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool Block, bool Activo, out string mensaje, out Usuario_54CS usuario)
+        public bool CrearUsuario(int dni,string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool Block, bool Activo, out string mensaje)
         {
             mensaje = string.Empty;
-            usuario = null;
+            Usuario_54CS usuario = new Usuario_54CS();
             try
             {
                 usuario = new Usuario_54CS()
@@ -85,6 +85,70 @@ namespace BLL_54CS
                 return false;
             }
         }
+
+        public bool DesbloquearUsuario(string login, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.DesbloquearUsuario(login); // No se si agregar la variable block
+                if (!resultado)
+                {
+                    mensaje = "No se desbloqueo correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+
+        public bool ActivarUsuario(string login, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.ActivarUsuario(login); // No se si agregar la variable block
+                if (!resultado)
+                {
+                    mensaje = "No se activo correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+
+        public bool DesactivarUsuario(string login, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.DesactivarUsuario(login); // No se si agregar la variable block
+                if (!resultado)
+                {
+                    mensaje = "No se desactivo correctamente";
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+
         public bool ActualizarUsuario(List<Usuario_54CS> lista, out string mensaje)
         {
             mensaje = string.Empty;

@@ -1,4 +1,4 @@
-﻿using MPP;
+﻿using BLL_54CS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -39,9 +39,9 @@ namespace ProyectoIS
                 if (misma == false)
                 {
                     password = seg.EncriptarContraseña(password);
-                    MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-                    mpp.ActualizarContraseña(usuario, password);
-                    MPPEventos_54CS mppev = new MPPEventos_54CS();
+                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                    bll.ActualizarContraseña(usuario, password, out string msj);
+                    BLLEventos_54CS blle = new BLLEventos_54CS();
                     Eventos_54CS nuevo = new Eventos_54CS()
                     {
                         Criticidad_54CS = "2",
@@ -50,7 +50,7 @@ namespace ProyectoIS
                         Evento_54CS = "Cambio de Contraseña",
                         Fecha_54CS = DateTime.Today
                     };
-                    mppev.GuardarEvento(nuevo);
+                    blle.GuardarEvento(nuevo, out string mens);
                     MessageBox.Show("Contraseña cambiada exitosamente, inicie sesión con su nueva contraseña","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Close();
                 }

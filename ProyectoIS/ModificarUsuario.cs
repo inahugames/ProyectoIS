@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MPP;
+using BLL_54CS;
 
 namespace ProyectoIS
 {
@@ -28,8 +28,8 @@ namespace ProyectoIS
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            MPPUsuarios_54CS mpp = new MPPUsuarios_54CS();
-            List<Usuario_54CS> lista = mpp.ObtenerUsuarios();
+            BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+            List<Usuario_54CS> lista = bll.ObtenerTodos();
             foreach (Usuario_54CS user in lista)
             {
                 if (user.DNI_54cs == seleccion.DNI_54cs)
@@ -42,7 +42,7 @@ namespace ProyectoIS
                     {
                         user.Rol_54CS = txtRol.Text;
                     }
-                    mpp.ActualizarUsuarios(lista);
+                    bll.ActualizarUsuario(lista, out string m);
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -51,8 +51,8 @@ namespace ProyectoIS
                         Evento_54CS = "Usuario Modificado",
                         Criticidad_54CS = "3"
                     };
-                    MPPEventos_54CS mppe = new MPPEventos_54CS();
-                    mppe.GuardarEvento(Evento);
+                    BLLEventos_54CS bllev = new BLLEventos_54CS();
+                    bllev.GuardarEvento(Evento, out string msj);
                     MessageBox.Show($"Usuario con DNI {user.DNI_54cs} modificado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

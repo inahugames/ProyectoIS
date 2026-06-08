@@ -16,9 +16,9 @@ namespace DAL
             string query = "SELECT * FROM Usuarios_54CS";
             return conexionSQL.Leer(query);
         }
-        public int CrearUsuario(int dni, string Apellido, string Nombre, string Rol, string Email)
+        public int CrearUsuario(int dni, string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool block, bool activo)
         {
-            string query = $"INSERT INTO Usuarios_54CS (DNI_54CS,Apellido_54CS,Nombre_54CS,Rol_54CS,Email_54CS) Values ('{dni}','{Apellido}','{Nombre}','{Rol}','{Email}')";
+            string query = $"INSERT INTO Usuarios_54CS (DNI_54CS,Apellido_54CS,Nombre_54CS,Login_54CS,Password_54CS,Rol_54CS,Email_54CS, Block_54CS, Activo_54CS) Values ('{dni}','{Apellido}','{Nombre}','{Login}','{Password}','{Rol}','{Email}','{block}','{activo}')";
             return conexionSQL.Escribir(query);
         }
 
@@ -39,6 +39,41 @@ namespace DAL
             {
                 { "@Block", bloqueo},
                 {"@Login",usuario }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int DesbloquearUsuario(string usuario,bool bloqueo)
+        {
+            string query = $"UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                { "@Block",bloqueo},
+                { "@Login", usuario }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int ActivarUsuario(string usuario)
+        {
+            string query = $"UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
+            bool activar = true;
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@Login",usuario },
+                {"@Activo", activar }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int DesactivarUsuario(string usuario)
+        {
+            string query = $"UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
+            bool activar = false;
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@Login",usuario },
+                {"@Activo", activar }
             };
             return conexionSQL.Escribir(query, parametros);
         }
