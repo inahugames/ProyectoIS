@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLLUsuarios.cs" />
+    <Compile Include="BLLEventos_54CS.cs" />
+    <Compile Include="BLLUsuarios_54CS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

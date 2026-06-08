@@ -140,9 +140,9 @@
       <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
       <Name>BE_54CS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MPP\MPP_54CS.csproj">
-      <Project>{3ab23c43-54fb-42b6-abb8-3efef745794b}</Project>
-      <Name>MPP_54CS</Name>
+    <ProjectReference Include="..\BLL_54CS\BLL_54CS.csproj">
+      <Project>{65589a80-61b7-448a-9010-089868aa7bd3}</Project>
+      <Name>BLL_54CS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servicios\Services_54CS.csproj">
       <Project>{366df5b8-7f80-45bf-b0a7-9c7fb0be9d73}</Project>

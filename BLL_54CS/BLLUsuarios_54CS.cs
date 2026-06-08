@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL_54CS
 {
-    public class BLLUsuarios
+    public class BLLUsuarios_54CS
     {
         MPPUsuarios_54CS MPPusuario = new MPPUsuarios_54CS();
         public List<Usuario_54CS> ObtenerTodos() => MPPusuario.ObtenerUsuarios();
