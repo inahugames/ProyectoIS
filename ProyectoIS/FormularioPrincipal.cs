@@ -68,5 +68,12 @@ namespace ProyectoIS
             this.Hide();
             nuevo.Show();
         }
+
+        private void perfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionarFamilias formulario = new GestionarFamilias();
+            formulario.MdiParent = this;
+            formulario.Show();
+        }
     }
 }

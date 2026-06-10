@@ -72,6 +72,18 @@
     <Compile Include="FormularioPrincipal.Designer.cs">
       <DependentUpon>FormularioPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="GestionarFamilias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionarFamilias.Designer.cs">
+      <DependentUpon>GestionarFamilias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionarRoles.Designer.cs">
+      <DependentUpon>GestionarRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestionUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormularioPrincipal.resx">
       <DependentUpon>FormularioPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionarFamilias.resx">
+      <DependentUpon>GestionarFamilias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario.resx">
       <DependentUpon>GestionUsuario.cs</DependentUpon>
