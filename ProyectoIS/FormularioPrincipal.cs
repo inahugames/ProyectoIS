@@ -75,5 +75,12 @@ namespace ProyectoIS
             formulario.MdiParent = this;
             formulario.Show();
         }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionarRoles formulario = new GestionarRoles();
+            formulario.MdiParent = this;
+            formulario.Show();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Servicios
     public abstract class Rol_54CS
     {
         public string Nombre { get; set; }
+        public int ID { get; set; }
 
         public Rol_54CS(string nombre)
         {

@@ -119,6 +119,9 @@
     <EmbeddedResource Include="GestionarFamilias.resx">
       <DependentUpon>GestionarFamilias.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GestionarRoles.resx">
+      <DependentUpon>GestionarRoles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GestionUsuario.resx">
       <DependentUpon>GestionUsuario.cs</DependentUpon>
     </EmbeddedResource>
