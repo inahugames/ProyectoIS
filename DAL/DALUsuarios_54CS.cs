@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Servicios;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Servicios;
 
 namespace DAL
 {
     public class DALUsuarios_54CS
     {
         private Conexion_54CS conexionSQL = new Conexion_54CS();
+        private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
         public DataTable ObtenerUsuarios()
         {
             string query = "SELECT * FROM Usuarios_54CS";
@@ -120,6 +122,30 @@ namespace DAL
                     { "@Usuario", usuario }
                 };
             return conexionSQL.Escribir(query, parametros);
+        }
+
+        public List<int> ObtenerIdsRolesPorUsuario(int idUsuario)
+        {
+            List<int> idsRoles = new List<int>();
+            string query = "SELECT IdRol FROM Usuario_Rol WHERE IdUsuario = @idUsu";
+
+            using (SqlConnection cx = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, cx))
+                {
+                    cmd.Parameters.AddWithValue("@idUsu", idUsuario);
+                    cx.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            idsRoles.Add(Convert.ToInt32(dr["IdRol"]));
+                        }
+                    }
+                }
+            }
+            return idsRoles;
         }
     }
 }

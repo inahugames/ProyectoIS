@@ -35,6 +35,8 @@
             this.btnCrear = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDesc = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listFamilias
@@ -102,11 +104,29 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Permisos Nueva Familia:";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(252, 135);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Descripción de Familia";
+            // 
+            // txtDesc
+            // 
+            this.txtDesc.Location = new System.Drawing.Point(365, 128);
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(178, 20);
+            this.txtDesc.TabIndex = 8;
+            // 
             // GestionarFamilias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 479);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCrear);
@@ -116,6 +136,7 @@
             this.Controls.Add(this.listFamilias);
             this.Name = "GestionarFamilias";
             this.Text = "GestionarFamilias";
+            this.Load += new System.EventHandler(this.GestionarFamilias_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,5 +151,7 @@
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtDesc;
     }
 }

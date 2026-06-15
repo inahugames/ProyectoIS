@@ -45,8 +45,8 @@ namespace MPP
             // --- FASE 1: Instanciar Hojas (Permisos) ---
             foreach (DataRow row in dtPermisos.Rows)
             {
-                int id = Convert.ToInt32(row["IdPermiso"]);
-                string nombre = row["Nombre"].ToString();
+                int id = Convert.ToInt32(row["IdPermiso_54CS"]);
+                string nombre = row["Nombre_54CS"].ToString();
 
                 var permiso = new Permiso_54CS(nombre) { ID = id };
                 dicPermisos.Add(id, permiso);
@@ -55,8 +55,8 @@ namespace MPP
             // --- FASE 2: Instanciar Nodos Intermedios (Familias) ---
             foreach (DataRow row in dtFamilias.Rows)
             {
-                int id = Convert.ToInt32(row["IdFamilia"]);
-                string nombre = row["Nombre"].ToString();
+                int id = Convert.ToInt32(row["IdFamilia_54CS"]);
+                string nombre = row["Nombre_54CS"].ToString();
 
                 var familia = new Familia_54CS(nombre) { ID = id };
                 dicFamilias.Add(id, familia);
@@ -77,8 +77,8 @@ namespace MPP
             // --- FASE 4: Instanciar Raíces (Roles) ---
             foreach (DataRow row in dtRoles.Rows)
             {
-                int id = Convert.ToInt32(row["IdRol"]);
-                string descripcion = row["Descripcion"].ToString();
+                int id = Convert.ToInt32(row["IdRol_54CS"]);
+                string descripcion = row["Nombre_54CS"].ToString();
 
                 // Un Rol actúa como un contenedor principal, usamos 'Familia' para representarlo
                 var rol = new Familia_54CS(descripcion) { ID = id };
@@ -125,8 +125,8 @@ namespace MPP
 
             foreach (DataRow row in dtPermisos.Rows)
             {
-                int id = Convert.ToInt32(row["IdPermiso"]);
-                string nombre = row["Nombre"].ToString();
+                int id = Convert.ToInt32(row["IdPermiso_54CS"]);
+                string nombre = row["Nombre_54CS"].ToString();
 
                 listaPermisos.Add(new Permiso_54CS(nombre) { ID = id });
             }
@@ -149,14 +149,14 @@ namespace MPP
 
             foreach (DataRow row in dtPermisos.Rows)
             {
-                int id = Convert.ToInt32(row["IdPermiso"]);
-                dicPermisos.Add(id, new Permiso_54CS(row["Nombre"].ToString()) { ID = id });
+                int id = Convert.ToInt32(row["IdPermiso_54CS"]);
+                dicPermisos.Add(id, new Permiso_54CS(row["Nombre_54CS"].ToString()) { ID = id });
             }
 
             foreach (DataRow row in dtFamilias.Rows)
             {
-                int id = Convert.ToInt32(row["IdFamilia"]);
-                dicFamilias.Add(id, new Familia_54CS(row["Nombre"].ToString()) { ID = id });
+                int id = Convert.ToInt32(row["IdFamilia_54CS"]);
+                dicFamilias.Add(id, new Familia_54CS(row["Nombre_54CS"].ToString()) { ID = id });
             }
 
             foreach (DataRow row in dtFam_Per.Rows)

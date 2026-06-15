@@ -22,7 +22,7 @@ namespace Servicios
             {
                 lista.AddRange(hijo.ObtenerListaPermisos());
             }
-            return lista.Distinct().ToList(); // no devolver duplicados
+            return lista; // no devolver duplicados
         }
 
         public override void Agregar(Rol_54CS rol)

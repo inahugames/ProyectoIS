@@ -34,12 +34,22 @@ namespace DAL
 
         public int InsertarRol(string descripcion)
         {
-            string query = $"INSERT INTO Roles_54CS (Descripcion_54CS) Values (@Descripcion)";
-            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            string query = "INSERT INTO Roles_54CS (Nombre_54CS) VALUES (@desc); SELECT SCOPE_IDENTITY();";
+
+            using (SqlConnection cx = new SqlConnection(_connectionString))
             {
-                {"@Descripcion",descripcion }
-            };
-            return conexionSQL.Escribir(query, parametros);
+                using (SqlCommand cmd = new SqlCommand(query, cx))
+                {
+                    cmd.Parameters.AddWithValue("@desc", descripcion);
+                    cx.Open();
+
+                    // ExecuteScalar ejecuta el INSERT y lee la respuesta de SCOPE_IDENTITY()
+                    // Convirtiéndolo al ID numérico que la BLL necesita
+                    int idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return idGenerado;
+                }
+            }
         }
 
         public int InsertarRelacionRolFamilia(int idRol, int idFamilia)

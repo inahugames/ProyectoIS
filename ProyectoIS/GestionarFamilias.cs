@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL_54CS;
 
 namespace ProyectoIS
 {
@@ -15,22 +16,10 @@ namespace ProyectoIS
     {
         List<Rol_54CS> listfam = new List<Rol_54CS>();
         List<Rol_54CS> listperm = new List<Rol_54CS>();
+        private BLLPermisos_54CS _permisosBLL = new BLLPermisos_54CS();
         public GestionarFamilias()
         {
             InitializeComponent();
-            Rol_54CS inicio = new Familia_54CS("Usuarios");
-            inicio.Agregar(new Permiso_54CS("Login"));
-            listperm.Add(new Permiso_54CS("Login"));
-            inicio.Agregar(new Permiso_54CS("Logout"));
-            listperm.Add(new Permiso_54CS("Logout"));
-            Rol_54CS admin = new Familia_54CS("Administradores");
-            admin.Agregar(inicio);
-            admin.Agregar(new Permiso_54CS("Eliminar Usuario"));
-            listperm.Add(new Permiso_54CS("Eliminar Usuario"));
-            admin.Agregar(new Permiso_54CS("Agregar Usuario"));
-            listperm.Add(new Permiso_54CS("Agregar Usuario"));
-            listfam.Add(inicio);
-            listfam.Add(admin);
             foreach (Familia_54CS fam in listfam)
             {
                 chklist.Items.Add(fam);
@@ -104,9 +93,13 @@ namespace ProyectoIS
                     Rol_54CS rolSeleccionado = (Rol_54CS)itemChecked;
                     fam.Agregar(rolSeleccionado);
                 }
-
+                _permisosBLL.CrearFamilia(fam, txtDesc.Text);
                 MessageBox.Show("Familia creada con éxito sin conflictos de permisos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 chklist.Items.Add(fam);
+                txtDesc.Clear();
+                txtNombre.Clear();
+                for (int i = 0; i < chklist.Items.Count; i++)
+                    chklist.SetItemChecked(i, false);
             }
             catch (Exception ex)
             {
@@ -117,6 +110,22 @@ namespace ProyectoIS
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void GestionarFamilias_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var permisos = _permisosBLL.ObtenerPermisosParaCrearFamilia();
+                foreach (var permiso in permisos)
+                {
+                    chklist.Items.Add(permiso);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar permisos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

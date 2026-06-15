@@ -209,5 +209,10 @@ namespace BLL_54CS
                 return false;
             }
         }
+
+        public void CargarPermisosDelUsuarioEnSesion(Usuario_54CS user)
+        {
+            MPPusuario.CargarPermisosDelUsuarioEnSesion(user);
+        }
     } 
 }

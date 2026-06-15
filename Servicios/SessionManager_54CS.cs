@@ -14,6 +14,7 @@ namespace Servicios
         public string Login_54CS;
         public string Nombre_54CS;
         public string Rol_54CS;
+        public List<Rol_54CS> listperm;
         //public bool Logged_54CS;
 
         public static SessionManager_54CS Instancia
@@ -31,7 +32,7 @@ namespace Servicios
             }
         }
 
-        public static void Login(string Login, string Nombre, string Rol)
+        public static void Login(string Login, string Nombre, string Rol, List<Rol_54CS> perm)
         {
             lock (_lock)
             {
@@ -43,6 +44,7 @@ namespace Servicios
                 _session.Login_54CS = Login;
                 _session.Nombre_54CS = Nombre;
                 _session.Rol_54CS = Rol;
+                _session.listperm = perm;
             }
         }
 
@@ -56,6 +58,12 @@ namespace Servicios
             {
                 throw new Exception("Sesión no iniciada");
             }
+        }
+
+        public bool TienePermiso(string permisoBuscado)
+        {
+            // Retorna 'true' si alguno de los roles asignados (o sus hijos) tiene el permiso
+            return listperm.Any(rol => rol.TienePermiso(permisoBuscado));
         }
     }
 }

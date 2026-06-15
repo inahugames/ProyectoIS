@@ -41,7 +41,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnAsignarUsuario = new System.Windows.Forms.Button();
             this.clbRolesParaAsignar = new System.Windows.Forms.CheckedListBox();
-            this.cmbUsuarios = new System.Windows.Forms.ComboBox();
+            this.combobox = new System.Windows.Forms.ComboBox();
             this.GestionRoles.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -81,8 +81,9 @@
             this.btnEliminarRol.Name = "btnEliminarRol";
             this.btnEliminarRol.Size = new System.Drawing.Size(288, 118);
             this.btnEliminarRol.TabIndex = 15;
-            this.btnEliminarRol.Text = "Crear Rol";
+            this.btnEliminarRol.Text = "Eliminar Rol";
             this.btnEliminarRol.UseVisualStyleBackColor = true;
+            this.btnEliminarRol.Click += new System.EventHandler(this.btnEliminarRol_Click_1);
             // 
             // label7
             // 
@@ -151,7 +152,7 @@
             // 
             this.tabPage2.Controls.Add(this.btnAsignarUsuario);
             this.tabPage2.Controls.Add(this.clbRolesParaAsignar);
-            this.tabPage2.Controls.Add(this.cmbUsuarios);
+            this.tabPage2.Controls.Add(this.combobox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -168,6 +169,7 @@
             this.btnAsignarUsuario.TabIndex = 2;
             this.btnAsignarUsuario.Text = "Asignar a Usuario";
             this.btnAsignarUsuario.UseVisualStyleBackColor = true;
+            this.btnAsignarUsuario.Click += new System.EventHandler(this.btnAsignarUsuario_Click_1);
             // 
             // clbRolesParaAsignar
             // 
@@ -177,13 +179,13 @@
             this.clbRolesParaAsignar.Size = new System.Drawing.Size(228, 424);
             this.clbRolesParaAsignar.TabIndex = 1;
             // 
-            // cmbUsuarios
+            // combobox
             // 
-            this.cmbUsuarios.FormattingEnabled = true;
-            this.cmbUsuarios.Location = new System.Drawing.Point(329, 132);
-            this.cmbUsuarios.Name = "cmbUsuarios";
-            this.cmbUsuarios.Size = new System.Drawing.Size(121, 21);
-            this.cmbUsuarios.TabIndex = 0;
+            this.combobox.FormattingEnabled = true;
+            this.combobox.Location = new System.Drawing.Point(329, 132);
+            this.combobox.Name = "combobox";
+            this.combobox.Size = new System.Drawing.Size(121, 21);
+            this.combobox.TabIndex = 0;
             // 
             // GestionarRoles
             // 
@@ -217,6 +219,6 @@
         private System.Windows.Forms.Button btnEliminarRol;
         private System.Windows.Forms.Button btnAsignarUsuario;
         private System.Windows.Forms.CheckedListBox clbRolesParaAsignar;
-        private System.Windows.Forms.ComboBox cmbUsuarios;
+        private System.Windows.Forms.ComboBox combobox;
     }
 }

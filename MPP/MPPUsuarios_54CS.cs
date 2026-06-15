@@ -13,6 +13,7 @@ namespace MPP
     public class MPPUsuarios_54CS
     {
         private DALUsuarios_54CS usuariossql = new DALUsuarios_54CS();
+        MPPPermisos_54CS perm = new MPPPermisos_54CS();
         public List<Usuario_54CS> ObtenerUsuarios()
         {
             DataTable tabla = usuariossql.ObtenerUsuarios();
@@ -29,7 +30,8 @@ namespace MPP
                     Rol_54CS = row["Rol_54CS"].ToString(),
                     Email_54CS = row["Email_54CS"].ToString(),
                     Block_54CS = Convert.ToBoolean(row["Block_54CS"].ToString()),
-                    Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString())
+                    Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString()),
+                    RolesAsignados = new List<Rol_54CS>()
                 };
                 usuarios.Add(usuario);
             }
@@ -87,6 +89,26 @@ namespace MPP
         public bool ActualizarContraseña(string usuario, string password)
         {
             return usuariossql.ActualizarContraseña(usuario, password) > 0;
+        }
+
+        public void CargarPermisosDelUsuarioEnSesion(Usuario_54CS usuario)
+        {
+            // 1. Buscamos qué IDs de roles tiene asignados en la tabla intermedia
+            List<int> idsRolesAsignados = usuariossql.ObtenerIdsRolesPorUsuario(usuario.DNI_54cs);
+
+            // 2. Traemos el árbol completo del sistema ensamblado (con todas sus familias y permisos)
+            List<Rol_54CS> arbolCompletoDelSistema = perm.ObtenerArbolDeRolesCompleto();
+
+            // 3. Filtramos: Le asignamos al usuario ÚNICAMENTE los roles del sistema cuyo ID coincida
+            usuario.RolesAsignados = new List<Rol_54CS>();
+
+            foreach (var rol in arbolCompletoDelSistema)
+            {
+                if (idsRolesAsignados.Contains(rol.ID))
+                {
+                    usuario.RolesAsignados.Add(rol);
+                }
+            }
         }
     }
 }

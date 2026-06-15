@@ -96,7 +96,9 @@ namespace ProyectoIS
                                 else if (login == true)
                                 {
                                     { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
-                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS);
+                                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                                    bll.CargarPermisosDelUsuarioEnSesion(user);
+                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS, user.RolesAsignados);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
                                     {
                                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -107,14 +109,16 @@ namespace ProyectoIS
                                     };
                                     bllev.GuardarEvento(Evento, out string msj);
                                     FormularioPrincipal frm = new FormularioPrincipal();
+                                    List<string> permisos = user.ObtenerTodosLosPermisosPlanos();
+                                    MessageBox.Show(string.Join(",",user.ObtenerTodosLosPermisosPlanos()));
                                     frm.Show();
                                     this.Hide();
                                     break;
                                 }
                             }
-                            catch
+                            catch (Exception ex)
                             {
-                                MessageBox.Show("Error al autenticar.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                MessageBox.Show($"Error al autenticar. {ex}","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                             }
                         }
 
