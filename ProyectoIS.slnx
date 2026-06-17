@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/Idiomas/">
-    <File Path="en.json" />
-  </Folder>
   <Project Path="BE/BE_54CS.csproj" Id="80b7a884-794b-45fe-afdf-764be3b99fd0" />
   <Project Path="BLL_54CS/BLL_54CS.csproj" Id="65589a80-61b7-448a-9010-089868aa7bd3" />
   <Project Path="DAL/DAL_54CS.csproj" Id="d9c6cac1-e13a-4222-a46f-321c8ef93eea" />

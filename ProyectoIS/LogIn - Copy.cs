@@ -143,11 +143,19 @@ namespace ProyectoIS
 
         private void LogIn_Load(object sender, EventArgs e)
         {
-            // en.json se copia automáticamente a la carpeta de salida (bin\Debug o bin\Release)
-            // en cada build, gracias a CopyToOutputDirectory en el .csproj. Por eso siempre
-            // está junto al .exe, sin importar en qué PC se compile o ejecute el programa.
             string rutaJson = Path.Combine(Application.StartupPath, @"Idiomas\en.json");
 
+            // 2. Si no lo encuentra ahí, forzamos a que retroceda a la carpeta original del proyecto
+            if (!File.Exists(rutaJson))
+            {
+                // Obtiene la carpeta padre de la carpeta padre (Sube de Debug -> bin -> Raíz del proyecto)
+                // Nota: Si usas .NET 6 o superior, puede que necesites un .Parent extra
+                string rutaRaizProyecto = Directory.GetParent(Application.StartupPath).Parent.FullName;
+
+                rutaJson = Path.Combine(rutaRaizProyecto, @"Idiomas\en.json");
+            }
+
+            // 3. Cargamos el idioma con la ruta que haya funcionado
             Servicios.IdiomaManager.CargarIdioma(rutaJson);
             IdiomaManager.Traducir(this);
         }

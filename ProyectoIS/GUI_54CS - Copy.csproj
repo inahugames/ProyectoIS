@@ -158,11 +158,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Idiomas\en.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BE\BE_54CS.csproj">
       <Project>{80b7a884-794b-45fe-afdf-764be3b99fd0}</Project>
       <Name>BE_54CS</Name>
