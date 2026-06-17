@@ -144,7 +144,19 @@ namespace ProyectoIS
         private void LogIn_Load(object sender, EventArgs e)
         {
             string rutaJson = Path.Combine(Application.StartupPath, @"Idiomas\en.json");
-            IdiomaManager.CargarIdioma(rutaJson);
+
+            // 2. Si no lo encuentra ahí, forzamos a que retroceda a la carpeta original del proyecto
+            if (!File.Exists(rutaJson))
+            {
+                // Obtiene la carpeta padre de la carpeta padre (Sube de Debug -> bin -> Raíz del proyecto)
+                // Nota: Si usas .NET 6 o superior, puede que necesites un .Parent extra
+                string rutaRaizProyecto = Directory.GetParent(Application.StartupPath).Parent.FullName;
+
+                rutaJson = Path.Combine(rutaRaizProyecto, @"Idiomas\en.json");
+            }
+
+            // 3. Cargamos el idioma con la ruta que haya funcionado
+            Servicios.IdiomaManager.CargarIdioma(rutaJson);
             IdiomaManager.Traducir(this);
         }
 
