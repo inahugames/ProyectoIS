@@ -35,13 +35,13 @@ namespace Servicios
 
             var diccionarioForm = _textos[formulario.Name];
 
-            // 1. Traducir el título de la ventana
+            //Traducir el título de la ventana
             if (diccionarioForm.ContainsKey("Text"))
             {
                 formulario.Text = diccionarioForm["Text"];
             }
 
-            // 2. Traducir todos los controles internos
+            //Traducir todos los controles internos
             TraducirControles(formulario.Controls, diccionarioForm);
         }
 
