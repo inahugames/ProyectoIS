@@ -1,15 +1,16 @@
 ﻿using BLL_54CS;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Servicios;
 
 namespace ProyectoIS
 {
@@ -142,7 +143,9 @@ namespace ProyectoIS
 
         private void LogIn_Load(object sender, EventArgs e)
         {
-
+            string rutaJson = Path.Combine(Application.StartupPath, @"Idiomas\en.json");
+            IdiomaManager.CargarIdioma(rutaJson);
+            IdiomaManager.Traducir(this);
         }
 
         private void LogIn_FormClosed(object sender, FormClosedEventArgs e)

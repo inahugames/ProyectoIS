@@ -1,0 +1,107 @@
+{
+  "BitacoraEventos": {
+    "Text": "Event Log",
+    "Login": "Login",
+    "Fecha": "Date",
+    "Módulo": "Module",
+    "Evento": "Event",
+    "Criticidad": "Criticality",
+    "btnAplicarFiltros": "Apply Filters",
+    "btnCancelarFiltros": "Cancel Filters",
+    "btnSalir": "Exit",
+    "label1": "Criticality",
+    "label2": "Start Date",
+    "label3": "Login",
+    "label4": "Module",
+    "label5": "End Date"
+  },
+  "CambiarContraseña": {
+    "Text": "Change Password",
+    "label3": "CHANGE PASSWORD",
+    "label1": "User",
+    "label2": "New Password",
+    "btnModificar": "Modify Password"
+  },
+  "CrearUsuario": {
+    "Text": "Create User",
+    "Nombre": "Name",
+    "label1": "Last Name",
+    "label2": "ID",
+    "label3": "Email",
+    "label4": "Role",
+    "btnCrear": "Create"
+  },
+  "FormularioPrincipal": {
+    "Text": "Main Form",
+    "usuariosToolStripMenuItem": "Users",
+    "bitácoraToolStripMenuItem": "Event Log",
+    "cerrarSesiónToolStripMenuItem": "Log Out",
+    "perfilesToolStripMenuItem": "Families",
+    "rolesToolStripMenuItem": "Roles",
+    "toolStripStatusLabel": "Status"
+  },
+  "GestionarFamilias": {
+    "Text": "Manage Families",
+    "label1": "Family Name",
+    "label2": "Existing Families and Permissions:",
+    "label3": "New Family Permissions:",
+    "label4": "Family Description",
+    "btnCrear": "Create Family"
+  },
+  "GestionarRoles": {
+    "Text": "Manage Roles",
+    "tabPage1": "Role Management",
+    "tabPage2": "User Assignment",
+    "label7": "New Role Permissions:",
+    "label5": "Existing Families and Permissions:",
+    "label6": "Role Name",
+    "btnCrearRol": "Create Role",
+    "btnEliminarRol": "Delete Role",
+    "btnAsignarUsuario": "Assign to User"
+  },
+  "GestionUsuario": {
+    "Text": "User Management",
+    "CSeleccionar": "Selected",
+    "DNI": "ID",
+    "Login": "Login",
+    "Nombre": "Name",
+    "Apellido": "Last Name",
+    "Email": "Email",
+    "Rol": "Role",
+    "Block": "Block",
+    "Activo": "Active",
+    "btnCrear": "Create",
+    "btnDesbloquear": "Unblock",
+    "btnModificar": "Modify",
+    "btnAct": "Activate/Deactivate",
+    "btnEliminar": "Delete",
+    "btnSalir": "Exit",
+    "btnAplicar": "Apply Filter",
+    "btnCancelar": "Cancel Filter",
+    "cbUsuario": "Modify Mode",
+    "label1": "Message:",
+    "label2": "Name",
+    "label3": "Last Name",
+    "label4": "ID",
+    "label5": "Email",
+    "label6": "Role",
+    "label7": "Login"
+  },
+  "LogIn": {
+    "Text": "Login",
+    "label1": "User",
+    "label2": "Password",
+    "label3": "WELCOME!",
+    "btnLogIn": "Log In",
+    "btnCambiar": "Change Password"
+  },
+  "ModificarUsuario": {
+    "Text": "Modify User",
+    "Nombre": "Name",
+    "label1": "Last Name",
+    "label2": "ID",
+    "label3": "Email",
+    "label4": "Role",
+    "btnModificar": "Modify"
+  }
+}
