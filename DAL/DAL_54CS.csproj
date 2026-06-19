@@ -52,7 +52,7 @@
     <Compile Include="Conexion_54CS.cs" />
     <Compile Include="DALEventos_54CS.cs" />
     <Compile Include="DALFamilia_54CS.cs" />
-    <Compile Include="DALPermisos.cs" />
+    <Compile Include="DALPermisos_54CS.cs" />
     <Compile Include="DALRoles_54CS.cs" />
     <Compile Include="DALUsuarios_54CS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

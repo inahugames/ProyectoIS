@@ -13,13 +13,13 @@ namespace MPP
     {
         private DALFamilia_54CS _dalfam;
         private DALRoles_54CS _dalrol;
-        private DALPermisos _dalperm;
+        private DALPermisos_54CS _dalperm;
 
         public MPPPermisos_54CS()
         {
             _dalfam = new DALFamilia_54CS();
             _dalrol = new DALRoles_54CS();
-            _dalperm = new DALPermisos();
+            _dalperm = new DALPermisos_54CS();
         }
 
         /// <summary>
