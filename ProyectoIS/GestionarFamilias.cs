@@ -94,6 +94,16 @@ namespace ProyectoIS
                     fam.Agregar(rolSeleccionado);
                 }
                 _permisosBLL.CrearFamilia(fam, txtDesc.Text);
+                BLLEventos_54CS bllev = new BLLEventos_54CS();
+                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                {
+                    Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                    Fecha_54CS = System.DateTime.Now,
+                    Modulo_54CS = "Gestión de Usuarios",
+                    Evento_54CS = "Crear Familia",
+                    Criticidad_54CS = "3"
+                };
+                bllev.GuardarEvento(Evento, out string msj);
                 MessageBox.Show("Familia creada con éxito sin conflictos de permisos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 chklist.Items.Add(fam);
                 txtDesc.Clear();

@@ -128,6 +128,16 @@ namespace ProyectoIS
                 _permisosBLL.CrearRol(nuevoRol);
                 RefrescarListas();
                 txtNombreNuevoRol.Clear();
+                BLLEventos_54CS bllev = new BLLEventos_54CS();
+                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                {
+                    Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                    Fecha_54CS = System.DateTime.Now,
+                    Modulo_54CS = "Gestión de Usuarios",
+                    Evento_54CS = "Crear Rol",
+                    Criticidad_54CS = "3"
+                };
+                bllev.GuardarEvento(Evento, out string msj);
                 MessageBox.Show("Rol creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -155,6 +165,16 @@ namespace ProyectoIS
                 try
                 {
                     _permisosBLL.EliminarRol(rolAEliminar.ID);
+                    BLLEventos_54CS bllev = new BLLEventos_54CS();
+                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                    {
+                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                        Fecha_54CS = System.DateTime.Now,
+                        Modulo_54CS = "Gestión de Usuarios",
+                        Evento_54CS = "Eliminar Rol",
+                        Criticidad_54CS = "3"
+                    };
+                    bllev.GuardarEvento(Evento, out string msj);
                     MessageBox.Show("Rol eliminado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RefrescarListas();
                 }
@@ -170,6 +190,17 @@ namespace ProyectoIS
             Usuario_54CS usuarioSeleccionado = (Usuario_54CS)combobox.SelectedItem;
             if (usuarioSeleccionado == null) return;
 
+            if (clbRolesParaAsignar.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Los campos están vacíos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (combobox.Text == SessionManager_54CS.Instancia.Login_54CS)
+            {
+                MessageBox.Show("No se pueden modificar los roles del usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             //usuarioSeleccionado.RolesAsignados.Clear();
 
             /*foreach (object itemChecked in clbRolesParaAsignar.CheckedItems)
@@ -191,6 +222,16 @@ namespace ProyectoIS
                 List<Usuario_54CS> act = new List<Usuario_54CS>();
                 act.Add(usuarioSeleccionado);
                 bllusuarios.ActualizarUsuario(act, out string msj);
+                BLLEventos_54CS bllev = new BLLEventos_54CS();
+                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                {
+                    Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                    Fecha_54CS = System.DateTime.Now,
+                    Modulo_54CS = "Gestión de Usuarios",
+                    Evento_54CS = "Asignar Rol",
+                    Criticidad_54CS = "3"
+                };
+                bllev.GuardarEvento(Evento, out string ms);
                 MessageBox.Show($"Roles asignados exitosamente al usuario {usuarioSeleccionado.Nombre_54CS}.",
                             "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
