@@ -15,7 +15,7 @@ namespace ProyectoIS
     public partial class GestionarRoles : Form
     {
         private BLLUsuarios_54CS bllusuarios = new BLLUsuarios_54CS();
-        private BLLPermisos_54CS _permisosBLL = new BLLPermisos_54CS();
+        private BLLRoles_54CS _rolesBLL = new BLLRoles_54CS();
         private List<Rol_54CS> _rolesDelSistema = new List<Rol_54CS>();
         private List<Usuario_54CS> _usuarios = new List<Usuario_54CS>();
         public GestionarRoles()
@@ -70,14 +70,14 @@ namespace ProyectoIS
                 combobox.ValueMember = "DNI_54CS";
 
                 // Cargar elementos para armar el Rol (Familias + Permisos)
-                var elementosDisponibles = _permisosBLL.ObtenerElementosParaCrearRol();
+                var elementosDisponibles = _rolesBLL.ObtenerElementosParaCrearRol();
                 foreach (var elemento in elementosDisponibles)
                 {
                     clbFamiliasYPermisos.Items.Add(elemento);
                 }
 
                 // Cargar Roles ya creados
-                var rolesDelSistema = _permisosBLL.ObtenerRolesDelSistema();
+                var rolesDelSistema = _rolesBLL.ObtenerRolesDelSistema();
                 foreach (var rol in rolesDelSistema)
                 {
                     lbRolesExistentes.Items.Add(rol);
@@ -125,7 +125,7 @@ namespace ProyectoIS
                 }
 
                 // Si todo es válido, guarda
-                _permisosBLL.CrearRol(nuevoRol);
+                _rolesBLL.CrearRol(nuevoRol);
                 RefrescarListas();
                 txtNombreNuevoRol.Clear();
                 BLLEventos_54CS bllev = new BLLEventos_54CS();
@@ -164,7 +164,7 @@ namespace ProyectoIS
                 }
                 try
                 {
-                    _permisosBLL.EliminarRol(rolAEliminar.ID);
+                    _rolesBLL.EliminarRol(rolAEliminar.ID);
                     BLLEventos_54CS bllev = new BLLEventos_54CS();
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
@@ -218,7 +218,7 @@ namespace ProyectoIS
                 }
                 usuarioSeleccionado.RolesAsignados = rolesSeleccionados;
                 usuarioSeleccionado.Rol_54CS = rolesSeleccionados.FirstOrDefault()?.Nombre ?? "Sin Asignar";
-                _permisosBLL.ActualizarRolesDeUsuario(usuarioSeleccionado.DNI_54cs, rolesSeleccionados);
+                _rolesBLL.ActualizarRolesDeUsuario(usuarioSeleccionado.DNI_54cs, rolesSeleccionados);
                 List<Usuario_54CS> act = new List<Usuario_54CS>();
                 act.Add(usuarioSeleccionado);
                 bllusuarios.ActualizarUsuario(act, out string msj);

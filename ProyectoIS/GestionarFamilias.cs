@@ -17,6 +17,7 @@ namespace ProyectoIS
         List<Rol_54CS> listfam = new List<Rol_54CS>();
         List<Rol_54CS> listperm = new List<Rol_54CS>();
         private BLLPermisos_54CS _permisosBLL = new BLLPermisos_54CS();
+        private BLLFamilias_54CS _familiasBLL = new BLLFamilias_54CS();
         public GestionarFamilias()
         {
             InitializeComponent();
@@ -93,7 +94,7 @@ namespace ProyectoIS
                     Rol_54CS rolSeleccionado = (Rol_54CS)itemChecked;
                     fam.Agregar(rolSeleccionado);
                 }
-                _permisosBLL.CrearFamilia(fam, txtDesc.Text);
+                _familiasBLL.CrearFamilia(fam, txtDesc.Text);
                 BLLEventos_54CS bllev = new BLLEventos_54CS();
                 Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                 {

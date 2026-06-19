@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLEventos_54CS.cs" />
+    <Compile Include="BLLFamilias_54CS.cs" />
     <Compile Include="BLLPermisos_54CS.cs" />
+    <Compile Include="BLLRoles_54CS.cs" />
     <Compile Include="BLLUsuarios_54CS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
