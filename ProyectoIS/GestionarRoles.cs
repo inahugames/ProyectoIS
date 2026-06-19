@@ -108,16 +108,14 @@ namespace ProyectoIS
                 return;
             }
 
-            // 1. Usamos la clase 'Familia' como base para nuestro Rol Principal
             Familia_54CS nuevoRol = new Familia_54CS(txtNombreNuevoRol.Text);
 
             try
             {
-                // 2. Cargamos los elementos tildados usando nuestra validación robusta
                 foreach (object itemChecked in clbFamiliasYPermisos.CheckedItems)
                 {
                     Rol_54CS elementoSeleccionado = (Rol_54CS)itemChecked;
-                    nuevoRol.Agregar(elementoSeleccionado); // Lanzará excepción si hay duplicados
+                    nuevoRol.Agregar(elementoSeleccionado); // tira excepción si hay duplicados
                 }
 
                 if (nuevoRol.ObtenerHijos().Count == 0)
@@ -126,16 +124,13 @@ namespace ProyectoIS
                     return;
                 }
 
-                // 3. Si todo es válido, guardamos
+                // Si todo es válido, guarda
                 _permisosBLL.CrearRol(nuevoRol);
-
-                // Aquí deberías hacer el INSERT en tu base de datos
-
                 RefrescarListas();
                 txtNombreNuevoRol.Clear();
                 MessageBox.Show("Rol creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Conflicto de Jerarquía", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

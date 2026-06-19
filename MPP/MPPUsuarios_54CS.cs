@@ -38,9 +38,9 @@ namespace MPP
             return usuarios;
         }
 
-        public bool CrearUsuarios(Usuario_54CS usuario) 
+        public bool CrearUsuarios(Usuario_54CS usuario)
         {
-            return usuariossql.CrearUsuario(usuario.DNI_54cs,usuario.Apellido_54CS,usuario.Nombre_54CS,usuario.Login_54CS,usuario.Password_54CS,usuario.Rol_54CS,usuario.Email_54CS,usuario.Block_54CS,usuario.Activo_54CS) > 0;
+            return usuariossql.GuardarUsuario(usuario) > 0;
         }
 
         public bool ActivarUsuario(string login)

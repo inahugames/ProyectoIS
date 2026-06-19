@@ -111,7 +111,7 @@ namespace DAL
 
         public int EliminarRol(int idRol)
         {
-            string query = "DELETE FROM Rol WHERE IdRol = @idRol";
+            string query = "DELETE FROM Roles_54CS WHERE IdRol = @idRol";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
                 {"@idRol",idRol}

@@ -51,14 +51,6 @@ namespace BLL_54CS
         {
             return _mpp.ObtenerPermisosSueltos();
         }
-
-        // ==========================================
-        // MÉTODOS DE ESCRITURA (Creación de entidades)
-        // ==========================================
-
-        /// <summary>
-        /// Valida y guarda un nuevo Rol en la base de datos junto con sus jerarquías.
-        /// </summary>
         public void CrearRol(Familia_54CS nuevoRol)
         {
             // 1. Validaciones de Negocio
