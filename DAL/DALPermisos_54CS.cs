@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALPermisos
+    public class DALPermisos_54CS
     {
         Conexion_54CS conexionSQL = new Conexion_54CS();
         public DataTable ObtenerPermisos()
