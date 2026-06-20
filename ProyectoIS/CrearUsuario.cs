@@ -12,11 +12,18 @@ using System.Windows.Forms;
 
 namespace ProyectoIS
 {
-    public partial class CrearUsuario : Form
+    public partial class CrearUsuario : Form, IIdiomaObservador_54CS
     {
         public CrearUsuario()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -92,7 +92,7 @@ namespace DAL
 
         public int GuardarUsuario(Usuario_54CS user)
         {
-            string query = $"INSERT INTO Usuarios_54CS VALUES (@DNI,@Apellido,@Nombre,@Login,@Password,@Rol,@Email,@Block,@Activo)";
+            string query = $"INSERT INTO Usuarios_54CS VALUES (@DNI,@Apellido,@Nombre,@Login,@Password,@Rol,@Email,@Block,@Activo,@Idioma)";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
                     { "@Rol", user.Rol_54CS},
@@ -103,7 +103,8 @@ namespace DAL
                     { "@Login",user.Login_54CS },
                     { "@Password",user.Password_54CS },
                     { "@Nombre", user.Nombre_54CS },
-                    { "@Apellido", user.Apellido_54CS }
+                    { "@Apellido", user.Apellido_54CS },
+                    { "@Idioma", string.IsNullOrWhiteSpace(user.Idioma_54CS) ? "es" : user.Idioma_54CS }
                 };
             return conexionSQL.Escribir(query, parametros);
         }
@@ -114,6 +115,17 @@ namespace DAL
             Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
                     { "@Password", contraseña },
+                    { "@Usuario", usuario }
+                };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int ActualizarIdioma(string usuario, string idioma)
+        {
+            string query = $"UPDATE Usuarios_54CS SET Idioma_54CS=@Idioma WHERE Login_54CS=@Usuario";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+                {
+                    { "@Idioma", idioma },
                     { "@Usuario", usuario }
                 };
             return conexionSQL.Escribir(query, parametros);

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ProyectoIS
 {
-    public partial class LogIn : Form
+    public partial class LogIn : Form, IIdiomaObservador_54CS
     {
         public LogIn()
         {
@@ -99,7 +98,14 @@ namespace ProyectoIS
                                     { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
                                     BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
                                     bll.CargarPermisosDelUsuarioEnSesion(user);
-                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS, user.RolesAsignados);
+
+                                    // Aplica el idioma guardado para este usuario (si nunca lo cambió,
+                                    // Idioma_54CS llega en "es" por defecto). Así, la próxima vez que
+                                    // inicia sesión, el programa se ajusta solo a su preferencia.
+                                    string idiomaPreferido = string.IsNullOrWhiteSpace(user.Idioma_54CS) ? IdiomaManager_54CS.IdiomaPorDefecto : user.Idioma_54CS;
+                                    IdiomaManager_54CS.CambiarIdioma(idiomaPreferido);
+
+                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS, user.RolesAsignados, idiomaPreferido);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
                                     {
                                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -141,15 +147,18 @@ namespace ProyectoIS
 
         }
 
+        // 2.1 - Observer: este formulario se traduce solo cada vez que el idioma cambia.
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
+        }
+
         private void LogIn_Load(object sender, EventArgs e)
         {
-            // en.json se copia automáticamente a la carpeta de salida (bin\Debug o bin\Release)
-            // en cada build, gracias a CopyToOutputDirectory en el .csproj. Por eso siempre
-            // está junto al .exe, sin importar en qué PC se compile o ejecute el programa.
-            string rutaJson = Path.Combine(Application.StartupPath, @"Idiomas\en.json");
-
-            Servicios.IdiomaManager.CargarIdioma(rutaJson);
-            IdiomaManager.Traducir(this);
+            // El idioma ya fue inicializado en Program.cs (carpeta Idiomas + idioma por
+            // defecto). Acá solo nos suscribimos como observadores: nos traducimos ahora
+            // mismo y también cada vez que el idioma cambie en caliente más adelante.
+            IdiomaManager_54CS.Suscribir(this);
         }
 
         private void LogIn_FormClosed(object sender, FormClosedEventArgs e)

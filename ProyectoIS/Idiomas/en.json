@@ -22,6 +22,17 @@
     "label2": "New Password",
     "btnModificar": "Modify Password"
   },
+  "CambiarIdioma": {
+    "Text": "Change Language",
+    "label1": "Select your language:",
+    "btnAceptar": "Accept",
+    "btnCancelar": "Cancel",
+    "MsjSeleccione": "You must select a language.",
+    "MsjExito": "Language changed successfully.",
+    "MsjErrorGuardado": "The language was applied, but the preference could not be saved for your next session.",
+    "TituloAviso": "Notice",
+    "TituloError": "Error"
+  },
   "CrearUsuario": {
     "Text": "Create User",
     "Nombre": "Name",
@@ -35,6 +46,7 @@
     "Text": "Main Form",
     "usuariosToolStripMenuItem": "Users",
     "bitácoraToolStripMenuItem": "Event Log",
+    "idiomaToolStripMenuItem": "Language",
     "cerrarSesiónToolStripMenuItem": "Log Out",
     "perfilesToolStripMenuItem": "Families",
     "rolesToolStripMenuItem": "Roles",

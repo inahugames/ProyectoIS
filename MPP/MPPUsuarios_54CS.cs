@@ -31,6 +31,9 @@ namespace MPP
                     Email_54CS = row["Email_54CS"].ToString(),
                     Block_54CS = Convert.ToBoolean(row["Block_54CS"].ToString()),
                     Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString()),
+                    Idioma_54CS = (tabla.Columns.Contains("Idioma_54CS") && row["Idioma_54CS"] != DBNull.Value)
+                        ? row["Idioma_54CS"].ToString()
+                        : "es", // si todavía no se corrió la migración de BD, usamos español por defecto
                     RolesAsignados = new List<Rol_54CS>()
                 };
                 usuarios.Add(usuario);
@@ -91,15 +94,15 @@ namespace MPP
             return usuariossql.ActualizarContraseña(usuario, password) > 0;
         }
 
+        public bool ActualizarIdioma(string usuario, string idioma)
+        {
+            return usuariossql.ActualizarIdioma(usuario, idioma) > 0;
+        }
+
         public void CargarPermisosDelUsuarioEnSesion(Usuario_54CS usuario)
         {
-            // 1. Buscamos qué IDs de roles tiene asignados en la tabla intermedia
             List<int> idsRolesAsignados = usuariossql.ObtenerIdsRolesPorUsuario(usuario.DNI_54cs);
-
-            // 2. Traemos el árbol completo del sistema ensamblado (con todas sus familias y permisos)
             List<Rol_54CS> arbolCompletoDelSistema = perm.ObtenerArbolDeRolesCompleto();
-
-            // 3. Filtramos: Le asignamos al usuario ÚNICAMENTE los roles del sistema cuyo ID coincida
             usuario.RolesAsignados = new List<Rol_54CS>();
 
             foreach (var rol in arbolCompletoDelSistema)

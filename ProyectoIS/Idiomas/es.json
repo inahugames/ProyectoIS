@@ -1,0 +1,119 @@
+{
+  "BitacoraEventos": {
+    "Text": "Bitácora de Eventos",
+    "Login": "Login",
+    "Fecha": "Fecha",
+    "Módulo": "Módulo",
+    "Evento": "Evento",
+    "Criticidad": "Criticidad",
+    "btnAplicarFiltros": "Aplicar Filtros",
+    "btnCancelarFiltros": "Cancelar Filtros",
+    "btnSalir": "Salir",
+    "label1": "Criticidad",
+    "label2": "Fecha inicio",
+    "label3": "Login",
+    "label4": "Módulo",
+    "label5": "Fecha fin"
+  },
+  "CambiarContraseña": {
+    "Text": "Cambiar Contraseña",
+    "label3": "CAMBIAR CONTRASEÑA",
+    "label1": "Usuario",
+    "label2": "Nueva Contraseña",
+    "btnModificar": "Modificar Contraseña"
+  },
+  "CambiarIdioma": {
+    "Text": "Cambiar Idioma",
+    "label1": "Seleccione su idioma:",
+    "btnAceptar": "Aceptar",
+    "btnCancelar": "Cancelar",
+    "MsjSeleccione": "Debe seleccionar un idioma.",
+    "MsjExito": "Idioma cambiado correctamente.",
+    "MsjErrorGuardado": "El idioma se aplicó, pero no se pudo guardar la preferencia para la próxima sesión.",
+    "TituloAviso": "Aviso",
+    "TituloError": "Error"
+  },
+  "CrearUsuario": {
+    "Text": "Crear Usuario",
+    "Nombre": "Nombre",
+    "label1": "Apellido",
+    "label2": "DNI",
+    "label3": "Email",
+    "label4": "Rol",
+    "btnCrear": "Crear"
+  },
+  "FormularioPrincipal": {
+    "Text": "Formulario Principal",
+    "usuariosToolStripMenuItem": "Usuarios",
+    "bitácoraToolStripMenuItem": "Bitácora",
+    "idiomaToolStripMenuItem": "Idioma",
+    "cerrarSesiónToolStripMenuItem": "Cerrar Sesión",
+    "perfilesToolStripMenuItem": "Familias",
+    "rolesToolStripMenuItem": "Roles",
+    "toolStripStatusLabel": "Estado"
+  },
+  "GestionarFamilias": {
+    "Text": "Gestionar Familias",
+    "label1": "Nombre de Familia",
+    "label2": "Familias y Permisos Existentes:",
+    "label3": "Permisos Nueva Familia:",
+    "label4": "Descripción de Familia",
+    "btnCrear": "Crear Familia"
+  },
+  "GestionarRoles": {
+    "Text": "Gestionar Roles",
+    "tabPage1": "Gestión de Roles",
+    "tabPage2": "Asignación a Usuarios",
+    "label7": "Permisos Nuevo Rol:",
+    "label5": "Familias y Permisos Existentes:",
+    "label6": "Nombre de Rol",
+    "btnCrearRol": "Crear Rol",
+    "btnEliminarRol": "Eliminar Rol",
+    "btnAsignarUsuario": "Asignar a Usuario"
+  },
+  "GestionUsuario": {
+    "Text": "Gestión de Usuarios",
+    "CSeleccionar": "Seleccionado",
+    "DNI": "DNI",
+    "Login": "Login",
+    "Nombre": "Nombre",
+    "Apellido": "Apellido",
+    "Email": "Email",
+    "Rol": "Rol",
+    "Block": "Block",
+    "Activo": "Activo",
+    "btnCrear": "Crear",
+    "btnDesbloquear": "Desbloquear",
+    "btnModificar": "Modificar",
+    "btnAct": "Activar/Desactivar",
+    "btnEliminar": "Eliminar",
+    "btnSalir": "Salir",
+    "btnAplicar": "Aplicar filtrado",
+    "btnCancelar": "Cancelar filtrado",
+    "cbUsuario": "Modo Modificar",
+    "label1": "Mensaje:",
+    "label2": "Nombre",
+    "label3": "Apellido",
+    "label4": "DNI",
+    "label5": "Email",
+    "label6": "Rol",
+    "label7": "Login"
+  },
+  "LogIn": {
+    "Text": "Inicio de Sesión",
+    "label1": "Usuario",
+    "label2": "Contraseña",
+    "label3": "¡BIENVENIDO!",
+    "btnLogIn": "Iniciar Sesión",
+    "btnCambiar": "Cambiar Clave"
+  },
+  "ModificarUsuario": {
+    "Text": "Modificar Usuario",
+    "Nombre": "Nombre",
+    "label1": "Apellido",
+    "label2": "DNI",
+    "label3": "Email",
+    "label4": "Rol",
+    "btnModificar": "Modificar"
+  }
+}

@@ -12,12 +12,19 @@ using System.Windows.Forms;
 
 namespace ProyectoIS
 {
-    public partial class BitacoraEventos : Form
+    public partial class BitacoraEventos : Form, IIdiomaObservador_54CS
     {
         public BitacoraEventos()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             Actualizar();
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

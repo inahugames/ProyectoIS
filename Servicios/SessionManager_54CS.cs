@@ -14,6 +14,7 @@ namespace Servicios
         public string Login_54CS;
         public string Nombre_54CS;
         public string Rol_54CS;
+        public string Idioma_54CS;
         public List<Rol_54CS> listperm;
         //public bool Logged_54CS;
 
@@ -32,7 +33,7 @@ namespace Servicios
             }
         }
 
-        public static void Login(string Login, string Nombre, string Rol, List<Rol_54CS> perm)
+        public static void Login(string Login, string Nombre, string Rol, List<Rol_54CS> perm, string Idioma = null)
         {
             lock (_lock)
             {
@@ -45,6 +46,7 @@ namespace Servicios
                 _session.Nombre_54CS = Nombre;
                 _session.Rol_54CS = Rol;
                 _session.listperm = perm;
+                _session.Idioma_54CS = Idioma;
             }
         }
 

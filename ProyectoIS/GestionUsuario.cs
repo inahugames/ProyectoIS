@@ -13,7 +13,7 @@ using Servicios;
 
 namespace ProyectoIS
 {
-    public partial class GestionUsuario : Form
+    public partial class GestionUsuario : Form, IIdiomaObservador_54CS
     {
         
         public Usuario_54CS seleccionado = new Usuario_54CS();
@@ -21,8 +21,15 @@ namespace ProyectoIS
         public GestionUsuario()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             Actualizar();
             TxtModoConsulta();
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
 

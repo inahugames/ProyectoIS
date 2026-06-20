@@ -12,7 +12,7 @@ using BLL_54CS;
 
 namespace ProyectoIS
 {
-    public partial class GestionarFamilias : Form
+    public partial class GestionarFamilias : Form, IIdiomaObservador_54CS
     {
         List<Rol_54CS> listfam = new List<Rol_54CS>();
         List<Rol_54CS> listperm = new List<Rol_54CS>();
@@ -21,6 +21,7 @@ namespace ProyectoIS
         public GestionarFamilias()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             foreach (Familia_54CS fam in listfam)
             {
                 chklist.Items.Add(fam);
@@ -31,6 +32,12 @@ namespace ProyectoIS
             }
             ((ListBox)chklist).DisplayMember = "Nombre";
             chklist.ItemCheck += Chklist_ItemCheck;
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void Chklist_ItemCheck(object sender, ItemCheckEventArgs e)

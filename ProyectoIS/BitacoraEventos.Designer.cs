@@ -192,7 +192,8 @@
             this.comboMódulo.FormattingEnabled = true;
             this.comboMódulo.Items.AddRange(new object[] {
             "Login",
-            "Gestión de Usuario"});
+            "Gestión de Usuario",
+            "Idioma"});
             this.comboMódulo.Location = new System.Drawing.Point(749, 115);
             this.comboMódulo.Name = "comboMódulo";
             this.comboMódulo.Size = new System.Drawing.Size(199, 21);

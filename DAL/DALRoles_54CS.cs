@@ -43,10 +43,8 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@desc", descripcion);
                     cx.Open();
 
-                    // ExecuteScalar ejecuta el INSERT y lee la respuesta de SCOPE_IDENTITY()
-                    // Convirtiéndolo al ID numérico que la BLL necesita
+                    // ExecuteScalar es para conseguir el id
                     int idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-
                     return idGenerado;
                 }
             }
@@ -97,7 +95,7 @@ namespace DAL
 
         public int EliminarRelacionesDeRol(int idRol)
         {
-            // Borra los hijos antes de borrar el padre para evitar errores de Foreign Key
+            // Borra los hijos antes de borrar el padre para evitar errores de fk
             string query = @"
                 DELETE FROM Rol_Familia WHERE IdRol = @idRol;
                 DELETE FROM Rol_Permiso WHERE IdRol = @idRol;";
