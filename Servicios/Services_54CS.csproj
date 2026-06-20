@@ -63,7 +63,8 @@
   <ItemGroup>
     <Compile Include="Eventos_54CS.cs" />
     <Compile Include="Familia_54CS.cs" />
-    <Compile Include="IdiomaManager.cs" />
+    <Compile Include="IdiomaManager_54CS.cs" />
+    <Compile Include="IIdiomaObservador_54CS.cs" />
     <Compile Include="Permiso_54CS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Encriptador_54CS.cs" />

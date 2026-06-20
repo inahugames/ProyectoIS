@@ -23,27 +23,22 @@ namespace Servicios
         public string Email_54CS { get; set; }
         public bool Block_54CS { get; set; }
         public bool Activo_54CS { get; set; }
+        public string Idioma_54CS { get; set; } // Preferencia de idioma del usuario (ej: "es", "en")
         public List<Rol_54CS> RolesAsignados;
 
         public bool TienePermiso(string permisoBuscado)
         {
-            // Retorna 'true' si alguno de los roles asignados (o sus hijos) tiene el permiso
+            // devuelve true si alguno de los roles asignados (o sus hijos) tiene el permiso
             return RolesAsignados.Any(rol => rol.TienePermiso(permisoBuscado));
         }
 
         public List<string> ObtenerTodosLosPermisosPlanos()
         {
             List<string> listaPlana = new List<string>();
-
-            // Recorremos los roles de nivel superior que tiene asignados el usuario
             foreach (var rol in RolesAsignados)
             {
-                // El Composite se encarga de extraer todas sus familias y permisos internos
                 listaPlana.AddRange(rol.ObtenerListaPermisos());
             }
-
-            // Usamos Distinct() para eliminar duplicados si dos roles comparten el mismo permiso
-            // Usamos OrderBy() para que te los devuelva ordenados alfabéticamente
             return listaPlana.Distinct().OrderBy(p => p).ToList();
         }
     }

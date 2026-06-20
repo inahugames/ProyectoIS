@@ -30,6 +30,7 @@ namespace BLL_54CS
                     Email_54CS = Email,
                     Block_54CS = Block,
                     Activo_54CS = Activo,
+                    Idioma_54CS = "es", // idioma por defecto para usuarios nuevos
                 };
                 bool resultado = MPPusuario.CrearUsuarios(usuario);
                 if (!resultado)
@@ -206,6 +207,26 @@ namespace BLL_54CS
             catch (Exception ex)
             {
                 mensaje = "Ocurrio un error";
+                return false;
+            }
+        }
+
+        public bool GuardarIdiomaUsuario(string login, string idioma, out string mensaje)
+        {
+            mensaje = string.Empty;
+            try
+            {
+                bool resultado = MPPusuario.ActualizarIdioma(login, idioma);
+                if (!resultado)
+                {
+                    mensaje = "No se guardó la preferencia de idioma correctamente";
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrió un error";
                 return false;
             }
         }

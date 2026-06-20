@@ -12,7 +12,7 @@ using BLL_54CS;
 
 namespace ProyectoIS
 {
-    public partial class GestionarRoles : Form
+    public partial class GestionarRoles : Form, IIdiomaObservador_54CS
     {
         private BLLUsuarios_54CS bllusuarios = new BLLUsuarios_54CS();
         private BLLRoles_54CS _rolesBLL = new BLLRoles_54CS();
@@ -21,7 +21,14 @@ namespace ProyectoIS
         public GestionarRoles()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             _usuarios = bllusuarios.ObtenerTodos();
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void GestionarRoles_Load(object sender, EventArgs e)

@@ -12,18 +12,25 @@ using BLL_54CS;
 
 namespace ProyectoIS
 {
-    public partial class ModificarUsuario : Form
+    public partial class ModificarUsuario : Form, IIdiomaObservador_54CS
     {
         Usuario_54CS seleccion = new Usuario_54CS();
         public ModificarUsuario(Usuario_54CS seleccionado)
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             txtApellido.Text = seleccionado.Apellido_54CS.Trim();
             txtNombre.Text = seleccionado.Nombre_54CS.Trim();
             txtDNI.Text = Convert.ToString(seleccionado.DNI_54cs).Trim();
             txtEmail.Text = seleccionado.Email_54CS.Trim();
             txtRol.Text = seleccionado.Rol_54CS.Trim();
             seleccion = seleccionado;
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void btnModificar_Click(object sender, EventArgs e)

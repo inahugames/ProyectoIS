@@ -21,7 +21,7 @@ namespace DAL
                 {
                     cmd.Parameters.AddRange(parametros);
                     cx.Open();
-                    // Ejecuta y castea el resultado del SCOPE_IDENTITY()
+                    // executescalar guarda el resultado del id
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }

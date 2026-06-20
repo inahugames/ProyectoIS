@@ -12,13 +12,20 @@ using BLL_54CS;
 
 namespace ProyectoIS
 {
-    public partial class FormularioPrincipal : Form
+    public partial class FormularioPrincipal : Form, IIdiomaObservador_54CS
     {
         private int childFormNumber = 0;
 
         public FormularioPrincipal()
         {
             InitializeComponent();
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+        }
+
+        // 2.1 - Observer
+        public void ActualizarIdioma()
+        {
+            IdiomaManager_54CS.Traducir(this);
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,6 +40,13 @@ namespace ProyectoIS
             BitacoraEventos formulario = new BitacoraEventos();
             formulario.MdiParent = this;
             formulario.Show();
+        }
+
+        private void idiomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 2.2 - GUI: ventana sencilla con lista desplegable de idiomas disponibles
+            CambiarIdioma formulario = new CambiarIdioma();
+            formulario.ShowDialog(this);
         }
 
         private void FormularioPrincipal_FormClosed(object sender, FormClosedEventArgs e)
