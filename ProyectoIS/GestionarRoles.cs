@@ -126,7 +126,7 @@ namespace ProyectoIS
                 combobox.DisplayMember = "Login_54CS";
                 combobox.ValueMember = "DNI_54CS";
 
-                //cargar elementos para armar el Rol
+                //cargar elementos para armar el Rol (Familias + Permisos)
                 var elementosDisponibles = _rolesBLL.ObtenerElementosParaCrearRol();
                 foreach (var elemento in elementosDisponibles)
                 {
@@ -150,7 +150,7 @@ namespace ProyectoIS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar los datos: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,7 +179,7 @@ namespace ProyectoIS
             }
             catch
             {
-                MessageBox.Show("Error en bitácora.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error en bitácora."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -189,7 +189,7 @@ namespace ProyectoIS
             {
                 if (string.IsNullOrWhiteSpace(txtNombreNuevoRol.Text))
                 {
-                    MessageBox.Show("Ingrese un nombre para el Rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un nombre para el Rol."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -205,7 +205,7 @@ namespace ProyectoIS
 
                     if (nuevoRol.ObtenerHijos().Count == 0)
                     {
-                        MessageBox.Show("Un rol debe contener al menos un permiso o familia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Un rol debe contener al menos un permiso o familia."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -214,16 +214,16 @@ namespace ProyectoIS
                     RefrescarListas();
                     txtNombreNuevoRol.Clear();
                     RegistrarEvento("Crear Rol");
-                    MessageBox.Show("Rol creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Rol creado exitosamente."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Conflicto de Jerarquía", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("Conflicto de Jerarquía"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -233,33 +233,33 @@ namespace ProyectoIS
             {
                 if (lbRolesExistentes.SelectedItem == null) return;
                 Rol_54CS rolAEliminar = (Rol_54CS)lbRolesExistentes.SelectedItem;
-                var confirmacion = MessageBox.Show($"¿Eliminar el rol '{rolAEliminar.Nombre}'?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var confirmacion = MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("¿Eliminar el rol '{0}'?"), rolAEliminar.Nombre), IdiomaManager_54CS.TraducirMensaje("Confirmar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmacion == DialogResult.Yes)
                 {
                     bool estaEnUso = _usuarios.Any(u => u.RolesAsignados.Any(r => r.Nombre == rolAEliminar.Nombre));
                     if (estaEnUso)
                     {
-                        MessageBox.Show("No se puede eliminar este Rol porque hay usuarios que lo tienen asignado.",
-                                        "Acción Denegada", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar este Rol porque hay usuarios que lo tienen asignado."),
+                                        IdiomaManager_54CS.TraducirMensaje("Acción Denegada"), MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
                     try
                     {
                         _rolesBLL.EliminarRol(rolAEliminar.ID);
                         RegistrarEvento("Eliminar Rol");
-                        MessageBox.Show("Rol eliminado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Rol eliminado."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         RefrescarListas();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Acción Denegada", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("Acción Denegada"), MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -272,13 +272,13 @@ namespace ProyectoIS
 
                 if (clbRolesParaAsignar.CheckedItems.Count == 0)
                 {
-                    MessageBox.Show("Los campos están vacíos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Los campos están vacíos."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (combobox.Text == SessionManager_54CS.Instancia.Login_54CS)
                 {
-                    MessageBox.Show("No se pueden modificar los roles del usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se pueden modificar los roles del usuario que se encuentra logeado actualmente."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 //usuarioSeleccionado.RolesAsignados.Clear();
@@ -303,17 +303,17 @@ namespace ProyectoIS
                     act.Add(usuarioSeleccionado);
                     bllusuarios.ActualizarUsuario(act, out string msj);
                     RegistrarEvento("Asignar Rol");
-                    MessageBox.Show($"Roles asignados exitosamente al usuario {usuarioSeleccionado.Nombre_54CS}.",
-                                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Roles asignados exitosamente al usuario {0}."), usuarioSeleccionado.Nombre_54CS),
+                                IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al asignar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al asignar: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -386,14 +386,14 @@ namespace ProyectoIS
             {
                 if (_rolSeleccionadoFamilias == null)
                 {
-                    MessageBox.Show("Seleccione primero un Rol de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero un Rol de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var familiasAAgregar = clbFamiliasDisponiblesRol.CheckedItems.Cast<object>().Select(o => (Familia_54CS)o).ToList();
                 if (familiasAAgregar.Count == 0)
                 {
-                    MessageBox.Show("Seleccione (tilde) al menos una familia para agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione (tilde) al menos una familia para agregar."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -408,7 +408,7 @@ namespace ProyectoIS
                     }
 
                     RegistrarEvento("Agregar Familia a Rol");
-                    MessageBox.Show($"Se agregaron {agregadas} familia(s) al rol '{nombreRol}'.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se agregaron {0} familia(s) al rol '{1}'."), agregadas, nombreRol), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (nombreRol == SessionManager_54CS.Instancia.Rol_54CS.Trim())
                     {
                         foreach (Usuario_54CS user in _usuarios)
@@ -424,7 +424,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "No se pudo agregar la familia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo agregar la familia"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -433,7 +433,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -443,20 +443,20 @@ namespace ProyectoIS
             {
                 if (_rolSeleccionadoFamilias == null)
                 {
-                    MessageBox.Show("Seleccione primero un Rol de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero un Rol de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var familiaSeleccionada = lbFamiliasDelRol.SelectedItem as Familia_54CS;
                 if (familiaSeleccionada == null)
                 {
-                    MessageBox.Show("Seleccione la familia que desea quitar del rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione la familia que desea quitar del rol."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var confirmacion = MessageBox.Show(
-                    $"¿Quitar la familia '{familiaSeleccionada.Nombre}' del rol '{_rolSeleccionadoFamilias.Nombre}'?",
-                    "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string.Format(IdiomaManager_54CS.TraducirMensaje("¿Quitar la familia '{0}' del rol '{1}'?"), familiaSeleccionada.Nombre, _rolSeleccionadoFamilias.Nombre),
+                    IdiomaManager_54CS.TraducirMensaje("Confirmar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirmacion != DialogResult.Yes)
                     return;
 
@@ -464,7 +464,7 @@ namespace ProyectoIS
                 {
                     _rolesBLL.QuitarFamiliaDeRol(_rolSeleccionadoFamilias, familiaSeleccionada);
                     RegistrarEvento("Quitar Familia de Rol");
-                    MessageBox.Show("Familia quitada del rol.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Familia quitada del rol."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (_rolSeleccionadoFamilias.Nombre == SessionManager_54CS.Instancia.Rol_54CS.Trim())
                     {
                         foreach (Usuario_54CS user in _usuarios)
@@ -480,7 +480,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "No se pudo quitar la familia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo quitar la familia"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -489,7 +489,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void RefrescarComposicionPermisosRol()
@@ -568,14 +568,14 @@ namespace ProyectoIS
             {
                 if (_rolSeleccionadoPermisos == null)
                 {
-                    MessageBox.Show("Seleccione primero un Rol de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero un Rol de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var permisosAAgregar = clbPermisosDisponiblesRol.CheckedItems.Cast<object>().Select(o => (Permiso_54CS)o).ToList();
                 if (permisosAAgregar.Count == 0)
                 {
-                    MessageBox.Show("Seleccione (tilde) al menos un permiso para agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione (tilde) al menos un permiso para agregar."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -590,7 +590,7 @@ namespace ProyectoIS
                     }
 
                     RegistrarEvento("Agregar Permiso a Rol");
-                    MessageBox.Show($"Se agregaron {agregados} permiso(s) al rol '{nombreRol}'.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se agregaron {0} permiso(s) al rol '{1}'."), agregados, nombreRol), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (nombreRol == SessionManager_54CS.Instancia.Rol_54CS.Trim())
                     {
                         foreach (Usuario_54CS user in _usuarios)
@@ -606,7 +606,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "No se pudo agregar el permiso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo agregar el permiso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -615,7 +615,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -625,20 +625,20 @@ namespace ProyectoIS
             {
                 if (_rolSeleccionadoPermisos == null)
                 {
-                    MessageBox.Show("Seleccione primero un Rol de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero un Rol de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var permisoSeleccionado = lbPermisosDirectosDelRol.SelectedItem as Permiso_54CS;
                 if (permisoSeleccionado == null)
                 {
-                    MessageBox.Show("Seleccione el permiso directo que desea quitar del rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione el permiso directo que desea quitar del rol."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var confirmacion = MessageBox.Show(
-                    $"¿Eliminar el permiso '{permisoSeleccionado.Nombre}' del rol '{_rolSeleccionadoPermisos.Nombre}'?",
-                    "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string.Format(IdiomaManager_54CS.TraducirMensaje("¿Eliminar el permiso '{0}' del rol '{1}'?"), permisoSeleccionado.Nombre, _rolSeleccionadoPermisos.Nombre),
+                    IdiomaManager_54CS.TraducirMensaje("Confirmar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirmacion != DialogResult.Yes)
                     return;
 
@@ -646,7 +646,7 @@ namespace ProyectoIS
                 {
                     _rolesBLL.QuitarPermisoDeRol(_rolSeleccionadoPermisos, permisoSeleccionado);
                     RegistrarEvento("Eliminar Permiso de Rol");
-                    MessageBox.Show("Permiso eliminado del rol.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Permiso eliminado del rol."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (_rolSeleccionadoPermisos.Nombre == SessionManager_54CS.Instancia.Rol_54CS.Trim())
                     {
                         foreach (Usuario_54CS user in _usuarios)
@@ -662,7 +662,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "No se pudo quitar el permiso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo quitar el permiso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -671,7 +671,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

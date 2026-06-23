@@ -51,7 +51,7 @@ namespace ProyectoIS
         {
             if ( valido == false )
             {
-                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
             }
 
@@ -151,7 +151,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Error: {0}"), ex.Message), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -160,7 +160,7 @@ namespace ProyectoIS
         {
             if (valido == false)
             {
-                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -185,7 +185,7 @@ namespace ProyectoIS
 
             if (filas.Count == 0)
             {
-                MessageBox.Show("No hay eventos para exportar.", "Exportar a PDF",
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No hay eventos para exportar."), IdiomaManager_54CS.TraducirMensaje("Exportar a PDF"),
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -223,9 +223,9 @@ namespace ProyectoIS
                         filas);
 
                     var abrir = MessageBox.Show(
-                        "PDF exportado correctamente en:" + Environment.NewLine + sfd.FileName +
-                        Environment.NewLine + Environment.NewLine + "¿Desea abrirlo ahora?",
-                        "Exportación exitosa", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        IdiomaManager_54CS.TraducirMensaje("PDF exportado correctamente en:") + Environment.NewLine + sfd.FileName +
+                        Environment.NewLine + Environment.NewLine + IdiomaManager_54CS.TraducirMensaje("¿Desea abrirlo ahora?"),
+                        IdiomaManager_54CS.TraducirMensaje("Exportación exitosa"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                     if (abrir == DialogResult.Yes)
                     {
@@ -235,7 +235,7 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo exportar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se pudo exportar el PDF: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -269,7 +269,7 @@ namespace ProyectoIS
         {
             if (fechaPickerFin.Value < fechaPickerInicio.Value)
             {
-                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valido = false;
             }
         }
@@ -278,7 +278,7 @@ namespace ProyectoIS
         {
             if (fechaPickerFin.Value < fechaPickerInicio.Value)
             {
-                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valido = false;
             }
         }

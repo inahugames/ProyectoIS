@@ -96,7 +96,7 @@ namespace ProyectoIS
             {
                 if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    MessageBox.Show("Por favor, ingrese el nombre de la nueva familia.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Por favor, ingrese el nombre de la nueva familia."), IdiomaManager_54CS.TraducirMensaje("Validación"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 Familia_54CS fam = new Familia_54CS(txtNombre.Text);
@@ -118,7 +118,7 @@ namespace ProyectoIS
                         Criticidad_54CS = "3"
                     };
                     bllev.GuardarEvento(Evento, out string msj);
-                    MessageBox.Show("Familia creada con éxito sin conflictos de permisos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Familia creada con éxito sin conflictos de permisos."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtDesc.Clear();
                     txtNombre.Clear();
 
@@ -128,12 +128,12 @@ namespace ProyectoIS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Conflicto de Permisos Redundantes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("Conflicto de Permisos Redundantes"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -156,14 +156,14 @@ namespace ProyectoIS
                     string mensaje = habiaPermisosTildados
                         ? "Solo se pueden eliminar familias, no permisos. Tilde al menos una familia."
                         : "Tilde al menos una familia para eliminar.";
-                    MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(mensaje, IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 string listado = string.Join(", ", familiasAEliminar.Select(f => f.Nombre));
                 var confirmacion = MessageBox.Show(
-                    $"¿Eliminar la(s) siguiente(s) familia(s)?\n\n{listado}\n\nLos permisos no se verán afectados.",
-                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string.Format(IdiomaManager_54CS.TraducirMensaje("¿Eliminar la(s) siguiente(s) familia(s)?\n\n{0}\n\nLos permisos no se verán afectados."), listado),
+                    IdiomaManager_54CS.TraducirMensaje("Confirmar eliminación"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirmacion == DialogResult.No)
                 {
                     return;
@@ -203,21 +203,21 @@ namespace ProyectoIS
 
                 if (errores.Count == 0)
                 {
-                    MessageBox.Show($"Se eliminó/eliminaron {eliminadas} familia(s) con éxito.",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se eliminó/eliminaron {0} familia(s) con éxito."), eliminadas),
+                        IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     string detalle = string.Join(Environment.NewLine, errores);
                     MessageBox.Show(
-                        $"Familias eliminadas: {eliminadas}." + Environment.NewLine + Environment.NewLine +
-                        "No se pudieron eliminar:" + Environment.NewLine + detalle,
-                        "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        string.Format(IdiomaManager_54CS.TraducirMensaje("Familias eliminadas: {0}."), eliminadas) + Environment.NewLine + Environment.NewLine +
+                        IdiomaManager_54CS.TraducirMensaje("No se pudieron eliminar:") + Environment.NewLine + detalle,
+                        IdiomaManager_54CS.TraducirMensaje("Resultado"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -235,7 +235,7 @@ namespace ProyectoIS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar permisos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar permisos: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             btnCrear.Visible = false;
             btnEliminarFamilia.Visible = false;
@@ -274,7 +274,7 @@ namespace ProyectoIS
                 tabsGestionFamilias.TabPages.Insert(index, tabPermisosFamilia);
                 index++;
                 btnAgregarPermisoFamilia.Visible = true;
-                btnEliminarFamilia.Visible = true;
+                btnQuitarPermisoFamilia.Visible = true;
             }
         }
 
@@ -311,7 +311,7 @@ namespace ProyectoIS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar las familias: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar las familias: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -349,7 +349,7 @@ namespace ProyectoIS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar los permisos disponibles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar los permisos disponibles: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -357,14 +357,14 @@ namespace ProyectoIS
         {
             if (_familiaSeleccionada == null)
             {
-                MessageBox.Show("Seleccione primero una familia de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero una familia de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var permisosAAgregar = clbPermisosDisponiblesFam.CheckedItems.Cast<object>().Select(o => (Permiso_54CS)o).ToList();
             if (permisosAAgregar.Count == 0)
             {
-                MessageBox.Show("Seleccione (tilde) al menos un permiso para agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione (tilde) al menos un permiso para agregar."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -388,11 +388,11 @@ namespace ProyectoIS
                 };
                 bllev.GuardarEvento(evento, out string msj);
 
-                MessageBox.Show($"Se agregaron {agregados} permiso(s) a la familia '{_familiaSeleccionada.Nombre}'.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se agregaron {0} permiso(s) a la familia '{1}'."), agregados, _familiaSeleccionada.Nombre), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "No se pudo agregar el permiso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo agregar el permiso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -404,20 +404,20 @@ namespace ProyectoIS
         {
             if (_familiaSeleccionada == null)
             {
-                MessageBox.Show("Seleccione primero una familia de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione primero una familia de la lista."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var permisoSeleccionado = lbPermisosDeFamilia.SelectedItem as Permiso_54CS;
             if (permisoSeleccionado == null)
             {
-                MessageBox.Show("Seleccione el permiso que desea quitar de la familia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Seleccione el permiso que desea quitar de la familia."), IdiomaManager_54CS.TraducirMensaje("Atención"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var confirmacion = MessageBox.Show(
-                $"¿Quitar el permiso '{permisoSeleccionado.Nombre}' de la familia '{_familiaSeleccionada.Nombre}'?",
-                "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                string.Format(IdiomaManager_54CS.TraducirMensaje("¿Quitar el permiso '{0}' de la familia '{1}'?"), permisoSeleccionado.Nombre, _familiaSeleccionada.Nombre),
+                IdiomaManager_54CS.TraducirMensaje("Confirmar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirmacion != DialogResult.Yes)
                 return;
 
@@ -436,11 +436,11 @@ namespace ProyectoIS
                 };
                 bllev.GuardarEvento(evento, out string msj);
 
-                MessageBox.Show("Permiso quitado de la familia.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Permiso quitado de la familia."), IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "No se pudo quitar el permiso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("No se pudo quitar el permiso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

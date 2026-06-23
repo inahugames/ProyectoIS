@@ -21,7 +21,7 @@ namespace ProyectoIS
         public GestionUsuario()
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this);
+            IdiomaManager_54CS.Suscribir(this); 
             Actualizar();
             TxtModoConsulta();
         }
@@ -46,7 +46,7 @@ namespace ProyectoIS
                 }
                 catch
                 {
-                    MessageBox.Show("El usuario seleccionado es inválido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("El usuario seleccionado es inválido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace ProyectoIS
                     };
                     BLLEventos_54CS bllev = new BLLEventos_54CS();
                     bllev.GuardarEvento(Evento, out string mens);
-                    MessageBox.Show($"Usuario con DNI {user.DNI_54cs} desbloqueado exitosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Usuario con DNI {0} desbloqueado exitosamente"), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     List<Eventos_54CS> listaev = bllev.ObtenerTodos();
                     foreach (Eventos_54CS ev in listaev)
                     {
@@ -83,7 +83,7 @@ namespace ProyectoIS
                 }
                 else if (user.Login_54CS == seleccionado.Login_54CS && user.Block_54CS == false)
                 {
-                    MessageBox.Show("El usuario seleccionado no se encuentra bloqueado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("El usuario seleccionado no se encuentra bloqueado."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             Actualizar();
@@ -135,7 +135,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
            
@@ -165,7 +165,7 @@ namespace ProyectoIS
                 if (Convert.ToBoolean(row.Cells[0].Value) == true)
                 {
                     DialogResult opcion;
-                    opcion = MessageBox.Show("Realmente quiere activar/desactivar el usuario?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    opcion = MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Realmente quiere activar/desactivar el usuario?"), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (opcion == DialogResult.OK)
                     {
                         BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
@@ -176,13 +176,13 @@ namespace ProyectoIS
                             {
                                 if (user.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
                                 {
-                                    MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No puede modificar el usuario que se encuentra logeado actualmente."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                                 }
                                 if (user.Activo_54CS == true)
                                 {
                                     bll.DesactivarUsuario(user.Login_54CS, out string msj);
-                                    MessageBox.Show($"Se desactivó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se desactivó el usuario con DNI: {0}"), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
                                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -199,7 +199,7 @@ namespace ProyectoIS
                                 else
                                 {
                                     bll.ActivarUsuario(user.Login_54CS, out string msj);
-                                    MessageBox.Show($"Se activó el usuario con DNI: {user.DNI_54cs}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Se activó el usuario con DNI: {0}"), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                                     {
                                         Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -224,7 +224,7 @@ namespace ProyectoIS
         {
             if (seleccionado.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
             {
-                MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No puede modificar el usuario que se encuentra logeado actualmente."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -256,16 +256,16 @@ namespace ProyectoIS
                 {
                     if (seleccionado.Login_54CS == SessionManager_54CS.Instancia.Login_54CS)
                     {
-                        MessageBox.Show("No puede modificar el usuario que se encuentra logeado actualmente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No puede modificar el usuario que se encuentra logeado actualmente."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                     DialogResult opcion;
-                    opcion = MessageBox.Show($"Realmente quiere eliminar al usuario con DNI: {user.DNI_54cs}?", "Aviso", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    opcion = MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Realmente quiere eliminar al usuario con DNI: {0}?"), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if ( opcion == DialogResult.OK)
                     {
                         bll.EliminarUsuario(user.DNI_54cs, out string msj);
                         Actualizar();
-                        MessageBox.Show("Usuario eliminado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario eliminado."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                         {
                             Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -280,7 +280,7 @@ namespace ProyectoIS
                     }
                     else
                     {
-                        MessageBox.Show("Operación cancelada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Operación cancelada."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

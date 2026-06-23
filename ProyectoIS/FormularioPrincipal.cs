@@ -37,7 +37,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -51,7 +51,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -64,7 +64,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -105,7 +105,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -119,7 +119,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -133,7 +133,7 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -34,13 +34,13 @@ namespace ProyectoIS
                     {
                         if (user.Block_54CS == true)
                         {
-                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario Bloqueado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Existe = true;
                             break;
                         }
                         if (user.Activo_54CS == false)
                         {
-                            MessageBox.Show("Usuario desactivado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario desactivado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Existe = true;
                             break;
                         }
@@ -75,7 +75,7 @@ namespace ProyectoIS
                                     if ( Login <= 0 )
                                     {
                                                 user.Block_54CS = true;
-                                                MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario Bloqueado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                 Existe = true;
                                                 Eventos_54CS Eventito = new Eventos_54CS() //Crear un evento
                                                 {
@@ -90,7 +90,7 @@ namespace ProyectoIS
                                                 bll.BloquearUsuario(user.Login_54CS, out string mensj);
                                                 break;
                                      }
-                                    else if (Login >= 1) { MessageBox.Show("Contraseña Incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                    else if (Login >= 1) { MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña Incorrecta."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
                                     Existe = true;
                                 }
                                 else if (login == true)
@@ -99,10 +99,10 @@ namespace ProyectoIS
                                     bll.CargarPermisosDelUsuarioEnSesion(user);
                                     if (user.TienePermiso("Login") == false)
                                     {
-                                        MessageBox.Show("No posee el permiso para iniciar sesión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No posee el permiso para iniciar sesión."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
-                                    { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
+                                    { MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Inicio de Sesión Exitoso"), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
                                     string idiomaPreferido = string.IsNullOrWhiteSpace(user.Idioma_54CS) ? IdiomaManager_54CS.IdiomaPorDefecto : user.Idioma_54CS;
                                     IdiomaManager_54CS.CambiarIdioma(idiomaPreferido);
 
@@ -126,7 +126,7 @@ namespace ProyectoIS
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show($"Error al autenticar. {ex}","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Error al autenticar. {0}"), ex),IdiomaManager_54CS.TraducirMensaje("Error"),MessageBoxButtons.OK,MessageBoxIcon.Error);
                             }
 
                         }
@@ -135,11 +135,11 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("Complete los campos de usuario y contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Complete los campos de usuario y contraseña."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Existe == false)
             {
-                MessageBox.Show("Usuario no encontrado en la Base de Datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario no encontrado en la Base de Datos."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -178,13 +178,13 @@ namespace ProyectoIS
                     {
                         if (user.Block_54CS == true)
                         {
-                            MessageBox.Show("Usuario Bloqueado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario Bloqueado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Existe = true;
                             break;
                         }
                         if (user.Activo_54CS == false)
                         {
-                            MessageBox.Show("Usuario desactivado, contacte a un Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario desactivado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Existe = true;
                             break;
                         }
@@ -216,7 +216,7 @@ namespace ProyectoIS
                                         }
                                     }
                                     Existe = true;
-                                    MessageBox.Show("Contraseña incorrecta.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña incorrecta."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     if ( intentos <= 0)
                                     {
                                         user.Block_54CS = true;
@@ -232,7 +232,7 @@ namespace ProyectoIS
                                         BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
                                         bll.BloquearUsuario(user.Login_54CS, out string m);
                                         ListUsuarios = bll.ObtenerTodos();
-                                        MessageBox.Show("Usuario bloqueado, contacte a un administrador.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario bloqueado, contacte a un administrador."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                     break;
                                 }
@@ -247,7 +247,7 @@ namespace ProyectoIS
                             }
                             catch
                             {
-                                MessageBox.Show("Error al autenticar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al autenticar."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                             }
                         }
@@ -257,11 +257,11 @@ namespace ProyectoIS
             }
             else
             {
-                MessageBox.Show("Complete los campos de usuario y contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Complete los campos de usuario y contraseña."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Existe == false)
             {
-                MessageBox.Show("Usuario no encontrado en la Base de Datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario no encontrado en la Base de Datos."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

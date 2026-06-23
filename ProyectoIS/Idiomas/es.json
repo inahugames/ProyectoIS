@@ -69,7 +69,7 @@
     "lblFamiliasGestion": "Familias Existentes:",
     "lblPermisosDisponiblesFam": "Permisos Disponibles:",
     "btnAgregarPermisoFamilia": "Agregar >>",
-    "btnQuitarPermisoFamilia": "<< Quitar",
+    "btnQuitarPermisoFamilia": "<< Eliminar",
     "lblPermisosDeFamilia": "Permisos de la Familia:"
   },
   "GestionarRoles": {
@@ -87,12 +87,12 @@
     "lblRolesFamTab": "Seleccione un Rol:",
     "lblFamiliasDisponiblesRol": "Familias Disponibles:",
     "btnAgregarFamiliaRol": "Agregar Familia(s) >>",
-    "btnQuitarFamiliaRol": "<< Quitar Familia",
+    "btnQuitarFamiliaRol": "<< Eliminar Familia",
     "lblFamiliasDelRol": "Familias del Rol:",
     "lblRolesPermTab": "Seleccione un Rol:",
     "lblPermisosDisponiblesRol": "Permisos Disponibles (sueltos):",
     "btnAgregarPermisoRol": "Agregar >>",
-    "btnQuitarPermisoRol": "<< Quitar",
+    "btnQuitarPermisoRol": "<< Eliminar",
     "lblPermisosDirectosDelRol": "Permisos Directos del Rol:",
     "lblPermisosEfectivosRol": "Todos los Permisos Efectivos (con Familias):"
   },

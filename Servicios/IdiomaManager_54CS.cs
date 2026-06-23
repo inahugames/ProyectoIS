@@ -157,6 +157,16 @@ namespace Servicios
                 return _textos[seccion][clave];
             return valorPorDefecto;
         }
+        public static string TraducirMensaje(string textoEnEspañol)
+        {
+            if (textoEnEspañol != null && _textos != null
+                && _textos.ContainsKey("Mensajes")
+                && _textos["Mensajes"].ContainsKey(textoEnEspañol))
+            {
+                return _textos["Mensajes"][textoEnEspañol];
+            }
+            return textoEnEspañol;
+        }
         // Observer
         public static void Suscribir(Form formulario)
         {

@@ -62,13 +62,13 @@ namespace ProyectoIS
                         };
                         BLLEventos_54CS bllev = new BLLEventos_54CS();
                         bllev.GuardarEvento(Evento, out string msj);
-                        MessageBox.Show($"Usuario con DNI {user.DNI_54cs} modificado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Usuario con DNI {0} modificado exitosamente."), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

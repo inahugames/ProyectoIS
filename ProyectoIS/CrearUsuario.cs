@@ -48,7 +48,7 @@ namespace ProyectoIS
                         bll.CrearUsuario(Convert.ToInt32(txtDNI.Text), apellidoIngresado, nombreIngresado, nombreIngresado + primeramitad, encripta.EncriptarContraseña(apellidoIngresado + segundamitad), rolIngresado, emailIngresado, false, true, out string msj);
                         if (string.IsNullOrEmpty(msj) == true)
                         {
-                            MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario creado exitosamente."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                             {
                                 Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
@@ -62,23 +62,23 @@ namespace ProyectoIS
                         }
                         else
                         {
-                            MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(msj, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch
                     {
-                        MessageBox.Show("El usuario ya se encuentra registrado, no es necesario que se vuelva a registrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("El usuario ya se encuentra registrado, no es necesario que se vuelva a registrar."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
 
                 else
                 {
-                    MessageBox.Show("No deje ningún campo sin llenar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No deje ningún campo sin llenar."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

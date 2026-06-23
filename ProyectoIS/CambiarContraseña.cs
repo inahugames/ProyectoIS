@@ -57,12 +57,12 @@ namespace ProyectoIS
                         Fecha_54CS = DateTime.Today
                     };
                     blle.GuardarEvento(nuevo, out string mens);
-                    MessageBox.Show("Contraseña cambiada exitosamente, inicie sesión con su nueva contraseña","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña cambiada exitosamente, inicie sesión con su nueva contraseña"),IdiomaManager_54CS.TraducirMensaje("Aviso"),MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Close();
                 }
                 else if (misma == true)
                 {
-                    MessageBox.Show("Debe ingresar una contraseña diferente a la actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Debe ingresar una contraseña diferente a la actual."), IdiomaManager_54CS.TraducirMensaje("Advertencia"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
