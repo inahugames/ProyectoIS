@@ -21,12 +21,11 @@ namespace ProyectoIS
         public GestionUsuario()
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+            IdiomaManager_54CS.Suscribir(this);
             Actualizar();
             TxtModoConsulta();
         }
 
-        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -92,25 +91,52 @@ namespace ProyectoIS
 
         private void cbUsuario_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbUsuario.Checked)
+            if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuarios") ||
+                SessionManager_54CS.Instancia.TienePermiso("DesbloquearUsuario") ||
+                SessionManager_54CS.Instancia.TienePermiso("ModificarUsuario") ||
+                SessionManager_54CS.Instancia.TienePermiso("ActivarDesactivarUsuario") ||
+                SessionManager_54CS.Instancia.TienePermiso("EliminarUsuario"))
             {
-                dgvUsuarios.Columns[0].Visible = true;
-                btnAct.Visible = true;
-                btnDesbloquear.Visible = true;
-                btnModificar.Visible = true;
-                btnEliminar.Visible = true;
-                btnCrear.Visible = true;
-                TxtModoModificar();
+                if (cbUsuario.Checked)
+                {
+                    dgvUsuarios.Columns[0].Visible = true;
+                    if (SessionManager_54CS.Instancia.TienePermiso("ActivarDesactivarUsuario"))
+                    {
+                        btnAct.Visible = true;
+                    }
+                    if (SessionManager_54CS.Instancia.TienePermiso("DesbloquearUsuario"))
+                    {
+                        btnDesbloquear.Visible = true;
+                    }
+                    if (SessionManager_54CS.Instancia.TienePermiso("ModificarUsuario"))
+                    {
+                        btnModificar.Visible = true;
+                    }
+                    if (SessionManager_54CS.Instancia.TienePermiso("EliminarUsuario"))
+                    {
+                        btnEliminar.Visible = true;
+                    }
+                    if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuarios"))
+                    {
+                        btnCrear.Visible = true;
+                    }
+                    TxtModoModificar();
+                }
+                else
+                {
+                    dgvUsuarios.Columns[0].Visible = false;
+                    btnAct.Visible = false;
+                    btnModificar.Visible = false;
+                    btnDesbloquear.Visible = false;
+                    btnEliminar.Visible = false;
+                    btnCrear.Visible = false;
+                    TxtModoConsulta();
+                }
             }
             else
             {
-                dgvUsuarios.Columns[0].Visible = false;
-                btnAct.Visible = false;
-                btnModificar.Visible = false;
-                btnDesbloquear.Visible = false;
-                btnEliminar.Visible = false;
-                btnCrear.Visible = false;
-                TxtModoConsulta();
+                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
            
         }
@@ -333,6 +359,18 @@ namespace ProyectoIS
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Actualizar();
+        }
+
+        private void GestionUsuario_Load(object sender, EventArgs e)
+        {
+            if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuarios") == false &&
+                SessionManager_54CS.Instancia.TienePermiso("DesbloquearUsuario") == false &&
+                SessionManager_54CS.Instancia.TienePermiso("ModificarUsuario") == false &&
+                SessionManager_54CS.Instancia.TienePermiso("ActivarDesactivarUsuario") == false &&
+                SessionManager_54CS.Instancia.TienePermiso("EliminarUsuario") == false)
+            {
+                cbUsuario.Visible = false;
+            }
         }
     }
 }

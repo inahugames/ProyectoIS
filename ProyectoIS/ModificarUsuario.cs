@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL_54CS;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ProyectoIS
 {
@@ -18,7 +19,7 @@ namespace ProyectoIS
         public ModificarUsuario(Usuario_54CS seleccionado)
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+            IdiomaManager_54CS.Suscribir(this);
             txtApellido.Text = seleccionado.Apellido_54CS.Trim();
             txtNombre.Text = seleccionado.Nombre_54CS.Trim();
             txtDNI.Text = Convert.ToString(seleccionado.DNI_54cs).Trim();
@@ -27,7 +28,6 @@ namespace ProyectoIS
             seleccion = seleccionado;
         }
 
-        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -35,33 +35,40 @@ namespace ProyectoIS
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
-            List<Usuario_54CS> lista = bll.ObtenerTodos();
-            foreach (Usuario_54CS user in lista)
+            if (SessionManager_54CS.Instancia.TienePermiso("ModificarUsuario"))
             {
-                if (user.DNI_54cs == seleccion.DNI_54cs)
+                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                List<Usuario_54CS> lista = bll.ObtenerTodos();
+                foreach (Usuario_54CS user in lista)
                 {
-                    if (txtEmail.Text != user.Email_54CS)
+                    if (user.DNI_54cs == seleccion.DNI_54cs)
                     {
-                        user.Email_54CS = txtEmail.Text;
+                        if (txtEmail.Text != user.Email_54CS)
+                        {
+                            user.Email_54CS = txtEmail.Text;
+                        }
+                        if (txtRol.Text != user.Rol_54CS)
+                        {
+                            user.Rol_54CS = txtRol.Text;
+                        }
+                        bll.ActualizarUsuario(lista, out string m);
+                        Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                        {
+                            Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                            Fecha_54CS = System.DateTime.Now,
+                            Modulo_54CS = "Gestión de Usuario",
+                            Evento_54CS = "Usuario Modificado",
+                            Criticidad_54CS = "3"
+                        };
+                        BLLEventos_54CS bllev = new BLLEventos_54CS();
+                        bllev.GuardarEvento(Evento, out string msj);
+                        MessageBox.Show($"Usuario con DNI {user.DNI_54cs} modificado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    if (txtRol.Text != user.Rol_54CS)
-                    {
-                        user.Rol_54CS = txtRol.Text;
-                    }
-                    bll.ActualizarUsuario(lista, out string m);
-                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
-                    {
-                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
-                        Fecha_54CS = System.DateTime.Now,
-                        Modulo_54CS = "Gestión de Usuario",
-                        Evento_54CS = "Usuario Modificado",
-                        Criticidad_54CS = "3"
-                    };
-                    BLLEventos_54CS bllev = new BLLEventos_54CS();
-                    bllev.GuardarEvento(Evento, out string msj);
-                    MessageBox.Show($"Usuario con DNI {user.DNI_54cs} modificado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

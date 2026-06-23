@@ -95,13 +95,14 @@ namespace ProyectoIS
                                 }
                                 else if (login == true)
                                 {
-                                    { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
                                     BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
                                     bll.CargarPermisosDelUsuarioEnSesion(user);
-
-                                    // Aplica el idioma guardado para este usuario (si nunca lo cambió,
-                                    // Idioma_54CS llega en "es" por defecto). Así, la próxima vez que
-                                    // inicia sesión, el programa se ajusta solo a su preferencia.
+                                    if (user.TienePermiso("Login") == false)
+                                    {
+                                        MessageBox.Show("No posee el permiso para iniciar sesión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                    { MessageBox.Show("Inicio de Sesión Exitoso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
                                     string idiomaPreferido = string.IsNullOrWhiteSpace(user.Idioma_54CS) ? IdiomaManager_54CS.IdiomaPorDefecto : user.Idioma_54CS;
                                     IdiomaManager_54CS.CambiarIdioma(idiomaPreferido);
 
@@ -127,8 +128,8 @@ namespace ProyectoIS
                             {
                                 MessageBox.Show($"Error al autenticar. {ex}","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                             }
-                        }
 
+                        }
                     }
                 }
             }
@@ -147,7 +148,6 @@ namespace ProyectoIS
 
         }
 
-        // 2.1 - Observer: este formulario se traduce solo cada vez que el idioma cambia.
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -155,9 +155,6 @@ namespace ProyectoIS
 
         private void LogIn_Load(object sender, EventArgs e)
         {
-            // El idioma ya fue inicializado en Program.cs (carpeta Idiomas + idioma por
-            // defecto). Acá solo nos suscribimos como observadores: nos traducimos ahora
-            // mismo y también cada vez que el idioma cambie en caliente más adelante.
             IdiomaManager_54CS.Suscribir(this);
         }
 

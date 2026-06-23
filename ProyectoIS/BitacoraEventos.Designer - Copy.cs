@@ -47,12 +47,6 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.fechaPickerFin = new System.Windows.Forms.DateTimePicker();
-            this.lblResponsable = new System.Windows.Forms.Label();
-            this.lblNombreResp = new System.Windows.Forms.Label();
-            this.txtNombreResponsable = new System.Windows.Forms.TextBox();
-            this.lblApellidoResp = new System.Windows.Forms.Label();
-            this.txtApellidoResponsable = new System.Windows.Forms.TextBox();
-            this.btnExportarPDF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,7 +67,6 @@
             this.dgvEventos.Size = new System.Drawing.Size(594, 445);
             this.dgvEventos.TabIndex = 0;
             this.dgvEventos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dgvEventos.SelectionChanged += new System.EventHandler(this.dgvEventos_SelectionChanged);
             // 
             // Login
             // 
@@ -115,7 +108,6 @@
             this.fechaPickerInicio.ShowCheckBox = true;
             this.fechaPickerInicio.Size = new System.Drawing.Size(200, 20);
             this.fechaPickerInicio.TabIndex = 3;
-            this.fechaPickerInicio.ValueChanged += new System.EventHandler(this.fechaPickerInicio_ValueChanged);
             // 
             // btnAplicarFiltros
             // 
@@ -234,76 +226,12 @@
             this.fechaPickerFin.ShowCheckBox = true;
             this.fechaPickerFin.Size = new System.Drawing.Size(200, 20);
             this.fechaPickerFin.TabIndex = 16;
-            this.fechaPickerFin.ValueChanged += new System.EventHandler(this.fechaPickerFin_ValueChanged);
-            // 
-            // lblResponsable
-            // 
-            this.lblResponsable.AutoSize = true;
-            this.lblResponsable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResponsable.Location = new System.Drawing.Point(10, 466);
-            this.lblResponsable.Name = "lblResponsable";
-            this.lblResponsable.Size = new System.Drawing.Size(243, 16);
-            this.lblResponsable.TabIndex = 18;
-            this.lblResponsable.Text = "Responsable del evento seleccionado:";
-            // 
-            // lblNombreResp
-            // 
-            this.lblNombreResp.AutoSize = true;
-            this.lblNombreResp.Location = new System.Drawing.Point(10, 495);
-            this.lblNombreResp.Name = "lblNombreResp";
-            this.lblNombreResp.Size = new System.Drawing.Size(47, 13);
-            this.lblNombreResp.TabIndex = 19;
-            this.lblNombreResp.Text = "Nombre:";
-            // 
-            // txtNombreResponsable
-            // 
-            this.txtNombreResponsable.Location = new System.Drawing.Point(75, 492);
-            this.txtNombreResponsable.Name = "txtNombreResponsable";
-            this.txtNombreResponsable.ReadOnly = true;
-            this.txtNombreResponsable.Size = new System.Drawing.Size(200, 20);
-            this.txtNombreResponsable.TabIndex = 20;
-            this.txtNombreResponsable.TabStop = false;
-            // 
-            // lblApellidoResp
-            // 
-            this.lblApellidoResp.AutoSize = true;
-            this.lblApellidoResp.Location = new System.Drawing.Point(295, 495);
-            this.lblApellidoResp.Name = "lblApellidoResp";
-            this.lblApellidoResp.Size = new System.Drawing.Size(47, 13);
-            this.lblApellidoResp.TabIndex = 21;
-            this.lblApellidoResp.Text = "Apellido:";
-            // 
-            // txtApellidoResponsable
-            // 
-            this.txtApellidoResponsable.Location = new System.Drawing.Point(360, 492);
-            this.txtApellidoResponsable.Name = "txtApellidoResponsable";
-            this.txtApellidoResponsable.ReadOnly = true;
-            this.txtApellidoResponsable.Size = new System.Drawing.Size(200, 20);
-            this.txtApellidoResponsable.TabIndex = 22;
-            this.txtApellidoResponsable.TabStop = false;
-            // 
-            // btnExportarPDF
-            // 
-            this.btnExportarPDF.Location = new System.Drawing.Point(651, 470);
-            this.btnExportarPDF.Margin = new System.Windows.Forms.Padding(2);
-            this.btnExportarPDF.Name = "btnExportarPDF";
-            this.btnExportarPDF.Size = new System.Drawing.Size(301, 60);
-            this.btnExportarPDF.TabIndex = 23;
-            this.btnExportarPDF.Text = "Exportar a PDF";
-            this.btnExportarPDF.UseVisualStyleBackColor = true;
-            this.btnExportarPDF.Click += new System.EventHandler(this.btnExportarPDF_Click);
             // 
             // BitacoraEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 560);
-            this.Controls.Add(this.btnExportarPDF);
-            this.Controls.Add(this.txtApellidoResponsable);
-            this.Controls.Add(this.lblApellidoResp);
-            this.Controls.Add(this.txtNombreResponsable);
-            this.Controls.Add(this.lblNombreResp);
-            this.Controls.Add(this.lblResponsable);
+            this.ClientSize = new System.Drawing.Size(960, 466);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.fechaPickerFin);
             this.Controls.Add(this.btnSalir);
@@ -348,11 +276,5 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker fechaPickerFin;
-        private System.Windows.Forms.Label lblResponsable;
-        private System.Windows.Forms.Label lblNombreResp;
-        private System.Windows.Forms.TextBox txtNombreResponsable;
-        private System.Windows.Forms.Label lblApellidoResp;
-        private System.Windows.Forms.TextBox txtApellidoResponsable;
-        private System.Windows.Forms.Button btnExportarPDF;
     }
 }

@@ -33,7 +33,7 @@ namespace MPP
                     Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString()),
                     Idioma_54CS = (tabla.Columns.Contains("Idioma_54CS") && row["Idioma_54CS"] != DBNull.Value)
                         ? row["Idioma_54CS"].ToString()
-                        : "es", // si todavía no se corrió la migración de BD, usamos español por defecto
+                        : "es",
                     RolesAsignados = new List<Rol_54CS>()
                 };
                 usuarios.Add(usuario);

@@ -39,6 +39,12 @@ namespace DAL
             return conexionSQL.Leer(query);
         }
 
+        public DataTable ObtenerRelacionesFamiliaFamilia()
+        {
+            string query = "SELECT IdFamiliaPadre, IdFamiliaHijo FROM Familia_Familia";
+            return conexionSQL.Leer(query);
+        }
+
         public int InsertarFamilia(string nombre, string descripcion)
         {
             string query = "INSERT INTO Familias_54CS (Nombre_54CS, Descripcion_54CS) VALUES (@nombre, @desc); SELECT SCOPE_IDENTITY();";
@@ -58,6 +64,79 @@ namespace DAL
                 { "@idPerm",idPermiso}
             };
             conexionSQL.Escribir(query, parametros);
+        }
+
+        public void InsertarRelacionFamiliaFamilia(int idFamiliaPadre, int idFamiliaHijo)
+        {
+            string query = "INSERT INTO Familia_Familia (IdFamiliaPadre, IdFamiliaHijo) VALUES (@idPadre, @idHijo)";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@idPadre",idFamiliaPadre},
+                { "@idHijo",idFamiliaHijo}
+            };
+            conexionSQL.Escribir(query, parametros);
+        }
+
+        public int EliminarRelacionFamiliaFamilia(int idFamiliaPadre, int idFamiliaHijo)
+        {
+            string query = "DELETE FROM Familia_Familia WHERE IdFamiliaPadre = @idPadre AND IdFamiliaHijo = @idHijo";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@idPadre",idFamiliaPadre},
+                { "@idHijo",idFamiliaHijo}
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public bool ExisteFamiliaEnUso(int idFamilia)
+        {
+            string query = @"
+                SELECT
+                    (SELECT COUNT(1) FROM Rol_Familia      WHERE IdFamilia     = @id) +
+                    (SELECT COUNT(1) FROM Familia_Familia  WHERE IdFamiliaHijo = @id)";
+            using (SqlConnection cx = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, cx))
+                {
+                    cmd.Parameters.AddWithValue("@id", idFamilia);
+                    cx.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+        }
+
+        public int EliminarRelacionesDeFamilia(int idFamilia)
+        {
+            string query = @"
+                DELETE FROM Familia_Permiso  WHERE IdFamilia       = @id;
+                DELETE FROM Familia_Familia  WHERE IdFamiliaPadre  = @id;";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@id",idFamilia}
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int EliminarFamilia(int idFamilia)
+        {
+            string query = "DELETE FROM Familias_54CS WHERE IdFamilia_54CS = @id";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@id",idFamilia}
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int EliminarRelacionFamiliaPermiso(int idFamilia, int idPermiso)
+        {
+            string query = "DELETE FROM Familia_Permiso WHERE IdFamilia = @idFam AND IdPermiso = @idPerm";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@idFam",idFamilia},
+                { "@idPerm",idPermiso}
+            };
+            return conexionSQL.Escribir(query, parametros);
         }
     }
 }

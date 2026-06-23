@@ -18,12 +18,14 @@ namespace ProyectoIS
         List<Rol_54CS> listperm = new List<Rol_54CS>();
         private BLLPermisos_54CS _permisosBLL = new BLLPermisos_54CS();
         private BLLFamilias_54CS _familiasBLL = new BLLFamilias_54CS();
+
+        // --- Estado de la pestaña "Gestionar Permisos de Familia" ---
         private Familia_54CS _familiaSeleccionada;
 
         public GestionarFamilias()
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this);
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             foreach (Familia_54CS fam in listfam)
             {
                 chklist.Items.Add(fam);
@@ -34,11 +36,14 @@ namespace ProyectoIS
             }
             ((ListBox)chklist).DisplayMember = "Nombre";
             chklist.ItemCheck += Chklist_ItemCheck;
+
+            // Configuramos los DisplayMember de los controles de la nueva pestaña
             lbFamiliasGestion.DisplayMember = "Nombre";
             clbPermisosDisponiblesFam.DisplayMember = "Nombre";
             lbPermisosDeFamilia.DisplayMember = "Nombre";
         }
 
+        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -92,132 +97,43 @@ namespace ProyectoIS
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            if (SessionManager_54CS.Instancia.TienePermiso("CrearFamilias"))
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                if (string.IsNullOrWhiteSpace(txtNombre.Text))
-                {
-                    MessageBox.Show("Por favor, ingrese el nombre de la nueva familia.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                Familia_54CS fam = new Familia_54CS(txtNombre.Text);
-                try
-                {
-                    foreach (object itemChecked in chklist.CheckedItems)
-                    {
-                        Rol_54CS rolSeleccionado = (Rol_54CS)itemChecked;
-                        fam.Agregar(rolSeleccionado);
-                    }
-                    _familiasBLL.CrearFamilia(fam, txtDesc.Text);
-                    BLLEventos_54CS bllev = new BLLEventos_54CS();
-                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
-                    {
-                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
-                        Fecha_54CS = System.DateTime.Now,
-                        Modulo_54CS = "Gestión de Usuarios",
-                        Evento_54CS = "Crear Familia",
-                        Criticidad_54CS = "3"
-                    };
-                    bllev.GuardarEvento(Evento, out string msj);
-                    MessageBox.Show("Familia creada con éxito sin conflictos de permisos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtDesc.Clear();
-                    txtNombre.Clear();
-
-                    CargarChecklistAdministrarFamilias();
-                    listFamilias.Items.Clear();
-                    CargarFamiliasGestion();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Conflicto de Permisos Redundantes", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Por favor, ingrese el nombre de la nueva familia.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+            Familia_54CS fam = new Familia_54CS(txtNombre.Text);
+            try
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnEliminarFamilia_Click(object sender, EventArgs e)
-        {
-            if (SessionManager_54CS.Instancia.TienePermiso("EliminarFamilias"))
-            {
-                // solo se permite eliminar familias. aunque el usuario tilde permisos en la lista, se ignoran
-                var familiasAEliminar = chklist.CheckedItems
-                    .Cast<object>()
-                    .OfType<Familia_54CS>()
-                    .ToList();
-
-                bool habiaPermisosTildados = chklist.CheckedItems
-                    .Cast<object>()
-                    .Any(o => o is Permiso_54CS);
-
-                if (familiasAEliminar.Count == 0)
+                foreach (object itemChecked in chklist.CheckedItems)
                 {
-                    string mensaje = habiaPermisosTildados
-                        ? "Solo se pueden eliminar familias, no permisos. Tilde al menos una familia."
-                        : "Tilde al menos una familia para eliminar.";
-                    MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    Rol_54CS rolSeleccionado = (Rol_54CS)itemChecked;
+                    fam.Agregar(rolSeleccionado);
                 }
-
-                string listado = string.Join(", ", familiasAEliminar.Select(f => f.Nombre));
-                var confirmacion = MessageBox.Show(
-                    $"¿Eliminar la(s) siguiente(s) familia(s)?\n\n{listado}\n\nLos permisos no se verán afectados.",
-                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (confirmacion == DialogResult.No)
+                _familiasBLL.CrearFamilia(fam, txtDesc.Text);
+                BLLEventos_54CS bllev = new BLLEventos_54CS();
+                Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                 {
-                    return;
-                }
+                    Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                    Fecha_54CS = System.DateTime.Now,
+                    Modulo_54CS = "Gestión de Usuarios",
+                    Evento_54CS = "Crear Familia",
+                    Criticidad_54CS = "3"
+                };
+                bllev.GuardarEvento(Evento, out string msj);
+                MessageBox.Show("Familia creada con éxito sin conflictos de permisos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                chklist.Items.Add(fam);
+                txtDesc.Clear();
+                txtNombre.Clear();
+                for (int i = 0; i < chklist.Items.Count; i++)
+                    chklist.SetItemChecked(i, false);
 
-                int eliminadas = 0;
-                var errores = new List<string>();
-                foreach (var familia in familiasAEliminar)
-                {
-                    try
-                    {
-                        _familiasBLL.EliminarFamilia(familia.ID);
-                        eliminadas++;
-                    }
-                    catch (Exception ex)
-                    {
-                        errores.Add($"- {familia.Nombre}: {ex.Message}");
-                    }
-                }
-
-                if (eliminadas > 0)
-                {
-                    BLLEventos_54CS bllev = new BLLEventos_54CS();
-                    Eventos_54CS evento = new Eventos_54CS()
-                    {
-                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS,
-                        Fecha_54CS = System.DateTime.Now,
-                        Modulo_54CS = "Gestión de Usuarios",
-                        Evento_54CS = "Eliminar Familia",
-                        Criticidad_54CS = "3"
-                    };
-                    bllev.GuardarEvento(evento, out string msj);
-                }
-                CargarChecklistAdministrarFamilias();
-                listFamilias.Items.Clear();
+                // La familia recién creada también debe quedar disponible en la pestaña de gestión
                 CargarFamiliasGestion();
-
-                if (errores.Count == 0)
-                {
-                    MessageBox.Show($"Se eliminó/eliminaron {eliminadas} familia(s) con éxito.",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    string detalle = string.Join(Environment.NewLine, errores);
-                    MessageBox.Show(
-                        $"Familias eliminadas: {eliminadas}." + Environment.NewLine + Environment.NewLine +
-                        "No se pudieron eliminar:" + Environment.NewLine + detalle,
-                        "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Conflicto de Permisos Redundantes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -230,70 +146,28 @@ namespace ProyectoIS
         {
             try
             {
-                CargarChecklistAdministrarFamilias();
+                var permisos = _permisosBLL.ObtenerPermisosParaCrearFamilia();
+                foreach (var permiso in permisos)
+                {
+                    chklist.Items.Add(permiso);
+                }
+
                 CargarFamiliasGestion();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar permisos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            btnCrear.Visible = false;
-            btnEliminarFamilia.Visible = false;
-            btnAgregarPermisoFamilia.Visible = false;
-            btnQuitarPermisoFamilia.Visible = false;
-            tabsGestionFamilias.TabPages.Remove(tabCrearFamilia);
-            tabsGestionFamilias.TabPages.Remove(tabPermisosFamilia);
-            txtNombre.Visible = false;
-            txtDesc.Visible = false;
-            label1.Visible = false;
-            label4.Visible = false;
-            listFamilias.Visible = false;
-            label3.Visible = false;
-            int index = 0;
-            if (SessionManager_54CS.Instancia.TienePermiso("CrearFamilias") || SessionManager_54CS.Instancia.TienePermiso("EliminarFamilias") || SessionManager_54CS.Instancia.TienePermiso("VerFamilias"))
-            {
-                tabsGestionFamilias.TabPages.Insert(index, tabCrearFamilia);
-                index++;
-                if (SessionManager_54CS.Instancia.TienePermiso("CrearFamilias"))
-                {
-                    btnCrear.Visible = true;
-                    txtNombre.Visible = true;
-                    txtDesc.Visible = true;
-                    label1.Visible = true;
-                    label4.Visible = true;
-                    listFamilias.Visible = true;
-                    label3.Visible = true;
-                }
-                if (SessionManager_54CS.Instancia.TienePermiso("EliminarFamilias"))
-                {
-                    btnEliminarFamilia.Visible = true;
-                }
-            }
-            if (SessionManager_54CS.Instancia.TienePermiso("ModificarFamilias"))
-            {
-                tabsGestionFamilias.TabPages.Insert(index, tabPermisosFamilia);
-                index++;
-                btnAgregarPermisoFamilia.Visible = true;
-                btnEliminarFamilia.Visible = true;
-            }
         }
 
-        private void CargarChecklistAdministrarFamilias()
-        {
-            chklist.Items.Clear();
-            var familias = _familiasBLL.ObtenerFamilias();
-            foreach (var familia in familias)
-            {
-                chklist.Items.Add(familia);
-            }
+        // ==========================================
+        // PESTAÑA: GESTIONAR PERMISOS DE FAMILIA
+        // (Agregar / Quitar Permisos de una Familia existente + visualización)
+        // ==========================================
 
-            var permisos = _permisosBLL.ObtenerPermisosParaCrearFamilia();
-            foreach (var permiso in permisos)
-            {
-                chklist.Items.Add(permiso);
-            }
-        }
-
+        /// <summary>
+        /// Recarga la lista de Familias existentes y limpia los paneles dependientes de la selección.
+        /// </summary>
         private void CargarFamiliasGestion()
         {
             try
@@ -321,6 +195,10 @@ namespace ProyectoIS
             ActualizarPanelPermisosDeFamilia();
         }
 
+        /// <summary>
+        /// Refresca los dos listados dependientes de la familia seleccionada:
+        /// los permisos que ya tiene (visualización) y los permisos disponibles para agregarle.
+        /// </summary>
         private void ActualizarPanelPermisosDeFamilia()
         {
             clbPermisosDisponiblesFam.Items.Clear();
@@ -329,13 +207,13 @@ namespace ProyectoIS
             if (_familiaSeleccionada == null)
                 return;
 
-            // permisos que la familia ya tiene
+            // Visualización: permisos que la familia ya tiene
             foreach (var hijo in _familiaSeleccionada.ObtenerHijos())
             {
                 lbPermisosDeFamilia.Items.Add(hijo);
             }
 
-            // permisos que todavia no estan en esta familia
+            // Permisos del sistema que todavía NO están en esta familia
             try
             {
                 var todosLosPermisos = _permisosBLL.ObtenerPermisosParaCrearFamilia();

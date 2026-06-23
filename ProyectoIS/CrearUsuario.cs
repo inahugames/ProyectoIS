@@ -17,10 +17,9 @@ namespace ProyectoIS
         public CrearUsuario()
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+            IdiomaManager_54CS.Suscribir(this);
         }
 
-        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -28,52 +27,59 @@ namespace ProyectoIS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text != "" && txtDNI.Text != "" && txtEmail.Text != "" && txtNombre.Text != "" && txtRol.Text != "")
+            if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuario"))
             {
-                try
+                if (txtApellido.Text != "" && txtDNI.Text != "" && txtEmail.Text != "" && txtNombre.Text != "" && txtRol.Text != "")
                 {
-                    string apellidoIngresado = txtApellido.Text.Trim();
-                    string emailIngresado = txtEmail.Text.ToLower().Trim();
-                    string nombreIngresado = txtNombre.Text.Trim();
-                    string rolIngresado = txtRol.Text.Trim();
-                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
-                    List<Usuario_54CS> lista = bll.ObtenerTodos();
-                    Encriptador_54CS encripta = new Encriptador_54CS();
-                    string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios
-                    int Mitad = dni.Length / 2;
-                    string primeramitad = dni.Substring(0, Mitad);
-                    string segundamitad = dni.Substring(Mitad);
-                    Usuario_54CS nuevo = new Usuario_54CS();
-                    bll.CrearUsuario(Convert.ToInt32(txtDNI.Text),apellidoIngresado,nombreIngresado,nombreIngresado + primeramitad,encripta.EncriptarContraseña(apellidoIngresado + segundamitad),rolIngresado,emailIngresado,false,true, out string msj);
-                    if (string.IsNullOrEmpty(msj) == true)
+                    try
                     {
-                        MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                        string apellidoIngresado = txtApellido.Text.Trim();
+                        string emailIngresado = txtEmail.Text.ToLower().Trim();
+                        string nombreIngresado = txtNombre.Text.Trim();
+                        string rolIngresado = txtRol.Text.Trim();
+                        BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                        List<Usuario_54CS> lista = bll.ObtenerTodos();
+                        Encriptador_54CS encripta = new Encriptador_54CS();
+                        string dni = txtDNI.Text.Replace(".", "").Replace(" ", "").Trim(); //limpia el dni por si se ingresa con puntos o espacios
+                        int Mitad = dni.Length / 2;
+                        string primeramitad = dni.Substring(0, Mitad);
+                        string segundamitad = dni.Substring(Mitad);
+                        Usuario_54CS nuevo = new Usuario_54CS();
+                        bll.CrearUsuario(Convert.ToInt32(txtDNI.Text), apellidoIngresado, nombreIngresado, nombreIngresado + primeramitad, encripta.EncriptarContraseña(apellidoIngresado + segundamitad), rolIngresado, emailIngresado, false, true, out string msj);
+                        if (string.IsNullOrEmpty(msj) == true)
                         {
-                            Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
-                            Fecha_54CS = System.DateTime.Now,
-                            Modulo_54CS = "Gestión de Usuario",
-                            Evento_54CS = "Usuario Creado",
-                            Criticidad_54CS = "3"
-                        };
-                        BLLEventos_54CS blle = new BLLEventos_54CS();
-                        blle.GuardarEvento(Evento, out string mens);
+                            MessageBox.Show("Usuario creado exitosamente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
+                            {
+                                Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                                Fecha_54CS = System.DateTime.Now,
+                                Modulo_54CS = "Gestión de Usuario",
+                                Evento_54CS = "Usuario Creado",
+                                Criticidad_54CS = "3"
+                            };
+                            BLLEventos_54CS blle = new BLLEventos_54CS();
+                            blle.GuardarEvento(Evento, out string mens);
+                        }
+                        else
+                        {
+                            MessageBox.Show(msj, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    else
+                    catch
                     {
-                        MessageBox.Show(msj,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("El usuario ya se encuentra registrado, no es necesario que se vuelva a registrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                catch
+
+                else
                 {
-                    MessageBox.Show("El usuario ya se encuentra registrado, no es necesario que se vuelva a registrar.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    MessageBox.Show("No deje ningún campo sin llenar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
             else
             {
-                MessageBox.Show("No deje ningún campo sin llenar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }   
+                MessageBox.Show("No tiene permisos suficientes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

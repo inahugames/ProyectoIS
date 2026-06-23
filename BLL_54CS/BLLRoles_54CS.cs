@@ -17,23 +17,11 @@ namespace BLL_54CS
             _mpp = new MPPPermisos_54CS();
         }
 
-        // ==========================================
-        // MÉTODOS DE LECTURA (Consultas para la UI)
-        // ==========================================
-
-        /// <summary>
-        /// Obtiene todos los Roles principales completamente ensamblados.
-        /// Ideal para la pestaña de "Asignación a Usuarios".
-        /// </summary>
         public List<Rol_54CS> ObtenerRolesDelSistema()
         {
             return _mpp.ObtenerArbolDeRolesCompleto();
         }
 
-        /// <summary>
-        /// Obtiene las Familias ensambladas y los Permisos sueltos combinados en una sola lista.
-        /// Ideal para llenar el CheckedListBox al momento de crear un NUEVO ROL.
-        /// </summary>
         public List<Rol_54CS> ObtenerElementosParaCrearRol()
         {
             var elementosDisponibles = new List<Rol_54CS>();
@@ -45,7 +33,6 @@ namespace BLL_54CS
 
         public void CrearRol(Familia_54CS nuevoRol)
         {
-            // 1. Validaciones de Negocio
             if (string.IsNullOrWhiteSpace(nuevoRol.Nombre))
                 throw new ArgumentException("El nombre del Rol no puede estar vacío.");
 
@@ -53,12 +40,8 @@ namespace BLL_54CS
             if (hijos.Count == 0)
                 throw new InvalidOperationException("No se puede crear un Rol vacío. Debe contener al menos una familia o permiso.");
 
-            // Opcional: Validar que el nombre no exista ya en la BD (requeriría un método extra en la DAL)
-
-            // 2. Insertar el registro principal en la tabla Rol y obtener su nuevo ID
             int idRolGenerado = _mpp.InsertarRol(nuevoRol.Nombre);
 
-            // 3. Iterar sobre los hijos y guardar las relaciones en las tablas intermedias
             foreach (var hijo in hijos)
             {
                 if (hijo is Familia_54CS)
@@ -72,50 +55,98 @@ namespace BLL_54CS
             }
         }
 
-        // ==========================================
-        // MÉTODOS DE ELIMINACIÓN
-        // ==========================================
-
-        /// <summary>
-        /// Intenta eliminar un Rol del sistema. Si está asignado a un usuario, aborta la operación.
-        /// </summary>
-        public void EliminarRol(int idRol)
+        public void AgregarFamiliaARol(Familia_54CS rol, Familia_54CS familia)
         {
-            // 1. Regla de Negocio: No se puede borrar un rol si algún usuario lo está usando
-            if (_mpp.ExisteRolEnUso(idRol))
+            if (rol == null)
+                throw new ArgumentException("Debe seleccionar un Rol.");
+            if (familia == null)
+                throw new ArgumentException("Debe seleccionar una Familia.");
+            if (rol.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase))
+                throw new InvalidOperationException("No se puede agregar un Rol a sí mismo.");
+            if (rol.ObtenerHijos().Any(h => h is Familia_54CS && h.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidOperationException($"La familia '{familia.Nombre}' ya pertenece al rol '{rol.Nombre}'.");
+
+            foreach (var permiso in familia.ObtenerListaPermisos())
             {
-                throw new InvalidOperationException("No se puede eliminar el Rol porque actualmente hay usuarios que lo tienen asignado.");
+                if (rol.TienePermiso(permiso))
+                    throw new InvalidOperationException($"Conflicto: el permiso '{permiso}' ya existe en el rol '{rol.Nombre}'.");
             }
 
-            // 2. Primero eliminamos los registros hijos (las relaciones en las tablas intermedias)
-            // Si borramos el padre primero, SQL Server lanzará un error de Foreign Key.
-            _mpp.EliminarRelacionesDeRol(idRol);
+            _mpp.InsertarRelacionRolFamilia(rol.ID, familia.ID);
+            rol.Agregar(familia);
+        }
 
-            // 3. Finalmente, eliminamos el Rol principal
+        public void QuitarFamiliaDeRol(Familia_54CS rol, Familia_54CS familia)
+        {
+            if (rol == null)
+                throw new ArgumentException("Debe seleccionar un Rol.");
+            if (familia == null)
+                throw new ArgumentException("Debe seleccionar una Familia.");
+
+            if (!rol.ObtenerHijos().Any(h => h is Familia_54CS && h.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidOperationException($"La familia '{familia.Nombre}' no pertenece directamente al rol '{rol.Nombre}'.");
+
+            if (rol.ObtenerHijos().Count <= 1)
+                throw new InvalidOperationException("No se puede eliminar el único elemento del Rol");
+           
+            _mpp.EliminarRelacionRolFamilia(rol.ID, familia.ID);
+            rol.Remover(familia);
+        }
+
+        public void AgregarPermisoARol(Familia_54CS rol, Permiso_54CS permiso)
+        {
+            if (rol == null)
+                throw new ArgumentException("Debe seleccionar un Rol.");
+            if (permiso == null)
+                throw new ArgumentException("Debe seleccionar un Permiso.");
+
+            if (rol.TienePermiso(permiso.Nombre))
+                throw new InvalidOperationException($"El permiso '{permiso.Nombre}' ya existe en el rol '{rol.Nombre}'.");
+
+            _mpp.InsertarRelacionRolPermiso(rol.ID, permiso.ID);
+            rol.Agregar(permiso);
+        }
+
+        public void QuitarPermisoDeRol(Familia_54CS rol, Permiso_54CS permiso)
+        {
+            if (rol == null)
+                throw new ArgumentException("Debe seleccionar un Rol.");
+            if (permiso == null)
+                throw new ArgumentException("Debe seleccionar un Permiso.");
+
+            if (!rol.ObtenerHijos().Any(h => h is Permiso_54CS && h.Nombre.Equals(permiso.Nombre, StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidOperationException($"El permiso '{permiso.Nombre}' no es un permiso suelto directo del rol '{rol.Nombre}'.");
+
+            if (rol.ObtenerHijos().Count <= 1)
+                throw new InvalidOperationException("No se puede eliminar el único elemento del Rol");
+
+            _mpp.EliminarRelacionRolPermiso(rol.ID, permiso.ID);
+            rol.Remover(permiso);
+        }
+
+        public void EliminarRol(int idRol)
+        {
+            if (_mpp.ExisteRolEnUso(idRol))
+            {
+                throw new InvalidOperationException("No se puede eliminar el Rol porque actualmente hay usuarios que lo tienen asignado");
+            }
+
+            _mpp.EliminarRelacionesDeRol(idRol);
             _mpp.EliminarRol(idRol);
         }
 
-        // ==========================================
-        // MÉTODOS DE ASIGNACIÓN A USUARIOS
-        // ==========================================
-
-        /// <summary>
-        /// Actualiza los roles de un usuario en la base de datos.
-        /// </summary>
         public void ActualizarRolesDeUsuario(int idUsuario, List<Rol_54CS> rolesNuevos)
         {
             if (idUsuario <= 0)
-                throw new ArgumentException("Identificador de usuario inválido.");
+                throw new ArgumentException("Identificador de usuario inválido");
 
-            // 1. Limpiamos los roles anteriores (Es más seguro borrar y recrear que buscar diferencias)
             _mpp.EliminarRolesDeUsuario(idUsuario);
 
-            // 2. Si la lista no está vacía, insertamos los nuevos
+            // si la lista no está vacía, insertamos los nuevos
             if (rolesNuevos != null && rolesNuevos.Any())
             {
                 foreach (var rol in rolesNuevos)
                 {
-                    // Validamos que estemos asignando Roles principales y no permisos sueltos
                     _mpp.AsignarRolAUsuario(idUsuario, rol.ID);
                 }
             }

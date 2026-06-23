@@ -42,19 +42,43 @@
             this.btnAsignarUsuario = new System.Windows.Forms.Button();
             this.clbRolesParaAsignar = new System.Windows.Forms.CheckedListBox();
             this.combobox = new System.Windows.Forms.ComboBox();
+            this.tabFamiliasRol = new System.Windows.Forms.TabPage();
+            this.lblFamiliasDelRol = new System.Windows.Forms.Label();
+            this.lbFamiliasDelRol = new System.Windows.Forms.ListBox();
+            this.btnQuitarFamiliaRol = new System.Windows.Forms.Button();
+            this.btnAgregarFamiliaRol = new System.Windows.Forms.Button();
+            this.lblFamiliasDisponiblesRol = new System.Windows.Forms.Label();
+            this.clbFamiliasDisponiblesRol = new System.Windows.Forms.CheckedListBox();
+            this.lblRolesFamTab = new System.Windows.Forms.Label();
+            this.lbRolesFamTab = new System.Windows.Forms.ListBox();
+            this.tabPermisosRol = new System.Windows.Forms.TabPage();
+            this.lblPermisosEfectivosRol = new System.Windows.Forms.Label();
+            this.lbPermisosEfectivosRol = new System.Windows.Forms.ListBox();
+            this.lblPermisosDirectosDelRol = new System.Windows.Forms.Label();
+            this.lbPermisosDirectosDelRol = new System.Windows.Forms.ListBox();
+            this.btnQuitarPermisoRol = new System.Windows.Forms.Button();
+            this.btnAgregarPermisoRol = new System.Windows.Forms.Button();
+            this.lblPermisosDisponiblesRol = new System.Windows.Forms.Label();
+            this.clbPermisosDisponiblesRol = new System.Windows.Forms.CheckedListBox();
+            this.lblRolesPermTab = new System.Windows.Forms.Label();
+            this.lbRolesPermTab = new System.Windows.Forms.ListBox();
             this.GestionRoles.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabFamiliasRol.SuspendLayout();
+            this.tabPermisosRol.SuspendLayout();
             this.SuspendLayout();
             // 
             // GestionRoles
             // 
             this.GestionRoles.Controls.Add(this.tabPage1);
             this.GestionRoles.Controls.Add(this.tabPage2);
-            this.GestionRoles.Location = new System.Drawing.Point(1, -1);
+            this.GestionRoles.Controls.Add(this.tabFamiliasRol);
+            this.GestionRoles.Controls.Add(this.tabPermisosRol);
+            this.GestionRoles.Location = new System.Drawing.Point(0, 0);
             this.GestionRoles.Name = "GestionRoles";
             this.GestionRoles.SelectedIndex = 0;
-            this.GestionRoles.Size = new System.Drawing.Size(796, 527);
+            this.GestionRoles.Size = new System.Drawing.Size(1000, 580);
             this.GestionRoles.TabIndex = 0;
             // 
             // tabPage1
@@ -70,7 +94,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(788, 501);
+            this.tabPage1.Size = new System.Drawing.Size(992, 554);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Gestión de Roles";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -156,7 +180,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(788, 501);
+            this.tabPage2.Size = new System.Drawing.Size(992, 554);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Asignación a Usuarios";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -187,11 +211,219 @@
             this.combobox.Size = new System.Drawing.Size(121, 21);
             this.combobox.TabIndex = 0;
             // 
+            // tabFamiliasRol
+            // 
+            this.tabFamiliasRol.Controls.Add(this.lblFamiliasDelRol);
+            this.tabFamiliasRol.Controls.Add(this.lbFamiliasDelRol);
+            this.tabFamiliasRol.Controls.Add(this.btnQuitarFamiliaRol);
+            this.tabFamiliasRol.Controls.Add(this.btnAgregarFamiliaRol);
+            this.tabFamiliasRol.Controls.Add(this.lblFamiliasDisponiblesRol);
+            this.tabFamiliasRol.Controls.Add(this.clbFamiliasDisponiblesRol);
+            this.tabFamiliasRol.Controls.Add(this.lblRolesFamTab);
+            this.tabFamiliasRol.Controls.Add(this.lbRolesFamTab);
+            this.tabFamiliasRol.Location = new System.Drawing.Point(4, 22);
+            this.tabFamiliasRol.Name = "tabFamiliasRol";
+            this.tabFamiliasRol.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFamiliasRol.Size = new System.Drawing.Size(992, 554);
+            this.tabFamiliasRol.TabIndex = 2;
+            this.tabFamiliasRol.Text = "Familias del Rol";
+            this.tabFamiliasRol.UseVisualStyleBackColor = true;
+            // 
+            // lblFamiliasDelRol
+            // 
+            this.lblFamiliasDelRol.AutoSize = true;
+            this.lblFamiliasDelRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFamiliasDelRol.Location = new System.Drawing.Point(627, 15);
+            this.lblFamiliasDelRol.Name = "lblFamiliasDelRol";
+            this.lblFamiliasDelRol.Size = new System.Drawing.Size(107, 16);
+            this.lblFamiliasDelRol.TabIndex = 7;
+            this.lblFamiliasDelRol.Text = "Familias del Rol:";
+            // 
+            // lbFamiliasDelRol
+            // 
+            this.lbFamiliasDelRol.FormattingEnabled = true;
+            this.lbFamiliasDelRol.Location = new System.Drawing.Point(630, 35);
+            this.lbFamiliasDelRol.Name = "lbFamiliasDelRol";
+            this.lbFamiliasDelRol.Size = new System.Drawing.Size(330, 498);
+            this.lbFamiliasDelRol.TabIndex = 6;
+            // 
+            // btnQuitarFamiliaRol
+            // 
+            this.btnQuitarFamiliaRol.Location = new System.Drawing.Point(462, 280);
+            this.btnQuitarFamiliaRol.Name = "btnQuitarFamiliaRol";
+            this.btnQuitarFamiliaRol.Size = new System.Drawing.Size(150, 45);
+            this.btnQuitarFamiliaRol.TabIndex = 5;
+            this.btnQuitarFamiliaRol.Text = "<< Quitar Familia";
+            this.btnQuitarFamiliaRol.UseVisualStyleBackColor = true;
+            this.btnQuitarFamiliaRol.Click += new System.EventHandler(this.btnQuitarFamiliaRol_Click);
+            // 
+            // btnAgregarFamiliaRol
+            // 
+            this.btnAgregarFamiliaRol.Location = new System.Drawing.Point(462, 220);
+            this.btnAgregarFamiliaRol.Name = "btnAgregarFamiliaRol";
+            this.btnAgregarFamiliaRol.Size = new System.Drawing.Size(150, 45);
+            this.btnAgregarFamiliaRol.TabIndex = 4;
+            this.btnAgregarFamiliaRol.Text = "Agregar Familia(s) >>";
+            this.btnAgregarFamiliaRol.UseVisualStyleBackColor = true;
+            this.btnAgregarFamiliaRol.Click += new System.EventHandler(this.btnAgregarFamiliaRol_Click);
+            // 
+            // lblFamiliasDisponiblesRol
+            // 
+            this.lblFamiliasDisponiblesRol.AutoSize = true;
+            this.lblFamiliasDisponiblesRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFamiliasDisponiblesRol.Location = new System.Drawing.Point(225, 15);
+            this.lblFamiliasDisponiblesRol.Name = "lblFamiliasDisponiblesRol";
+            this.lblFamiliasDisponiblesRol.Size = new System.Drawing.Size(136, 16);
+            this.lblFamiliasDisponiblesRol.TabIndex = 2;
+            this.lblFamiliasDisponiblesRol.Text = "Familias Disponibles:";
+            // 
+            // clbFamiliasDisponiblesRol
+            // 
+            this.clbFamiliasDisponiblesRol.CheckOnClick = true;
+            this.clbFamiliasDisponiblesRol.FormattingEnabled = true;
+            this.clbFamiliasDisponiblesRol.Location = new System.Drawing.Point(228, 35);
+            this.clbFamiliasDisponiblesRol.Name = "clbFamiliasDisponiblesRol";
+            this.clbFamiliasDisponiblesRol.Size = new System.Drawing.Size(220, 484);
+            this.clbFamiliasDisponiblesRol.TabIndex = 3;
+            // 
+            // lblRolesFamTab
+            // 
+            this.lblRolesFamTab.AutoSize = true;
+            this.lblRolesFamTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRolesFamTab.Location = new System.Drawing.Point(9, 15);
+            this.lblRolesFamTab.Name = "lblRolesFamTab";
+            this.lblRolesFamTab.Size = new System.Drawing.Size(119, 16);
+            this.lblRolesFamTab.TabIndex = 0;
+            this.lblRolesFamTab.Text = "Seleccione un Rol:";
+            // 
+            // lbRolesFamTab
+            // 
+            this.lbRolesFamTab.FormattingEnabled = true;
+            this.lbRolesFamTab.Location = new System.Drawing.Point(12, 35);
+            this.lbRolesFamTab.Name = "lbRolesFamTab";
+            this.lbRolesFamTab.Size = new System.Drawing.Size(200, 498);
+            this.lbRolesFamTab.TabIndex = 1;
+            this.lbRolesFamTab.SelectedIndexChanged += new System.EventHandler(this.lbRolesFamTab_SelectedIndexChanged);
+            // 
+            // tabPermisosRol
+            // 
+            this.tabPermisosRol.Controls.Add(this.lblPermisosEfectivosRol);
+            this.tabPermisosRol.Controls.Add(this.lbPermisosEfectivosRol);
+            this.tabPermisosRol.Controls.Add(this.lblPermisosDirectosDelRol);
+            this.tabPermisosRol.Controls.Add(this.lbPermisosDirectosDelRol);
+            this.tabPermisosRol.Controls.Add(this.btnQuitarPermisoRol);
+            this.tabPermisosRol.Controls.Add(this.btnAgregarPermisoRol);
+            this.tabPermisosRol.Controls.Add(this.lblPermisosDisponiblesRol);
+            this.tabPermisosRol.Controls.Add(this.clbPermisosDisponiblesRol);
+            this.tabPermisosRol.Controls.Add(this.lblRolesPermTab);
+            this.tabPermisosRol.Controls.Add(this.lbRolesPermTab);
+            this.tabPermisosRol.Location = new System.Drawing.Point(4, 22);
+            this.tabPermisosRol.Name = "tabPermisosRol";
+            this.tabPermisosRol.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPermisosRol.Size = new System.Drawing.Size(992, 554);
+            this.tabPermisosRol.TabIndex = 3;
+            this.tabPermisosRol.Text = "Permisos del Rol";
+            this.tabPermisosRol.UseVisualStyleBackColor = true;
+            // 
+            // lblPermisosEfectivosRol
+            // 
+            this.lblPermisosEfectivosRol.AutoSize = true;
+            this.lblPermisosEfectivosRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPermisosEfectivosRol.Location = new System.Drawing.Point(701, 15);
+            this.lblPermisosEfectivosRol.Name = "lblPermisosEfectivosRol";
+            this.lblPermisosEfectivosRol.Size = new System.Drawing.Size(276, 16);
+            this.lblPermisosEfectivosRol.TabIndex = 9;
+            this.lblPermisosEfectivosRol.Text = "Todos los Permisos Efectivos (con Familias):";
+            // 
+            // lbPermisosEfectivosRol
+            // 
+            this.lbPermisosEfectivosRol.FormattingEnabled = true;
+            this.lbPermisosEfectivosRol.Location = new System.Drawing.Point(704, 35);
+            this.lbPermisosEfectivosRol.Name = "lbPermisosEfectivosRol";
+            this.lbPermisosEfectivosRol.Size = new System.Drawing.Size(270, 498);
+            this.lbPermisosEfectivosRol.TabIndex = 8;
+            // 
+            // lblPermisosDirectosDelRol
+            // 
+            this.lblPermisosDirectosDelRol.AutoSize = true;
+            this.lblPermisosDirectosDelRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPermisosDirectosDelRol.Location = new System.Drawing.Point(507, 15);
+            this.lblPermisosDirectosDelRol.Name = "lblPermisosDirectosDelRol";
+            this.lblPermisosDirectosDelRol.Size = new System.Drawing.Size(166, 16);
+            this.lblPermisosDirectosDelRol.TabIndex = 7;
+            this.lblPermisosDirectosDelRol.Text = "Permisos Directos del Rol:";
+            // 
+            // lbPermisosDirectosDelRol
+            // 
+            this.lbPermisosDirectosDelRol.FormattingEnabled = true;
+            this.lbPermisosDirectosDelRol.Location = new System.Drawing.Point(510, 35);
+            this.lbPermisosDirectosDelRol.Name = "lbPermisosDirectosDelRol";
+            this.lbPermisosDirectosDelRol.Size = new System.Drawing.Size(180, 498);
+            this.lbPermisosDirectosDelRol.TabIndex = 6;
+            // 
+            // btnQuitarPermisoRol
+            // 
+            this.btnQuitarPermisoRol.Location = new System.Drawing.Point(388, 270);
+            this.btnQuitarPermisoRol.Name = "btnQuitarPermisoRol";
+            this.btnQuitarPermisoRol.Size = new System.Drawing.Size(110, 40);
+            this.btnQuitarPermisoRol.TabIndex = 5;
+            this.btnQuitarPermisoRol.Text = "<< Eliminar";
+            this.btnQuitarPermisoRol.UseVisualStyleBackColor = true;
+            this.btnQuitarPermisoRol.Click += new System.EventHandler(this.btnQuitarPermisoRol_Click);
+            // 
+            // btnAgregarPermisoRol
+            // 
+            this.btnAgregarPermisoRol.Location = new System.Drawing.Point(388, 220);
+            this.btnAgregarPermisoRol.Name = "btnAgregarPermisoRol";
+            this.btnAgregarPermisoRol.Size = new System.Drawing.Size(110, 40);
+            this.btnAgregarPermisoRol.TabIndex = 4;
+            this.btnAgregarPermisoRol.Text = "Agregar >>";
+            this.btnAgregarPermisoRol.UseVisualStyleBackColor = true;
+            this.btnAgregarPermisoRol.Click += new System.EventHandler(this.btnAgregarPermisoRol_Click);
+            // 
+            // lblPermisosDisponiblesRol
+            // 
+            this.lblPermisosDisponiblesRol.AutoSize = true;
+            this.lblPermisosDisponiblesRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPermisosDisponiblesRol.Location = new System.Drawing.Point(193, 15);
+            this.lblPermisosDisponiblesRol.Name = "lblPermisosDisponiblesRol";
+            this.lblPermisosDisponiblesRol.Size = new System.Drawing.Size(196, 16);
+            this.lblPermisosDisponiblesRol.TabIndex = 2;
+            this.lblPermisosDisponiblesRol.Text = "Permisos Disponibles (sueltos):";
+            // 
+            // clbPermisosDisponiblesRol
+            // 
+            this.clbPermisosDisponiblesRol.CheckOnClick = true;
+            this.clbPermisosDisponiblesRol.FormattingEnabled = true;
+            this.clbPermisosDisponiblesRol.Location = new System.Drawing.Point(196, 35);
+            this.clbPermisosDisponiblesRol.Name = "clbPermisosDisponiblesRol";
+            this.clbPermisosDisponiblesRol.Size = new System.Drawing.Size(180, 484);
+            this.clbPermisosDisponiblesRol.TabIndex = 3;
+            // 
+            // lblRolesPermTab
+            // 
+            this.lblRolesPermTab.AutoSize = true;
+            this.lblRolesPermTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRolesPermTab.Location = new System.Drawing.Point(9, 15);
+            this.lblRolesPermTab.Name = "lblRolesPermTab";
+            this.lblRolesPermTab.Size = new System.Drawing.Size(119, 16);
+            this.lblRolesPermTab.TabIndex = 0;
+            this.lblRolesPermTab.Text = "Seleccione un Rol:";
+            // 
+            // lbRolesPermTab
+            // 
+            this.lbRolesPermTab.FormattingEnabled = true;
+            this.lbRolesPermTab.Location = new System.Drawing.Point(12, 35);
+            this.lbRolesPermTab.Name = "lbRolesPermTab";
+            this.lbRolesPermTab.Size = new System.Drawing.Size(170, 498);
+            this.lbRolesPermTab.TabIndex = 1;
+            this.lbRolesPermTab.SelectedIndexChanged += new System.EventHandler(this.lbRolesPermTab_SelectedIndexChanged);
+            // 
             // GestionarRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 527);
+            this.ClientSize = new System.Drawing.Size(1000, 580);
             this.Controls.Add(this.GestionRoles);
             this.Name = "GestionarRoles";
             this.Text = "GestionarRoles";
@@ -200,6 +432,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabFamiliasRol.ResumeLayout(false);
+            this.tabFamiliasRol.PerformLayout();
+            this.tabPermisosRol.ResumeLayout(false);
+            this.tabPermisosRol.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,5 +456,25 @@
         private System.Windows.Forms.Button btnAsignarUsuario;
         private System.Windows.Forms.CheckedListBox clbRolesParaAsignar;
         private System.Windows.Forms.ComboBox combobox;
+        private System.Windows.Forms.TabPage tabFamiliasRol;
+        private System.Windows.Forms.Label lblFamiliasDelRol;
+        private System.Windows.Forms.ListBox lbFamiliasDelRol;
+        private System.Windows.Forms.Button btnQuitarFamiliaRol;
+        private System.Windows.Forms.Button btnAgregarFamiliaRol;
+        private System.Windows.Forms.Label lblFamiliasDisponiblesRol;
+        private System.Windows.Forms.CheckedListBox clbFamiliasDisponiblesRol;
+        private System.Windows.Forms.Label lblRolesFamTab;
+        private System.Windows.Forms.ListBox lbRolesFamTab;
+        private System.Windows.Forms.TabPage tabPermisosRol;
+        private System.Windows.Forms.Label lblPermisosEfectivosRol;
+        private System.Windows.Forms.ListBox lbPermisosEfectivosRol;
+        private System.Windows.Forms.Label lblPermisosDirectosDelRol;
+        private System.Windows.Forms.ListBox lbPermisosDirectosDelRol;
+        private System.Windows.Forms.Button btnQuitarPermisoRol;
+        private System.Windows.Forms.Button btnAgregarPermisoRol;
+        private System.Windows.Forms.Label lblPermisosDisponiblesRol;
+        private System.Windows.Forms.CheckedListBox clbPermisosDisponiblesRol;
+        private System.Windows.Forms.Label lblRolesPermTab;
+        private System.Windows.Forms.ListBox lbRolesPermTab;
     }
 }

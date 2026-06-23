@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +15,20 @@ namespace ProyectoIS
 {
     public partial class BitacoraEventos : Form, IIdiomaObservador_54CS
     {
+        private readonly BLLUsuarios_54CS _bllUsuarios = new BLLUsuarios_54CS();
+        private List<Usuario_54CS> _usuarios = new List<Usuario_54CS>();
+        private bool valido = true;
+
         public BitacoraEventos()
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
+            IdiomaManager_54CS.Suscribir(this);
+            try { _usuarios = _bllUsuarios.ObtenerTodos(); }
+            catch { _usuarios = new List<Usuario_54CS>(); }
+
             Actualizar();
         }
 
-        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
@@ -42,6 +49,12 @@ namespace ProyectoIS
 
         private void btnFiltraLogin_Click(object sender, EventArgs e)
         {
+            if ( valido == false )
+            {
+                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+            }
+
             if ( comboCriticidad.Text != "" || txtLogin.Text != "" || fechaPickerInicio.Text != "" || comboMódulo.Text != "")
             {
                 string filtroCriticidad = comboCriticidad.Text.ToLower();
@@ -97,9 +110,177 @@ namespace ProyectoIS
             }
         }
 
+        private void dgvEventos_SelectionChanged(object sender, EventArgs e)
+        {
+            MostrarResponsableSeleccionado();
+        }
+
+        private void MostrarResponsableSeleccionado()
+        {
+            txtNombreResponsable.Text = string.Empty;
+            txtApellidoResponsable.Text = string.Empty;
+
+            if (_usuarios == null) { return; }
+
+            DataGridViewRow fila = dgvEventos.CurrentRow;
+            if (fila == null || fila.IsNewRow)
+                return;
+
+            object valorLogin = fila.Cells["Login"].Value;
+            string login = valorLogin == null ? null : valorLogin.ToString();
+            if (string.IsNullOrWhiteSpace(login))
+                return;
+
+            Usuario_54CS us;
+
+            foreach (Usuario_54CS user in _usuarios)
+            {
+                try
+                {
+                    if (user.Login_54CS.Trim() == login)
+                    {
+                        txtNombreResponsable.Text = user.Nombre_54CS.Trim();
+                        txtApellidoResponsable.Text = user.Apellido_54CS.Trim();
+                        return;
+                    }
+                    else
+                    {
+                        txtNombreResponsable.Text = "Usuario no encontrado";
+                        txtApellidoResponsable.Text = "Usuario no encontrado";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnExportarPDF_Click(object sender, EventArgs e)
+        {
+            if (valido == false)
+            {
+                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var encabezados = new List<string>();
+            foreach (DataGridViewColumn col in dgvEventos.Columns)
+                encabezados.Add(col.HeaderText);
+
+            var filas = new List<string[]>();
+            foreach (DataGridViewRow fila in dgvEventos.Rows)
+            {
+                if (fila.IsNewRow)
+                    continue;
+
+                var celdas = new string[dgvEventos.Columns.Count];
+                for (int c = 0; c < dgvEventos.Columns.Count; c++)
+                {
+                    object valor = fila.Cells[c].Value;
+                    celdas[c] = valor == null ? string.Empty : valor.ToString();
+                }
+                filas.Add(celdas);
+            }
+
+            if (filas.Count == 0)
+            {
+                MessageBox.Show("No hay eventos para exportar.", "Exportar a PDF",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // encabezado del pdf
+            var info = new List<string>();
+            info.Add("Generado: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            List<string> filtros = DescribirFiltrosActivos();
+            info.Add(filtros.Count > 0
+                ? "Filtros aplicados: " + string.Join("   |   ", filtros)
+                : "Filtros aplicados: ninguno (todos los eventos)");
+            info.Add("Total de eventos: " + filas.Count);
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                sfd.FileName = "Bitacora_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+                sfd.Title = "Exportar bitácora a PDF";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    var anchos = new List<float> { 1.4f, 1.6f, 1.6f, 2.6f, 1.0f };
+                    while (anchos.Count < encabezados.Count) anchos.Add(1f);
+                    if (anchos.Count > encabezados.Count) anchos = anchos.GetRange(0, encabezados.Count);
+
+                    PdfBitacoraExporter_54CS.Exportar(
+                        sfd.FileName,
+                        "Bitácora de Eventos",
+                        info,
+                        encabezados,
+                        anchos,
+                        filas);
+
+                    var abrir = MessageBox.Show(
+                        "PDF exportado correctamente en:" + Environment.NewLine + sfd.FileName +
+                        Environment.NewLine + Environment.NewLine + "¿Desea abrirlo ahora?",
+                        "Exportación exitosa", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (abrir == DialogResult.Yes)
+                    {
+                        try { System.Diagnostics.Process.Start(sfd.FileName); }
+                        catch { }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No se pudo exportar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private List<string> DescribirFiltrosActivos()
+        {
+            var filtros = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(comboCriticidad.Text))
+                filtros.Add("Criticidad = " + comboCriticidad.Text);
+
+            if (!string.IsNullOrWhiteSpace(txtLogin.Text))
+                filtros.Add("Login contiene \"" + txtLogin.Text + "\"");
+
+            if (!string.IsNullOrWhiteSpace(comboMódulo.Text))
+                filtros.Add("Módulo = " + comboMódulo.Text);
+
+            if (fechaPickerInicio.Checked && fechaPickerFin.Checked)
+                filtros.Add("Fecha entre " + fechaPickerInicio.Value.ToString("dd/MM/yyyy") +
+                            " y " + fechaPickerFin.Value.ToString("dd/MM/yyyy"));
+
+            return filtros;
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void fechaPickerFin_ValueChanged(object sender, EventArgs e)
+        {
+            if (fechaPickerFin.Value < fechaPickerInicio.Value)
+            {
+                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                valido = false;
+            }
+        }
+
+        private void fechaPickerInicio_ValueChanged(object sender, EventArgs e)
+        {
+            if (fechaPickerFin.Value < fechaPickerInicio.Value)
+            {
+                MessageBox.Show("Ingrese un rango de fechas válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                valido = false;
+            }
         }
     }
 }

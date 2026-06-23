@@ -23,7 +23,7 @@ namespace Servicios
         public string Email_54CS { get; set; }
         public bool Block_54CS { get; set; }
         public bool Activo_54CS { get; set; }
-        public string Idioma_54CS { get; set; } // Preferencia de idioma del usuario (ej: "es", "en")
+        public string Idioma_54CS { get; set; }
         public List<Rol_54CS> RolesAsignados;
 
         public bool TienePermiso(string permisoBuscado)

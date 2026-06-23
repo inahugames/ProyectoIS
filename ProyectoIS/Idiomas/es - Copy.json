@@ -13,11 +13,7 @@
     "label2": "Fecha inicio",
     "label3": "Login",
     "label4": "Módulo",
-    "label5": "Fecha fin",
-    "lblResponsable": "Responsable del evento seleccionado:",
-    "lblNombreResp": "Nombre:",
-    "lblApellidoResp": "Apellido:",
-    "btnExportarPDF": "Exportar a PDF"
+    "label5": "Fecha fin"
   },
   "CambiarContraseña": {
     "Text": "Cambiar Contraseña",

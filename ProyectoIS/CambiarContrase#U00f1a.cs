@@ -19,12 +19,13 @@ namespace ProyectoIS
         public CambiarContraseña(Usuario_54CS user)
         {
             InitializeComponent();
-            IdiomaManager_54CS.Suscribir(this);
+            IdiomaManager_54CS.Suscribir(this); // 2.1 - Observer: nos traducimos solos en caliente
             usuario = user.Login_54CS.Trim();
             txtUser.Text = usuario;
             contraseña = user.Password_54CS.Trim();
         }
 
+        // 2.1 - Observer
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);

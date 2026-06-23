@@ -22,6 +22,17 @@
     "label2": "New Password",
     "btnModificar": "Modify Password"
   },
+  "CambiarIdioma": {
+    "Text": "Change Language",
+    "label1": "Select your language:",
+    "btnAceptar": "Accept",
+    "btnCancelar": "Cancel",
+    "MsjSeleccione": "You must select a language.",
+    "MsjExito": "Language changed successfully.",
+    "MsjErrorGuardado": "The language was applied, but the preference could not be saved for your next session.",
+    "TituloAviso": "Notice",
+    "TituloError": "Error"
+  },
   "CrearUsuario": {
     "Text": "Create User",
     "Nombre": "Name",
@@ -35,6 +46,7 @@
     "Text": "Main Form",
     "usuariosToolStripMenuItem": "Users",
     "bitácoraToolStripMenuItem": "Event Log",
+    "idiomaToolStripMenuItem": "Language",
     "cerrarSesiónToolStripMenuItem": "Log Out",
     "perfilesToolStripMenuItem": "Families",
     "rolesToolStripMenuItem": "Roles",
@@ -46,7 +58,15 @@
     "label2": "Existing Families and Permissions:",
     "label3": "New Family Permissions:",
     "label4": "Family Description",
-    "btnCrear": "Create Family"
+    "btnCrear": "Create Family",
+    "tabCrearFamilia": "Manage Families",
+    "btnEliminarFamilia": "Delete Family(ies)",
+    "tabPermisosFamilia": "Manage Family Permissions",
+    "lblFamiliasGestion": "Existing Families:",
+    "lblPermisosDisponiblesFam": "Available Permissions:",
+    "btnAgregarPermisoFamilia": "Add >>",
+    "btnQuitarPermisoFamilia": "<< Remove",
+    "lblPermisosDeFamilia": "Family Permissions:"
   },
   "GestionarRoles": {
     "Text": "Manage Roles",
@@ -57,7 +77,20 @@
     "label6": "Role Name",
     "btnCrearRol": "Create Role",
     "btnEliminarRol": "Delete Role",
-    "btnAsignarUsuario": "Assign to User"
+    "btnAsignarUsuario": "Assign to User",
+    "tabFamiliasRol": "Role Families",
+    "tabPermisosRol": "Role Permissions",
+    "lblRolesFamTab": "Select a Role:",
+    "lblFamiliasDisponiblesRol": "Available Families:",
+    "btnAgregarFamiliaRol": "Add Family(ies) >>",
+    "btnQuitarFamiliaRol": "<< Remove Family",
+    "lblFamiliasDelRol": "Role Families:",
+    "lblRolesPermTab": "Select a Role:",
+    "lblPermisosDisponiblesRol": "Available Permissions (loose):",
+    "btnAgregarPermisoRol": "Add >>",
+    "btnQuitarPermisoRol": "<< Remove",
+    "lblPermisosDirectosDelRol": "Role Direct Permissions:",
+    "lblPermisosEfectivosRol": "All Effective Permissions (with Families):"
   },
   "GestionUsuario": {
     "Text": "User Management",

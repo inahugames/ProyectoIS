@@ -64,7 +64,7 @@ namespace Servicios
 
         public bool TienePermiso(string permisoBuscado)
         {
-            // Retorna 'true' si alguno de los roles asignados (o sus hijos) tiene el permiso
+            // devuelve true si alguno de los roles asignados (o sus hijos) tiene el permiso
             return listperm.Any(rol => rol.TienePermiso(permisoBuscado));
         }
     }

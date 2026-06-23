@@ -72,6 +72,28 @@ namespace DAL
             return conexionSQL.Escribir(query, parametros);
         }
 
+        public int EliminarRelacionRolFamilia(int idRol, int idFamilia)
+        {
+            string query = "DELETE FROM Rol_Familia WHERE IdRol = @idRol AND IdFamilia = @idFamilia";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@idRol",idRol},
+                { "@idFamilia",idFamilia }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
+        public int EliminarRelacionRolPermiso(int idRol, int idPermiso)
+        {
+            string query = "DELETE FROM Rol_Permiso WHERE IdRol = @idRol AND IdPermiso = @idPermiso";
+            Dictionary<string, object> parametros = new Dictionary<string, object>()
+            {
+                {"@idRol",idRol},
+                { "@idPermiso",idPermiso }
+            };
+            return conexionSQL.Escribir(query, parametros);
+        }
+
         public int AsignarRolAUsuario(int idUsuario, int idRol)
         {
             string query = "INSERT INTO Usuario_Rol (IdUsuario, IdRol) VALUES (@idUsu, @idRol)";

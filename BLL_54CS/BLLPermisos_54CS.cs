@@ -17,14 +17,6 @@ namespace BLL_54CS
             _mpp = new MPPPermisos_54CS();
         }
 
-        // ==========================================
-        // MÉTODOS DE LECTURA (Consultas para la UI)
-        // ==========================================
-
-        /// <summary>
-        /// Obtiene solo los permisos individuales.
-        /// Ideal para llenar el CheckedListBox al momento de crear una NUEVA FAMILIA.
-        /// </summary>
         public List<Rol_54CS> ObtenerPermisosParaCrearFamilia()
         {
             return _mpp.ObtenerPermisosSueltos();

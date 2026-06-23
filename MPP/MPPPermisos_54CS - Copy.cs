@@ -22,21 +22,27 @@ namespace MPP
             _dalperm = new DALPermisos_54CS();
         }
 
+        /// <summary>
+        /// Reconstruye el árbol completo de Roles, con sus Familias y Permisos anidados.
+        /// Este es el método principal que usarás para asignar roles a los usuarios.
+        /// </summary>
         public List<Rol_54CS> ObtenerArbolDeRolesCompleto()
         {
+            // 1. Obtener todos los datos crudos desde la DAL
             DataTable dtPermisos = _dalperm.ObtenerPermisos();
             DataTable dtFamilias = _dalfam.ObtenerFamilias();
             DataTable dtRoles = _dalrol.ObtenerRoles();
 
             DataTable dtFam_Per = _dalfam.ObtenerRelacionesFamiliaPermiso();
-            DataTable dtFam_Fam = _dalfam.ObtenerRelacionesFamiliaFamilia();
             DataTable dtRol_Fam = _dalrol.ObtenerRelacionesRolFamilia();
             DataTable dtRol_Per = _dalrol.ObtenerRelacionesRolPermiso();
 
+            // 2. Diccionarios para acceso rápido por ID (O(1) en búsquedas)
             var dicPermisos = new Dictionary<int, Permiso_54CS>();
             var dicFamilias = new Dictionary<int, Familia_54CS>();
             var dicRoles = new Dictionary<int, Rol_54CS>();
 
+            // --- FASE 1: Instanciar Hojas (Permisos) ---
             foreach (DataRow row in dtPermisos.Rows)
             {
                 int id = Convert.ToInt32(row["IdPermiso_54CS"]);
@@ -46,6 +52,7 @@ namespace MPP
                 dicPermisos.Add(id, permiso);
             }
 
+            // --- FASE 2: Instanciar Nodos Intermedios (Familias) ---
             foreach (DataRow row in dtFamilias.Rows)
             {
                 int id = Convert.ToInt32(row["IdFamilia_54CS"]);
@@ -55,6 +62,7 @@ namespace MPP
                 dicFamilias.Add(id, familia);
             }
 
+            // --- FASE 3: Anidar Permisos dentro de las Familias ---
             foreach (DataRow row in dtFam_Per.Rows)
             {
                 int idFamilia = Convert.ToInt32(row["IdFamilia"]);
@@ -66,16 +74,19 @@ namespace MPP
                 }
             }
 
-            AnidarSubFamilias(dicFamilias, dtFam_Fam);
-
+            // --- FASE 4: Instanciar Raíces (Roles) ---
             foreach (DataRow row in dtRoles.Rows)
             {
                 int id = Convert.ToInt32(row["IdRol_54CS"]);
                 string descripcion = row["Nombre_54CS"].ToString();
+
+                // Un Rol actúa como un contenedor principal, usamos 'Familia' para representarlo
                 var rol = new Familia_54CS(descripcion) { ID = id };
                 dicRoles.Add(id, rol);
             }
 
+            // --- FASE 5: Anidar Familias y Permisos dentro de los Roles ---
+            // 5.1 Vincular Roles con Familias
             foreach (DataRow row in dtRol_Fam.Rows)
             {
                 int idRol = Convert.ToInt32(row["IdRol"]);
@@ -87,6 +98,7 @@ namespace MPP
                 }
             }
 
+            // 5.2 Vincular Roles con Permisos Sueltos
             foreach (DataRow row in dtRol_Per.Rows)
             {
                 int idRol = Convert.ToInt32(row["IdRol"]);
@@ -98,9 +110,14 @@ namespace MPP
                 }
             }
 
+            // 3. Retornar solo la lista de Roles (ya contienen todo el árbol adentro)
             return new List<Rol_54CS>(dicRoles.Values);
         }
 
+        /// <summary>
+        /// Devuelve únicamente la lista de Permisos base.
+        /// Útil para llenar el CheckedListBox al crear una nueva Familia.
+        /// </summary>
         public List<Rol_54CS> ObtenerPermisosSueltos()
         {
             DataTable dtPermisos = _dalperm.ObtenerPermisos();
@@ -117,12 +134,15 @@ namespace MPP
             return listaPermisos;
         }
 
+        /// <summary>
+        /// Devuelve las Familias con sus permisos ya cargados.
+        /// Útil para llenar el CheckedListBox al crear un nuevo Rol.
+        /// </summary>
         public List<Rol_54CS> ObtenerFamiliasEnsambladas()
         {
             DataTable dtPermisos = _dalperm.ObtenerPermisos();
             DataTable dtFamilias = _dalfam.ObtenerFamilias();
             DataTable dtFam_Per = _dalfam.ObtenerRelacionesFamiliaPermiso();
-            DataTable dtFam_Fam = _dalfam.ObtenerRelacionesFamiliaFamilia();
 
             var dicPermisos = new Dictionary<int, Permiso_54CS>();
             var dicFamilias = new Dictionary<int, Familia_54CS>();
@@ -150,7 +170,7 @@ namespace MPP
                 }
             }
 
-            AnidarSubFamilias(dicFamilias, dtFam_Fam);
+            // Retorna las familias listas y cargadas (Casteadas a la clase base)
             return new List<Rol_54CS>(dicFamilias.Values);
         }
 
@@ -179,85 +199,25 @@ namespace MPP
             _dalfam.InsertarRelacionFamiliaPermiso(idfam, idhijo);
         }
 
-        public void InsertarRelacionFamiliaFamilia(int idFamiliaPadre, int idFamiliaHijo)
-        {
-            _dalfam.InsertarRelacionFamiliaFamilia(idFamiliaPadre, idFamiliaHijo);
-        }
-
-        public bool EliminarRelacionFamiliaFamilia(int idFamiliaPadre, int idFamiliaHijo)
-        {
-            return _dalfam.EliminarRelacionFamiliaFamilia(idFamiliaPadre, idFamiliaHijo) > 0;
-        }
-
-        public bool ExisteFamiliaEnUso(int idFamilia)
-        {
-            return _dalfam.ExisteFamiliaEnUso(idFamilia);
-        }
-
-        public bool EliminarRelacionesDeFamilia(int idFamilia)
-        {
-            return _dalfam.EliminarRelacionesDeFamilia(idFamilia) > 0;
-        }
-
-        public bool EliminarFamilia(int idFamilia)
-        {
-            return _dalfam.EliminarFamilia(idFamilia) > 0;
-        }
-
-        private void AnidarSubFamilias(Dictionary<int, Familia_54CS> dicFamilias, DataTable dtFamFam)
-        {
-            if (dtFamFam == null)
-                return;
-
-            var hijosPorPadre = new Dictionary<int, List<int>>();
-            foreach (DataRow row in dtFamFam.Rows)
-            {
-                int idPadre = Convert.ToInt32(row["IdFamiliaPadre"]);
-                int idHijo = Convert.ToInt32(row["IdFamiliaHijo"]);
-
-                if (!hijosPorPadre.ContainsKey(idPadre))
-                    hijosPorPadre[idPadre] = new List<int>();
-                hijosPorPadre[idPadre].Add(idHijo);
-            }
-
-            var ensambladas = new HashSet<int>();
-            foreach (var idFamilia in dicFamilias.Keys.ToList())
-            {
-                EnsamblarFamilia(idFamilia, dicFamilias, hijosPorPadre, ensambladas);
-            }
-        }
-
-        private void EnsamblarFamilia(int idFamilia, Dictionary<int, Familia_54CS> dicFamilias,
-            Dictionary<int, List<int>> hijosPorPadre, HashSet<int> ensambladas)
-        {
-            if (ensambladas.Contains(idFamilia))
-                return;
-            ensambladas.Add(idFamilia);
-
-            List<int> hijos;
-            if (!hijosPorPadre.TryGetValue(idFamilia, out hijos))
-                return;
-
-            foreach (var idHijo in hijos)
-            {
-                if (!dicFamilias.ContainsKey(idFamilia) || !dicFamilias.ContainsKey(idHijo))
-                    continue;
-
-                EnsamblarFamilia(idHijo, dicFamilias, hijosPorPadre, ensambladas);
-                dicFamilias[idFamilia].Agregar(dicFamilias[idHijo]);
-            }
-        }
-
+        /// <summary>
+        /// Quita un Permiso de una Familia (Composite: equivalente a "Remover" pero persistido en la BD).
+        /// </summary>
         public bool EliminarRelacionFamiliaPermiso(int idFamilia, int idPermiso)
         {
             return _dalfam.EliminarRelacionFamiliaPermiso(idFamilia, idPermiso) > 0;
         }
 
+        /// <summary>
+        /// Quita una Familia de un Rol (Composite: equivalente a "Remover" pero persistido en la BD).
+        /// </summary>
         public bool EliminarRelacionRolFamilia(int idRol, int idFamilia)
         {
             return _dalrol.EliminarRelacionRolFamilia(idRol, idFamilia) > 0;
         }
 
+        /// <summary>
+        /// Quita un Permiso suelto de un Rol (Composite: equivalente a "Remover" pero persistido en la BD).
+        /// </summary>
         public bool EliminarRelacionRolPermiso(int idRol, int idPermiso)
         {
             return _dalrol.EliminarRelacionRolPermiso(idRol, idPermiso) > 0;

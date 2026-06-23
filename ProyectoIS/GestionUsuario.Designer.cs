@@ -404,6 +404,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GestionUsuario";
             this.Text = "Gestión de Usuarios";
+            this.Load += new System.EventHandler(this.GestionUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
