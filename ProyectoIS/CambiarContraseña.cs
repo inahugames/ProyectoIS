@@ -1,4 +1,5 @@
 ﻿using BLL_54CS;
+using MigraDoc.DocumentObjectModel;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,14 @@ namespace ProyectoIS
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (txtPass.Text.Trim() != "")
+            if (txtPass.Text.Trim() != "" && txtPassConf.Text.Trim() != "")
             {
+                if (txtPass.Text.Trim() != txtPassConf.Text.Trim())
+                {
+                    MessageBox.Show("Las contraseñas ingresadas son distintas entre sí.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 string password = txtPass.Text.Trim();
                 Encriptador_54CS seg = new Encriptador_54CS();
                 bool misma = seg.VerificarContraseña(password, contraseña);

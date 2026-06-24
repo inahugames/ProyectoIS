@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtPassConf = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label3
@@ -92,11 +94,30 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(291, 222);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Confirmar Contraseña";
+            // 
+            // txtPassConf
+            // 
+            this.txtPassConf.Location = new System.Drawing.Point(393, 215);
+            this.txtPassConf.Name = "txtPassConf";
+            this.txtPassConf.Size = new System.Drawing.Size(100, 20);
+            this.txtPassConf.TabIndex = 13;
+            this.txtPassConf.UseSystemPasswordChar = true;
+            // 
             // CambiarContraseña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtPassConf);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -118,5 +139,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtPassConf;
     }
 }

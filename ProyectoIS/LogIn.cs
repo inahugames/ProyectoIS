@@ -238,11 +238,21 @@ namespace ProyectoIS
                                 }
                                 else if (contracorrecta == true)
                                 {
-                                    CambiarContraseña cambia = new CambiarContraseña(user);
-                                    cambia.ShowDialog();
-                                    ListUsuarios = DBUsuarios.ObtenerTodos();
-                                    Existe = true;
-                                    break;
+                                    BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                                    bll.CargarPermisosDelUsuarioEnSesion(user);
+                                    if (user.TienePermiso("CambiarClave"))
+                                    {
+                                        CambiarContraseña cambia = new CambiarContraseña(user);
+                                        cambia.ShowDialog();
+                                        ListUsuarios = DBUsuarios.ObtenerTodos();
+                                        Existe = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("No tiene los permisos suficientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
                                 }
                             }
                             catch
