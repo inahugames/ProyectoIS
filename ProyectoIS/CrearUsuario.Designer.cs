@@ -33,7 +33,7 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtRol = new System.Windows.Forms.TextBox();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
             this.Nombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -88,14 +88,16 @@
             this.txtEmail.TabIndex = 4;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
-            // txtRol
+            // cmbRol
             // 
-            this.txtRol.Location = new System.Drawing.Point(71, 132);
-            this.txtRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtRol.Name = "txtRol";
-            this.txtRol.Size = new System.Drawing.Size(76, 20);
-            this.txtRol.TabIndex = 5;
-            this.txtRol.TextChanged += new System.EventHandler(this.txtRol_TextChanged);
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Location = new System.Drawing.Point(71, 132);
+            this.cmbRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(76, 21);
+            this.cmbRol.TabIndex = 5;
+            this.cmbRol.DropDownWidth = 200;
             // 
             // Nombre
             // 
@@ -162,7 +164,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Nombre);
-            this.Controls.Add(this.txtRol);
+            this.Controls.Add(this.cmbRol);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtDNI);
             this.Controls.Add(this.txtApellido);
@@ -183,7 +185,7 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtRol;
+        private System.Windows.Forms.ComboBox cmbRol;
         private System.Windows.Forms.Label Nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

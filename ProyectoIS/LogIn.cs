@@ -102,26 +102,33 @@ namespace ProyectoIS
                                         MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No posee el permiso para iniciar sesión."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
-                                    { MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Inicio de Sesión Exitoso"), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
-                                    string idiomaPreferido = string.IsNullOrWhiteSpace(user.Idioma_54CS) ? IdiomaManager_54CS.IdiomaPorDefecto : user.Idioma_54CS;
-                                    IdiomaManager_54CS.CambiarIdioma(idiomaPreferido);
-
-                                    SessionManager_54CS.Login(user.Login_54CS,user.Nombre_54CS,user.Rol_54CS, user.RolesAsignados, idiomaPreferido);
-                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
+                                    try
                                     {
-                                        Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
-                                        Fecha_54CS = System.DateTime.Now,
-                                        Modulo_54CS = "Login",
-                                        Evento_54CS = "Login",
-                                        Criticidad_54CS = "1"
-                                    };
-                                    bllev.GuardarEvento(Evento, out string msj);
-                                    FormularioPrincipal frm = new FormularioPrincipal();
-                                    List<string> permisos = user.ObtenerTodosLosPermisosPlanos();
-                                    MessageBox.Show(string.Join(",",user.ObtenerTodosLosPermisosPlanos()));
-                                    frm.Show();
-                                    this.Hide();
-                                    break;
+                                        string idiomaPreferido = string.IsNullOrWhiteSpace(user.Idioma_54CS) ? IdiomaManager_54CS.IdiomaPorDefecto : user.Idioma_54CS;
+                                        IdiomaManager_54CS.CambiarIdioma(idiomaPreferido);
+                                        SessionManager_54CS.Login(user.Login_54CS, user.Nombre_54CS, user.Rol_54CS, user.RolesAsignados, idiomaPreferido);
+                                        Eventos_54CS Evento = new Eventos_54CS() //Crear un evento de tipo login
+                                        {
+                                            Login_54CS = SessionManager_54CS.Instancia.Login_54CS, // mismo login que el usuario que se logeo
+                                            Fecha_54CS = System.DateTime.Now,
+                                            Modulo_54CS = "Login",
+                                            Evento_54CS = "Login",
+                                            Criticidad_54CS = "1"
+                                        };
+                                        bllev.GuardarEvento(Evento, out string msj);
+                                        { MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Inicio de Sesión Exitoso"), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information); Existe = true; }
+                                        FormularioPrincipal frm = new FormularioPrincipal();
+                                        //para mostrar los permisos del usuario en login:
+                                        /*List<string> permisos = user.ObtenerTodosLosPermisosPlanos();
+                                        MessageBox.Show(string.Join(",", user.ObtenerTodosLosPermisosPlanos()));*/
+                                        frm.Show();
+                                        this.Hide();
+                                        break;
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        MessageBox.Show($"Error: {ex.Message}","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                    }
                                 }
                             }
                             catch (Exception ex)

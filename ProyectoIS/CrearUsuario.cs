@@ -18,6 +18,33 @@ namespace ProyectoIS
         {
             InitializeComponent();
             IdiomaManager_54CS.Suscribir(this);
+            CargarRoles();
+        }
+
+        private void CargarRoles()
+        {
+            cmbRol.DisplayMember = "Nombre";
+            cmbRol.Items.Clear();
+
+            // Primera opción: no asignar ningún rol. Permite crear usuarios a quienes
+            // no poseen el permiso "AsignarRoles". Es una cadena simple, por lo que al
+            // seleccionarla "SelectedItem as Rol_54CS" devuelve null.
+            cmbRol.Items.Add(IdiomaManager_54CS.ObtenerTexto("CrearUsuario", "cmbRolSinRol", "(Sin rol)"));
+
+            try
+            {
+                BLLRoles_54CS rolesBLL = new BLLRoles_54CS();
+                foreach (var rol in rolesBLL.ObtenerRolesDelSistema())
+                {
+                    cmbRol.Items.Add(rol);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar los datos: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            cmbRol.SelectedIndex = 0; // Por defecto queda seleccionada la opción "sin rol".
         }
 
         public void ActualizarIdioma()
@@ -27,16 +54,24 @@ namespace ProyectoIS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuario"))
+            if (SessionManager_54CS.Instancia.TienePermiso("CrearUsuarios"))
             {
-                if (txtApellido.Text != "" && txtDNI.Text != "" && txtEmail.Text != "" && txtNombre.Text != "" && txtRol.Text != "")
+                Rol_54CS rolSeleccionado = cmbRol.SelectedItem as Rol_54CS;
+                bool deseaAsignarRol = rolSeleccionado != null;
+                if (deseaAsignarRol && !SessionManager_54CS.Instancia.TienePermiso("AsignarRoles"))
+                {
+                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene el permiso \"AsignarRoles\". Puede crear el usuario sin asignarle un rol."), IdiomaManager_54CS.TraducirMensaje("Acción Denegada"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (txtApellido.Text != "" && txtDNI.Text != "" && txtEmail.Text != "" && txtNombre.Text != "")
                 {
                     try
                     {
                         string apellidoIngresado = txtApellido.Text.Trim();
                         string emailIngresado = txtEmail.Text.ToLower().Trim();
                         string nombreIngresado = txtNombre.Text.Trim();
-                        string rolIngresado = txtRol.Text.Trim();
+                        string rolIngresado = deseaAsignarRol ? rolSeleccionado.Nombre : ""; // vacío = sin rol
                         BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
                         List<Usuario_54CS> lista = bll.ObtenerTodos();
                         Encriptador_54CS encripta = new Encriptador_54CS();
@@ -45,9 +80,23 @@ namespace ProyectoIS
                         string primeramitad = dni.Substring(0, Mitad);
                         string segundamitad = dni.Substring(Mitad);
                         Usuario_54CS nuevo = new Usuario_54CS();
-                        bll.CrearUsuario(Convert.ToInt32(txtDNI.Text), apellidoIngresado, nombreIngresado, nombreIngresado + primeramitad, encripta.EncriptarContraseña(apellidoIngresado + segundamitad), rolIngresado, emailIngresado, false, true, out string msj);
+                        int dniUsuario = Convert.ToInt32(txtDNI.Text);
+                        bll.CrearUsuario(dniUsuario, apellidoIngresado, nombreIngresado, nombreIngresado + primeramitad, encripta.EncriptarContraseña(apellidoIngresado + segundamitad), rolIngresado, emailIngresado, false, true, out string msj);
                         if (string.IsNullOrEmpty(msj) == true)
                         {
+                            if (deseaAsignarRol)
+                            {
+                                try
+                                {
+                                    BLLRoles_54CS rolesBLL = new BLLRoles_54CS();
+                                    rolesBLL.ActualizarRolesDeUsuario(dniUsuario, new List<Rol_54CS> { rolSeleccionado });
+                                }
+                                catch (Exception exRol)
+                                {
+                                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("El usuario se creó, pero no se pudo asignar el rol: ") + exRol.Message, IdiomaManager_54CS.TraducirMensaje("Advertencia"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+
                             MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario creado exitosamente."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                             {
@@ -103,11 +152,6 @@ namespace ProyectoIS
         }
 
         private void Nombre_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtRol_TextChanged(object sender, EventArgs e)
         {
 
         }

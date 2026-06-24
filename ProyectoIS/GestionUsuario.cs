@@ -29,6 +29,10 @@ namespace ProyectoIS
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
+            if (cbUsuario.Checked)
+                TxtModoModificar();
+            else
+                TxtModoConsulta();
         }
 
 
@@ -293,12 +297,12 @@ namespace ProyectoIS
 
         private void TxtModoConsulta()
         {
-            txtMsj.Text = "\t\tMODO CONSULTA. \r\n \r\nEn modo consulta, usted puede definir los parámetros que desea utilizar para realizar una búsqueda de los usuarios de la base de datos. \r\n \r\nCuando llene todos los parámetros, aprete el botón Aplicar para realizar el filtrado.";
+            txtMsj.Text = IdiomaManager_54CS.TraducirMensaje("\t\tMODO CONSULTA. \r\n \r\nEn modo consulta, usted puede definir los parámetros que desea utilizar para realizar una búsqueda de los usuarios de la base de datos. \r\n \r\nCuando llene todos los parámetros, aprete el botón Aplicar para realizar el filtrado.");
         }
 
         private void TxtModoModificar()
         {
-            txtMsj.Text = "\t\tMODO MODIFICAR. \r\n \r\n En modo modificar, usted puede seleccionar a un usuario en la grilla de arriba, sobre el cual puede realizar las acciones de modificación, eliminación, desbloqueo, y desactivación. \r\n \r\n También puede crear un usuario nuevo si así lo desea."; 
+            txtMsj.Text = IdiomaManager_54CS.TraducirMensaje("\t\tMODO MODIFICAR. \r\n \r\n En modo modificar, usted puede seleccionar a un usuario en la grilla de arriba, sobre el cual puede realizar las acciones de modificación, eliminación, desbloqueo, y desactivación. \r\n \r\n También puede crear un usuario nuevo si así lo desea."); 
         }
 
         private void btnAplicar_Click(object sender, EventArgs e)

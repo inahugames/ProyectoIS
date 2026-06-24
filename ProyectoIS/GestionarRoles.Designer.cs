@@ -117,7 +117,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(134, 16);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Permisos Nuevo Rol:";
+            this.label7.Text = "Roles Existentes:";
             // 
             // label5
             // 

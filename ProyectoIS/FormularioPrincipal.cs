@@ -137,6 +137,12 @@ namespace ProyectoIS
             }
         }
 
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogIn relogin = new LogIn();
+            relogin.ShowDialog(this);
+        }
+
         private void FormularioPrincipal_Load(object sender, EventArgs e)
         {
             if (SessionManager_54CS.Instancia.TienePermiso("VerUsuarios"))
@@ -162,6 +168,25 @@ namespace ProyectoIS
             if (SessionManager_54CS.Instancia.TienePermiso("VerRoles"))
             {
                 rolesToolStripMenuItem.Visible = true;
+            }
+        }
+
+        private void cambiarClaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SessionManager_54CS.Instancia.TienePermiso("Logout") && SessionManager_54CS.Instancia.TienePermiso("CambiarClave"))
+            {
+                var confirmacion = MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("¿Desea cerrar sesión para cambiar su contraseña?"), IdiomaManager_54CS.TraducirMensaje("Confirmar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirmacion == DialogResult.Yes)
+                {
+                    SessionManager_54CS.Logout();
+                    LogIn nuevo = new LogIn();
+                    this.Hide();
+                    nuevo.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
