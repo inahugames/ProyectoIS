@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MPPDigitoVerificador_54CS.cs" />
     <Compile Include="MPPEventos_54CS.cs" />
     <Compile Include="MPPPermisos_54CS.cs" />
     <Compile Include="MPPUsuarios_54CS.cs" />

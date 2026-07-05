@@ -19,6 +19,7 @@ namespace ProyectoIS
         public ModificarUsuario(Usuario_54CS seleccionado)
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             txtApellido.Text = seleccionado.Apellido_54CS.Trim();
             txtNombre.Text = seleccionado.Nombre_54CS.Trim();

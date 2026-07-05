@@ -21,6 +21,7 @@ namespace ProyectoIS
         public GestionUsuario()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this); 
             Actualizar();
             TxtModoConsulta();

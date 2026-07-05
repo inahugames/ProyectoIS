@@ -17,6 +17,7 @@ namespace ProyectoIS
         public CrearUsuario()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             CargarRoles();
         }

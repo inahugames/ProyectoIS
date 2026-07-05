@@ -67,6 +67,7 @@
     "cambiarClaveToolStripMenuItem": "Cambiar Clave",
     "cerrarSesiónToolStripMenuItem": "Logout",
     "idiomaToolStripMenuItem": "Cambiar Idioma",
+    "temaToolStripMenuItem": "Cambiar Tema",
     "ventasToolStripMenuItem": "Ventas",
     "carritoToolStripMenuItem": "Carrito",
     "facturarToolStripMenuItem": "Facturar",
@@ -163,5 +164,21 @@
     "label3": "Email",
     "label4": "Rol",
     "btnModificar": "Modificar"
+  },
+  "RecuperacionDV": {
+    "Text": "Recuperación de Integridad - Dígito Verificador",
+    "lblTitulo": "¡INCONSISTENCIA DE DATOS DETECTADA!",
+    "lblInfo": "Los Dígitos Verificadores calculados sobre los datos no coinciden con los almacenados en la tabla DV. Como Administrador del Sistema, seleccione una acción para continuar:",
+    "btnRecalcular": "RECALCULAR EL DV",
+    "btnRestore": "RESTORE BD",
+    "btnSalir": "SALIR"
+  },
+  "RestaurarBD": {
+    "Text": "Restaurar Base de Datos",
+    "lblArchivo": "Archivo de backup (.bak):",
+    "btnExaminar": "Examinar...",
+    "lblAviso": "Se recomienda elegir el backup más reciente, de manera de perder la mínima cantidad de datos de las operaciones normales del sistema.",
+    "btnRestaurar": "Restaurar",
+    "btnCancelar": "Cancelar"
   }
 }

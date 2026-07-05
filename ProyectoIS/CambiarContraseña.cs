@@ -20,6 +20,7 @@ namespace ProyectoIS
         public CambiarContraseña(Usuario_54CS user)
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             usuario = user.Login_54CS.Trim();
             txtUser.Text = usuario;

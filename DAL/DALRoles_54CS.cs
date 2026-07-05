@@ -36,6 +36,7 @@ namespace DAL
         {
             string query = "INSERT INTO Roles_54CS (Nombre_54CS) VALUES (@desc); SELECT SCOPE_IDENTITY();";
 
+            int idGenerado;
             using (SqlConnection cx = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, cx))
@@ -43,11 +44,11 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@desc", descripcion);
                     cx.Open();
 
-                    // ExecuteScalar es para conseguir el id
-                    int idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                    return idGenerado;
+                    idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
+            DALDigitoVerificador_54CS.RecalcularYPersistir();
+            return idGenerado;
         }
 
         public int InsertarRelacionRolFamilia(int idRol, int idFamilia)
@@ -117,7 +118,6 @@ namespace DAL
 
         public int EliminarRelacionesDeRol(int idRol)
         {
-            // Borra los hijos antes de borrar el padre para evitar errores de fk
             string query = @"
                 DELETE FROM Rol_Familia WHERE IdRol = @idRol;
                 DELETE FROM Rol_Permiso WHERE IdRol = @idRol;";

@@ -48,6 +48,7 @@
             this.cambiarClaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.carritoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,12 +123,16 @@
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
             this.backupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backupToolStripMenuItem.Text = "Backup";
+            this.backupToolStripMenuItem.Visible = false;
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // restoreToolStripMenuItem
             // 
             this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
             this.restoreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restoreToolStripMenuItem.Text = "Restore";
+            this.restoreToolStripMenuItem.Visible = false;
+            this.restoreToolStripMenuItem.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
             // 
             // bitácoraToolStripMenuItem
             // 
@@ -142,6 +147,8 @@
             this.digVerToolStripMenuItem.Name = "digVerToolStripMenuItem";
             this.digVerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.digVerToolStripMenuItem.Text = "Dig. Ver.";
+            this.digVerToolStripMenuItem.Visible = false;
+            this.digVerToolStripMenuItem.Click += new System.EventHandler(this.digVerToolStripMenuItem_Click);
             // 
             // perfilesToolStripMenuItem
             // 
@@ -192,7 +199,8 @@
             this.loginToolStripMenuItem,
             this.cambiarClaveToolStripMenuItem,
             this.cerrarSesiónToolStripMenuItem,
-            this.idiomaToolStripMenuItem});
+            this.idiomaToolStripMenuItem,
+            this.temaToolStripMenuItem});
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
             this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.usuarioToolStripMenuItem.Text = "Usuario";
@@ -226,6 +234,13 @@
             this.idiomaToolStripMenuItem.Text = "Cambiar Idioma";
             this.idiomaToolStripMenuItem.Visible = false;
             this.idiomaToolStripMenuItem.Click += new System.EventHandler(this.idiomaToolStripMenuItem_Click);
+            //
+            // temaToolStripMenuItem
+            //
+            this.temaToolStripMenuItem.Name = "temaToolStripMenuItem";
+            this.temaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.temaToolStripMenuItem.Text = "Cambiar Tema";
+            this.temaToolStripMenuItem.Click += new System.EventHandler(this.temaToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem
             // 
@@ -387,6 +402,7 @@
         private System.Windows.Forms.ToolStripMenuItem cambiarClaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem idiomaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem temaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem carritoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem facturarToolStripMenuItem;

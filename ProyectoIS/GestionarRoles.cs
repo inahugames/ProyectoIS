@@ -30,6 +30,7 @@ namespace ProyectoIS
         public GestionarRoles()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             _usuarios = bllusuarios.ObtenerTodos();
         }

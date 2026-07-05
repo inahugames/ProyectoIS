@@ -22,6 +22,7 @@ namespace ProyectoIS
         public BitacoraEventos()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             try { _usuarios = _bllUsuarios.ObtenerTodos(); }
             catch { _usuarios = new List<Usuario_54CS>(); }

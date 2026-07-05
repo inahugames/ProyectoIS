@@ -23,6 +23,7 @@ namespace ProyectoIS
         public GestionarFamilias()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             foreach (Familia_54CS fam in listfam)
             {

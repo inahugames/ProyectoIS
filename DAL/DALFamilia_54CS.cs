@@ -15,16 +15,18 @@ namespace DAL
 
         private int EjecutarScalarParaId(string query, SqlParameter[] parametros)
         {
+            int id;
             using (SqlConnection cx = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, cx))
                 {
                     cmd.Parameters.AddRange(parametros);
                     cx.Open();
-                    // executescalar guarda el resultado del id
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    id = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
+            DALDigitoVerificador_54CS.RecalcularYPersistir();
+            return id;
         }
 
         public DataTable ObtenerFamilias()

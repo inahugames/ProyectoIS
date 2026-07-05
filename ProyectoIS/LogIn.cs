@@ -18,9 +18,18 @@ namespace ProyectoIS
         public LogIn()
         {
             InitializeComponent();
+            Tema_54CS.Aplicar(this);
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
+            // REVISIÓN: lo primero que hace el sistema antes del login es
+            // verificar la consistencia de los datos mediante el Dígito
+            // Verificador (DVH / DVV).
+            if (!VerificarIntegridadDeDatos())
+            {
+                return;
+            }
+            // EOC: se procede a realizar el proceso normal del Login.
             BLLUsuarios_54CS DBUsuarios = new BLLUsuarios_54CS();
             List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerTodos();
             bool Existe = false; // se usa para determinar si existe el usuario en la bd
@@ -172,6 +181,12 @@ namespace ProyectoIS
 
         private void btnCambiar_Click(object sender, EventArgs e)
         {
+            // REVISIÓN: también se verifica la consistencia de los datos antes
+            // de permitir el cambio de contraseña, ya que implica autenticarse.
+            if (!VerificarIntegridadDeDatos())
+            {
+                return;
+            }
             BLLUsuarios_54CS DBUsuarios = new BLLUsuarios_54CS();
             List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerTodos();
             bool Existe = false; // se usa para determinar si existe el usuario en la bd
@@ -280,6 +295,96 @@ namespace ProyectoIS
             {
                 MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario no encontrado en la Base de Datos."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // REVISIÓN del Dígito Verificador:
+        // 1. Se genera el OBJETO DV igual que en la GENERACIÓN, sin persistirlo.
+        // 2. Se consulta la tabla DV de la BD a través de un SELECT.
+        // 3. Se comparan el DVH y el DVV generados con los consultados.
+        // 4. Si no se corresponden: si quien intenta ingresar es el Administrador
+        //    del Sistema, se le presenta la pantalla de REPARACIÓN; en caso
+        //    contrario se presenta el mensaje de inconsistencia y se sale del
+        //    sistema. Devuelve true cuando el login puede continuar normalmente.
+        private bool VerificarIntegridadDeDatos()
+        {
+            try
+            {
+                BLLDigitoVerificador_54CS bllDV = new BLLDigitoVerificador_54CS();
+                if (bllDV.VerificarConsistencia(out string detalle))
+                {
+                    return true;
+                }
+
+                if (EsAdministradorDelSistema(txtUser.Text.Trim(), txtPassword.Text))
+                {
+                    // El Administrador es reconocido por el sistema y se le
+                    // presenta el GUI de REPARACIÓN.
+                    using (RecuperacionDV formulario = new RecuperacionDV(detalle))
+                    {
+                        formulario.ShowDialog(this);
+                    }
+                    // Se limpia la pantalla y se vuelve al Login para hacer un
+                    // nuevo acceso.
+                    txtUser.Clear();
+                    txtPassword.Clear();
+                    return false;
+                }
+
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Se detectó una inconsistencia en los datos de la Base de Datos. El sistema se cerrará. Contacte al Administrador del Sistema."), IdiomaManager_54CS.TraducirMensaje("Error de Integridad"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Se marca la integridad como comprometida para que ninguna
+                // escritura durante el cierre recalcule (y oculte) el DV.
+                SessionManager_54CS.IntegridadComprometida = true;
+                Application.Exit();
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se pudo verificar la integridad de los datos: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        // Determina si las credenciales ingresadas pertenecen al Administrador
+        // del Sistema (por su rol o por tener el permiso "DigitoVerificador"),
+        // sin ejecutar el proceso normal del login ni registrar eventos.
+        private bool EsAdministradorDelSistema(string login, string password)
+        {
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
+            {
+                return false;
+            }
+            try
+            {
+                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
+                foreach (Usuario_54CS user in bll.ObtenerTodos())
+                {
+                    if (user.Login_54CS != null && user.Login_54CS.Trim() == login)
+                    {
+                        Encriptador_54CS seg = new Encriptador_54CS();
+                        if (!seg.VerificarContraseña(password, user.Password_54CS))
+                        {
+                            return false;
+                        }
+                        bool rolAdministrador = user.Rol_54CS != null && user.Rol_54CS.Trim().ToLower().Contains("admin");
+                        bool permisoDV = false;
+                        try
+                        {
+                            bll.CargarPermisosDelUsuarioEnSesion(user);
+                            permisoDV = user.TienePermiso("DigitoVerificador");
+                        }
+                        catch
+                        {
+                            // si no se pueden cargar los permisos, alcanza con el rol
+                        }
+                        return rolAdministrador || permisoDV;
+                    }
+                }
+            }
+            catch
+            {
+                // ante cualquier error no se lo reconoce como administrador
+            }
+            return false;
         }
     }
 }

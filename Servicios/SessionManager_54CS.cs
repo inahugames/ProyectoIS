@@ -16,7 +16,18 @@ namespace Servicios
         public string Rol_54CS;
         public string Idioma_54CS;
         public List<Rol_54CS> listperm;
-        //public bool Logged_54CS;
+        public static bool HaySesion
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _session != null;
+                }
+            }
+        }
+
+        public static bool IntegridadComprometida { get; set; }
 
         public static SessionManager_54CS Instancia
         {
