@@ -1,23 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    // Backup y Restore de la Base de Datos. Las operaciones se ejecutan
-    // conectados a master porque no se puede restaurar una base mientras se
-    // está conectado a ella.
     public class DALBackup_54CS
     {
         private readonly string _masterConnectionString = "Server=.;DataBase=master;Integrated Security=True";
         private const string NombreBD = "BDProyecto";
+        private const string CarpetaIntercambio = @"C:\Backup_BDProyecto";
+        private const int ErrorNoSePuedeAbrirDispositivo = 3201; // "Cannot open backup device"
 
-        // Genera un backup completo (.bak) en la ruta indicada. La ruta debe
-        // ser accesible para la cuenta de servicio de SQL Server.
+        // genera un backup completo (.bak) en la ruta indicada
         public void RealizarBackup(string rutaArchivo)
+        {
+            try
+            {
+                EjecutarBackup(rutaArchivo); // intento directo a la ruta elegida
+            }
+            catch (SqlException ex) when (ex.Number == ErrorNoSePuedeAbrirDispositivo)
+            {
+                // el servicio de SQL no puede escribir en la carpeta elegida:
+                // se genera el backup en la carpeta de intercambio y la
+                // aplicacion lo copia al destino.
+                string rutaIntermedia = PrepararRutaIntermedia(rutaArchivo);
+                EjecutarBackup(rutaIntermedia);
+                if (!string.Equals(rutaIntermedia, rutaArchivo, StringComparison.OrdinalIgnoreCase))
+                {
+                    File.Copy(rutaIntermedia, rutaArchivo, true);
+                    IntentarBorrar(rutaIntermedia);
+                }
+            }
+        }
+        public void RestaurarBackup(string rutaArchivo)
+        {
+            SqlConnection.ClearAllPools();
+
+            try
+            {
+                EjecutarRestore(rutaArchivo); // intento directo desde la ruta elegida
+            }
+            catch (SqlException ex) when (ex.Number == ErrorNoSePuedeAbrirDispositivo)
+            {
+                // el servicio de SQL no puede leer el archivo desde la carpeta
+                // elegida se copia a la carpeta de intercambio y se restaura
+                // desde ahi
+                string rutaIntermedia = PrepararRutaIntermedia(rutaArchivo);
+                if (!string.Equals(rutaIntermedia, rutaArchivo, StringComparison.OrdinalIgnoreCase))
+                {
+                    File.Copy(rutaArchivo, rutaIntermedia, true);
+                }
+                try
+                {
+                    EjecutarRestore(rutaIntermedia);
+                }
+                finally
+                {
+                    IntentarBorrar(rutaIntermedia);
+                }
+            }
+
+            // despues del restore se regenera el DV para dejar la BD en un
+            // estado consistente aunque el backup fuera anterior a la
+            // implementacion del Digito Verificador.
+            DALDigitoVerificador_54CS.RecalcularYPersistir();
+        }
+
+        private void EjecutarBackup(string rutaArchivo)
         {
             using (SqlConnection conexion = new SqlConnection(_masterConnectionString))
             using (SqlCommand comando = new SqlCommand($"BACKUP DATABASE [{NombreBD}] TO DISK = @Ruta WITH INIT", conexion))
@@ -29,14 +82,8 @@ namespace DAL
             }
         }
 
-        // REPARACIÓN - RESTORE BD: reemplaza la BD actual con el contenido del
-        // backup elegido para normalizar la situación ante una inconsistencia.
-        public void RestaurarBackup(string rutaArchivo)
+        private void EjecutarRestore(string rutaArchivo)
         {
-            // Se liberan las conexiones del pool de esta aplicación para que el
-            // RESTORE pueda tomar acceso exclusivo de la base.
-            SqlConnection.ClearAllPools();
-
             using (SqlConnection conexion = new SqlConnection(_masterConnectionString))
             {
                 conexion.Open();
@@ -56,10 +103,6 @@ namespace DAL
                 }
                 finally
                 {
-                    // No enmascarar una excepción del RESTORE: si la BD quedó
-                    // en estado RESTORING este ALTER falla, y debe conservarse
-                    // el error original para que el Administrador vea la causa
-                    // real (y pueda reintentar con un backup válido).
                     try
                     {
                         using (SqlCommand multiUsuario = new SqlCommand($"ALTER DATABASE [{NombreBD}] SET MULTI_USER", conexion))
@@ -70,15 +113,29 @@ namespace DAL
                     }
                     catch (SqlException)
                     {
-                        // se ignora: prevalece la excepción original del RESTORE
+                        // se ignora
                     }
                 }
             }
+        }
 
-            // Después del restore se regenera el DV para dejar la BD en un
-            // estado consistente aunque el backup fuera anterior a la
-            // implementación del Dígito Verificador.
-            DALDigitoVerificador_54CS.RecalcularYPersistir();
+        private static string PrepararRutaIntermedia(string rutaArchivo)
+        {
+            Directory.CreateDirectory(CarpetaIntercambio);
+            return Path.Combine(CarpetaIntercambio, Path.GetFileName(rutaArchivo));
+        }
+
+        private static void IntentarBorrar(string rutaArchivo)
+        {
+            try
+            {
+                File.Delete(rutaArchivo);
+            }
+            catch
+            {
+                // si no se puede borrar el archivo intermedio no es un error
+                // queda como una copia extra del backup
+            }
         }
     }
 }

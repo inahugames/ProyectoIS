@@ -10,32 +10,14 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    // GENERACIÓN del Dígito Verificador (DVH / DVV).
-    //
-    // DVH (Dígito Verificador Horizontal): cada valor de cada columna de un
-    // registro se convierte a su equivalente hexadecimal y se suma con los
-    // demás valores del mismo registro (cálculo columna a columna). La suma de
-    // los DVH de todos los registros da el DVH de la tabla, y la suma de los
-    // DVH de todas las tablas da el DVH de la BD.
-    //
-    // DVV (Dígito Verificador Vertical): cada valor de cada columna se suma
-    // con los valores de todos los registros de la misma columna (cálculo
-    // registro a registro). La suma de los DVV de todas las columnas da el DVV
-    // de la tabla, y la suma de los DVV de todas las tablas da el DVV de la BD.
-    //
-    // Ambos totales se persisten en la tabla especial DV (DV_54CS), junto con
-    // el detalle por tabla para poder informarle al Administrador cuál tabla
-    // presenta la inconsistencia.
     public class DALDigitoVerificador_54CS
     {
         private static readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
 
-        // Nombre de la tabla especial DV y de la fila que guarda el total de la BD.
+        // Nombre de la tabla especial DV y de la fila que guarda el total de la BD
         public const string TablaDV = "DV_54CS";
         public const string FilaTotalBD = "TOTAL_BD";
 
-        // Genera el OBJETO DV en memoria (sin persistirlo). Se usa tanto en la
-        // GENERACIÓN (antes de guardar) como en la REVISIÓN del login.
         public static DigitoVerificadorBD_54CS GenerarObjetoDV()
         {
             DigitoVerificadorBD_54CS objetoDV = new DigitoVerificadorBD_54CS();
@@ -55,9 +37,6 @@ namespace DAL
             return objetoDV;
         }
 
-        // GENERACIÓN completa: calcula el OBJETO DV y lo persiste en la tabla DV.
-        // Se invoca automáticamente después de cada persistencia sobre la BD
-        // (ver Conexion_54CS.Escribir) y desde la opción RECALCULAR EL DV.
         public static DigitoVerificadorBD_54CS RecalcularYPersistir()
         {
             DigitoVerificadorBD_54CS objetoDV = GenerarObjetoDV();
@@ -81,8 +60,7 @@ namespace DAL
             return objetoDV;
         }
 
-        // REVISIÓN: lee los DV almacenados en la tabla DV mediante un SELECT.
-        // Devuelve null si la tabla DV todavía no fue inicializada.
+        // devuelve null si la tabla DV todavia no fue inicializada
         public static DigitoVerificadorBD_54CS LeerDVPersistido()
         {
             DigitoVerificadorBD_54CS objetoDV = new DigitoVerificadorBD_54CS();
@@ -126,22 +104,16 @@ namespace DAL
             }
             if (!tieneTotal)
             {
-                // fila de total ausente: se reconstruye a partir del detalle por tabla
                 objetoDV.DVHBaseDatos_54CS = objetoDV.Tablas_54CS.Sum(t => t.DVH_54CS);
                 objetoDV.DVVBaseDatos_54CS = objetoDV.Tablas_54CS.Sum(t => t.DVV_54CS);
             }
             return objetoDV;
         }
 
-        // ------------------------- Cálculo -------------------------
+        // calculo:
 
         private static DVTabla_54CS CalcularDVDeTabla(string nombreTabla, DataTable datos)
         {
-            // DVH: cálculo horizontal, columna a columna dentro de cada registro.
-            // Cada valor se pondera por la posición de su columna dentro del
-            // registro; así el DVH detecta también el intercambio de valores
-            // entre columnas de un mismo registro (cosa que una suma simple no
-            // detectaría) y se diferencia del cálculo vertical del DVV.
             long dvhTabla = 0;
             foreach (DataRow registro in datos.Rows)
             {
@@ -153,7 +125,6 @@ namespace DAL
                 dvhTabla += dvhRegistro; // suma de los DVH de todos los registros
             }
 
-            // DVV: cálculo vertical, registro a registro dentro de cada columna.
             long dvvTabla = 0;
             for (int columna = 0; columna < datos.Columns.Count; columna++)
             {
@@ -173,10 +144,6 @@ namespace DAL
             };
         }
 
-        // Convierte el valor de una celda a su equivalente hexadecimal y lo
-        // reduce a un número: cada carácter del valor se convierte a su código
-        // expresado en hexadecimal y se suma el valor numérico de ese
-        // hexadecimal. Los valores nulos aportan 0.
         private static long CalcularValorCelda(object valor)
         {
             if (valor == null || valor == DBNull.Value)
@@ -187,14 +154,12 @@ namespace DAL
             long suma = 0;
             foreach (char caracter in texto)
             {
-                string hexadecimal = ((int)caracter).ToString("X"); // equivalente hexadecimal del carácter
+                string hexadecimal = ((int)caracter).ToString("X"); // equivalente hexadecimal del caracter
                 suma += Convert.ToInt64(hexadecimal, 16);            // valor numérico del hexadecimal
             }
             return suma;
         }
 
-        // Representación de texto estable e independiente de la cultura del
-        // equipo, para que el mismo dato produzca siempre el mismo DV.
         private static string ConvertirATextoCanonico(object valor)
         {
             if (valor is DateTime fecha)
@@ -216,11 +181,6 @@ namespace DAL
             return Convert.ToString(valor, CultureInfo.InvariantCulture) ?? string.Empty;
         }
 
-        // ------------------------- Acceso a datos -------------------------
-
-        // Tablas de usuario de la BD sobre las que se calcula el DV. Se excluye
-        // la propia tabla DV (si se incluyera, cada recálculo la modificaría y
-        // el valor nunca podría coincidir) y las tablas de sistema.
         private static List<string> ObtenerTablasVerificables(SqlConnection conexion)
         {
             List<string> tablas = new List<string>();
