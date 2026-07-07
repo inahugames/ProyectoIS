@@ -25,8 +25,43 @@ namespace ProyectoIS
             txtNombre.Text = seleccionado.Nombre_54CS.Trim();
             txtDNI.Text = Convert.ToString(seleccionado.DNI_54cs).Trim();
             txtEmail.Text = seleccionado.Email_54CS.Trim();
-            txtRol.Text = seleccionado.Rol_54CS.Trim();
+            CargarRoles(seleccionado.Rol_54CS?.Trim());
             seleccion = seleccionado;
+        }
+        private void CargarRoles(string rolActual)
+        {
+            cmbRol.DisplayMember = "Nombre";
+            cmbRol.Items.Clear();
+
+            cmbRol.Items.Add(IdiomaManager_54CS.ObtenerTexto("CrearUsuario", "cmbRolSinRol", "(Sin rol)"));
+
+            try
+            {
+                BLLRoles_54CS rolesBLL = new BLLRoles_54CS();
+                foreach (var rol in rolesBLL.ObtenerRolesDelSistema())
+                {
+                    cmbRol.Items.Add(rol);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar los datos: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            cmbRol.SelectedIndex = 0;
+            if (!string.IsNullOrEmpty(rolActual) &&
+                !string.Equals(rolActual, "Sin Asignar", StringComparison.OrdinalIgnoreCase))
+            {
+                for (int i = 1; i < cmbRol.Items.Count; i++)
+                {
+                    var rol = cmbRol.Items[i] as Rol_54CS;
+                    if (rol != null && string.Equals(rol.Nombre, rolActual, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cmbRol.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
         }
 
         public void ActualizarIdioma()
@@ -48,10 +83,33 @@ namespace ProyectoIS
                         {
                             user.Email_54CS = txtEmail.Text;
                         }
-                        if (txtRol.Text != user.Rol_54CS)
+
+                        Rol_54CS rolSeleccionado = cmbRol.SelectedItem as Rol_54CS;
+                        bool deseaAsignarRol = rolSeleccionado != null;
+                        if (deseaAsignarRol && !SessionManager_54CS.Instancia.TienePermiso("AsignarRoles"))
                         {
-                            user.Rol_54CS = txtRol.Text;
+                            MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene el permiso \"AsignarRoles\". Puede guardar el usuario sin asignarle un rol."), IdiomaManager_54CS.TraducirMensaje("Acción Denegada"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
+
+                        string nuevoNombreRol = deseaAsignarRol ? rolSeleccionado.Nombre : "Sin Asignar";
+                        if (nuevoNombreRol != user.Rol_54CS)
+                        {
+                            user.Rol_54CS = nuevoNombreRol;
+                            user.RolesAsignados = deseaAsignarRol
+                                ? new List<Rol_54CS> { rolSeleccionado }
+                                : new List<Rol_54CS>();
+                            try
+                            {
+                                BLLRoles_54CS rolesBLL = new BLLRoles_54CS();
+                                rolesBLL.ActualizarRolesDeUsuario(user.DNI_54cs, user.RolesAsignados);
+                            }
+                            catch (Exception exRol)
+                            {
+                                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se pudo asignar el rol: ") + exRol.Message, IdiomaManager_54CS.TraducirMensaje("Advertencia"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+
                         bll.ActualizarUsuario(lista, out string m);
                         Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                         {

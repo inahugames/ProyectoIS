@@ -38,10 +38,6 @@
             this.txtNombreNuevoRol = new System.Windows.Forms.TextBox();
             this.clbFamiliasYPermisos = new System.Windows.Forms.CheckedListBox();
             this.lbRolesExistentes = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnAsignarUsuario = new System.Windows.Forms.Button();
-            this.clbRolesParaAsignar = new System.Windows.Forms.CheckedListBox();
-            this.combobox = new System.Windows.Forms.ComboBox();
             this.tabFamiliasRol = new System.Windows.Forms.TabPage();
             this.lblFamiliasDelRol = new System.Windows.Forms.Label();
             this.lbFamiliasDelRol = new System.Windows.Forms.ListBox();
@@ -64,7 +60,6 @@
             this.lbRolesPermTab = new System.Windows.Forms.ListBox();
             this.GestionRoles.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tabFamiliasRol.SuspendLayout();
             this.tabPermisosRol.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +67,6 @@
             // GestionRoles
             // 
             this.GestionRoles.Controls.Add(this.tabPage1);
-            this.GestionRoles.Controls.Add(this.tabPage2);
             this.GestionRoles.Controls.Add(this.tabFamiliasRol);
             this.GestionRoles.Controls.Add(this.tabPermisosRol);
             this.GestionRoles.Location = new System.Drawing.Point(0, 0);
@@ -171,46 +165,7 @@
             this.lbRolesExistentes.Name = "lbRolesExistentes";
             this.lbRolesExistentes.Size = new System.Drawing.Size(200, 420);
             this.lbRolesExistentes.TabIndex = 8;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnAsignarUsuario);
-            this.tabPage2.Controls.Add(this.clbRolesParaAsignar);
-            this.tabPage2.Controls.Add(this.combobox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(992, 554);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Asignación a Usuarios";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnAsignarUsuario
-            // 
-            this.btnAsignarUsuario.Location = new System.Drawing.Point(298, 191);
-            this.btnAsignarUsuario.Name = "btnAsignarUsuario";
-            this.btnAsignarUsuario.Size = new System.Drawing.Size(189, 98);
-            this.btnAsignarUsuario.TabIndex = 2;
-            this.btnAsignarUsuario.Text = "Asignar a Usuario";
-            this.btnAsignarUsuario.UseVisualStyleBackColor = true;
-            this.btnAsignarUsuario.Click += new System.EventHandler(this.btnAsignarUsuario_Click_1);
-            // 
-            // clbRolesParaAsignar
-            // 
-            this.clbRolesParaAsignar.FormattingEnabled = true;
-            this.clbRolesParaAsignar.Location = new System.Drawing.Point(554, 66);
-            this.clbRolesParaAsignar.Name = "clbRolesParaAsignar";
-            this.clbRolesParaAsignar.Size = new System.Drawing.Size(228, 424);
-            this.clbRolesParaAsignar.TabIndex = 1;
-            // 
-            // combobox
-            // 
-            this.combobox.FormattingEnabled = true;
-            this.combobox.Location = new System.Drawing.Point(329, 132);
-            this.combobox.Name = "combobox";
-            this.combobox.Size = new System.Drawing.Size(121, 21);
-            this.combobox.TabIndex = 0;
-            // 
+            //
             // tabFamiliasRol
             // 
             this.tabFamiliasRol.Controls.Add(this.lblFamiliasDelRol);
@@ -431,7 +386,6 @@
             this.GestionRoles.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.tabFamiliasRol.ResumeLayout(false);
             this.tabFamiliasRol.PerformLayout();
             this.tabPermisosRol.ResumeLayout(false);
@@ -453,9 +407,6 @@
         private System.Windows.Forms.CheckedListBox clbFamiliasYPermisos;
         private System.Windows.Forms.ListBox lbRolesExistentes;
         private System.Windows.Forms.Button btnEliminarRol;
-        private System.Windows.Forms.Button btnAsignarUsuario;
-        private System.Windows.Forms.CheckedListBox clbRolesParaAsignar;
-        private System.Windows.Forms.ComboBox combobox;
         private System.Windows.Forms.TabPage tabFamiliasRol;
         private System.Windows.Forms.Label lblFamiliasDelRol;
         private System.Windows.Forms.ListBox lbFamiliasDelRol;

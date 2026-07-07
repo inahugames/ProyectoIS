@@ -43,9 +43,7 @@ namespace ProyectoIS
         private void GestionarRoles_Load(object sender, EventArgs e)
         {
             ((ListBox)clbFamiliasYPermisos).DisplayMember = "Nombre";
-            ((ListBox)clbRolesParaAsignar).DisplayMember = "Nombre";
             lbRolesExistentes.DisplayMember = "Nombre";
-            combobox.DisplayMember = "Nombre";
 
             lbRolesFamTab.DisplayMember = "Nombre";
             clbFamiliasDisponiblesRol.DisplayMember = "Nombre";
@@ -60,11 +58,9 @@ namespace ProyectoIS
             btnEliminarRol.Visible = false;
             btnAgregarFamiliaRol.Visible = false;
             btnAgregarPermisoRol.Visible = false;
-            btnAsignarUsuario.Visible = false;
             btnQuitarFamiliaRol.Visible = false;
             btnQuitarPermisoRol.Visible = false;
             GestionRoles.TabPages.Remove(tabPage1);
-            GestionRoles.TabPages.Remove(tabPage2);
             GestionRoles.TabPages.Remove(tabFamiliasRol);
             GestionRoles.TabPages.Remove(tabPermisosRol);
             int index = 0;
@@ -80,12 +76,6 @@ namespace ProyectoIS
                 {
                     btnEliminarRol.Visible = true;
                 }
-            }
-            if (SessionManager_54CS.Instancia.TienePermiso("AsignarRoles"))
-            {
-                GestionRoles.TabPages.Insert(index, tabPage2);
-                index++;
-                btnAsignarUsuario.Visible = true;
             }
             if (SessionManager_54CS.Instancia.TienePermiso("ModificarRoles"))
             {
@@ -104,12 +94,10 @@ namespace ProyectoIS
         private void RefrescarListasDeRoles()
         {
             lbRolesExistentes.Items.Clear();
-            clbRolesParaAsignar.Items.Clear();
 
             foreach (var rol in _rolesDelSistema)
             {
                 lbRolesExistentes.Items.Add(rol);
-                clbRolesParaAsignar.Items.Add(rol);
             }
         }
 
@@ -119,13 +107,8 @@ namespace ProyectoIS
             {
                 clbFamiliasYPermisos.Items.Clear();
                 lbRolesExistentes.Items.Clear();
-                clbRolesParaAsignar.Items.Clear();
 
                 _usuarios = bllusuarios.ObtenerTodos();
-                combobox.DataSource = null;
-                combobox.DataSource = _usuarios;
-                combobox.DisplayMember = "Login_54CS";
-                combobox.ValueMember = "DNI_54CS";
 
                 //cargar elementos para armar el Rol (Familias + Permisos)
                 var elementosDisponibles = _rolesBLL.ObtenerElementosParaCrearRol();
@@ -139,7 +122,6 @@ namespace ProyectoIS
                 foreach (var rol in _rolesDelSistema)
                 {
                     lbRolesExistentes.Items.Add(rol);
-                    clbRolesParaAsignar.Items.Add(rol); //para la pestaña de asignacion
                 }
 
                 // cargar Familias y Permisos sueltos del sistema
@@ -256,60 +238,6 @@ namespace ProyectoIS
                     {
                         MessageBox.Show(ex.Message, IdiomaManager_54CS.TraducirMensaje("Acción Denegada"), MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
-                }
-            }
-            else
-            {
-                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnAsignarUsuario_Click_1(object sender, EventArgs e)
-        {
-            if (SessionManager_54CS.Instancia.TienePermiso("AsignarRoles"))
-            {
-                Usuario_54CS usuarioSeleccionado = (Usuario_54CS)combobox.SelectedItem;
-                if (usuarioSeleccionado == null) return;
-
-                if (clbRolesParaAsignar.CheckedItems.Count == 0)
-                {
-                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Los campos están vacíos."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (combobox.Text == SessionManager_54CS.Instancia.Login_54CS)
-                {
-                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No se pueden modificar los roles del usuario que se encuentra logeado actualmente."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                //usuarioSeleccionado.RolesAsignados.Clear();
-
-                /*foreach (object itemChecked in clbRolesParaAsignar.CheckedItems)
-                {
-                    Rol_54CS rol = (Rol_54CS)itemChecked;
-                    usuarioSeleccionado.RolesAsignados.Add(rol);
-                }*/
-
-                try
-                {
-                    List<Rol_54CS> rolesSeleccionados = new List<Rol_54CS>();
-                    foreach (object itemChecked in clbRolesParaAsignar.CheckedItems)
-                    {
-                        rolesSeleccionados.Add((Rol_54CS)itemChecked);
-                    }
-                    usuarioSeleccionado.RolesAsignados = rolesSeleccionados;
-                    usuarioSeleccionado.Rol_54CS = rolesSeleccionados.FirstOrDefault()?.Nombre ?? "Sin Asignar";
-                    _rolesBLL.ActualizarRolesDeUsuario(usuarioSeleccionado.DNI_54cs, rolesSeleccionados);
-                    List<Usuario_54CS> act = new List<Usuario_54CS>();
-                    act.Add(usuarioSeleccionado);
-                    bllusuarios.ActualizarUsuario(act, out string msj);
-                    RegistrarEvento("Asignar Rol");
-                    MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Roles asignados exitosamente al usuario {0}."), usuarioSeleccionado.Nombre_54CS),
-                                IdiomaManager_54CS.TraducirMensaje("Éxito"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al asignar: ") + ex.Message, IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
