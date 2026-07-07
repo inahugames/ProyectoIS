@@ -64,6 +64,10 @@ namespace ProyectoIS
                 {
                     BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
                     bll.DesbloquearUsuario(user.Login_54CS, out string msj);
+                    // Se limpian ÚNICAMENTE los intentos fallidos del usuario
+                    // desbloqueado (antes se recorrían todos los eventos y se
+                    // reseteaban los contadores de cualquier usuario reciente).
+                    bll.LimpiarIntentosFallidos(user.Login_54CS);
                     lista = bll.ObtenerTodos();
                     Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
                     {
@@ -76,14 +80,6 @@ namespace ProyectoIS
                     BLLEventos_54CS bllev = new BLLEventos_54CS();
                     bllev.GuardarEvento(Evento, out string mens);
                     MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Usuario con DNI {0} desbloqueado exitosamente"), user.DNI_54cs), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    List<Eventos_54CS> listaev = bllev.ObtenerTodos();
-                    foreach (Eventos_54CS ev in listaev)
-                    {
-                        if (DateTime.Now < ev.Fecha_54CS.AddHours(3))
-                        {
-                            bllev.EliminarEvento(ev, out string me);
-                        }
-                    }        
                     break;
                 }
                 else if (user.Login_54CS == seleccionado.Login_54CS && user.Block_54CS == false)

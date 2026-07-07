@@ -10,8 +10,117 @@ namespace BLL_54CS
 {
     public class BLLUsuarios_54CS
     {
+        // Política de bloqueo por intentos fallidos de contraseña.
+        // Centralizada aquí para que todos los puntos de autenticación
+        // (login, cambio de contraseña, etc.) compartan el mismo criterio.
+        private const int MaximosIntentosFallidos = 3;
+        private const int VentanaIntentosHoras = 3;
+        private const string EventoContrasenaErronea = "Contraseña Errónea";
+        private const string EventoUsuarioBloqueado = "Usuario Bloqueado";
+
         MPPUsuarios_54CS MPPusuario = new MPPUsuarios_54CS();
+        BLLEventos_54CS BLLeventos = new BLLEventos_54CS();
         public List<Usuario_54CS> ObtenerTodos() => MPPusuario.ObtenerUsuarios();
+
+        // Cuenta los intentos fallidos de contraseña del login dentro de la
+        // ventana configurable (evita arrastrar intentos antiguos de por vida).
+        public int ContarIntentosFallidosRecientes(string login)
+        {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                return 0;
+            }
+            string loginNormalizado = login.Trim();
+            DateTime desde = DateTime.Now.AddHours(-VentanaIntentosHoras);
+            int cantidad = 0;
+            foreach (Eventos_54CS ev in BLLeventos.ObtenerTodos())
+            {
+                if (ev.Login_54CS != null
+                    && ev.Login_54CS.Trim() == loginNormalizado
+                    && ev.Evento_54CS == EventoContrasenaErronea
+                    && ev.Fecha_54CS >= desde)
+                {
+                    cantidad++;
+                }
+            }
+            return cantidad;
+        }
+
+        // Registra un intento fallido para el login y, si se alcanza el umbral,
+        // bloquea al usuario. Devuelve true cuando el usuario quedó bloqueado.
+        public bool RegistrarIntentoFallido(string login, out string mensaje)
+        {
+            mensaje = string.Empty;
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                mensaje = "Login inválido";
+                return false;
+            }
+            try
+            {
+                Eventos_54CS intento = new Eventos_54CS()
+                {
+                    Login_54CS = login.Trim(),
+                    Fecha_54CS = DateTime.Now,
+                    Modulo_54CS = "Login",
+                    Evento_54CS = EventoContrasenaErronea,
+                    Criticidad_54CS = "1"
+                };
+                if (!BLLeventos.GuardarEvento(intento, out string msjEvento))
+                {
+                    mensaje = msjEvento;
+                    return false;
+                }
+
+                // Se cuenta DESPUÉS de guardar el intento actual, de modo que
+                // éste forme parte del contador. Umbral exacto y consistente.
+                int intentos = ContarIntentosFallidosRecientes(login);
+                if (intentos >= MaximosIntentosFallidos)
+                {
+                    if (!BloquearUsuario(login, out string msjBloqueo))
+                    {
+                        mensaje = msjBloqueo;
+                        return false;
+                    }
+                    Eventos_54CS bloqueo = new Eventos_54CS()
+                    {
+                        Login_54CS = login.Trim(),
+                        Fecha_54CS = DateTime.Now,
+                        Modulo_54CS = "Login",
+                        Evento_54CS = EventoUsuarioBloqueado,
+                        Criticidad_54CS = "2"
+                    };
+                    BLLeventos.GuardarEvento(bloqueo, out string msjEvBloqueo);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                mensaje = $"Ocurrió un error: {ex.Message}";
+                return false;
+            }
+        }
+
+        // Borra únicamente los intentos fallidos del login indicado, dejándolo
+        // con el contador en cero. Se usa al desbloquear a un usuario.
+        public void LimpiarIntentosFallidos(string login)
+        {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                return;
+            }
+            string loginNormalizado = login.Trim();
+            foreach (Eventos_54CS ev in BLLeventos.ObtenerTodos())
+            {
+                if (ev.Login_54CS != null
+                    && ev.Login_54CS.Trim() == loginNormalizado
+                    && ev.Evento_54CS == EventoContrasenaErronea)
+                {
+                    BLLeventos.EliminarEvento(ev, out string msj);
+                }
+            }
+        }
     
         public bool CrearUsuario(int dni,string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool Block, bool Activo, out string mensaje)
         {

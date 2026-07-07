@@ -56,51 +56,25 @@ namespace ProyectoIS
                         else
                         {
                             BLLEventos_54CS bllev = new BLLEventos_54CS();
-                            List<Eventos_54CS> listaeventos = bllev.ObtenerTodos();
-                            int Login = 4;
-                            foreach (Eventos_54CS ev in listaeventos)
-                            {
-                                if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea" && DateTime.Now < ev.Fecha_54CS.AddHours(3))
-                                {
-                                    Login = Login - 1;
-                                }
-                            }
+                            BLLUsuarios_54CS bllUsu = new BLLUsuarios_54CS();
                             Encriptador_54CS seg = new Encriptador_54CS();
                             try
                             {
                                 bool login = seg.VerificarContraseña(Password, user.Password_54CS);
                                 if (login == false)
                                 {
-                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
-                                    {
-                                        Login_54CS = User, // mismo login que el usuario que se logeo
-                                        Fecha_54CS = System.DateTime.Now,
-                                        Modulo_54CS = "Login",
-                                        Evento_54CS = "Contraseña Errónea",
-                                        Criticidad_54CS = "1"
-                                    };
-                                    bllev.GuardarEvento(Evento, out string msj);
-                                    listaeventos = bllev.ObtenerTodos();  
-                                    if ( Login <= 0 )
-                                    {
-                                                user.Block_54CS = true;
-                                                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario Bloqueado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                Existe = true;
-                                                Eventos_54CS Eventito = new Eventos_54CS() //Crear un evento
-                                                {
-                                                    Login_54CS = User, // mismo login que el usuario que se logeo
-                                                    Fecha_54CS = System.DateTime.Now,
-                                                    Modulo_54CS = "Login",
-                                                    Evento_54CS = "Usuario Bloqueado",
-                                                    Criticidad_54CS = "2"
-                                                };
-                                                bllev.GuardarEvento(Eventito, out string mens);
-                                                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
-                                                bll.BloquearUsuario(user.Login_54CS, out string mensj);
-                                                break;
-                                     }
-                                    else if (Login >= 1) { MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña Incorrecta."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                    // Política de bloqueo centralizada en la BLL:
+                                    // registra el intento fallido y bloquea al
+                                    // alcanzar el umbral (3 intentos en 3 h).
+                                    bool bloqueado = bllUsu.RegistrarIntentoFallido(User, out string msjBloqueo);
                                     Existe = true;
+                                    if (bloqueado)
+                                    {
+                                        user.Block_54CS = true;
+                                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario Bloqueado, contacte a un Administrador"), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        break;
+                                    }
+                                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña Incorrecta."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 else if (login == true)
                                 {
@@ -212,49 +186,28 @@ namespace ProyectoIS
                         }
                         else
                         {
-                            BLLEventos_54CS bllev = new BLLEventos_54CS();
+                            BLLUsuarios_54CS bllUsu = new BLLUsuarios_54CS();
                             Encriptador_54CS seg = new Encriptador_54CS();
                             try
                             {
                                 bool contracorrecta = seg.VerificarContraseña(Password, user.Password_54CS);
                                 if (contracorrecta == false)
                                 {
-                                    int intentos = 3;
-                                    Eventos_54CS Evento = new Eventos_54CS() //Crear un evento
-                                    {
-                                        Login_54CS = User, // mismo login que el usuario que se logeo
-                                        Fecha_54CS = System.DateTime.Now,
-                                        Modulo_54CS = "Login",
-                                        Evento_54CS = "Contraseña Errónea",
-                                        Criticidad_54CS = "2"
-                                    };
-                                    bllev.GuardarEvento(Evento, out string msj);
-                                    List<Eventos_54CS> listev = bllev.ObtenerTodos();
-                                    foreach (Eventos_54CS ev in listev)
-                                    {
-                                        if (ev.Login_54CS == User && ev.Evento_54CS == "Contraseña Errónea")
-                                        {
-                                            intentos = intentos - 1;
-                                        }
-                                    }
+                                    // Política de bloqueo centralizada en la BLL:
+                                    // registra el intento fallido y bloquea al
+                                    // alcanzar el umbral (3 intentos en 3 h),
+                                    // con el mismo criterio que el login normal.
+                                    bool bloqueado = bllUsu.RegistrarIntentoFallido(User, out string msjBloqueo);
                                     Existe = true;
-                                    MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña incorrecta."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    if ( intentos <= 0)
+                                    if (bloqueado)
                                     {
                                         user.Block_54CS = true;
-                                        Eventos_54CS Eventito = new Eventos_54CS() //Crear un evento
-                                        {
-                                            Login_54CS = User, // mismo login que el usuario que se logeo
-                                            Fecha_54CS = System.DateTime.Now,
-                                            Modulo_54CS = "Login",
-                                            Evento_54CS = "Usuario Bloqueado",
-                                            Criticidad_54CS = "2"
-                                        };
-                                        bllev.GuardarEvento(Eventito, out string mens);
-                                        BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
-                                        bll.BloquearUsuario(user.Login_54CS, out string m);
-                                        ListUsuarios = bll.ObtenerTodos();
+                                        ListUsuarios = bllUsu.ObtenerTodos();
                                         MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Usuario bloqueado, contacte a un administrador."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Contraseña incorrecta."), IdiomaManager_54CS.TraducirMensaje("Aviso"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                     break;
                                 }
