@@ -98,6 +98,11 @@ namespace ProyectoIS
         private void btnCancelarFiltros_Click(object sender, EventArgs e)
         {
             Actualizar();
+            txtLogin.Text = string.Empty;
+            fechaPickerFin.Value = DateTime.Today;
+            fechaPickerInicio.Value = DateTime.Today;
+            comboCriticidad.Text = string.Empty;
+            comboMódulo.Text = string.Empty;
         }
 
         private void Actualizar()
