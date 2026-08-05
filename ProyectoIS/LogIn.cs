@@ -29,7 +29,6 @@ namespace ProyectoIS
             {
                 return;
             }
-            // EOC: se procede a realizar el proceso normal del Login.
             BLLUsuarios_54CS DBUsuarios = new BLLUsuarios_54CS();
             List<Usuario_54CS> ListUsuarios = DBUsuarios.ObtenerTodos();
             bool Existe = false; // se usa para determinar si existe el usuario en la bd

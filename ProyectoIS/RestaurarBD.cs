@@ -12,9 +12,6 @@ using System.Windows.Forms;
 
 namespace ProyectoIS
 {
-    // REPARACIÓN - RESTORE BD: permite elegir un backup (.bak) y restaurarlo
-    // para normalizar la situación de la Base de Datos. Conviene elegir el
-    // backup más reciente para perder la mínima cantidad de datos.
     public partial class RestaurarBD : Form, IIdiomaObservador_54CS
     {
         public RestaurarBD()

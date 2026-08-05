@@ -272,6 +272,11 @@ namespace ProyectoIS
             {
                 MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valido = false;
+                fechaPickerFin.Value = DateTime.Today;
+            }
+            else
+            {
+                valido = true;
             }
         }
 
@@ -281,6 +286,11 @@ namespace ProyectoIS
             {
                 MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Ingrese un rango de fechas válido."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 valido = false;
+                fechaPickerInicio.Value = DateTime.Today;
+            }
+            else
+            {
+                valido = true;
             }
         }
     }
