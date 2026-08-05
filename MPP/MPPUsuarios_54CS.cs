@@ -14,6 +14,8 @@ namespace MPP
     {
         private DALUsuarios_54CS usuariossql = new DALUsuarios_54CS();
         MPPPermisos_54CS perm = new MPPPermisos_54CS();
+        private Encriptador_54CS encriptador = new Encriptador_54CS();
+
         public List<Usuario_54CS> ObtenerUsuarios()
         {
             DataTable tabla = usuariossql.ObtenerUsuarios();
@@ -28,7 +30,7 @@ namespace MPP
                     Login_54CS = row["Login_54CS"].ToString(),
                     Password_54CS = row["Password_54CS"].ToString(),
                     Rol_54CS = row["Rol_54CS"].ToString(),
-                    Email_54CS = row["Email_54CS"].ToString(),
+                    Email_54CS = encriptador.DesencriptarReversible(row["Email_54CS"].ToString().Trim()),
                     Block_54CS = Convert.ToBoolean(row["Block_54CS"].ToString()),
                     Activo_54CS = Convert.ToBoolean(row["Activo_54CS"].ToString()),
                     Idioma_54CS = (tabla.Columns.Contains("Idioma_54CS") && row["Idioma_54CS"] != DBNull.Value)
@@ -43,7 +45,7 @@ namespace MPP
 
         public bool CrearUsuarios(Usuario_54CS usuario)
         {
-            return usuariossql.GuardarUsuario(usuario) > 0;
+            return usuariossql.GuardarUsuario(ConEmailEncriptado(usuario)) > 0;
         }
 
         public bool ActivarUsuario(string login)
@@ -78,7 +80,7 @@ namespace MPP
             {
                 foreach (Usuario_54CS user in lista)
                 {
-                    usuariossql.ActualizarUsuarios(user);
+                    usuariossql.ActualizarUsuarios(ConEmailEncriptado(user));
                 }
             }
             return true;
@@ -86,7 +88,7 @@ namespace MPP
 
         public bool GuardarUsuario(Usuario_54CS user)
         {
-            return usuariossql.GuardarUsuario(user) > 0;
+            return usuariossql.GuardarUsuario(ConEmailEncriptado(user)) > 0;
         }
 
         public bool ActualizarContraseña(string usuario, string password)
@@ -112,6 +114,28 @@ namespace MPP
                     usuario.RolesAsignados.Add(rol);
                 }
             }
+        }
+
+        private Usuario_54CS ConEmailEncriptado(Usuario_54CS usuario)
+        {
+            if (usuario == null)
+            {
+                return null;
+            }
+            return new Usuario_54CS()
+            {
+                DNI_54cs = usuario.DNI_54cs,
+                Apellido_54CS = usuario.Apellido_54CS,
+                Nombre_54CS = usuario.Nombre_54CS,
+                Login_54CS = usuario.Login_54CS,
+                Password_54CS = usuario.Password_54CS,
+                Rol_54CS = usuario.Rol_54CS,
+                Email_54CS = encriptador.EncriptarReversible(usuario.Email_54CS?.Trim()),
+                Block_54CS = usuario.Block_54CS,
+                Activo_54CS = usuario.Activo_54CS,
+                Idioma_54CS = usuario.Idioma_54CS,
+                RolesAsignados = usuario.RolesAsignados
+            };
         }
     }
 }
