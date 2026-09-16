@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /Tests
 /Scripts
+/.dotnet-home/.dotnet
+/.test-output
