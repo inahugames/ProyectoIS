@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,14 +22,14 @@ namespace Servicios
             {
                 lista.AddRange(hijo.ObtenerListaPermisos());
             }
-            return lista; // no devolver duplicados
+            return lista.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         }
 
         public override void Agregar(Rol_54CS rol)
         {
             if (this.Nombre.Equals(rol.Nombre, StringComparison.OrdinalIgnoreCase))
             {
-                throw new Exception("No se puede agregar una familia a sí misma.");
+                throw new Exception(IdiomaManager_54CS.TraducirMensaje("No se puede agregar una familia a sí misma."));
             }
             var permisosNuevos = rol.ObtenerListaPermisos();
             // Verificar si la familia ya tienen alguno de esos permisos
@@ -37,7 +37,7 @@ namespace Servicios
             {
                 if (this.TienePermiso(permiso))
                 {
-                    throw new Exception($"Conflicto: El permiso '{permiso}' ya existe en la familia '{this.Nombre}' o en alguna de sus sub-familias.");
+                    throw new Exception(string.Format(IdiomaManager_54CS.TraducirMensaje("Conflicto: El permiso '{0}' ya existe en la familia '{1}' o en alguna de sus sub-familias."), permiso, this.Nombre));
                 }
             }
             _hijos.Add(rol);
@@ -58,11 +58,6 @@ namespace Servicios
 
         public override bool TienePermiso(string permisoBuscado)
         {
-            // Si el nombre de la familia es exactamente el permiso que buscamos
-            if (this.Nombre.Equals(permisoBuscado, System.StringComparison.OrdinalIgnoreCase))
-                return true;
-
-            // Si no, delegamos la pregunta recursivamente a sus hijos
             return _hijos.Any(hijo => hijo.TienePermiso(permisoBuscado));
         }
     }

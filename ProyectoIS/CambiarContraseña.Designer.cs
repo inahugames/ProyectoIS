@@ -2,144 +2,300 @@
 {
     partial class CambiarContraseña
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtUser = new System.Windows.Forms.TextBox();
-            this.txtPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.subtituloClave = new System.Windows.Forms.Label();
+            this.ayudaClave = new System.Windows.Forms.Label();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
             this.txtPassConf = new System.Windows.Forms.TextBox();
+            this.tarjetaClave = new ProyectoIS.UsuariosRoundedPanel();
+            this.insigniaClave = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoUsuarioClave = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoNuevaClave = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoConfirmacionClave = new ProyectoIS.UsuariosRoundedPanel();
+            this.iconoClave = new ProyectoIS.LoginGlyph();
+            this.iconoUsuario = new ProyectoIS.LoginGlyph();
+            this.iconoNuevaClave = new ProyectoIS.LoginGlyph();
+            this.iconoConfirmacion = new ProyectoIS.LoginGlyph();
+            this.candadoUsuario = new ProyectoIS.LoginGlyph();
+            this.ojoClave = new ProyectoIS.LoginEyeButton();
+            this.ojoConfirmacion = new ProyectoIS.LoginEyeButton();
+            this.btnModificar = new ProyectoIS.UsuariosRoundedButton();
+            this.cancelarClave = new ProyectoIS.UsuariosRoundedButton();
+            this.temaClave = new ProyectoIS.UsuariosThemeSwitch();
+            this.tarjetaClave.SuspendLayout();
+            this.insigniaClave.SuspendLayout();
+            this.campoUsuarioClave.SuspendLayout();
+            this.campoNuevaClave.SuspendLayout();
+            this.campoConfirmacionClave.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(215, 9);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(370, 36);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "CAMBIAR CONTRASEÑA";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(393, 119);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(100, 20);
-            this.txtUser.TabIndex = 8;
-            // 
-            // txtPass
-            // 
-            this.txtPass.Location = new System.Drawing.Point(393, 176);
-            this.txtPass.Name = "txtPass";
-            this.txtPass.Size = new System.Drawing.Size(100, 20);
-            this.txtPass.TabIndex = 9;
-            this.txtPass.UseSystemPasswordChar = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(332, 126);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Usuario";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(291, 183);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Nueva Contraseña";
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(294, 250);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(199, 81);
-            this.btnModificar.TabIndex = 12;
-            this.btnModificar.Text = "Modificar Contraseña";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(291, 222);
+            this.label3.Name = "label3";
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Confirmar Contraseña";
-            // 
-            // txtPassConf
-            // 
-            this.txtPassConf.Location = new System.Drawing.Point(393, 215);
+            this.subtituloClave.Name = "subtituloClave";
+            this.ayudaClave.Name = "ayudaClave";
+            this.txtUser.Name = "txtUser";
+            this.txtPass.Name = "txtPass";
             this.txtPassConf.Name = "txtPassConf";
-            this.txtPassConf.Size = new System.Drawing.Size(100, 20);
-            this.txtPassConf.TabIndex = 13;
+            this.tarjetaClave.Name = "tarjetaClave";
+            this.insigniaClave.Name = "insigniaClave";
+            this.campoUsuarioClave.Name = "campoUsuarioClave";
+            this.campoNuevaClave.Name = "campoNuevaClave";
+            this.campoConfirmacionClave.Name = "campoConfirmacionClave";
+            this.iconoClave.Name = "iconoClave";
+            this.iconoUsuario.Name = "iconoUsuario";
+            this.iconoNuevaClave.Name = "iconoNuevaClave";
+            this.iconoConfirmacion.Name = "iconoConfirmacion";
+            this.candadoUsuario.Name = "candadoUsuario";
+            this.ojoClave.Name = "ojoClave";
+            this.ojoConfirmacion.Name = "ojoConfirmacion";
+            this.btnModificar.Name = "btnModificar";
+            this.cancelarClave.Name = "cancelarClave";
+            this.temaClave.Name = "temaClave";
+            this.temaClave.Location = new System.Drawing.Point(412, 20);
+            this.temaClave.Size = new System.Drawing.Size(94, 38);
+            this.temaClave.TabIndex = 3;
+            this.temaClave.Click += new System.EventHandler(this.temaClave_Click);
+            this.insigniaClave.Location = new System.Drawing.Point(229, 52);
+            this.insigniaClave.Size = new System.Drawing.Size(82, 82);
+            this.insigniaClave.CornerRadius = 18;
+            this.insigniaClave.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaClave.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.iconoClave.Location = new System.Drawing.Point(20, 20);
+            this.iconoClave.Size = new System.Drawing.Size(42, 42);
+            this.iconoClave.Key = true;
+            this.iconoClave.BackColor = System.Drawing.Color.Transparent;
+            this.iconoClave.ForeColor = System.Drawing.Color.White;
+            this.insigniaClave.Controls.Add(this.iconoClave);
+            this.label3.Location = new System.Drawing.Point(24, 148);
+            this.label3.Size = new System.Drawing.Size(492, 43);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.Text = "Cambiar contraseña";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.subtituloClave.Location = new System.Drawing.Point(24, 195);
+            this.subtituloClave.Size = new System.Drawing.Size(492, 28);
+            this.subtituloClave.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.subtituloClave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.subtituloClave.Text = "Elegí una nueva contraseña para tu cuenta";
+            this.subtituloClave.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.tarjetaClave.Location = new System.Drawing.Point(34, 240);
+            this.tarjetaClave.Size = new System.Drawing.Size(472, 310);
+            this.tarjetaClave.CornerRadius = 18;
+            this.tarjetaClave.TabIndex = 0;
+            this.tarjetaClave.BackColor = System.Drawing.Color.White;
+            this.tarjetaClave.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.label1.Location = new System.Drawing.Point(24, 18);
+            this.label1.Size = new System.Drawing.Size(420, 24);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label1.Text = "Usuario";
+            this.campoUsuarioClave.Location = new System.Drawing.Point(24, 44);
+            this.campoUsuarioClave.Size = new System.Drawing.Size(424, 44);
+            this.campoUsuarioClave.CornerRadius = 11;
+            this.campoUsuarioClave.TabIndex = 0;
+            this.campoUsuarioClave.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoUsuarioClave.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoUsuarioClave.ForeColor = System.Drawing.Color.FromArgb(102, 112, 130);
+            this.iconoUsuario.Location = new System.Drawing.Point(14, 11);
+            this.iconoUsuario.Size = new System.Drawing.Size(22, 22);
+            this.iconoUsuario.Lock = false;
+            this.iconoUsuario.BackColor = System.Drawing.Color.Transparent;
+            this.campoUsuarioClave.Controls.Add(this.iconoUsuario);
+            this.txtUser.Location = new System.Drawing.Point(46, 12);
+            this.txtUser.Size = new System.Drawing.Size(326, 24);
+            this.txtUser.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser.TabIndex = 0;
+            this.txtUser.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtUser.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtUser.AccessibleName = "Usuario";
+            this.txtUser.Enter += new System.EventHandler(this.campoClave_Enter);
+            this.txtUser.Leave += new System.EventHandler(this.campoClave_Leave);
+            this.campoUsuarioClave.Controls.Add(this.txtUser);
+            this.tarjetaClave.Controls.Add(this.label1);
+            this.tarjetaClave.Controls.Add(this.campoUsuarioClave);
+            this.label2.Location = new System.Drawing.Point(24, 98);
+            this.label2.Size = new System.Drawing.Size(420, 24);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label2.Text = "Nueva contraseña";
+            this.campoNuevaClave.Location = new System.Drawing.Point(24, 124);
+            this.campoNuevaClave.Size = new System.Drawing.Size(424, 44);
+            this.campoNuevaClave.CornerRadius = 11;
+            this.campoNuevaClave.TabIndex = 1;
+            this.campoNuevaClave.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoNuevaClave.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoNuevaClave.ForeColor = System.Drawing.Color.FromArgb(102, 112, 130);
+            this.iconoNuevaClave.Location = new System.Drawing.Point(14, 11);
+            this.iconoNuevaClave.Size = new System.Drawing.Size(22, 22);
+            this.iconoNuevaClave.Lock = true;
+            this.iconoNuevaClave.BackColor = System.Drawing.Color.Transparent;
+            this.campoNuevaClave.Controls.Add(this.iconoNuevaClave);
+            this.txtPass.Location = new System.Drawing.Point(46, 12);
+            this.txtPass.Size = new System.Drawing.Size(326, 24);
+            this.txtPass.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPass.TabIndex = 0;
+            this.txtPass.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtPass.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtPass.AccessibleName = "Nueva contraseña";
+            this.txtPass.Enter += new System.EventHandler(this.campoClave_Enter);
+            this.txtPass.Leave += new System.EventHandler(this.campoClave_Leave);
+            this.campoNuevaClave.Controls.Add(this.txtPass);
+            this.tarjetaClave.Controls.Add(this.label2);
+            this.tarjetaClave.Controls.Add(this.campoNuevaClave);
+            this.label4.Location = new System.Drawing.Point(24, 178);
+            this.label4.Size = new System.Drawing.Size(420, 24);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label4.Text = "Confirmar contraseña";
+            this.campoConfirmacionClave.Location = new System.Drawing.Point(24, 204);
+            this.campoConfirmacionClave.Size = new System.Drawing.Size(424, 44);
+            this.campoConfirmacionClave.CornerRadius = 11;
+            this.campoConfirmacionClave.TabIndex = 2;
+            this.campoConfirmacionClave.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoConfirmacionClave.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoConfirmacionClave.ForeColor = System.Drawing.Color.FromArgb(102, 112, 130);
+            this.iconoConfirmacion.Location = new System.Drawing.Point(14, 11);
+            this.iconoConfirmacion.Size = new System.Drawing.Size(22, 22);
+            this.iconoConfirmacion.Lock = true;
+            this.iconoConfirmacion.BackColor = System.Drawing.Color.Transparent;
+            this.campoConfirmacionClave.Controls.Add(this.iconoConfirmacion);
+            this.txtPassConf.Location = new System.Drawing.Point(46, 12);
+            this.txtPassConf.Size = new System.Drawing.Size(326, 24);
+            this.txtPassConf.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtPassConf.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassConf.TabIndex = 0;
+            this.txtPassConf.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtPassConf.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtPassConf.AccessibleName = "Confirmar contraseña";
+            this.txtPassConf.Enter += new System.EventHandler(this.campoClave_Enter);
+            this.txtPassConf.Leave += new System.EventHandler(this.campoClave_Leave);
+            this.campoConfirmacionClave.Controls.Add(this.txtPassConf);
+            this.tarjetaClave.Controls.Add(this.label4);
+            this.tarjetaClave.Controls.Add(this.campoConfirmacionClave);
+            this.txtUser.ReadOnly = true;
+            this.txtUser.TabStop = false;
+            this.txtPass.UseSystemPasswordChar = true;
             this.txtPassConf.UseSystemPasswordChar = true;
-            // 
-            // CambiarContraseña
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtPassConf);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtPass);
-            this.Controls.Add(this.txtUser);
+            this.candadoUsuario.Location = new System.Drawing.Point(384, 12);
+            this.candadoUsuario.Size = new System.Drawing.Size(18, 20);
+            this.candadoUsuario.Lock = true;
+            this.candadoUsuario.BackColor = System.Drawing.Color.Transparent;
+            this.campoUsuarioClave.Controls.Add(this.candadoUsuario);
+            this.ojoClave.Location = new System.Drawing.Point(380, 8);
+            this.ojoClave.Size = new System.Drawing.Size(30, 28);
+            this.ojoClave.TabIndex = 1;
+            this.ojoClave.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.ojoClave.HoverBackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.ojoClave.ForeColor = System.Drawing.Color.FromArgb(102, 112, 130);
+            this.ojoClave.FlatAppearance.BorderSize = 0;
+            this.ojoClave.Click += new System.EventHandler(this.ojoClave_Click);
+            this.campoNuevaClave.Controls.Add(this.ojoClave);
+            this.ojoConfirmacion.Location = new System.Drawing.Point(380, 8);
+            this.ojoConfirmacion.Size = new System.Drawing.Size(30, 28);
+            this.ojoConfirmacion.TabIndex = 1;
+            this.ojoConfirmacion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.ojoConfirmacion.HoverBackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.ojoConfirmacion.ForeColor = System.Drawing.Color.FromArgb(102, 112, 130);
+            this.ojoConfirmacion.FlatAppearance.BorderSize = 0;
+            this.ojoConfirmacion.Click += new System.EventHandler(this.ojoConfirmacion_Click);
+            this.campoConfirmacionClave.Controls.Add(this.ojoConfirmacion);
+            this.ayudaClave.Location = new System.Drawing.Point(24, 260);
+            this.ayudaClave.Size = new System.Drawing.Size(424, 42);
+            this.ayudaClave.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.ayudaClave.Text = "Debe ser diferente de tu contraseña actual.";
+            this.ayudaClave.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.tarjetaClave.Controls.Add(this.ayudaClave);
+            this.btnModificar.Location = new System.Drawing.Point(34, 568);
+            this.btnModificar.Size = new System.Drawing.Size(472, 44);
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnModificar.TabIndex = 1;
+            this.btnModificar.Text = "Guardar contraseña";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.cancelarClave.Location = new System.Drawing.Point(34, 624);
+            this.cancelarClave.Size = new System.Drawing.Size(472, 40);
+            this.cancelarClave.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cancelarClave.TabIndex = 2;
+            this.cancelarClave.Text = "Cancelar";
+            this.cancelarClave.Click += new System.EventHandler(this.cancelarClave_Click);
+            this.btnModificar.Icon = ProyectoIS.UsuariosButtonIcon.Check;
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.FlatAppearance.BorderSize = 0;
+            this.cancelarClave.Tag = "secondary";
+            this.cancelarClave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelarClave.BackColor = System.Drawing.Color.White;
+            this.cancelarClave.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarClave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarClave.FlatAppearance.BorderSize = 1;
+            this.Controls.Add(this.temaClave);
+            this.Controls.Add(this.insigniaClave);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.subtituloClave);
+            this.Controls.Add(this.tarjetaClave);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.cancelarClave);
+            this.AcceptButton = this.btnModificar;
+            this.CancelButton = this.cancelarClave;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(540, 680);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Name = "CambiarContraseña";
-            this.Text = "CambiarContraseña";
+            this.Text = "Cambiar contraseña";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.tarjetaClave.ResumeLayout(false);
+            this.tarjetaClave.PerformLayout();
+            this.insigniaClave.ResumeLayout(false);
+            this.insigniaClave.PerformLayout();
+            this.campoUsuarioClave.ResumeLayout(false);
+            this.campoUsuarioClave.PerformLayout();
+            this.campoNuevaClave.ResumeLayout(false);
+            this.campoNuevaClave.PerformLayout();
+            this.campoConfirmacionClave.ResumeLayout(false);
+            this.campoConfirmacionClave.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label subtituloClave;
+        private System.Windows.Forms.Label ayudaClave;
+        private System.Windows.Forms.TextBox txtUser;
+        private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.TextBox txtPassConf;
+        private ProyectoIS.UsuariosRoundedPanel tarjetaClave;
+        private ProyectoIS.UsuariosRoundedPanel insigniaClave;
+        private ProyectoIS.UsuariosRoundedPanel campoUsuarioClave;
+        private ProyectoIS.UsuariosRoundedPanel campoNuevaClave;
+        private ProyectoIS.UsuariosRoundedPanel campoConfirmacionClave;
+        private ProyectoIS.LoginGlyph iconoClave;
+        private ProyectoIS.LoginGlyph iconoUsuario;
+        private ProyectoIS.LoginGlyph iconoNuevaClave;
+        private ProyectoIS.LoginGlyph iconoConfirmacion;
+        private ProyectoIS.LoginGlyph candadoUsuario;
+        private ProyectoIS.LoginEyeButton ojoClave;
+        private ProyectoIS.LoginEyeButton ojoConfirmacion;
+        private ProyectoIS.UsuariosRoundedButton btnModificar;
+        private ProyectoIS.UsuariosRoundedButton cancelarClave;
+        private ProyectoIS.UsuariosThemeSwitch temaClave;
     }
 }

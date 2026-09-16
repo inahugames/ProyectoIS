@@ -122,6 +122,8 @@ namespace ProyectoIS
         public static Modo ModoActual => _modo;
         public static bool EsOscuro => _paleta.EsOscura;
 
+        public static event EventHandler TemaCambiado;
+
         public static Color ColorAlerta => _paleta.Alerta;
 
         public static void AlternarModo()
@@ -138,10 +140,24 @@ namespace ProyectoIS
 
         public static void Aplicar(Form formulario)
         {
+            GestionUsuario gestion = formulario as GestionUsuario;
+            Color colorAnterior = gestion == null ? Color.Empty : gestion.ColorFondoContenido;
             formulario.BackColor = _paleta.FondoFormulario;
             formulario.ForeColor = _paleta.TextoPrincipal;
             AplicarBarraTitulo(formulario);
             AplicarAControles(formulario.Controls);
+            if (formulario is FormularioPrincipal principal) principal.AplicarTemaPrincipal();
+            if (gestion != null) gestion.AplicarTemaUsuarios(colorAnterior);
+            if (formulario is LogIn login) login.AplicarTemaLogin();
+            if (formulario is CambiarIdioma idioma) idioma.AplicarTemaIdioma();
+            if (formulario is RecuperacionDV integridad) integridad.AplicarTemaIntegridad();
+            if (formulario is RestaurarBD restore) restore.AplicarTemaRestore();
+            if (formulario is BitacoraEventos bitacora) bitacora.AplicarTemaBitacora();
+            if (formulario is GestionarFamilias familias) familias.AplicarTemaFamilias();
+            if (formulario is GestionarRoles roles) roles.AplicarTemaRoles();
+            if (formulario is CrearUsuario alta) alta.AplicarTemaAlta();
+            if (formulario is ModificarUsuario edicion) edicion.AplicarTemaEdicion();
+            if (formulario is CambiarContraseña clave) clave.AplicarTemaClave();
         }
 
         private static void AplicarAControles(Control.ControlCollection controles)
@@ -237,7 +253,11 @@ namespace ProyectoIS
                 }
                 else if (control is Panel panel)
                 {
-                    if (EsFondoDeTema(panel.BackColor))
+                    if (string.Equals(Convert.ToString(panel.Tag), "surface", StringComparison.OrdinalIgnoreCase))
+                    {
+                        panel.BackColor = _paleta.FondoControl;
+                    }
+                    else if (EsFondoDeTema(panel.BackColor))
                     {
                         panel.BackColor = _paleta.FondoFormulario;
                     }
@@ -279,6 +299,17 @@ namespace ProyectoIS
             boton.Cursor = Cursors.Hand;
             boton.UseVisualStyleBackColor = false;
 
+            if (string.Equals(Convert.ToString(boton.Tag), "secondary", StringComparison.OrdinalIgnoreCase))
+            {
+                boton.FlatAppearance.BorderSize = 1;
+                boton.FlatAppearance.BorderColor = _paleta.SecundarioBorde;
+                boton.BackColor = _paleta.SecundarioFondo;
+                boton.ForeColor = _paleta.TextoPrincipal;
+                boton.FlatAppearance.MouseOverBackColor = _paleta.SecundarioHover;
+                boton.FlatAppearance.MouseDownBackColor = _paleta.SecundarioPresionado;
+                return;
+            }
+
             // "quitar" también es destructivo: esos botones se muestran como
             // "<< Eliminar" en pantalla a través de las traducciones.
             if (nombre.Contains("eliminar") || nombre.Contains("quitar"))
@@ -314,7 +345,9 @@ namespace ProyectoIS
         private static void EstilarGrilla(DataGridView grilla)
         {
             grilla.BorderStyle = BorderStyle.None;
-            grilla.BackgroundColor = _paleta.FondoFormulario;
+            grilla.BackgroundColor = string.Equals(Convert.ToString(grilla.Tag), "surface", StringComparison.OrdinalIgnoreCase)
+                ? _paleta.FondoControl
+                : _paleta.FondoFormulario;
             grilla.GridColor = _paleta.GrillaLinea;
             grilla.EnableHeadersVisualStyles = false;
             grilla.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;

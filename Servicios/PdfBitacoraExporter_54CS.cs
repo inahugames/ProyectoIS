@@ -1,3 +1,4 @@
+using Servicios;
 using System;
 using System.Collections.Generic;
 using MigraDoc.DocumentObjectModel;
@@ -17,13 +18,13 @@ namespace ProyectoIS
             IList<string[]> filas)
         {
             if (encabezados == null || encabezados.Count == 0)
-                throw new ArgumentException("Se requieren encabezados para exportar.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Se requieren encabezados para exportar."));
             if (filas == null)
                 filas = new List<string[]>();
 
             int numColumnas = encabezados.Count;
             Document document = new Document();
-            document.Info.Title = string.IsNullOrEmpty(titulo) ? "Bitácora de Eventos" : titulo;
+            document.Info.Title = string.IsNullOrEmpty(titulo) ? IdiomaManager_54CS.TraducirMensaje("Bitácora de Eventos") : titulo;
 
             Style normal = document.Styles["Normal"];
             normal.Font.Name = "Arial";
@@ -40,9 +41,9 @@ namespace ProyectoIS
             Paragraph pie = section.Footers.Primary.AddParagraph();
             pie.Format.Alignment = ParagraphAlignment.Center;
             pie.Format.Font.Size = 8;
-            pie.AddText("Página ");
+            pie.AddText(IdiomaManager_54CS.TraducirMensaje("Página "));
             pie.AddPageField();
-            pie.AddText(" de ");
+            pie.AddText(IdiomaManager_54CS.TraducirMensaje(" de "));
             pie.AddNumPagesField();
 
             Paragraph pTitulo = section.AddParagraph(document.Info.Title);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +28,7 @@ namespace Servicios
         }
 
         public static bool IntegridadComprometida { get; set; }
+        public static Func<string, Usuario_54CS> ResolverUsuarioActual { get; set; }
 
         public static SessionManager_54CS Instancia
         {
@@ -50,7 +51,7 @@ namespace Servicios
             {
                 if (_session != null)
                 {
-                    throw new Exception("Sesión ya iniciada");
+                    throw new Exception(IdiomaManager_54CS.TraducirMensaje("Sesión ya iniciada"));
                 }
                 _session = new SessionManager_54CS();
                 _session.Login_54CS = Login;
@@ -69,14 +70,34 @@ namespace Servicios
             }
             else
             {
-                throw new Exception("Sesión no iniciada");
+                throw new Exception(IdiomaManager_54CS.TraducirMensaje("Sesión no iniciada"));
             }
         }
 
         public bool TienePermiso(string permisoBuscado)
         {
-            // devuelve true si alguno de los roles asignados (o sus hijos) tiene el permiso
-            return listperm.Any(rol => rol.TienePermiso(permisoBuscado));
+            if (IntegridadComprometida) return false;
+            if (ResolverUsuarioActual != null)
+            {
+                try
+                {
+                    var usuario = ResolverUsuarioActual(Login_54CS);
+                    if (usuario == null || usuario.Block_54CS || !usuario.Activo_54CS)
+                    {
+                        listperm = new List<Rol_54CS>();
+                        return permisoBuscado == "Logout";
+                    }
+                    listperm = usuario.RolesAsignados;
+                    Rol_54CS = usuario.Rol_54CS;
+                    Idioma_54CS = usuario.Idioma_54CS;
+                }
+                catch
+                {
+                    listperm = new List<Rol_54CS>();
+                    return permisoBuscado == "Logout";
+                }
+            }
+            return listperm != null && listperm.Any(rol => rol.TienePermiso(permisoBuscado));
         }
     }
 }

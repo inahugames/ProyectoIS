@@ -1,4 +1,7 @@
-﻿using BLL_54CS;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using BLL_54CS;
 using Servicios;
 using System;
 using System.Linq;
@@ -17,13 +20,21 @@ namespace ProyectoIS
         public CambiarIdioma()
         {
             InitializeComponent();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime) return;
             Tema_54CS.Aplicar(this);
             IdiomaManager_54CS.Suscribir(this);
             CargarIdiomasDisponibles();
+            CargarOpcionesIdioma();
         }
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
+            ActualizarTextosIdioma();
         }
 
         private void CargarIdiomasDisponibles()
@@ -47,6 +58,11 @@ namespace ProyectoIS
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (!SessionManager_54CS.Instancia.TienePermiso("CambiarIdioma"))
+            {
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes."), IdiomaManager_54CS.TraducirMensaje("Error"));
+                return;
+            }
             if (cmbIdiomas.SelectedItem == null)
             {
                 MessageBox.Show(
@@ -103,5 +119,108 @@ namespace ProyectoIS
         {
             this.Close();
         }
+
+        private readonly List<OpcionIdiomaButton> botonesIdioma = new List<OpcionIdiomaButton>();
+        private Color AcentoIdioma => Tema_54CS.EsOscuro ? Color.FromArgb(238, 162, 126) : Color.FromArgb(45, 96, 196);
+
+        private void temaIdioma_Click(object sender, EventArgs e)
+        {
+            Tema_54CS.AlternarModo();
+        }
+
+        private void cmbIdiomas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizarSeleccionIdioma();
+        }
+
+        private void CargarOpcionesIdioma()
+        {
+            opcionesIdioma.SuspendLayout();
+            var existentes = opcionesIdioma.Controls.OfType<OpcionIdiomaButton>().ToList();
+            botonesIdioma.Clear();
+            opcionesIdioma.Controls.Clear();
+            foreach (ItemIdioma item in cmbIdiomas.Items.Cast<ItemIdioma>().OrderBy(i => i.Codigo == "es" ? 0 : i.Codigo == "en" ? 1 : i.Codigo == "pt" ? 2 : 3))
+            {
+                var boton = existentes.FirstOrDefault(b => b.Codigo.Equals(item.Codigo, StringComparison.OrdinalIgnoreCase));
+                if (boton == null)
+                {
+                    boton = new OpcionIdiomaButton
+                    {
+                    Name = "idioma_" + item.Codigo,
+                    Codigo = item.Codigo.ToUpperInvariant(),
+                    NombreIdioma = item.Nombre,
+                    AccessibleName = item.Nombre,
+                    Size = new Size(508, 68),
+                    Margin = new Padding(0, 0, 0, 12),
+                    Tag = item,
+                    TabIndex = botonesIdioma.Count,
+                    Font = new Font("Segoe UI", 12F)
+                    };
+                }
+                boton.Tag = item;
+                boton.NombreIdioma = item.Nombre;
+                boton.AccessibleName = item.Nombre;
+                boton.TabIndex = botonesIdioma.Count;
+                boton.Click += (s, e) => cmbIdiomas.SelectedItem = item;
+                botonesIdioma.Add(boton);
+                opcionesIdioma.Controls.Add(boton);
+            }
+            foreach (var boton in existentes.Where(b => !botonesIdioma.Contains(b))) boton.Dispose();
+            opcionesIdioma.ResumeLayout(true);
+            AplicarTemaIdioma();
+        }
+
+        private void ActualizarSeleccionIdioma()
+        {
+            foreach (OpcionIdiomaButton boton in botonesIdioma)
+            {
+                boton.Seleccionado = ReferenceEquals(boton.Tag, cmbIdiomas.SelectedItem);
+                boton.Accent = AcentoIdioma;
+                boton.BackColor = boton.Seleccionado
+                    ? (Tema_54CS.EsOscuro ? Color.FromArgb(78, 57, 47) : Color.FromArgb(229, 237, 253))
+                    : (Tema_54CS.EsOscuro ? Color.FromArgb(43, 43, 41) : Color.White);
+                boton.ForeColor = boton.Seleccionado ? AcentoIdioma : ForeColor;
+                boton.FlatAppearance.BorderSize = 1;
+                boton.FlatAppearance.BorderColor = boton.Seleccionado ? AcentoIdioma : (Tema_54CS.EsOscuro ? Color.FromArgb(74, 74, 70) : Color.FromArgb(219, 223, 231));
+                boton.HoverBackColor = Tema_54CS.EsOscuro ? Color.FromArgb(94, 72, 58) : Color.FromArgb(216, 230, 254);
+                boton.Invalidate();
+            }
+        }
+
+        private void ActualizarTextosIdioma()
+        {
+            if (temaIdioma == null) return;
+            foreach (Label label in new[] { tituloIdioma, subtituloIdioma, ayudaIdioma }) label.Text = IdiomaManager_54CS.ObtenerTexto("CambiarIdioma", label.Name, label.Name);
+            btnAceptar.Text = IdiomaManager_54CS.ObtenerTexto("CambiarIdioma", "aplicarIdioma", btnAceptar.Text);
+            temaIdioma.Text = IdiomaManager_54CS.ObtenerTexto("GestionUsuario", Tema_54CS.EsOscuro ? "TemaClaro" : "TemaOscuro");
+        }
+
+        public void AplicarTemaIdioma()
+        {
+            if (temaIdioma == null) return;
+            bool dark = Tema_54CS.EsOscuro;
+            BackColor = dark ? Color.FromArgb(31, 31, 30) : Color.FromArgb(245, 246, 249);
+            ForeColor = dark ? Color.FromArgb(242, 240, 237) : Color.FromArgb(35, 39, 45);
+            Color superficie = dark ? Color.FromArgb(43, 43, 41) : Color.White;
+            tarjetaIdioma.BackColor = opcionesIdioma.BackColor = superficie;
+            tarjetaIdioma.BorderColor = dark ? Color.FromArgb(74, 74, 70) : Color.FromArgb(219, 223, 231);
+            insigniaIdioma.BackColor = insigniaIdioma.BorderColor = AcentoIdioma;
+            tituloIdioma.ForeColor = ForeColor;
+            subtituloIdioma.ForeColor = ayudaIdioma.ForeColor = dark ? Color.Silver : Color.DimGray;
+            btnAceptar.BackColor = AcentoIdioma;
+            btnAceptar.ForeColor = dark ? Color.FromArgb(35, 30, 27) : Color.White;
+            btnAceptar.FlatAppearance.BorderSize = 0;
+            btnCancelar.BackColor = superficie;
+            btnCancelar.ForeColor = AcentoIdioma;
+            btnCancelar.FlatAppearance.BorderSize = 1;
+            btnCancelar.FlatAppearance.BorderColor = tarjetaIdioma.BorderColor;
+            ((UsuariosRoundedButton)btnAceptar).HoverBackColor = dark ? Color.FromArgb(246, 183, 152) : Color.FromArgb(35, 78, 170);
+            ((UsuariosRoundedButton)btnCancelar).HoverBackColor = dark ? Color.FromArgb(94, 72, 58) : Color.FromArgb(216, 230, 254);
+            temaIdioma.DarkMode = dark;
+            ActualizarSeleccionIdioma();
+            ActualizarTextosIdioma();
+            Invalidate(true);
+        }
     }
+
 }

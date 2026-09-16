@@ -2,32 +2,41 @@
 {
     partial class GestionUsuario
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+        protected override void Dispose(bool disposing) { if (disposing) { filtrosAnimacion?.Dispose(); entradaAnimacion?.Dispose(); temaAnimacion?.Dispose(); if (components != null) components.Dispose(); }
             base.Dispose(disposing);
-        }
-
+            }
         #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
+            this.pnlContenido = new System.Windows.Forms.Panel();
+            this.pnlEncabezado = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblSubtitulo = new System.Windows.Forms.Label();
+            this.pnlFiltros = new UsuariosRoundedPanel();
+            this.tableFiltros = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtLogin = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtRol = new System.Windows.Forms.TextBox();
+            this.btnAplicar = new UsuariosRoundedButton();
+            this.btnCancelar = new UsuariosRoundedButton();
+            this.pnlAcciones = new System.Windows.Forms.Panel();
+            this.cbUsuario = new System.Windows.Forms.CheckBox();
+            this.btnCrear = new UsuariosRoundedButton();
+            this.btnDesbloquear = new UsuariosRoundedButton();
+            this.btnModificar = new UsuariosRoundedButton();
+            this.btnAct = new UsuariosRoundedButton();
+            this.btnEliminar = new UsuariosRoundedButton();
+            this.pnlTabla = new UsuariosRoundedPanel();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.CSeleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,415 +45,596 @@
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Block = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnCrear = new System.Windows.Forms.Button();
-            this.btnDesbloquear = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAct = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.cbUsuario = new System.Windows.Forms.CheckBox();
-            this.txtMsj = new System.Windows.Forms.TextBox();
+            this.Block = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlEstado = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtDNI = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtRol = new System.Windows.Forms.TextBox();
-            this.txtLogin = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnAplicar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtMsj = new System.Windows.Forms.TextBox();
+            this.btnSalir = new UsuariosRoundedButton();
+            this.flpFiltrosAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpEstadoAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.components = new System.ComponentModel.Container();
+            this.estadisticasUsuarios = new System.Windows.Forms.FlowLayoutPanel();
+            this.buscadorUsuarios = new System.Windows.Forms.Panel();
+            this.captionUsuarios = new System.Windows.Forms.Label();
+            this.captionActivos = new System.Windows.Forms.Label();
+            this.captionBloqueados = new System.Windows.Forms.Label();
+            this.iconoUsuarios = new ProyectoIS.UsuariosStatIcon();
+            this.iconoActivos = new ProyectoIS.UsuariosStatIcon();
+            this.iconoBloqueados = new ProyectoIS.UsuariosStatIcon();
+            this.lblCategoria = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblActivos = new System.Windows.Forms.Label();
+            this.lblBloqueados = new System.Windows.Forms.Label();
+            this.lblResumen = new System.Windows.Forms.Label();
+            this.pnlTotal = new ProyectoIS.UsuariosRoundedPanel();
+            this.pnlActivos = new ProyectoIS.UsuariosRoundedPanel();
+            this.pnlBloqueados = new ProyectoIS.UsuariosRoundedPanel();
+            this.btnTema = new ProyectoIS.UsuariosThemeSwitch();
+            this.btnFiltros = new ProyectoIS.UsuariosRoundedButton();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.filtrosAnimacion = new System.Windows.Forms.Timer(this.components);
+            this.entradaAnimacion = new System.Windows.Forms.Timer(this.components);
+            this.temaAnimacion = new System.Windows.Forms.Timer(this.components);
+            this.pnlContenido.SuspendLayout();
+            this.pnlEncabezado.SuspendLayout();
+            this.pnlFiltros.SuspendLayout();
+            this.tableFiltros.SuspendLayout();
+            this.flpFiltrosAcciones.SuspendLayout();
+            this.pnlAcciones.SuspendLayout();
+            this.flpAcciones.SuspendLayout();
+            this.pnlTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
+            this.pnlEstado.SuspendLayout();
+            this.flpEstadoAcciones.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dgvUsuarios
-            // 
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CSeleccionar,
-            this.DNI,
-            this.Login,
-            this.Nombre,
-            this.Apellido,
-            this.Email,
-            this.Rol,
-            this.Block,
-            this.Activo});
-            this.dgvUsuarios.Location = new System.Drawing.Point(10, 11);
-            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.RowHeadersWidth = 51;
-            this.dgvUsuarios.RowTemplate.Height = 24;
-            this.dgvUsuarios.Size = new System.Drawing.Size(1136, 379);
-            this.dgvUsuarios.TabIndex = 0;
-            this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
-            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
-            // 
-            // CSeleccionar
-            // 
-            this.CSeleccionar.HeaderText = "Seleccionado";
-            this.CSeleccionar.MinimumWidth = 6;
-            this.CSeleccionar.Name = "CSeleccionar";
-            this.CSeleccionar.Width = 125;
-            // 
-            // DNI
-            // 
-            this.DNI.HeaderText = "DNI";
-            this.DNI.MinimumWidth = 6;
-            this.DNI.Name = "DNI";
-            this.DNI.Width = 125;
-            // 
-            // Login
-            // 
-            this.Login.HeaderText = "Login";
-            this.Login.MinimumWidth = 6;
-            this.Login.Name = "Login";
-            this.Login.Width = 125;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.MinimumWidth = 6;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 125;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.MinimumWidth = 6;
-            this.Apellido.Name = "Apellido";
-            this.Apellido.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 6;
-            this.Email.Name = "Email";
-            this.Email.Width = 125;
-            // 
-            // Rol
-            // 
-            this.Rol.HeaderText = "Rol";
-            this.Rol.MinimumWidth = 6;
-            this.Rol.Name = "Rol";
-            this.Rol.Width = 125;
-            // 
-            // Block
-            // 
-            this.Block.HeaderText = "Block";
-            this.Block.Name = "Block";
-            this.Block.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Block.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Activo
-            // 
-            this.Activo.HeaderText = "Activo";
-            this.Activo.Name = "Activo";
-            this.Activo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Activo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // btnCrear
-            // 
-            this.btnCrear.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCrear.Location = new System.Drawing.Point(1218, 55);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContenido.Padding = new System.Windows.Forms.Padding(24, 18, 24, 18);
+            this.pnlContenido.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlEncabezado.Height = 72;
+            this.pnlEncabezado.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlEncabezado.Controls.Add(this.lblSubtitulo);
+            this.pnlEncabezado.Controls.Add(this.lblTitulo);
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Text = "Gestión de Usuarios";
+            this.lblSubtitulo.AutoSize = true;
+            this.lblSubtitulo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblSubtitulo.Location = new System.Drawing.Point(3, 40);
+            this.lblSubtitulo.Name = "lblSubtitulo";
+            this.lblSubtitulo.Text = "Administrá usuarios, estados y permisos de acceso";
+            this.pnlFiltros.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFiltros.Height = 112;
+            this.pnlFiltros.Padding = new System.Windows.Forms.Padding(12, 10, 12, 8);
+            this.pnlFiltros.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlFiltros.Tag = "surface";
+            this.pnlFiltros.Controls.Add(this.tableFiltros);
+            this.pnlFiltros.Controls.Add(this.flpFiltrosAcciones);
+            this.tableFiltros.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableFiltros.Height = 55;
+            this.tableFiltros.Tag = "surface";
+            this.tableFiltros.ColumnCount = 6;
+            this.tableFiltros.RowCount = 2;
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66F));
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66F));
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66F));
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66F));
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66F));
+            this.tableFiltros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.70F));
+            this.tableFiltros.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableFiltros.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.flpFiltrosAcciones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpFiltrosAcciones.Height = 38;
+            this.flpFiltrosAcciones.Tag = "surface";
+            this.flpFiltrosAcciones.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpFiltrosAcciones.WrapContents = false;
+            this.flpFiltrosAcciones.Controls.Add(this.btnAplicar);
+            this.label4.Name = "label4";
+            this.label4.Text = "DNI";
+            this.label4.AutoSize = true;
+            this.txtDNI.Name = "txtDNI";
+            this.txtDNI.TabIndex = 1;
+            this.txtDNI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDNI.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label4, 0, 0);
+            this.tableFiltros.Controls.Add(this.txtDNI, 0, 1);
+            this.label2.Name = "label2";
+            this.label2.Text = "Nombre";
+            this.label2.AutoSize = true;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.TabIndex = 2;
+            this.txtNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label2, 1, 0);
+            this.tableFiltros.Controls.Add(this.txtNombre, 1, 1);
+            this.label3.Name = "label3";
+            this.label3.Text = "Apellido";
+            this.label3.AutoSize = true;
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.TabIndex = 3;
+            this.txtApellido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label3, 2, 0);
+            this.tableFiltros.Controls.Add(this.txtApellido, 2, 1);
+            this.label5.Name = "label5";
+            this.label5.Text = "Email";
+            this.label5.AutoSize = true;
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.TabIndex = 4;
+            this.txtEmail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label5, 3, 0);
+            this.tableFiltros.Controls.Add(this.txtEmail, 3, 1);
+            this.label7.Name = "label7";
+            this.label7.Text = "Login";
+            this.label7.AutoSize = true;
+            this.txtLogin.Name = "txtLogin";
+            this.txtLogin.TabIndex = 5;
+            this.txtLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label7, 4, 0);
+            this.tableFiltros.Controls.Add(this.txtLogin, 4, 1);
+            this.label6.Name = "label6";
+            this.label6.Text = "Rol";
+            this.label6.AutoSize = true;
+            this.txtRol.Name = "txtRol";
+            this.txtRol.TabIndex = 6;
+            this.txtRol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRol.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tableFiltros.Controls.Add(this.label6, 5, 0);
+            this.tableFiltros.Controls.Add(this.txtRol, 5, 1);
+            this.btnAplicar.Name = "btnAplicar";
+            this.btnAplicar.TabIndex = 7;
+            this.btnAplicar.Size = new System.Drawing.Size(112, 30);
+            this.btnAplicar.Text = "Aplicar filtrado";
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.TabIndex = 8;
+            this.btnCancelar.Size = new System.Drawing.Size(126, 30);
+            this.btnCancelar.Text = "Cancelar filtrado";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.pnlAcciones.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAcciones.Height = 48;
+            this.pnlAcciones.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlAcciones.Controls.Add(this.flpAcciones);
+            this.flpAcciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpAcciones.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
+            this.flpAcciones.WrapContents = false;
+            this.flpAcciones.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.flpAcciones.Controls.Add(this.btnAct);
+            this.flpAcciones.Controls.Add(this.btnEliminar);
+            this.cbUsuario.AutoSize = true;
+            this.cbUsuario.Margin = new System.Windows.Forms.Padding(0, 8, 16, 0);
+            this.cbUsuario.Name = "cbUsuario";
+            this.cbUsuario.Text = "Modo Modificar";
+            this.cbUsuario.CheckedChanged += new System.EventHandler(this.cbUsuario_CheckedChanged);
             this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(136, 52);
-            this.btnCrear.TabIndex = 1;
             this.btnCrear.Text = "Crear";
-            this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Size = new System.Drawing.Size(108, 32);
+            this.btnCrear.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnCrear.Visible = false;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
-            // 
-            // btnDesbloquear
-            // 
-            this.btnDesbloquear.Location = new System.Drawing.Point(1218, 111);
-            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesbloquear.Name = "btnDesbloquear";
-            this.btnDesbloquear.Size = new System.Drawing.Size(136, 52);
-            this.btnDesbloquear.TabIndex = 2;
             this.btnDesbloquear.Text = "Desbloquear";
-            this.btnDesbloquear.UseVisualStyleBackColor = true;
+            this.btnDesbloquear.Size = new System.Drawing.Size(108, 32);
+            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnDesbloquear.Visible = false;
             this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(1218, 168);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(136, 52);
-            this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Size = new System.Drawing.Size(108, 32);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnModificar.Visible = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnAct
-            // 
-            this.btnAct.Location = new System.Drawing.Point(1218, 225);
-            this.btnAct.Margin = new System.Windows.Forms.Padding(2);
             this.btnAct.Name = "btnAct";
-            this.btnAct.Size = new System.Drawing.Size(136, 52);
-            this.btnAct.TabIndex = 4;
             this.btnAct.Text = "Activar/Desactivar";
-            this.btnAct.UseVisualStyleBackColor = true;
+            this.btnAct.Size = new System.Drawing.Size(108, 32);
+            this.btnAct.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnAct.Visible = false;
             this.btnAct.Click += new System.EventHandler(this.btnAct_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(1218, 282);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(136, 52);
-            this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Size = new System.Drawing.Size(108, 32);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(1218, 598);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(136, 52);
-            this.btnSalir.TabIndex = 7;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // cbUsuario
-            // 
-            this.cbUsuario.AutoSize = true;
-            this.cbUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUsuario.Location = new System.Drawing.Point(11, 394);
-            this.cbUsuario.Margin = new System.Windows.Forms.Padding(2);
-            this.cbUsuario.Name = "cbUsuario";
-            this.cbUsuario.Size = new System.Drawing.Size(133, 20);
-            this.cbUsuario.TabIndex = 8;
-            this.cbUsuario.Text = "Modo Modificar";
-            this.cbUsuario.UseVisualStyleBackColor = true;
-            this.cbUsuario.CheckedChanged += new System.EventHandler(this.cbUsuario_CheckedChanged);
-            // 
-            // txtMsj
-            // 
-            this.txtMsj.Location = new System.Drawing.Point(850, 447);
-            this.txtMsj.Multiline = true;
-            this.txtMsj.Name = "txtMsj";
-            this.txtMsj.ReadOnly = true;
-            this.txtMsj.Size = new System.Drawing.Size(296, 203);
-            this.txtMsj.TabIndex = 9;
-            // 
-            // label1
-            // 
+            this.pnlTabla.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTabla.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.pnlTabla.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlTabla.Controls.Add(this.dgvUsuarios);
+            this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsuarios.AllowUserToAddRows = false;
+            this.dgvUsuarios.AllowUserToDeleteRows = false;
+            this.dgvUsuarios.ColumnHeadersHeight = 38;
+            this.dgvUsuarios.RowTemplate.Height = 34;
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.Tag = "surface";
+            this.dgvUsuarios.RowHeadersVisible = false;
+            this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUsuarios.MultiSelect = false;
+            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+            {
+                this.CSeleccionar,
+                this.DNI,
+                this.Login,
+                this.Nombre,
+                this.Apellido,
+                this.Email,
+                this.Rol,
+                this.Block,
+                this.Activo
+            });
+            this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
+            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
+            this.dgvUsuarios.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvUsuarios_CellFormatting);
+            this.CSeleccionar.Name = "CSeleccionar";
+            this.CSeleccionar.HeaderText = "Sel.";
+            this.CSeleccionar.Width = 90;
+            this.CSeleccionar.MinimumWidth = 50;
+            this.CSeleccionar.ReadOnly = false;
+            this.CSeleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DNI.Name = "DNI";
+            this.DNI.HeaderText = "DNI";
+            this.DNI.Width = 85;
+            this.DNI.MinimumWidth = 50;
+            this.DNI.ReadOnly = true;
+            this.DNI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Login.Name = "Login";
+            this.Login.HeaderText = "Login";
+            this.Login.Width = 110;
+            this.Login.MinimumWidth = 50;
+            this.Login.ReadOnly = true;
+            this.Login.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Nombre.Name = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Width = 120;
+            this.Nombre.MinimumWidth = 50;
+            this.Nombre.ReadOnly = true;
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Apellido.Name = "Apellido";
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Width = 120;
+            this.Apellido.MinimumWidth = 50;
+            this.Apellido.ReadOnly = true;
+            this.Apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Email.Name = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Width = 190;
+            this.Email.MinimumWidth = 50;
+            this.Email.ReadOnly = true;
+            this.Email.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Rol.Name = "Rol";
+            this.Rol.HeaderText = "Rol";
+            this.Rol.Width = 130;
+            this.Rol.MinimumWidth = 50;
+            this.Rol.ReadOnly = true;
+            this.Rol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Block.Name = "Block";
+            this.Block.HeaderText = "Bloqueo";
+            this.Block.Width = 105;
+            this.Block.MinimumWidth = 50;
+            this.Block.ReadOnly = true;
+            this.Block.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Activo.Name = "Activo";
+            this.Activo.HeaderText = "Activo";
+            this.Activo.Width = 105;
+            this.Activo.MinimumWidth = 50;
+            this.Activo.ReadOnly = true;
+            this.Activo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.pnlEstado.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlEstado.Height = 58;
+            this.pnlEstado.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.pnlEstado.BackColor = System.Drawing.SystemColors.Control;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(954, 419);
+            this.label1.Location = new System.Drawing.Point(0, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 25);
-            this.label1.TabIndex = 10;
             this.label1.Text = "Mensaje:";
-            // 
-            // txtDNI
-            // 
-            this.txtDNI.Location = new System.Drawing.Point(158, 471);
-            this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(100, 20);
-            this.txtDNI.TabIndex = 11;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(158, 499);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 12;
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(158, 525);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(100, 20);
-            this.txtApellido.TabIndex = 13;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(158, 551);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(100, 20);
-            this.txtEmail.TabIndex = 14;
-            // 
-            // txtRol
-            // 
-            this.txtRol.Location = new System.Drawing.Point(158, 577);
-            this.txtRol.Name = "txtRol";
-            this.txtRol.Size = new System.Drawing.Size(100, 20);
-            this.txtRol.TabIndex = 15;
-            // 
-            // txtLogin
-            // 
-            this.txtLogin.Location = new System.Drawing.Point(158, 603);
-            this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(100, 20);
-            this.txtLogin.TabIndex = 16;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(99, 506);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Nombre";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(99, 532);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Apellido";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(99, 478);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "DNI";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(99, 558);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Email";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(99, 584);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Rol";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(99, 610);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Login";
-            // 
-            // btnAplicar
-            // 
-            this.btnAplicar.Location = new System.Drawing.Point(1218, 469);
-            this.btnAplicar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAplicar.Name = "btnAplicar";
-            this.btnAplicar.Size = new System.Drawing.Size(136, 52);
-            this.btnAplicar.TabIndex = 23;
-            this.btnAplicar.Text = "Aplicar filtrado";
-            this.btnAplicar.UseVisualStyleBackColor = true;
-            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(1218, 525);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(136, 52);
-            this.btnCancelar.TabIndex = 24;
-            this.btnCancelar.Text = "Cancelar filtrado";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // GestionUsuario
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.txtMsj.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.txtMsj.Location = new System.Drawing.Point(78, 8);
+            this.txtMsj.Multiline = true;
+            this.txtMsj.ReadOnly = true;
+            this.txtMsj.Name = "txtMsj";
+            this.txtMsj.Size = new System.Drawing.Size(750, 42);
+            this.flpEstadoAcciones.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flpEstadoAcciones.Width = 120;
+            this.flpEstadoAcciones.WrapContents = false;
+            this.flpEstadoAcciones.Controls.Add(this.btnSalir);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(112, 32);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 653);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAplicar);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtLogin);
-            this.Controls.Add(this.txtRol);
-            this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtMsj);
-            this.Controls.Add(this.cbUsuario);
-            this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnAct);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnDesbloquear);
-            this.Controls.Add(this.btnCrear);
-            this.Controls.Add(this.dgvUsuarios);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ClientSize = new System.Drawing.Size(1000, 700);
+            this.MinimumSize = new System.Drawing.Size(820, 580);
+            this.Controls.Add(this.pnlContenido);
             this.Name = "GestionUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Usuarios";
             this.Load += new System.EventHandler(this.GestionUsuario_Load);
+            this.estadisticasUsuarios.Name = "estadisticasUsuarios";
+            this.buscadorUsuarios.Name = "buscadorUsuarios";
+            this.captionUsuarios.Name = "captionUsuarios";
+            this.captionActivos.Name = "captionActivos";
+            this.captionBloqueados.Name = "captionBloqueados";
+            this.iconoUsuarios.Name = "iconoUsuarios";
+            this.iconoActivos.Name = "iconoActivos";
+            this.iconoBloqueados.Name = "iconoBloqueados";
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblTotal.Name = "lblTotal";
+            this.lblActivos.Name = "lblActivos";
+            this.lblBloqueados.Name = "lblBloqueados";
+            this.lblResumen.Name = "lblResumen";
+            this.pnlTotal.Name = "pnlTotal";
+            this.pnlActivos.Name = "pnlActivos";
+            this.pnlBloqueados.Name = "pnlBloqueados";
+            this.btnTema.Name = "btnTema";
+            this.btnFiltros.Name = "btnFiltros";
+            this.txtBuscar.Name = "txtBuscar";
+            this.pnlContenido.Padding = new System.Windows.Forms.Padding(24, 18, 24, 18);
+            this.pnlContenido.BackColor = System.Drawing.Color.FromArgb(248, 249, 252);
+            this.pnlEncabezado.Height = 92;
+            this.pnlEncabezado.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.pnlEncabezado.BackColor = System.Drawing.Color.Transparent;
+            this.lblCategoria.Text = "ADMINISTRACIÓN";
+            this.lblCategoria.AutoSize = true;
+            this.lblCategoria.Location = new System.Drawing.Point(8, 2);
+            this.lblCategoria.Size = new System.Drawing.Size(150, 20);
+            this.lblCategoria.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblCategoria.ForeColor = System.Drawing.Color.FromArgb(52, 103, 190);
+            this.pnlEncabezado.Controls.Add(this.lblCategoria);
+            this.lblTitulo.Text = "Usuarios";
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 29F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.Location = new System.Drawing.Point(4, 19);
+            this.lblSubtitulo.Text = "Gestioná las cuentas y los permisos de acceso";
+            this.lblSubtitulo.Location = new System.Drawing.Point(8, 67);
+            this.cbUsuario.Location = new System.Drawing.Point(400, 13);
+            this.cbUsuario.Size = new System.Drawing.Size(170, 25);
+            this.cbUsuario.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlEncabezado.Controls.Add(this.cbUsuario);
+            this.btnTema.Location = new System.Drawing.Point(674, 9);
+            this.btnTema.Size = new System.Drawing.Size(100, 40);
+            this.btnTema.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlEncabezado.Controls.Add(this.btnTema);
+            this.btnCrear.Location = new System.Drawing.Point(798, 7);
+            this.btnCrear.Size = new System.Drawing.Size(150, 42);
+            this.btnCrear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            this.pnlEncabezado.Controls.Add(this.btnCrear);
+            this.cbUsuario.Text = "Modo modificación";
+            this.cbUsuario.AutoSize = true;
+            this.btnCrear.Text = "+  Crear usuario";
+            this.btnTema.Click += new System.EventHandler(this.btnTema_Click);
+            this.pnlEncabezado.Resize += new System.EventHandler(this.EncabezadoUsuarios_Resize);
+            this.pnlTotal.Size = new System.Drawing.Size(308, 78);
+            this.pnlTotal.Margin = new System.Windows.Forms.Padding(0, 0, 14, 0);
+            this.pnlTotal.Padding = new System.Windows.Forms.Padding(18, 9, 10, 6);
+            this.pnlTotal.Tag = System.Drawing.Color.FromArgb(73, 125, 190);
+            this.lblTotal.Name = "valorUsuarios";
+            this.lblTotal.Text = "0";
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.Location = new System.Drawing.Point(80, 8);
+            this.captionUsuarios.Name = "lblUsuarios";
+            this.captionUsuarios.Text = "Usuarios";
+            this.captionUsuarios.AutoSize = true;
+            this.captionUsuarios.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.captionUsuarios.Location = new System.Drawing.Point(80, 47);
+            this.iconoUsuarios.Location = new System.Drawing.Point(16, 15);
+            this.iconoUsuarios.Kind = ProyectoIS.UsuariosStatIconKind.Users;
+            this.iconoUsuarios.Accent = System.Drawing.Color.FromArgb(73, 125, 190);
+            this.pnlTotal.Controls.Add(this.iconoUsuarios);
+            this.pnlTotal.Controls.Add(this.captionUsuarios);
+            this.pnlTotal.Controls.Add(this.lblTotal);
+            this.estadisticasUsuarios.Controls.Add(this.pnlTotal);
+            this.pnlActivos.Size = new System.Drawing.Size(308, 78);
+            this.pnlActivos.Margin = new System.Windows.Forms.Padding(0, 0, 14, 0);
+            this.pnlActivos.Padding = new System.Windows.Forms.Padding(18, 9, 10, 6);
+            this.pnlActivos.Tag = System.Drawing.Color.FromArgb(79, 164, 92);
+            this.lblActivos.Name = "valorActivos";
+            this.lblActivos.Text = "0";
+            this.lblActivos.AutoSize = true;
+            this.lblActivos.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Bold);
+            this.lblActivos.Location = new System.Drawing.Point(80, 8);
+            this.captionActivos.Name = "lblActivos";
+            this.captionActivos.Text = "Activos";
+            this.captionActivos.AutoSize = true;
+            this.captionActivos.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.captionActivos.Location = new System.Drawing.Point(80, 47);
+            this.iconoActivos.Location = new System.Drawing.Point(16, 15);
+            this.iconoActivos.Kind = ProyectoIS.UsuariosStatIconKind.Active;
+            this.iconoActivos.Accent = System.Drawing.Color.FromArgb(79, 164, 92);
+            this.pnlActivos.Controls.Add(this.iconoActivos);
+            this.pnlActivos.Controls.Add(this.captionActivos);
+            this.pnlActivos.Controls.Add(this.lblActivos);
+            this.estadisticasUsuarios.Controls.Add(this.pnlActivos);
+            this.pnlBloqueados.Size = new System.Drawing.Size(308, 78);
+            this.pnlBloqueados.Margin = new System.Windows.Forms.Padding(0, 0, 14, 0);
+            this.pnlBloqueados.Padding = new System.Windows.Forms.Padding(18, 9, 10, 6);
+            this.pnlBloqueados.Tag = System.Drawing.Color.FromArgb(205, 80, 72);
+            this.lblBloqueados.Name = "valorBloqueados";
+            this.lblBloqueados.Text = "0";
+            this.lblBloqueados.AutoSize = true;
+            this.lblBloqueados.Font = new System.Drawing.Font("Segoe UI", 21F, System.Drawing.FontStyle.Bold);
+            this.lblBloqueados.Location = new System.Drawing.Point(80, 8);
+            this.captionBloqueados.Name = "lblBloqueados";
+            this.captionBloqueados.Text = "Bloqueados";
+            this.captionBloqueados.AutoSize = true;
+            this.captionBloqueados.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.captionBloqueados.Location = new System.Drawing.Point(80, 47);
+            this.iconoBloqueados.Location = new System.Drawing.Point(16, 15);
+            this.iconoBloqueados.Kind = ProyectoIS.UsuariosStatIconKind.Blocked;
+            this.iconoBloqueados.Accent = System.Drawing.Color.FromArgb(205, 80, 72);
+            this.pnlBloqueados.Controls.Add(this.iconoBloqueados);
+            this.pnlBloqueados.Controls.Add(this.captionBloqueados);
+            this.pnlBloqueados.Controls.Add(this.lblBloqueados);
+            this.estadisticasUsuarios.Controls.Add(this.pnlBloqueados);
+            this.estadisticasUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.estadisticasUsuarios.Height = 92;
+            this.estadisticasUsuarios.WrapContents = false;
+            this.estadisticasUsuarios.Padding = new System.Windows.Forms.Padding(0, 2, 0, 8);
+            this.estadisticasUsuarios.Resize += new System.EventHandler(this.EstadisticasUsuarios_Resize);
+            this.pnlFiltros.Height = 96;
+            this.pnlFiltros.Padding = new System.Windows.Forms.Padding(16);
+            this.buscadorUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buscadorUsuarios.Height = 40;
+            this.txtBuscar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtBuscar.HandleCreated += new System.EventHandler(this.txtBuscar_HandleCreated);
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.buscadorUsuarios.Controls.Add(this.txtBuscar);
+            this.btnFiltros.Text = "☰  Filtros";
+            this.btnFiltros.Size = new System.Drawing.Size(106, 34);
+            this.btnFiltros.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFiltros.Click += new System.EventHandler(this.btnFiltros_Click);
+            this.buscadorUsuarios.Controls.Add(this.btnFiltros);
+            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCancelar.Size = new System.Drawing.Size(92, 34);
+            this.btnCancelar.Text = "Limpiar";
+            this.buscadorUsuarios.Controls.Add(this.btnCancelar);
+            this.pnlFiltros.Controls.Add(this.buscadorUsuarios);
+            this.flpFiltrosAcciones.Height = 0;
+            this.tableFiltros.Visible = false;
+            this.tableFiltros.Height = 120;
+            this.tableFiltros.AutoSize = false;
+            this.btnAplicar.Visible = false;
+            this.btnAplicar.Text = "Aplicar";
+            this.pnlAcciones.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.btnModificar.Width = 130;
+            this.btnModificar.Icon = ProyectoIS.UsuariosButtonIcon.Edit;
+            this.flpAcciones.Controls.Add(this.btnModificar);
+            this.flpAcciones.Controls.SetChildIndex(this.btnModificar, 0);
+            this.btnDesbloquear.Width = 155;
+            this.btnDesbloquear.Icon = ProyectoIS.UsuariosButtonIcon.Unlock;
+            this.flpAcciones.Controls.Add(this.btnDesbloquear);
+            this.flpAcciones.Controls.SetChildIndex(this.btnDesbloquear, 1);
+            this.btnAct.Width = 210;
+            this.btnAct.Icon = ProyectoIS.UsuariosButtonIcon.Power;
+            this.flpAcciones.Controls.Add(this.btnAct);
+            this.flpAcciones.Controls.SetChildIndex(this.btnAct, 2);
+            this.btnEliminar.Width = 130;
+            this.btnEliminar.Icon = ProyectoIS.UsuariosButtonIcon.Delete;
+            this.flpAcciones.Controls.Add(this.btnEliminar);
+            this.flpAcciones.Controls.SetChildIndex(this.btnEliminar, 3);
+            this.pnlTabla.Padding = new System.Windows.Forms.Padding(8);
+            this.dgvUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvUsuarios.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvUsuarios.RowTemplate.Height = 48;
+            this.dgvUsuarios.BackgroundColor = System.Drawing.Color.White;
+            this.dgvUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUsuarios.EnableHeadersVisualStyles = false;
+            this.CSeleccionar.FillWeight = 55F;
+            this.DNI.FillWeight = 70F;
+            this.Login.FillWeight = 90F;
+            this.Nombre.FillWeight = 95F;
+            this.Apellido.FillWeight = 95F;
+            this.Email.FillWeight = 150F;
+            this.Rol.FillWeight = 100F;
+            this.Block.FillWeight = 80F;
+            this.Activo.FillWeight = 80F;
+            this.dgvUsuarios.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvUsuarios_CurrentCellDirtyStateChanged);
+            this.dgvUsuarios.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellValueChanged);
+            this.dgvUsuarios.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvUsuarios_CellPainting);
+            this.pnlEstado.Height = 48;
+            this.txtMsj.Visible = false;
+            this.lblResumen.AutoSize = true;
+            this.lblResumen.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResumen.Text = "0 de 0 usuarios · 0 seleccionados";
+            this.lblResumen.Padding = new System.Windows.Forms.Padding(8, 10, 20, 0);
+            this.pnlEstado.Controls.Add(this.lblResumen);
+            this.pnlEstado.Controls.Add(this.btnSalir);
+            this.btnSalir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSalir.Size = new System.Drawing.Size(110, 36);
+            this.btnSalir.Text = "Cerrar";
+            this.pnlContenido.Controls.Add(this.pnlTabla);
+            this.pnlContenido.Controls.Add(this.pnlAcciones);
+            this.pnlContenido.Controls.Add(this.pnlFiltros);
+            this.pnlContenido.Controls.Add(this.estadisticasUsuarios);
+            this.pnlContenido.Controls.Add(this.pnlEncabezado);
+            this.pnlContenido.Controls.Add(this.pnlEstado);
+            this.pnlFiltros.BackColor = System.Drawing.Color.White;
+            this.pnlFiltros.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.pnlFiltros.BorderColor = System.Drawing.Color.FromArgb(223, 228, 236);
+            this.pnlTabla.BackColor = System.Drawing.Color.White;
+            this.pnlTabla.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.pnlTabla.BorderColor = System.Drawing.Color.FromArgb(223, 228, 236);
+            this.pnlTotal.BackColor = System.Drawing.Color.White;
+            this.pnlTotal.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.pnlTotal.BorderColor = System.Drawing.Color.FromArgb(223, 228, 236);
+            this.pnlActivos.BackColor = System.Drawing.Color.White;
+            this.pnlActivos.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.pnlActivos.BorderColor = System.Drawing.Color.FromArgb(223, 228, 236);
+            this.pnlBloqueados.BackColor = System.Drawing.Color.White;
+            this.pnlBloqueados.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.pnlBloqueados.BorderColor = System.Drawing.Color.FromArgb(223, 228, 236);
+            this.pnlAcciones.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEstado.BackColor = System.Drawing.Color.Transparent;
+            this.filtrosAnimacion.Interval = 15;
+            this.filtrosAnimacion.Tick += new System.EventHandler(this.filtrosAnimacion_Tick);
+            this.entradaAnimacion.Interval = 16;
+            this.entradaAnimacion.Tick += new System.EventHandler(this.entradaAnimacion_Tick);
+            this.temaAnimacion.Interval = 16;
+            this.temaAnimacion.Tick += new System.EventHandler(this.temaAnimacion_Tick);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GestionUsuario_FormClosed);
+            this.lblTitulo.AutoSize = false;
+            this.lblTitulo.Size = new System.Drawing.Size(360, 48);
+            this.lblSubtitulo.AutoSize = false;
+            this.lblSubtitulo.Location = new System.Drawing.Point(8, 70);
+            this.lblSubtitulo.Size = new System.Drawing.Size(600, 22);
+            this.pnlFiltros.Height = 250;
+            this.tableFiltros.Visible = true;
+            this.btnAplicar.Visible = true;
+            this.flpFiltrosAcciones.Height = 38;
+            this.pnlEstado.ResumeLayout(false);
+            this.pnlEstado.PerformLayout();
+            this.flpEstadoAcciones.ResumeLayout(false);
+            this.flpAcciones.ResumeLayout(false);
+            this.flpAcciones.PerformLayout();
+            this.pnlAcciones.ResumeLayout(false);
+            this.tableFiltros.ResumeLayout(false);
+            this.tableFiltros.PerformLayout();
+            this.flpFiltrosAcciones.ResumeLayout(false);
+            this.pnlFiltros.ResumeLayout(false);
+            this.pnlEncabezado.ResumeLayout(false);
+            this.pnlEncabezado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
+            this.pnlTabla.ResumeLayout(false);
+            this.pnlContenido.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
         #endregion
-
+        private System.Windows.Forms.Panel pnlContenido, pnlEncabezado, pnlAcciones, pnlEstado;
+        private UsuariosRoundedPanel pnlFiltros, pnlTabla;
+        private System.Windows.Forms.FlowLayoutPanel flpFiltrosAcciones, flpAcciones, flpEstadoAcciones;
+        private System.Windows.Forms.TableLayoutPanel tableFiltros;
+        private System.Windows.Forms.Label lblTitulo, lblSubtitulo, label1, label2, label3, label4, label5, label6, label7;
         private System.Windows.Forms.DataGridView dgvUsuarios;
-        private System.Windows.Forms.Button btnCrear;
-        private System.Windows.Forms.Button btnDesbloquear;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAct;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.CheckBox cbUsuario;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CSeleccionar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DNI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Login;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Block;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Activo;
-        private System.Windows.Forms.TextBox txtMsj;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDNI;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtRol;
-        private System.Windows.Forms.TextBox txtLogin;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnAplicar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DNI, Login, Nombre, Apellido, Email, Rol, Block, Activo;
+        private UsuariosRoundedButton btnCrear, btnDesbloquear, btnModificar, btnAct, btnEliminar, btnSalir, btnAplicar, btnCancelar, btnFiltros;
+        private UsuariosThemeSwitch btnTema;
+        private System.Windows.Forms.CheckBox cbUsuario;
+        private System.Windows.Forms.TextBox txtMsj, txtDNI, txtNombre, txtApellido, txtEmail, txtRol, txtLogin, txtBuscar;
+        private System.Windows.Forms.Label lblCategoria, lblTotal, lblActivos, lblBloqueados, lblResumen;
+        private UsuariosRoundedPanel pnlTotal, pnlActivos, pnlBloqueados;
+        private System.Windows.Forms.Timer filtrosAnimacion;
+        private System.Windows.Forms.Timer entradaAnimacion, temaAnimacion;
+        private int entradaProgreso, entradaTicks, temaProgreso;
+        private System.Drawing.Color temaOrigen, temaDestino;
+        private string filtroDniAplicado = "", filtroNombreAplicado = "", filtroApellidoAplicado = "", filtroEmailAplicado = "", filtroLoginAplicado = "", filtroRolAplicado = "";
+        private bool filtrosExpandidos;
+        private System.Windows.Forms.FlowLayoutPanel estadisticasUsuarios;
+        private System.Windows.Forms.Panel buscadorUsuarios;
+        private System.Windows.Forms.Label captionUsuarios;
+        private System.Windows.Forms.Label captionActivos;
+        private System.Windows.Forms.Label captionBloqueados;
+        private ProyectoIS.UsuariosStatIcon iconoUsuarios;
+        private ProyectoIS.UsuariosStatIcon iconoActivos;
+        private ProyectoIS.UsuariosStatIcon iconoBloqueados;
     }
 }

@@ -27,6 +27,15 @@ namespace ProyectoIS
             IdiomaManager_54CS.Inicializar(carpetaIdiomas);
             IdiomaManager_54CS.CargarIdioma(IdiomaManager_54CS.IdiomaPorDefecto);
 
+            SessionManager_54CS.ResolverUsuarioActual = login =>
+            {
+                var bll = new BLL_54CS.BLLUsuarios_54CS();
+                var usuario = bll.ObtenerTodos().SingleOrDefault(u =>
+                    string.Equals(u.Login_54CS.Trim(), login.Trim(), StringComparison.OrdinalIgnoreCase));
+                if (usuario != null) bll.CargarPermisosDelUsuarioEnSesion(usuario);
+                return usuario;
+            };
+
             Application.Run(new LogIn());
         }
     }

@@ -1,4 +1,4 @@
-﻿using Servicios;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ namespace DAL
     public class DALUsuarios_54CS
     {
         private Conexion_54CS conexionSQL = new Conexion_54CS();
-        private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        private readonly string _connectionString = Conexion_54CS.Cadena;
         public DataTable ObtenerUsuarios()
         {
             string query = "SELECT * FROM Usuarios_54CS";
@@ -21,7 +21,7 @@ namespace DAL
 
         public int EliminarUsuario(int dni)
         {
-            string query = $"DELETE FROM Usuarios_54CS WHERE DNI_54CS = @DNI";
+            string query = $"DELETE FROM Usuario_Rol WHERE IdUsuario=@DNI; DELETE FROM Usuarios_54CS WHERE DNI_54CS = @DNI";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
                 {"@DNI",dni }
@@ -30,7 +30,7 @@ namespace DAL
         }
         public int BloquearUsuario(string usuario,bool bloqueo)
         {
-            string query = $"UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Login)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
 
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
@@ -42,7 +42,7 @@ namespace DAL
 
         public int DesbloquearUsuario(string usuario,bool bloqueo)
         {
-            string query = $"UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Login)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Block_54CS=@Block WHERE Login_54CS = @Login";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
                 { "@Block",bloqueo},
@@ -53,7 +53,7 @@ namespace DAL
 
         public int ActivarUsuario(string usuario)
         {
-            string query = $"UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Login)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
             bool activar = true;
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
@@ -65,7 +65,7 @@ namespace DAL
 
         public int DesactivarUsuario(string usuario)
         {
-            string query = $"UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Login)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Activo_54CS=@Activo WHERE Login_54CS = @Login";
             bool activar = false;
             Dictionary<string, object> parametros = new Dictionary<string, object>()
             {
@@ -90,9 +90,19 @@ namespace DAL
                 return conexionSQL.Escribir(query, parametros);
         }
 
+        public int ActualizarPerfil(Usuario_54CS usuario, bool cambiarRol)
+        {
+            string query = "UPDATE Usuarios_54CS SET Email_54CS=@Email" +
+                (cambiarRol ? ", Rol_54CS=@Rol" : "") + " WHERE DNI_54CS=@DNI";
+            return conexionSQL.Escribir(query, new Dictionary<string, object>
+            {
+                { "@Email", usuario.Email_54CS }, { "@Rol", usuario.Rol_54CS }, { "@DNI", usuario.DNI_54cs }
+            });
+        }
+
         public int GuardarUsuario(Usuario_54CS user)
         {
-            string query = $"INSERT INTO Usuarios_54CS VALUES (@DNI,@Apellido,@Nombre,@Login,@Password,@Rol,@Email,@Block,@Activo,@Idioma)";
+            string query = $"IF EXISTS (SELECT 1 FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Login) THROW 50001, 'El nombre de usuario generado ya existe. No se creó el usuario.', 1; INSERT INTO Usuarios_54CS (DNI_54CS,Apellido_54CS,Nombre_54CS,Login_54CS,Password_54CS,Rol_54CS,Email_54CS,Block_54CS,Activo_54CS,Idioma_54CS) VALUES (@DNI,@Apellido,@Nombre,@Login,@Password,@Rol,@Email,@Block,@Activo,@Idioma)";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
                     { "@Rol", user.Rol_54CS},
@@ -111,7 +121,7 @@ namespace DAL
 
         public int ActualizarContraseña(string usuario, string contraseña)
         {
-            string query = $"UPDATE Usuarios_54CS SET Password_54CS=@Password WHERE Login_54CS=@Usuario";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Usuario)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Password_54CS=@Password WHERE Login_54CS=@Usuario";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
                     { "@Password", contraseña },
@@ -122,7 +132,7 @@ namespace DAL
 
         public int ActualizarIdioma(string usuario, string idioma)
         {
-            string query = $"UPDATE Usuarios_54CS SET Idioma_54CS=@Idioma WHERE Login_54CS=@Usuario";
+            string query = $"IF (SELECT COUNT(*) FROM Usuarios_54CS WITH (UPDLOCK,HOLDLOCK) WHERE Login_54CS=@Usuario)<>1 THROW 50002, 'El usuario no existe o su login está duplicado.', 1; UPDATE Usuarios_54CS SET Idioma_54CS=@Idioma WHERE Login_54CS=@Usuario";
             Dictionary<string, object> parametros = new Dictionary<string, object>()
                 {
                     { "@Idioma", idioma },

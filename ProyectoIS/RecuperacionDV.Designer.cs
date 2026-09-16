@@ -2,132 +2,221 @@
 {
     partial class RecuperacionDV
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.tituloIntegridad = new System.Windows.Forms.Label();
+            this.subtituloIntegridad = new System.Windows.Forms.Label();
+            this.tituloDetalleIntegridad = new System.Windows.Forms.Label();
+            this.pieIntegridad = new System.Windows.Forms.Label();
+            this.insigniaIntegridad = new ProyectoIS.UsuariosRoundedPanel();
+            this.alertaIntegridad = new ProyectoIS.UsuariosRoundedPanel();
+            this.detalleIntegridad = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoIntegridad = new ProyectoIS.UsuariosRoundedPanel();
+            this.btnRestore = new ProyectoIS.UsuariosRoundedButton();
+            this.btnRecalcular = new ProyectoIS.UsuariosRoundedButton();
+            this.btnSalir = new ProyectoIS.UsuariosRoundedButton();
+            this.iconoIntegridad = new ProyectoIS.AltaGlyph();
+            this.iconoAlertaIntegridad = new ProyectoIS.RestoreGlyph();
+            this.temaIntegridad = new ProyectoIS.UsuariosThemeSwitch();
             this.txtDetalle = new System.Windows.Forms.TextBox();
-            this.btnRecalcular = new System.Windows.Forms.Button();
-            this.btnRestore = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            //
-            // lblTitulo
-            //
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(120)))), ((int)(((byte)(106)))));
-            this.lblTitulo.Location = new System.Drawing.Point(12, 15);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(383, 20);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "¡INCONSISTENCIA DE DATOS DETECTADA!";
-            //
-            // lblInfo
-            //
-            this.lblInfo.Location = new System.Drawing.Point(12, 48);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(536, 48);
-            this.lblInfo.TabIndex = 1;
-            this.lblInfo.Text = "Los Dígitos Verificadores calculados sobre los datos no coinciden con los almace" +
-    "nados en la tabla DV. Como Administrador del Sistema, seleccione una acción para" +
-    " continuar:";
-            //
-            // txtDetalle
-            //
-            this.txtDetalle.Location = new System.Drawing.Point(15, 99);
-            this.txtDetalle.Multiline = true;
-            this.txtDetalle.Name = "txtDetalle";
-            this.txtDetalle.ReadOnly = true;
-            this.txtDetalle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDetalle.Size = new System.Drawing.Size(533, 175);
-            this.txtDetalle.TabIndex = 2;
-            //
-            // btnRecalcular
-            //
-            this.btnRecalcular.Location = new System.Drawing.Point(15, 290);
-            this.btnRecalcular.Name = "btnRecalcular";
-            this.btnRecalcular.Size = new System.Drawing.Size(170, 45);
-            this.btnRecalcular.TabIndex = 3;
-            this.btnRecalcular.Text = "RECALCULAR EL DV";
-            this.btnRecalcular.UseVisualStyleBackColor = true;
-            this.btnRecalcular.Click += new System.EventHandler(this.btnRecalcular_Click);
-            //
-            // btnRestore
-            //
-            this.btnRestore.Location = new System.Drawing.Point(197, 290);
+            this.tituloIntegridad.Name = "tituloIntegridad";
+            this.subtituloIntegridad.Name = "subtituloIntegridad";
+            this.tituloDetalleIntegridad.Name = "tituloDetalleIntegridad";
+            this.pieIntegridad.Name = "pieIntegridad";
+            this.insigniaIntegridad.Name = "insigniaIntegridad";
+            this.alertaIntegridad.Name = "alertaIntegridad";
+            this.detalleIntegridad.Name = "detalleIntegridad";
+            this.campoIntegridad.Name = "campoIntegridad";
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(170, 45);
-            this.btnRestore.TabIndex = 4;
-            this.btnRestore.Text = "RESTORE BD";
-            this.btnRestore.UseVisualStyleBackColor = true;
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
-            //
-            // btnSalir
-            //
-            this.btnSalir.Location = new System.Drawing.Point(378, 290);
+            this.btnRecalcular.Name = "btnRecalcular";
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(170, 45);
-            this.btnSalir.TabIndex = 5;
-            this.btnSalir.Text = "SALIR";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            //
-            // RecuperacionDV
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 350);
-            this.ControlBox = false;
-            this.Controls.Add(this.btnSalir);
+            this.iconoIntegridad.Name = "iconoIntegridad";
+            this.iconoAlertaIntegridad.Name = "iconoAlertaIntegridad";
+            this.temaIntegridad.Name = "temaIntegridad";
+            this.txtDetalle.Name = "txtDetalle";
+            this.insigniaIntegridad.Location = new System.Drawing.Point(28, 26);
+            this.insigniaIntegridad.Size = new System.Drawing.Size(72, 72);
+            this.insigniaIntegridad.CornerRadius = 17;
+            this.insigniaIntegridad.BackColor = System.Drawing.Color.White;
+            this.insigniaIntegridad.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.alertaIntegridad.Location = new System.Drawing.Point(28, 160);
+            this.alertaIntegridad.Size = new System.Drawing.Size(664, 118);
+            this.alertaIntegridad.CornerRadius = 16;
+            this.alertaIntegridad.BackColor = System.Drawing.Color.White;
+            this.alertaIntegridad.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.detalleIntegridad.Location = new System.Drawing.Point(28, 294);
+            this.detalleIntegridad.Size = new System.Drawing.Size(664, 230);
+            this.detalleIntegridad.CornerRadius = 18;
+            this.detalleIntegridad.BackColor = System.Drawing.Color.White;
+            this.detalleIntegridad.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.campoIntegridad.Location = new System.Drawing.Point(20, 58);
+            this.campoIntegridad.Size = new System.Drawing.Size(624, 152);
+            this.campoIntegridad.CornerRadius = 10;
+            this.campoIntegridad.BackColor = System.Drawing.Color.White;
+            this.campoIntegridad.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.detalleIntegridad.TabIndex = 0;
+            this.insigniaIntegridad.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaIntegridad.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.alertaIntegridad.BackColor = System.Drawing.Color.FromArgb(255, 247, 232);
+            this.alertaIntegridad.BorderColor = System.Drawing.Color.FromArgb(231, 191, 127);
+            this.alertaIntegridad.ForeColor = System.Drawing.Color.FromArgb(152, 91, 16);
+            this.campoIntegridad.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.iconoIntegridad.Location = new System.Drawing.Point(17, 16);
+            this.iconoIntegridad.Size = new System.Drawing.Size(38, 40);
+            this.iconoIntegridad.Kind = 3;
+            this.iconoIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.insigniaIntegridad.Controls.Add(this.iconoIntegridad);
+            this.iconoAlertaIntegridad.Location = new System.Drawing.Point(20, 24);
+            this.iconoAlertaIntegridad.Size = new System.Drawing.Size(38, 38);
+            this.iconoAlertaIntegridad.Kind = 2;
+            this.iconoAlertaIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.alertaIntegridad.Controls.Add(this.iconoAlertaIntegridad);
+            this.iconoIntegridad.ForeColor = System.Drawing.Color.White;
+            this.tituloIntegridad.Location = new System.Drawing.Point(116, 24);
+            this.tituloIntegridad.Size = new System.Drawing.Size(420, 86);
+            this.tituloIntegridad.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
+            this.tituloIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.tituloIntegridad.Text = "Recuperación de\nintegridad";
+            this.tituloIntegridad.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.tituloIntegridad);
+            this.subtituloIntegridad.Location = new System.Drawing.Point(116, 116);
+            this.subtituloIntegridad.Size = new System.Drawing.Size(564, 26);
+            this.subtituloIntegridad.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.subtituloIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.subtituloIntegridad.Text = "Revisá la inconsistencia detectada";
+            this.subtituloIntegridad.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.subtituloIntegridad);
+            this.lblTitulo.Location = new System.Drawing.Point(74, 18);
+            this.lblTitulo.Size = new System.Drawing.Size(564, 28);
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitulo.Text = "Los verificadores no coinciden";
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.alertaIntegridad.Controls.Add(this.lblTitulo);
+            this.lblInfo.Location = new System.Drawing.Point(74, 52);
+            this.lblInfo.Size = new System.Drawing.Size(564, 54);
+            this.lblInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblInfo.Text = "Los dígitos verificadores calculados no coinciden con los almacenados.";
+            this.lblInfo.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.alertaIntegridad.Controls.Add(this.lblInfo);
+            this.tituloDetalleIntegridad.Location = new System.Drawing.Point(22, 16);
+            this.tituloDetalleIntegridad.Size = new System.Drawing.Size(620, 30);
+            this.tituloDetalleIntegridad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.tituloDetalleIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.tituloDetalleIntegridad.Text = "Detalle del problema";
+            this.tituloDetalleIntegridad.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.detalleIntegridad.Controls.Add(this.tituloDetalleIntegridad);
+            this.pieIntegridad.Location = new System.Drawing.Point(28, 544);
+            this.pieIntegridad.Size = new System.Drawing.Size(664, 26);
+            this.pieIntegridad.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.pieIntegridad.BackColor = System.Drawing.Color.Transparent;
+            this.pieIntegridad.Text = "Seleccioná una acción para continuar.";
+            this.pieIntegridad.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.pieIntegridad);
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(152, 91, 16);
+            this.subtituloIntegridad.ForeColor = System.Drawing.Color.DimGray;
+            this.pieIntegridad.ForeColor = System.Drawing.Color.DimGray;
+            this.temaIntegridad.Location = new System.Drawing.Point(596, 27);
+            this.temaIntegridad.Size = new System.Drawing.Size(96, 38);
+            this.temaIntegridad.TabIndex = 4;
+            this.temaIntegridad.Click += new System.EventHandler(this.temaIntegridad_Click);
+            this.txtDetalle.Location = new System.Drawing.Point(12, 12);
+            this.txtDetalle.Size = new System.Drawing.Size(598, 126);
+            this.txtDetalle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.txtDetalle.Multiline = true;
+            this.txtDetalle.ReadOnly = true;
+            this.txtDetalle.WordWrap = true;
+            this.txtDetalle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDetalle.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDetalle.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtDetalle.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoIntegridad.Controls.Add(this.txtDetalle);
+            this.detalleIntegridad.Controls.Add(this.campoIntegridad);
+            this.btnRestore.Location = new System.Drawing.Point(28, 580);
+            this.btnRestore.Size = new System.Drawing.Size(316, 44);
+            this.btnRestore.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnRestore.TabIndex = 1;
+            this.btnRestore.Text = "Restaurar backup";
+            this.btnRestore.Icon = ProyectoIS.UsuariosButtonIcon.Database;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            this.btnRestore.FlatAppearance.BorderSize = 1;
+            this.btnRestore.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnRestore.BackColor = System.Drawing.Color.White;
+            this.btnRestore.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnRestore.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
             this.Controls.Add(this.btnRestore);
+            this.btnRecalcular.Location = new System.Drawing.Point(366, 580);
+            this.btnRecalcular.Size = new System.Drawing.Size(326, 44);
+            this.btnRecalcular.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnRecalcular.TabIndex = 2;
+            this.btnRecalcular.Text = "Recalcular DV";
+            this.btnRecalcular.Icon = ProyectoIS.UsuariosButtonIcon.Refresh;
+            this.btnRecalcular.Click += new System.EventHandler(this.btnRecalcular_Click);
+            this.btnRecalcular.FlatAppearance.BorderSize = 0;
+            this.btnRecalcular.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnRecalcular.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnRecalcular.ForeColor = System.Drawing.Color.White;
+            this.btnRecalcular.HoverBackColor = System.Drawing.Color.FromArgb(35, 78, 170);
             this.Controls.Add(this.btnRecalcular);
-            this.Controls.Add(this.txtDetalle);
-            this.Controls.Add(this.lblInfo);
-            this.Controls.Add(this.lblTitulo);
+            this.btnSalir.Location = new System.Drawing.Point(28, 646);
+            this.btnSalir.Size = new System.Drawing.Size(170, 42);
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnSalir.TabIndex = 3;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.Icon = ProyectoIS.UsuariosButtonIcon.Arrow;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnSalir.FlatAppearance.BorderSize = 1;
+            this.btnSalir.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnSalir.BackColor = System.Drawing.Color.White;
+            this.btnSalir.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnSalir.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.insigniaIntegridad);
+            this.Controls.Add(this.temaIntegridad);
+            this.Controls.Add(this.alertaIntegridad);
+            this.Controls.Add(this.detalleIntegridad);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(720, 708);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.ControlBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Name = "RecuperacionDV";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recuperación de Integridad - Dígito Verificador";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
             this.Load += new System.EventHandler(this.RecuperacionDV_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
-        #endregion
-
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label tituloIntegridad;
+        private System.Windows.Forms.Label subtituloIntegridad;
+        private System.Windows.Forms.Label tituloDetalleIntegridad;
+        private System.Windows.Forms.Label pieIntegridad;
+        private ProyectoIS.UsuariosRoundedPanel insigniaIntegridad;
+        private ProyectoIS.UsuariosRoundedPanel alertaIntegridad;
+        private ProyectoIS.UsuariosRoundedPanel detalleIntegridad;
+        private ProyectoIS.UsuariosRoundedPanel campoIntegridad;
+        private ProyectoIS.UsuariosRoundedButton btnRestore;
+        private ProyectoIS.UsuariosRoundedButton btnRecalcular;
+        private ProyectoIS.UsuariosRoundedButton btnSalir;
+        private ProyectoIS.AltaGlyph iconoIntegridad;
+        private ProyectoIS.RestoreGlyph iconoAlertaIntegridad;
+        private ProyectoIS.UsuariosThemeSwitch temaIntegridad;
         private System.Windows.Forms.TextBox txtDetalle;
-        private System.Windows.Forms.Button btnRecalcular;
-        private System.Windows.Forms.Button btnRestore;
-        private System.Windows.Forms.Button btnSalir;
     }
 }

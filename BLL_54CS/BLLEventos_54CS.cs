@@ -1,4 +1,4 @@
-﻿using MPP;
+using MPP;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace BLL_54CS
                 bool resultado = MPPeventos.GuardarEvento(evento);
                 if (!resultado)
                 {
-                    mensaje = "No se guardo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se guardo correctamente");
                     return false;
                 }
                 return true;
@@ -31,7 +31,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -44,14 +44,14 @@ namespace BLL_54CS
                 bool resultado = MPPeventos.EliminarEvento(evento);
                 if (!resultado)
                 {
-                    mensaje = "No se elimino correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se elimino correctamente");
                     return false;
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }

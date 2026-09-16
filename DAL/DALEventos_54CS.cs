@@ -21,14 +21,22 @@ namespace DAL
         public int GuardarEvento( Eventos_54CS eventito )
         {
             // el dateformat es para evitar errores con 
-            string query = $"SET DATEFORMAT dmy; INSERT INTO Eventos_54CS(Login_54CS,Fecha_54CS,Modulo_54CS,Evento_54CS,Criticidad_54CS) VALUES ('{eventito.Login_54CS}','{Convert.ToString(eventito.Fecha_54CS)}','{eventito.Modulo_54CS}','{eventito.Evento_54CS}','{eventito.Criticidad_54CS}')";
-            return conexionSQL.Escribir(query);
+            const string query = "SET DATEFORMAT dmy; INSERT INTO Eventos_54CS(Login_54CS,Fecha_54CS,Modulo_54CS,Evento_54CS,Criticidad_54CS) VALUES (@Login,@Fecha,@Modulo,@Evento,@Criticidad)";
+            return conexionSQL.Escribir(query, new Dictionary<string, object>
+            {
+                { "@Login", eventito.Login_54CS }, { "@Fecha", eventito.Fecha_54CS },
+                { "@Modulo", eventito.Modulo_54CS }, { "@Evento", eventito.Evento_54CS },
+                { "@Criticidad", eventito.Criticidad_54CS }
+            });
         }
 
         public int EliminarEvento ( Eventos_54CS evento)
         {
-            string query = $"DELETE FROM Eventos_54CS WHERE Login_54CS='{evento.Login_54CS}' AND Evento_54CS='Contraseña Errónea'";
-            return conexionSQL.Escribir(query);
+            const string query = "DELETE FROM Eventos_54CS WHERE Login_54CS=@Login AND Evento_54CS=@Evento";
+            return conexionSQL.Escribir(query, new Dictionary<string, object>
+            {
+                { "@Login", evento.Login_54CS }, { "@Evento", "Contraseña Errónea" }
+            });
         }
     }
 }

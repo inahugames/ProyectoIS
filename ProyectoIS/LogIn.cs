@@ -1,4 +1,6 @@
-﻿using BLL_54CS;
+﻿using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
+using BLL_54CS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace ProyectoIS
         public LogIn()
         {
             InitializeComponent();
-            Tema_54CS.Aplicar(this);
+
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
@@ -109,7 +111,7 @@ namespace ProyectoIS
                                     }
                                     catch(Exception ex)
                                     {
-                                        MessageBox.Show($"Error: {ex.Message}","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                        MessageBox.Show(string.Format(IdiomaManager_54CS.TraducirMensaje("Error: {0}"), ex.Message),IdiomaManager_54CS.TraducirMensaje("Error"),MessageBoxButtons.OK,MessageBoxIcon.Error);
                                     }
                                 }
                             }
@@ -140,10 +142,14 @@ namespace ProyectoIS
         public void ActualizarIdioma()
         {
             IdiomaManager_54CS.Traducir(this);
+            ActualizarTextosLogin();
         }
 
         private void LogIn_Load(object sender, EventArgs e)
         {
+            if (DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+            Tema_54CS.Aplicar(this);
+            ActiveControl = txtUser;
             IdiomaManager_54CS.Suscribir(this);
         }
 
@@ -224,7 +230,7 @@ namespace ProyectoIS
                                     }
                                     else
                                     {
-                                        MessageBox.Show("No tiene los permisos suficientes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("No tiene los permisos suficientes."), IdiomaManager_54CS.TraducirMensaje("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
                                 }
@@ -296,47 +302,100 @@ namespace ProyectoIS
             }
         }
 
-        // Determina si las credenciales ingresadas pertenecen al Administrador
-        // del Sistema (por su rol o por tener el permiso "DigitoVerificador"),
-        // sin ejecutar el proceso normal del login ni registrar eventos.
+        // Recuperación: credenciales, estado de cuenta, límite de intentos y permiso explícito.
         private bool EsAdministradorDelSistema(string login, string password)
         {
-            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
+            try { return new BLLUsuarios_54CS().AutenticarRecuperacion(login, password); }
+            catch { return false; }
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        private static extern IntPtr SendMessage(IntPtr handle, int message, IntPtr wParam, string text);
+        private void temaLogin_Click(object sender, EventArgs e)
+        {
+            Tema_54CS.AlternarModo();
+        }
+
+        private void mostrarClave_Click(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !txtPassword.UseSystemPasswordChar;
+            mostrarClave.Revealed = !txtPassword.UseSystemPasswordChar;
+            ActualizarTextosLogin();
+            mostrarClave.Invalidate();
+        }
+
+        private void campoLogin_Enter(object sender, EventArgs e)
+        {
+            var panel = (UsuariosRoundedPanel)((Control)sender).Parent;
+            panel.BorderColor = Tema_54CS.EsOscuro ? Color.FromArgb(238, 162, 126) : Color.FromArgb(52, 103, 190);
+            panel.Invalidate();
+        }
+
+        private void campoLogin_Leave(object sender, EventArgs e)
+        {
+            var panel = (UsuariosRoundedPanel)((Control)sender).Parent;
+            panel.BorderColor = Tema_54CS.EsOscuro ? Color.FromArgb(79, 79, 75) : Color.FromArgb(208, 214, 225);
+            panel.Invalidate();
+        }
+
+        private void txtUser_HandleCreated(object sender, EventArgs e)
+        {
+            if (!DesignMode && LicenseManager.UsageMode != LicenseUsageMode.Designtime) ActualizarTextosLogin();
+        }
+
+        private void ActualizarTextosLogin()
+        {
+            if (subtituloLogin == null) return;
+            Text = IdiomaManager_54CS.ObtenerTexto("LogIn", "Text", "Acceso");
+            label3.Text = IdiomaManager_54CS.ObtenerTexto("LogIn", "label3", "¡Bienvenido!");
+            subtituloLogin.Text = IdiomaManager_54CS.ObtenerTexto("LogIn", "subtituloLogin", "Ingresá tus datos para continuar");
+            temaLogin.Text = IdiomaManager_54CS.ObtenerTexto("GestionUsuario", Tema_54CS.EsOscuro ? "TemaClaro" : "TemaOscuro", Tema_54CS.EsOscuro ? "Claro" : "Oscuro");
+            mostrarClave.AccessibleName = IdiomaManager_54CS.ObtenerTexto("LogIn", txtPassword.UseSystemPasswordChar ? "MostrarClave" : "OcultarClave", txtPassword.UseSystemPasswordChar ? "Mostrar contraseña" : "Ocultar contraseña");
+            txtUser.AccessibleName = label1.Text;
+            txtPassword.AccessibleName = label2.Text;
+            if (txtUser.IsHandleCreated)
+                SendMessage(txtUser.Handle, 0x1501, new IntPtr(1), IdiomaManager_54CS.ObtenerTexto("LogIn", "UsuarioEjemplo", "Tu nombre de usuario"));
+        }
+
+        public void AplicarTemaLogin()
+        {
+            if (tarjetaLogin == null) return;
+            bool dark = Tema_54CS.EsOscuro;
+            Color accent = dark ? Color.FromArgb(238, 162, 126) : Color.FromArgb(45, 96, 196);
+            Color surface = dark ? Color.FromArgb(43, 43, 41) : Color.White;
+            Color input = dark ? Color.FromArgb(35, 35, 34) : Color.FromArgb(249, 250, 252);
+            Color border = dark ? Color.FromArgb(79, 79, 75) : Color.FromArgb(208, 214, 225);
+            BackColor = dark ? Color.FromArgb(31, 31, 30) : Color.FromArgb(245, 246, 249);
+            ForeColor = dark ? Color.FromArgb(242, 240, 237) : Color.FromArgb(35, 39, 45);
+            tarjetaLogin.BackColor = surface;
+            tarjetaLogin.BorderColor = border;
+            insigniaLogin.BackColor = accent;
+            insigniaLogin.BorderColor = accent;
+            foreach (UsuariosRoundedPanel field in new[] { campoUsuario, campoClave })
             {
-                return false;
+                field.BackColor = input;
+                field.BorderColor = field.ContainsFocus ? accent : border;
+                field.ForeColor = dark ? Color.Silver : Color.FromArgb(102, 112, 130);
             }
-            try
-            {
-                BLLUsuarios_54CS bll = new BLLUsuarios_54CS();
-                foreach (Usuario_54CS user in bll.ObtenerTodos())
-                {
-                    if (user.Login_54CS != null && user.Login_54CS.Trim() == login)
-                    {
-                        Encriptador_54CS seg = new Encriptador_54CS();
-                        if (!seg.VerificarContraseña(password, user.Password_54CS))
-                        {
-                            return false;
-                        }
-                        bool rolAdministrador = user.Rol_54CS != null && user.Rol_54CS.Trim().ToLower().Contains("admin");
-                        bool permisoDV = false;
-                        try
-                        {
-                            bll.CargarPermisosDelUsuarioEnSesion(user);
-                            permisoDV = user.TienePermiso("DigitoVerificador");
-                        }
-                        catch
-                        {
-                            // si no se pueden cargar los permisos, alcanza con el rol
-                        }
-                        return rolAdministrador || permisoDV;
-                    }
-                }
-            }
-            catch
-            {
-                // ante cualquier error no se lo reconoce como administrador
-            }
-            return false;
+            txtUser.BackColor = txtPassword.BackColor = input;
+            txtUser.BorderStyle = txtPassword.BorderStyle = BorderStyle.None;
+            txtUser.ForeColor = txtPassword.ForeColor = ForeColor;
+            label1.ForeColor = label2.ForeColor = label3.ForeColor = ForeColor;
+            subtituloLogin.ForeColor = dark ? Color.Silver : Color.FromArgb(103, 110, 124);
+            btnLogIn.BackColor = accent;
+            btnLogIn.ForeColor = dark ? Color.FromArgb(35, 30, 27) : Color.White;
+            btnCambiar.BackColor = surface;
+            btnCambiar.ForeColor = accent;
+            btnCambiar.FlatAppearance.BorderColor = accent;
+            btnCambiar.FlatAppearance.BorderSize = 1;
+            mostrarClave.BackColor = input;
+            mostrarClave.ForeColor = campoClave.ForeColor;
+            mostrarClave.FlatAppearance.BorderSize = 0;
+            mostrarClave.HoverBackColor = input;
+            temaLogin.DarkMode = dark;
+            ActualizarTextosLogin();
+            Invalidate(true);
         }
     }
+
 }

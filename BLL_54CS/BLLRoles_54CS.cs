@@ -1,4 +1,4 @@
-﻿using MPP;
+using MPP;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -34,42 +34,50 @@ namespace BLL_54CS
         public void CrearRol(Familia_54CS nuevoRol)
         {
             if (string.IsNullOrWhiteSpace(nuevoRol.Nombre))
-                throw new ArgumentException("El nombre del Rol no puede estar vacío.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre del Rol no puede estar vacío."));
 
+            nuevoRol.Nombre = nuevoRol.Nombre.Trim();
+            if (nuevoRol.Nombre.Length > 20)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre del rol admite hasta 20 caracteres."));
             var hijos = nuevoRol.ObtenerHijos();
             if (hijos.Count == 0)
-                throw new InvalidOperationException("No se puede crear un Rol vacío. Debe contener al menos una familia o permiso.");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede crear un Rol vacío. Debe contener al menos una familia o permiso."));
 
-            int idRolGenerado = _mpp.InsertarRol(nuevoRol.Nombre);
-
-            foreach (var hijo in hijos)
+            _mpp.EnTransaccion(() =>
             {
-                if (hijo is Familia_54CS)
+                if (_mpp.ObtenerArbolDeRolesCompleto().Any(r => string.Equals(r.Nombre.Trim(), nuevoRol.Nombre, StringComparison.OrdinalIgnoreCase)))
+                    throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("Ya existe un rol con ese nombre."));
+                int idRolGenerado = _mpp.InsertarRol(nuevoRol.Nombre);
+
+                foreach (var hijo in hijos)
                 {
-                    _mpp.InsertarRelacionRolFamilia(idRolGenerado, hijo.ID);
+                    if (hijo is Familia_54CS)
+                    {
+                        _mpp.InsertarRelacionRolFamilia(idRolGenerado, hijo.ID);
+                    }
+                    else if (hijo is Permiso_54CS)
+                    {
+                        _mpp.InsertarRelacionRolPermiso(idRolGenerado, hijo.ID);
+                    }
                 }
-                else if (hijo is Permiso_54CS)
-                {
-                    _mpp.InsertarRelacionRolPermiso(idRolGenerado, hijo.ID);
-                }
-            }
+            });
         }
 
         public void AgregarFamiliaARol(Familia_54CS rol, Familia_54CS familia)
         {
             if (rol == null)
-                throw new ArgumentException("Debe seleccionar un Rol.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Rol."));
             if (familia == null)
-                throw new ArgumentException("Debe seleccionar una Familia.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar una Familia."));
             if (rol.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase))
-                throw new InvalidOperationException("No se puede agregar un Rol a sí mismo.");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede agregar un Rol a sí mismo."));
             if (rol.ObtenerHijos().Any(h => h is Familia_54CS && h.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase)))
-                throw new InvalidOperationException($"La familia '{familia.Nombre}' ya pertenece al rol '{rol.Nombre}'.");
+                throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("La familia '{0}' ya pertenece al rol '{1}'."), familia.Nombre, rol.Nombre));
 
             foreach (var permiso in familia.ObtenerListaPermisos())
             {
                 if (rol.TienePermiso(permiso))
-                    throw new InvalidOperationException($"Conflicto: el permiso '{permiso}' ya existe en el rol '{rol.Nombre}'.");
+                    throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("Conflicto: el permiso '{0}' ya existe en el rol '{1}'."), permiso, rol.Nombre));
             }
 
             _mpp.InsertarRelacionRolFamilia(rol.ID, familia.ID);
@@ -79,15 +87,15 @@ namespace BLL_54CS
         public void QuitarFamiliaDeRol(Familia_54CS rol, Familia_54CS familia)
         {
             if (rol == null)
-                throw new ArgumentException("Debe seleccionar un Rol.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Rol."));
             if (familia == null)
-                throw new ArgumentException("Debe seleccionar una Familia.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar una Familia."));
 
             if (!rol.ObtenerHijos().Any(h => h is Familia_54CS && h.Nombre.Equals(familia.Nombre, StringComparison.OrdinalIgnoreCase)))
-                throw new InvalidOperationException($"La familia '{familia.Nombre}' no pertenece directamente al rol '{rol.Nombre}'.");
+                throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("La familia '{0}' no pertenece directamente al rol '{1}'."), familia.Nombre, rol.Nombre));
 
             if (rol.ObtenerHijos().Count <= 1)
-                throw new InvalidOperationException("No se puede eliminar el único elemento del Rol");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar el único elemento del Rol"));
            
             _mpp.EliminarRelacionRolFamilia(rol.ID, familia.ID);
             rol.Remover(familia);
@@ -96,12 +104,12 @@ namespace BLL_54CS
         public void AgregarPermisoARol(Familia_54CS rol, Permiso_54CS permiso)
         {
             if (rol == null)
-                throw new ArgumentException("Debe seleccionar un Rol.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Rol."));
             if (permiso == null)
-                throw new ArgumentException("Debe seleccionar un Permiso.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Permiso."));
 
             if (rol.TienePermiso(permiso.Nombre))
-                throw new InvalidOperationException($"El permiso '{permiso.Nombre}' ya existe en el rol '{rol.Nombre}'.");
+                throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("El permiso '{0}' ya existe en el rol '{1}'."), permiso.Nombre, rol.Nombre));
 
             _mpp.InsertarRelacionRolPermiso(rol.ID, permiso.ID);
             rol.Agregar(permiso);
@@ -110,15 +118,15 @@ namespace BLL_54CS
         public void QuitarPermisoDeRol(Familia_54CS rol, Permiso_54CS permiso)
         {
             if (rol == null)
-                throw new ArgumentException("Debe seleccionar un Rol.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Rol."));
             if (permiso == null)
-                throw new ArgumentException("Debe seleccionar un Permiso.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Permiso."));
 
             if (!rol.ObtenerHijos().Any(h => h is Permiso_54CS && h.Nombre.Equals(permiso.Nombre, StringComparison.OrdinalIgnoreCase)))
-                throw new InvalidOperationException($"El permiso '{permiso.Nombre}' no es un permiso suelto directo del rol '{rol.Nombre}'.");
+                throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("El permiso '{0}' no es un permiso suelto directo del rol '{1}'."), permiso.Nombre, rol.Nombre));
 
             if (rol.ObtenerHijos().Count <= 1)
-                throw new InvalidOperationException("No se puede eliminar el único elemento del Rol");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar el único elemento del Rol"));
 
             _mpp.EliminarRelacionRolPermiso(rol.ID, permiso.ID);
             rol.Remover(permiso);
@@ -128,28 +136,35 @@ namespace BLL_54CS
         {
             if (_mpp.ExisteRolEnUso(idRol))
             {
-                throw new InvalidOperationException("No se puede eliminar el Rol porque actualmente hay usuarios que lo tienen asignado");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar el Rol porque actualmente hay usuarios que lo tienen asignado"));
             }
 
-            _mpp.EliminarRelacionesDeRol(idRol);
-            _mpp.EliminarRol(idRol);
+            _mpp.EnTransaccion(() =>
+            {
+                if (_mpp.ExisteRolEnUso(idRol)) throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("El rol está en uso."));
+                _mpp.EliminarRelacionesDeRol(idRol);
+                if (!_mpp.EliminarRol(idRol)) throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("El rol ya no existe."));
+            });
         }
 
         public void ActualizarRolesDeUsuario(int idUsuario, List<Rol_54CS> rolesNuevos)
         {
             if (idUsuario <= 0)
-                throw new ArgumentException("Identificador de usuario inválido");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Identificador de usuario inválido"));
 
-            _mpp.EliminarRolesDeUsuario(idUsuario);
-
-            // si la lista no está vacía, insertamos los nuevos
-            if (rolesNuevos != null && rolesNuevos.Any())
+            _mpp.EnTransaccion(() =>
             {
-                foreach (var rol in rolesNuevos)
+                _mpp.EliminarRolesDeUsuario(idUsuario);
+
+                // si la lista no está vacía, insertamos los nuevos
+                if (rolesNuevos != null && rolesNuevos.Any())
                 {
-                    _mpp.AsignarRolAUsuario(idUsuario, rol.ID);
+                    foreach (var rol in rolesNuevos)
+                    {
+                        _mpp.AsignarRolAUsuario(idUsuario, rol.ID);
+                    }
                 }
-            }
+            });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -43,9 +43,32 @@ namespace MPP
             return usuarios;
         }
 
-        public bool CrearUsuarios(Usuario_54CS usuario)
+        public bool CrearUsuarios(Usuario_54CS usuario, Rol_54CS rol = null)
         {
-            return usuariossql.GuardarUsuario(ConEmailEncriptado(usuario)) > 0;
+            Conexion_54CS.EnTransaccion(() =>
+            {
+                if (usuariossql.GuardarUsuario(ConEmailEncriptado(usuario)) != 1)
+                    throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se creó el usuario."));
+                if (rol != null && !perm.AsignarRolAUsuario(usuario.DNI_54cs, rol.ID))
+                    throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se pudo asignar el rol."));
+            });
+            return true;
+        }
+
+        public bool ModificarPerfil(Usuario_54CS usuario, Rol_54CS rol, bool cambiarRol)
+        {
+            Conexion_54CS.EnTransaccion(() =>
+            {
+                if (usuariossql.ActualizarPerfil(ConEmailEncriptado(usuario), cambiarRol) != 1)
+                    throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("El usuario ya no existe."));
+                if (cambiarRol)
+                {
+                    perm.EliminarRolesDeUsuario(usuario.DNI_54cs);
+                    if (rol != null && !perm.AsignarRolAUsuario(usuario.DNI_54cs, rol.ID))
+                        throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se pudo asignar el rol."));
+                }
+            });
+            return true;
         }
 
         public bool ActivarUsuario(string login)
@@ -76,13 +99,13 @@ namespace MPP
 
         public bool ActualizarUsuarios(List<Usuario_54CS> lista)
         {
-            if (lista != null)
+            if (lista == null || lista.Count == 0) return false;
+            Conexion_54CS.EnTransaccion(() =>
             {
-                foreach (Usuario_54CS user in lista)
-                {
-                    usuariossql.ActualizarUsuarios(ConEmailEncriptado(user));
-                }
-            }
+                foreach (var usuario in lista)
+                    if (usuariossql.ActualizarUsuarios(ConEmailEncriptado(usuario)) != 1)
+                        throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("El usuario ya no existe."));
+            });
             return true;
         }
 

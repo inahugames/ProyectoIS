@@ -1,4 +1,4 @@
-﻿using MPP;
+using MPP;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace BLL_54CS
             mensaje = string.Empty;
             if (string.IsNullOrWhiteSpace(login))
             {
-                mensaje = "Login inválido";
+                mensaje = IdiomaManager_54CS.TraducirMensaje("Login inválido");
                 return false;
             }
             try
@@ -122,7 +122,7 @@ namespace BLL_54CS
             }
         }
     
-        public bool CrearUsuario(int dni,string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool Block, bool Activo, out string mensaje)
+        public bool CrearUsuario(int dni,string Apellido, string Nombre, string Login, string Password, string Rol, string Email, bool Block, bool Activo, out string mensaje, Rol_54CS rolSeleccionado = null)
         {
             mensaje = string.Empty;
             Usuario_54CS usuario = new Usuario_54CS();
@@ -141,17 +141,22 @@ namespace BLL_54CS
                     Activo_54CS = Activo,
                     Idioma_54CS = "es", // idioma por defecto para usuarios nuevos
                 };
-                bool resultado = MPPusuario.CrearUsuarios(usuario);
+                ValidarUsuario(usuario);
+                ExigirPermiso("CrearUsuarios");
+                if (rolSeleccionado != null) ExigirPermiso("AsignarRoles");
+                if (!string.Equals(usuario.Rol_54CS, rolSeleccionado?.Nombre ?? "", StringComparison.Ordinal))
+                    throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El rol seleccionado no coincide con el usuario."));
+                bool resultado = MPPusuario.CrearUsuarios(usuario, rolSeleccionado);
                 if (!resultado)
                 {
-                    mensaje = "No se creo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se creo correctamente");
                     return false;
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                mensaje = $"Error inesperado:{ex.Message}";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 usuario = null;
                 return false;
             }
@@ -164,14 +169,14 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.EliminarUsuario(id);
                 if (!resultado)
                 {
-                    mensaje = "No se elimino correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se elimino correctamente");
                     return false;
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -183,7 +188,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.BloquearUsuario(login); // No se si agregar la variable block
                 if(!resultado)
                 {
-                    mensaje = "No se bloqueo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se bloqueo correctamente");
                     return false;
                 }
                 return true;
@@ -191,7 +196,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -204,7 +209,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.DesbloquearUsuario(login); // No se si agregar la variable block
                 if (!resultado)
                 {
-                    mensaje = "No se desbloqueo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se desbloqueo correctamente");
                     return false;
                 }
                 return true;
@@ -212,7 +217,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -225,7 +230,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.ActivarUsuario(login); // No se si agregar la variable block
                 if (!resultado)
                 {
-                    mensaje = "No se activo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se activo correctamente");
                     return false;
                 }
                 return true;
@@ -233,7 +238,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -246,7 +251,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.DesactivarUsuario(login); // No se si agregar la variable block
                 if (!resultado)
                 {
-                    mensaje = "No se desactivo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se desactivo correctamente");
                     return false;
                 }
                 return true;
@@ -254,7 +259,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -267,7 +272,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.ActualizarUsuarios(lista); 
                 if (!resultado)
                 {
-                    mensaje = "No se actualizo el usuario correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se actualizo el usuario correctamente");
                     return false;
                 }
                 return true;
@@ -275,7 +280,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -287,7 +292,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.GuardarUsuario(usuario);
                 if (!resultado)
                 {
-                    mensaje = "No se guardo correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se guardo correctamente");
                     return false;
                 }
                 return true;
@@ -295,7 +300,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -307,7 +312,7 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.ActualizarContraseña(usuario,password);
                 if (!resultado)
                 {
-                    mensaje = "No se actualizo la contraseña correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se actualizo la contraseña correctamente");
                     return false;
                 }
                 return true;
@@ -315,7 +320,7 @@ namespace BLL_54CS
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrio un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
         }
@@ -328,16 +333,95 @@ namespace BLL_54CS
                 bool resultado = MPPusuario.ActualizarIdioma(login, idioma);
                 if (!resultado)
                 {
-                    mensaje = "No se guardó la preferencia de idioma correctamente";
+                    mensaje = IdiomaManager_54CS.TraducirMensaje("No se guardó la preferencia de idioma correctamente");
                     return false;
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                mensaje = "Ocurrió un error";
+                mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message);
                 return false;
             }
+        }
+
+        private static readonly Dictionary<string, List<DateTime>> intentosRecuperacion =
+            new Dictionary<string, List<DateTime>>(StringComparer.OrdinalIgnoreCase);
+
+        public bool AutenticarRecuperacion(string login, string password)
+        {
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password)) return false;
+            login = login.Trim();
+            lock (intentosRecuperacion)
+            {
+                if (!intentosRecuperacion.TryGetValue(login, out var intentos))
+                    intentosRecuperacion[login] = intentos = new List<DateTime>();
+                intentos.RemoveAll(t => t < DateTime.Now.AddHours(-VentanaIntentosHoras));
+                if (intentos.Count >= MaximosIntentosFallidos) return false;
+                // Una autenticación de recuperación nunca escribe en una BD inconsistente.
+                intentos.Add(DateTime.Now);
+                var candidatos = ObtenerTodos().Where(u =>
+                    string.Equals(u.Login_54CS.Trim(), login, StringComparison.OrdinalIgnoreCase)).ToList();
+                if (candidatos.Count != 1) return false;
+                var usuario = candidatos[0];
+                if (usuario.Block_54CS || !usuario.Activo_54CS ||
+                    ContarIntentosFallidosRecientes(login) >= MaximosIntentosFallidos ||
+                    !new Encriptador_54CS().VerificarContraseña(password, usuario.Password_54CS)) return false;
+                CargarPermisosDelUsuarioEnSesion(usuario);
+                if (!usuario.TienePermiso("DigitoVerificador")) return false;
+                intentos.Clear();
+                return true;
+            }
+        }
+
+        private static void ExigirPermiso(string permiso)
+        {
+            if (!SessionManager_54CS.HaySesion || !SessionManager_54CS.Instancia.TienePermiso(permiso))
+                throw new UnauthorizedAccessException(IdiomaManager_54CS.TraducirMensaje("No tiene permisos suficientes."));
+        }
+
+        public static void ValidarUsuario(Usuario_54CS usuario)
+        {
+            if (usuario == null || usuario.DNI_54cs <= 0 || usuario.DNI_54cs > 99999999)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Ingrese un DNI válido."));
+            if (string.IsNullOrWhiteSpace(usuario.Nombre_54CS) || usuario.Nombre_54CS.Trim().Length > 20)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre es obligatorio y admite hasta 20 caracteres."));
+            if (string.IsNullOrWhiteSpace(usuario.Apellido_54CS) || usuario.Apellido_54CS.Trim().Length > 50)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El apellido es obligatorio y admite hasta 50 caracteres."));
+            if (string.IsNullOrWhiteSpace(usuario.Login_54CS) || usuario.Login_54CS.Length > 50)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El login es obligatorio y admite hasta 50 caracteres."));
+            ValidarEmail(usuario.Email_54CS);
+            if ((usuario.Rol_54CS ?? "").Length > 20)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre del rol admite hasta 20 caracteres."));
+        }
+
+        public static void ValidarEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Ingrese un correo electrónico válido."));
+            var direccion = new System.Net.Mail.MailAddress(email.Trim());
+            if (direccion.Address != email.Trim())
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Ingrese un correo electrónico válido."));
+            if (new Encriptador_54CS().EncriptarReversible(email.Trim()).Length > 200)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El correo electrónico es demasiado largo."));
+        }
+
+        public bool ModificarPerfil(int dni, string email, Rol_54CS rol, bool cambiarRol, out string mensaje)
+        {
+            mensaje = "";
+            try
+            {
+                ExigirPermiso("ModificarUsuario");
+                if (cambiarRol) ExigirPermiso("AsignarRoles");
+                ValidarEmail(email);
+                if (rol != null && rol.Nombre.Length > 20)
+                    throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre del rol admite hasta 20 caracteres."));
+                return MPPusuario.ModificarPerfil(new Usuario_54CS
+                {
+                    DNI_54cs = dni, Email_54CS = email.Trim(), Rol_54CS = rol?.Nombre ?? ""
+                }, rol, cambiarRol);
+            }
+            catch (Exception ex) { mensaje = IdiomaManager_54CS.TraducirMensaje(ex.Message); return false; }
         }
 
         public void CargarPermisosDelUsuarioEnSesion(Usuario_54CS user)

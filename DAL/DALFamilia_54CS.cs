@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,24 +10,8 @@ namespace DAL
 {
     public class DALFamilia_54CS
     {
-        private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        private readonly string _connectionString = Conexion_54CS.Cadena;
         private Conexion_54CS conexionSQL = new Conexion_54CS();
-
-        private int EjecutarScalarParaId(string query, SqlParameter[] parametros)
-        {
-            int id;
-            using (SqlConnection cx = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, cx))
-                {
-                    cmd.Parameters.AddRange(parametros);
-                    cx.Open();
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-            }
-            DALDigitoVerificador_54CS.RecalcularYPersistir();
-            return id;
-        }
 
         public DataTable ObtenerFamilias()
         {
@@ -54,7 +38,7 @@ namespace DAL
                 new SqlParameter("@nombre", nombre),
                 new SqlParameter("@desc", (object)descripcion ?? DBNull.Value)
             };
-            return EjecutarScalarParaId(query, parametros);
+            return conexionSQL.InsertarId(query, parametros.ToDictionary(p => p.ParameterName, p => p.Value));
         }
 
         public void InsertarRelacionFamiliaPermiso(int idFamilia, int idPermiso)
@@ -92,20 +76,10 @@ namespace DAL
 
         public bool ExisteFamiliaEnUso(int idFamilia)
         {
-            string query = @"
-                SELECT
-                    (SELECT COUNT(1) FROM Rol_Familia      WHERE IdFamilia     = @id) +
-                    (SELECT COUNT(1) FROM Familia_Familia  WHERE IdFamiliaHijo = @id)";
-            using (SqlConnection cx = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, cx))
-                {
-                    cmd.Parameters.AddWithValue("@id", idFamilia);
-                    cx.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
+            return Convert.ToInt32(conexionSQL.Leer(@"SELECT
+                (SELECT COUNT(*) FROM Rol_Familia WHERE IdFamilia=@id) +
+                (SELECT COUNT(*) FROM Familia_Familia WHERE IdFamiliaHijo=@id)",
+                new Dictionary<string, object> { { "@id", idFamilia } }).Rows[0][0]) > 0;
         }
 
         public int EliminarRelacionesDeFamilia(int idFamilia)

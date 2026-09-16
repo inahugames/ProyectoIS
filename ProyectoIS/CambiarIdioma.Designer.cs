@@ -2,104 +2,208 @@
 {
     partial class CambiarIdioma
     {
-        /// <summary>
-        /// Variable de diseñador necesaria.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Limpiar los recursos que se estén usando.
-        /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben eliminar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
 
-        #region Código generado por el Diseñador de Windows Forms
-
-        /// <summary>
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido del método con el editor de código.
-        /// </summary>
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cmbIdiomas = new System.Windows.Forms.ComboBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new ProyectoIS.UsuariosRoundedButton();
+            this.btnCancelar = new ProyectoIS.UsuariosRoundedButton();
+            this.insigniaIdioma = new ProyectoIS.UsuariosRoundedPanel();
+            this.tarjetaIdioma = new ProyectoIS.UsuariosRoundedPanel();
+            this.opcionesIdioma = new System.Windows.Forms.FlowLayoutPanel();
+            this.temaIdioma = new ProyectoIS.UsuariosThemeSwitch();
+            this.tituloIdioma = new System.Windows.Forms.Label();
+            this.subtituloIdioma = new System.Windows.Forms.Label();
+            this.ayudaIdioma = new System.Windows.Forms.Label();
+            this.iconoIdioma = new ProyectoIS.IdiomaGlyph();
+            this.idioma_es = new ProyectoIS.OpcionIdiomaButton();
+            this.idioma_en = new ProyectoIS.OpcionIdiomaButton();
+            this.idioma_pt = new ProyectoIS.OpcionIdiomaButton();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Seleccione su idioma:";
-            // 
-            // cmbIdiomas
-            // 
-            this.cmbIdiomas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIdiomas.FormattingEnabled = true;
-            this.cmbIdiomas.Location = new System.Drawing.Point(25, 46);
             this.cmbIdiomas.Name = "cmbIdiomas";
-            this.cmbIdiomas.Size = new System.Drawing.Size(270, 21);
-            this.cmbIdiomas.TabIndex = 1;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(60, 90);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(90, 30);
-            this.btnAceptar.TabIndex = 2;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(170, 90);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(90, 30);
-            this.btnCancelar.TabIndex = 3;
+            this.insigniaIdioma.Name = "insigniaIdioma";
+            this.tarjetaIdioma.Name = "tarjetaIdioma";
+            this.opcionesIdioma.Name = "opcionesIdioma";
+            this.temaIdioma.Name = "temaIdioma";
+            this.tituloIdioma.Name = "tituloIdioma";
+            this.subtituloIdioma.Name = "subtituloIdioma";
+            this.ayudaIdioma.Name = "ayudaIdioma";
+            this.iconoIdioma.Name = "iconoIdioma";
+            this.idioma_es.Name = "idioma_es";
+            this.idioma_en.Name = "idioma_en";
+            this.idioma_pt.Name = "idioma_pt";
+            this.label1.Location = new System.Drawing.Point(22, 20);
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Visible = false;
+            this.cmbIdiomas.Location = new System.Drawing.Point(25, 46);
+            this.cmbIdiomas.Size = new System.Drawing.Size(270, 21);
+            this.cmbIdiomas.Visible = false;
+            this.cmbIdiomas.TabStop = false;
+            this.cmbIdiomas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIdiomas.SelectedIndexChanged += new System.EventHandler(this.cmbIdiomas_SelectedIndexChanged);
+            this.insigniaIdioma.Location = new System.Drawing.Point(28, 26);
+            this.insigniaIdioma.Size = new System.Drawing.Size(68, 68);
+            this.insigniaIdioma.CornerRadius = 16;
+            this.insigniaIdioma.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaIdioma.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.iconoIdioma.Location = new System.Drawing.Point(14, 14);
+            this.iconoIdioma.Size = new System.Drawing.Size(40, 40);
+            this.iconoIdioma.BackColor = System.Drawing.Color.Transparent;
+            this.iconoIdioma.ForeColor = System.Drawing.Color.White;
+            this.insigniaIdioma.Controls.Add(this.iconoIdioma);
+            this.tituloIdioma.Location = new System.Drawing.Point(112, 28);
+            this.tituloIdioma.Size = new System.Drawing.Size(370, 44);
+            this.tituloIdioma.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
+            this.tituloIdioma.Text = "Cambiar idioma";
+            this.subtituloIdioma.Location = new System.Drawing.Point(112, 91);
+            this.subtituloIdioma.Size = new System.Drawing.Size(480, 30);
+            this.subtituloIdioma.Text = "Elegí el idioma de la aplicación.";
+            this.subtituloIdioma.ForeColor = System.Drawing.Color.DimGray;
+            this.temaIdioma.Location = new System.Drawing.Point(496, 27);
+            this.temaIdioma.Size = new System.Drawing.Size(96, 38);
+            this.temaIdioma.TabIndex = 3;
+            this.temaIdioma.Click += new System.EventHandler(this.temaIdioma_Click);
+            this.tarjetaIdioma.Location = new System.Drawing.Point(28, 140);
+            this.tarjetaIdioma.Size = new System.Drawing.Size(564, 274);
+            this.tarjetaIdioma.CornerRadius = 18;
+            this.tarjetaIdioma.TabIndex = 0;
+            this.tarjetaIdioma.BackColor = System.Drawing.Color.White;
+            this.tarjetaIdioma.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.opcionesIdioma.Location = new System.Drawing.Point(16, 16);
+            this.opcionesIdioma.Size = new System.Drawing.Size(532, 242);
+            this.opcionesIdioma.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.opcionesIdioma.WrapContents = false;
+            this.opcionesIdioma.AutoScroll = true;
+            this.opcionesIdioma.Padding = new System.Windows.Forms.Padding(0);
+            this.opcionesIdioma.BackColor = System.Drawing.Color.White;
+            this.tarjetaIdioma.Controls.Add(this.opcionesIdioma);
+            this.idioma_es.Location = new System.Drawing.Point(0, 0);
+            this.idioma_es.Size = new System.Drawing.Size(508, 68);
+            this.idioma_es.Margin = new System.Windows.Forms.Padding(0, 0, 0, 12);
+            this.idioma_es.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.idioma_es.Codigo = "ES";
+            this.idioma_es.NombreIdioma = "Español";
+            this.idioma_es.AccessibleName = "Español";
+            this.idioma_es.TabIndex = 0;
+            this.idioma_es.Seleccionado = true;
+            this.idioma_es.Accent = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.idioma_es.BackColor = System.Drawing.Color.FromArgb(229, 237, 253);
+            this.idioma_es.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.idioma_es.FlatAppearance.BorderSize = 1;
+            this.idioma_es.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.idioma_es.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.opcionesIdioma.Controls.Add(this.idioma_es);
+            this.idioma_en.Location = new System.Drawing.Point(0, 80);
+            this.idioma_en.Size = new System.Drawing.Size(508, 68);
+            this.idioma_en.Margin = new System.Windows.Forms.Padding(0, 0, 0, 12);
+            this.idioma_en.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.idioma_en.Codigo = "EN";
+            this.idioma_en.NombreIdioma = "English";
+            this.idioma_en.AccessibleName = "English";
+            this.idioma_en.TabIndex = 1;
+            this.idioma_en.Seleccionado = false;
+            this.idioma_en.Accent = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.idioma_en.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            this.idioma_en.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.idioma_en.FlatAppearance.BorderSize = 1;
+            this.idioma_en.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.idioma_en.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.opcionesIdioma.Controls.Add(this.idioma_en);
+            this.idioma_pt.Location = new System.Drawing.Point(0, 160);
+            this.idioma_pt.Size = new System.Drawing.Size(508, 68);
+            this.idioma_pt.Margin = new System.Windows.Forms.Padding(0, 0, 0, 12);
+            this.idioma_pt.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.idioma_pt.Codigo = "PT";
+            this.idioma_pt.NombreIdioma = "Português";
+            this.idioma_pt.AccessibleName = "Português";
+            this.idioma_pt.TabIndex = 2;
+            this.idioma_pt.Seleccionado = false;
+            this.idioma_pt.Accent = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.idioma_pt.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            this.idioma_pt.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.idioma_pt.FlatAppearance.BorderSize = 1;
+            this.idioma_pt.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.idioma_pt.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.opcionesIdioma.Controls.Add(this.idioma_pt);
+            this.ayudaIdioma.Location = new System.Drawing.Point(28, 430);
+            this.ayudaIdioma.Size = new System.Drawing.Size(564, 28);
+            this.ayudaIdioma.Text = "El cambio se aplicará al confirmar.";
+            this.ayudaIdioma.ForeColor = System.Drawing.Color.DimGray;
+            this.btnCancelar.Location = new System.Drawing.Point(28, 482);
+            this.btnCancelar.Size = new System.Drawing.Size(174, 42);
+            this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // CambiarIdioma
-            // 
-            this.AcceptButton = this.btnAceptar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(320, 150);
+            this.btnAceptar.Location = new System.Drawing.Point(366, 482);
+            this.btnAceptar.Size = new System.Drawing.Size(226, 42);
+            this.btnAceptar.TabIndex = 1;
+            this.btnAceptar.Text = "Aplicar idioma";
+            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.BackColor = System.Drawing.Color.White;
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnCancelar.FlatAppearance.BorderSize = 1;
+            this.btnCancelar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnCancelar.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.btnAceptar.Icon = ProyectoIS.UsuariosButtonIcon.Check;
+            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnAceptar.ForeColor = System.Drawing.Color.White;
+            this.btnAceptar.FlatAppearance.BorderSize = 0;
+            this.btnAceptar.HoverBackColor = System.Drawing.Color.FromArgb(35, 78, 170);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cmbIdiomas);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.insigniaIdioma);
+            this.Controls.Add(this.tituloIdioma);
+            this.Controls.Add(this.subtituloIdioma);
+            this.Controls.Add(this.temaIdioma);
+            this.Controls.Add(this.tarjetaIdioma);
+            this.Controls.Add(this.ayudaIdioma);
+            this.AcceptButton = this.btnAceptar;
+            this.CancelButton = this.btnCancelar;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(620, 548);
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CambiarIdioma";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CambiarIdioma";
+            this.Name = "CambiarIdioma";
+            this.Text = "Cambiar idioma";
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
-        #endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbIdiomas;
-        private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.Button btnCancelar;
+        private ProyectoIS.UsuariosRoundedButton btnAceptar;
+        private ProyectoIS.UsuariosRoundedButton btnCancelar;
+        private ProyectoIS.UsuariosRoundedPanel insigniaIdioma;
+        private ProyectoIS.UsuariosRoundedPanel tarjetaIdioma;
+        private System.Windows.Forms.FlowLayoutPanel opcionesIdioma;
+        private ProyectoIS.UsuariosThemeSwitch temaIdioma;
+        private System.Windows.Forms.Label tituloIdioma;
+        private System.Windows.Forms.Label subtituloIdioma;
+        private System.Windows.Forms.Label ayudaIdioma;
+        private ProyectoIS.IdiomaGlyph iconoIdioma;
+        private ProyectoIS.OpcionIdiomaButton idioma_es;
+        private ProyectoIS.OpcionIdiomaButton idioma_en;
+        private ProyectoIS.OpcionIdiomaButton idioma_pt;
     }
 }

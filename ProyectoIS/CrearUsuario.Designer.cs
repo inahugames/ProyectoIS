@@ -2,194 +2,362 @@
 {
     partial class CrearUsuario
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnCrear = new System.Windows.Forms.Button();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.txtDNI = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
             this.Nombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.tituloAlta = new System.Windows.Forms.Label();
+            this.subtituloAlta = new System.Windows.Forms.Label();
+            this.tituloDatosAlta = new System.Windows.Forms.Label();
+            this.tituloRolesAlta = new System.Windows.Forms.Label();
+            this.ayudaRolAlta = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.datosAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.rolesAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.insigniaAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoRolAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoNombreAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoApellidoAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoDniAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoEmailAlta = new ProyectoIS.UsuariosRoundedPanel();
+            this.iconoAlta = new ProyectoIS.AltaGlyph();
+            this.iconoDatosAlta = new ProyectoIS.AltaGlyph();
+            this.iconoRolesAlta = new ProyectoIS.AltaGlyph();
+            this.iconoDniAlta = new ProyectoIS.AltaGlyph();
+            this.iconoEmailAlta = new ProyectoIS.AltaGlyph();
+            this.btnCrear = new ProyectoIS.UsuariosRoundedButton();
+            this.cancelarAlta = new ProyectoIS.UsuariosRoundedButton();
+            this.temaAlta = new ProyectoIS.UsuariosThemeSwitch();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(71, 41);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(76, 20);
-            this.txtNombre.TabIndex = 0;
-            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
-            // 
-            // btnCrear
-            // 
-            this.btnCrear.Location = new System.Drawing.Point(9, 266);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(137, 89);
-            this.btnCrear.TabIndex = 1;
-            this.btnCrear.Text = "Crear";
-            this.btnCrear.UseVisualStyleBackColor = true;
-            this.btnCrear.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(71, 63);
-            this.txtApellido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(76, 20);
-            this.txtApellido.TabIndex = 2;
-            this.txtApellido.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // txtDNI
-            // 
-            this.txtDNI.Location = new System.Drawing.Point(71, 86);
-            this.txtDNI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(76, 20);
-            this.txtDNI.TabIndex = 3;
-            this.txtDNI.TextChanged += new System.EventHandler(this.txtDNI_TextChanged);
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(71, 109);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(76, 20);
-            this.txtEmail.TabIndex = 4;
-            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(71, 132);
-            this.cmbRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(76, 21);
-            this.cmbRol.TabIndex = 5;
-            this.cmbRol.DropDownWidth = 200;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSize = true;
-            this.Nombre.Location = new System.Drawing.Point(7, 46);
-            this.Nombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Nombre.Name = "Nombre";
-            this.Nombre.Size = new System.Drawing.Size(44, 13);
-            this.Nombre.TabIndex = 6;
-            this.Nombre.Text = "Nombre";
-            this.Nombre.Click += new System.EventHandler(this.Nombre_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 68);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Apellido";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 91);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "DNI";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 114);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Email";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 136);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 10;
+            this.tituloAlta.Name = "tituloAlta";
+            this.subtituloAlta.Name = "subtituloAlta";
+            this.tituloDatosAlta.Name = "tituloDatosAlta";
+            this.tituloRolesAlta.Name = "tituloRolesAlta";
+            this.ayudaRolAlta.Name = "ayudaRolAlta";
+            this.txtNombre.Name = "txtNombre";
+            this.txtApellido.Name = "txtApellido";
+            this.txtDNI.Name = "txtDNI";
+            this.txtEmail.Name = "txtEmail";
+            this.datosAlta.Name = "datosAlta";
+            this.rolesAlta.Name = "rolesAlta";
+            this.insigniaAlta.Name = "insigniaAlta";
+            this.campoRolAlta.Name = "campoRolAlta";
+            this.campoNombreAlta.Name = "campoNombreAlta";
+            this.campoApellidoAlta.Name = "campoApellidoAlta";
+            this.campoDniAlta.Name = "campoDniAlta";
+            this.campoEmailAlta.Name = "campoEmailAlta";
+            this.iconoAlta.Name = "iconoAlta";
+            this.iconoDatosAlta.Name = "iconoDatosAlta";
+            this.iconoRolesAlta.Name = "iconoRolesAlta";
+            this.iconoDniAlta.Name = "iconoDniAlta";
+            this.iconoEmailAlta.Name = "iconoEmailAlta";
+            this.btnCrear.Name = "btnCrear";
+            this.cancelarAlta.Name = "cancelarAlta";
+            this.temaAlta.Name = "temaAlta";
+            this.cmbRol.Name = "cmbRol";
+            this.insigniaAlta.Location = new System.Drawing.Point(28, 24);
+            this.insigniaAlta.Size = new System.Drawing.Size(70, 70);
+            this.insigniaAlta.CornerRadius = 17;
+            this.insigniaAlta.BackColor = System.Drawing.Color.White;
+            this.insigniaAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.insigniaAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaAlta.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaAlta.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.iconoAlta.Location = new System.Drawing.Point(16, 16);
+            this.iconoAlta.Size = new System.Drawing.Size(38, 38);
+            this.iconoAlta.Kind = 0;
+            this.iconoAlta.BackColor = System.Drawing.Color.Transparent;
+            this.insigniaAlta.Controls.Add(this.iconoAlta);
+            this.iconoAlta.ForeColor = System.Drawing.Color.White;
+            this.tituloAlta.Location = new System.Drawing.Point(116, 24);
+            this.tituloAlta.Size = new System.Drawing.Size(365, 40);
+            this.tituloAlta.Font = new System.Drawing.Font("Segoe UI", 23F, System.Drawing.FontStyle.Bold);
+            this.tituloAlta.Text = "Crear usuario";
+            this.subtituloAlta.Location = new System.Drawing.Point(116, 70);
+            this.subtituloAlta.Size = new System.Drawing.Size(480, 30);
+            this.subtituloAlta.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.subtituloAlta.Text = "Completá los datos de la nueva cuenta";
+            this.subtituloAlta.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.temaAlta.Location = new System.Drawing.Point(516, 25);
+            this.temaAlta.Size = new System.Drawing.Size(96, 38);
+            this.temaAlta.TabIndex = 4;
+            this.temaAlta.Click += new System.EventHandler(this.temaAlta_Click);
+            this.datosAlta.Location = new System.Drawing.Point(28, 120);
+            this.datosAlta.Size = new System.Drawing.Size(584, 310);
+            this.datosAlta.CornerRadius = 18;
+            this.datosAlta.BackColor = System.Drawing.Color.White;
+            this.datosAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.datosAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.datosAlta.TabIndex = 0;
+            this.rolesAlta.Location = new System.Drawing.Point(28, 444);
+            this.rolesAlta.Size = new System.Drawing.Size(584, 150);
+            this.rolesAlta.CornerRadius = 18;
+            this.rolesAlta.BackColor = System.Drawing.Color.White;
+            this.rolesAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.rolesAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.rolesAlta.TabIndex = 1;
+            this.tituloDatosAlta.Location = new System.Drawing.Point(56, 18);
+            this.tituloDatosAlta.Size = new System.Drawing.Size(500, 30);
+            this.tituloDatosAlta.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.tituloDatosAlta.Text = "Datos personales";
+            this.tituloDatosAlta.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.iconoDatosAlta.Location = new System.Drawing.Point(22, 20);
+            this.iconoDatosAlta.Size = new System.Drawing.Size(24, 24);
+            this.iconoDatosAlta.Kind = 0;
+            this.iconoDatosAlta.BackColor = System.Drawing.Color.Transparent;
+            this.datosAlta.Controls.Add(this.iconoDatosAlta);
+            this.datosAlta.Controls.Add(this.tituloDatosAlta);
+            this.tituloRolesAlta.Location = new System.Drawing.Point(56, 18);
+            this.tituloRolesAlta.Size = new System.Drawing.Size(500, 30);
+            this.tituloRolesAlta.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.tituloRolesAlta.Text = "Rol y acceso";
+            this.tituloRolesAlta.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.iconoRolesAlta.Location = new System.Drawing.Point(22, 20);
+            this.iconoRolesAlta.Size = new System.Drawing.Size(24, 24);
+            this.iconoRolesAlta.Kind = 3;
+            this.iconoRolesAlta.BackColor = System.Drawing.Color.Transparent;
+            this.rolesAlta.Controls.Add(this.iconoRolesAlta);
+            this.rolesAlta.Controls.Add(this.tituloRolesAlta);
+            this.Nombre.Location = new System.Drawing.Point(22, 61);
+            this.Nombre.Size = new System.Drawing.Size(256, 23);
+            this.Nombre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.Nombre.Text = "Nombre";
+            this.Nombre.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoNombreAlta.Location = new System.Drawing.Point(22, 87);
+            this.campoNombreAlta.Size = new System.Drawing.Size(256, 42);
+            this.campoNombreAlta.CornerRadius = 10;
+            this.campoNombreAlta.BackColor = System.Drawing.Color.White;
+            this.campoNombreAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoNombreAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoNombreAlta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoNombreAlta.TabIndex = 0;
+            this.txtNombre.Location = new System.Drawing.Point(12, 11);
+            this.txtNombre.Size = new System.Drawing.Size(232, 24);
+            this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtNombre.TabIndex = 0;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtNombre.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtNombre.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtNombre.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoNombreAlta.Controls.Add(this.txtNombre);
+            this.datosAlta.Controls.Add(this.Nombre);
+            this.datosAlta.Controls.Add(this.campoNombreAlta);
+            this.label1.Location = new System.Drawing.Point(306, 61);
+            this.label1.Size = new System.Drawing.Size(256, 23);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label1.Text = "Apellido";
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoApellidoAlta.Location = new System.Drawing.Point(306, 87);
+            this.campoApellidoAlta.Size = new System.Drawing.Size(256, 42);
+            this.campoApellidoAlta.CornerRadius = 10;
+            this.campoApellidoAlta.BackColor = System.Drawing.Color.White;
+            this.campoApellidoAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoApellidoAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoApellidoAlta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoApellidoAlta.TabIndex = 1;
+            this.txtApellido.Location = new System.Drawing.Point(12, 11);
+            this.txtApellido.Size = new System.Drawing.Size(232, 24);
+            this.txtApellido.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtApellido.TabIndex = 0;
+            this.txtApellido.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtApellido.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtApellido.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtApellido.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtApellido.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoApellidoAlta.Controls.Add(this.txtApellido);
+            this.datosAlta.Controls.Add(this.label1);
+            this.datosAlta.Controls.Add(this.campoApellidoAlta);
+            this.label2.Location = new System.Drawing.Point(22, 141);
+            this.label2.Size = new System.Drawing.Size(540, 23);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label2.Text = "DNI";
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoDniAlta.Location = new System.Drawing.Point(22, 167);
+            this.campoDniAlta.Size = new System.Drawing.Size(540, 42);
+            this.campoDniAlta.CornerRadius = 10;
+            this.campoDniAlta.BackColor = System.Drawing.Color.White;
+            this.campoDniAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoDniAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoDniAlta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoDniAlta.TabIndex = 2;
+            this.txtDNI.Location = new System.Drawing.Point(42, 11);
+            this.txtDNI.Size = new System.Drawing.Size(486, 24);
+            this.txtDNI.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtDNI.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDNI.TabIndex = 0;
+            this.txtDNI.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtDNI.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtDNI.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtDNI.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtDNI.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoDniAlta.Controls.Add(this.txtDNI);
+            this.datosAlta.Controls.Add(this.label2);
+            this.datosAlta.Controls.Add(this.campoDniAlta);
+            this.iconoDniAlta.Location = new System.Drawing.Point(12, 11);
+            this.iconoDniAlta.Size = new System.Drawing.Size(22, 22);
+            this.iconoDniAlta.Kind = 1;
+            this.iconoDniAlta.BackColor = System.Drawing.Color.Transparent;
+            this.campoDniAlta.Controls.Add(this.iconoDniAlta);
+            this.label3.Location = new System.Drawing.Point(22, 221);
+            this.label3.Size = new System.Drawing.Size(540, 23);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label3.Text = "Email";
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoEmailAlta.Location = new System.Drawing.Point(22, 247);
+            this.campoEmailAlta.Size = new System.Drawing.Size(540, 42);
+            this.campoEmailAlta.CornerRadius = 10;
+            this.campoEmailAlta.BackColor = System.Drawing.Color.White;
+            this.campoEmailAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoEmailAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoEmailAlta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoEmailAlta.TabIndex = 3;
+            this.txtEmail.Location = new System.Drawing.Point(42, 11);
+            this.txtEmail.Size = new System.Drawing.Size(486, 24);
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmail.TabIndex = 0;
+            this.txtEmail.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtEmail.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtEmail.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtEmail.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtEmail.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoEmailAlta.Controls.Add(this.txtEmail);
+            this.datosAlta.Controls.Add(this.label3);
+            this.datosAlta.Controls.Add(this.campoEmailAlta);
+            this.iconoEmailAlta.Location = new System.Drawing.Point(12, 11);
+            this.iconoEmailAlta.Size = new System.Drawing.Size(22, 22);
+            this.iconoEmailAlta.Kind = 2;
+            this.iconoEmailAlta.BackColor = System.Drawing.Color.Transparent;
+            this.campoEmailAlta.Controls.Add(this.iconoEmailAlta);
+            this.label4.Location = new System.Drawing.Point(22, 54);
+            this.label4.Size = new System.Drawing.Size(540, 23);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.label4.Text = "Rol";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // CrearUsuario
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(161, 366);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.Nombre);
-            this.Controls.Add(this.cmbRol);
-            this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.txtApellido);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.rolesAlta.Controls.Add(this.label4);
+            this.campoRolAlta.Location = new System.Drawing.Point(22, 78);
+            this.campoRolAlta.Size = new System.Drawing.Size(540, 38);
+            this.campoRolAlta.CornerRadius = 10;
+            this.campoRolAlta.BackColor = System.Drawing.Color.White;
+            this.campoRolAlta.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoRolAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoRolAlta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoRolAlta.TabIndex = 0;
+            this.cmbRol.Location = new System.Drawing.Point(10, 6);
+            this.cmbRol.Size = new System.Drawing.Size(520, 27);
+            this.cmbRol.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cmbRol.TabIndex = 0;
+            this.cmbRol.DropDownWidth = 520;
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRol.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRol.ItemHeight = 23;
+            this.cmbRol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbRol.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.cmbRol.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.cmbRol.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRol_DrawItem);
+            this.campoRolAlta.Controls.Add(this.cmbRol);
+            this.rolesAlta.Controls.Add(this.campoRolAlta);
+            this.ayudaRolAlta.Location = new System.Drawing.Point(22, 120);
+            this.ayudaRolAlta.Size = new System.Drawing.Size(540, 24);
+            this.ayudaRolAlta.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.ayudaRolAlta.Text = "Podés crear la cuenta sin asignar un rol.";
+            this.ayudaRolAlta.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.rolesAlta.Controls.Add(this.ayudaRolAlta);
+            this.btnCrear.Location = new System.Drawing.Point(402, 615);
+            this.btnCrear.Size = new System.Drawing.Size(210, 42);
+            this.btnCrear.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnCrear.TabIndex = 2;
+            this.btnCrear.Text = "Crear usuario";
+            this.btnCrear.Click += new System.EventHandler(this.button1_Click);
+            this.cancelarAlta.Location = new System.Drawing.Point(28, 615);
+            this.cancelarAlta.Size = new System.Drawing.Size(172, 42);
+            this.cancelarAlta.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cancelarAlta.TabIndex = 3;
+            this.cancelarAlta.Text = "Cancelar";
+            this.cancelarAlta.Click += new System.EventHandler(this.cancelarAlta_Click);
+            this.btnCrear.Icon = ProyectoIS.UsuariosButtonIcon.UserAdd;
+            this.btnCrear.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnCrear.ForeColor = System.Drawing.Color.White;
+            this.btnCrear.FlatAppearance.BorderSize = 0;
+            this.cancelarAlta.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelarAlta.Tag = "secondary";
+            this.cancelarAlta.BackColor = System.Drawing.Color.White;
+            this.cancelarAlta.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarAlta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarAlta.FlatAppearance.BorderSize = 1;
+            this.Controls.Add(this.insigniaAlta);
+            this.Controls.Add(this.tituloAlta);
+            this.Controls.Add(this.subtituloAlta);
+            this.Controls.Add(this.temaAlta);
+            this.Controls.Add(this.datosAlta);
+            this.Controls.Add(this.rolesAlta);
             this.Controls.Add(this.btnCrear);
-            this.Controls.Add(this.txtNombre);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.cancelarAlta);
+            this.AcceptButton = this.btnCrear;
+            this.CancelButton = this.cancelarAlta;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(640, 674);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Name = "CrearUsuario";
-            this.Text = "CrearUsuario";
+            this.Text = "Crear usuario";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
-        #endregion
-
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Button btnCrear;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.TextBox txtDNI;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.ComboBox cmbRol;
         private System.Windows.Forms.Label Nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label tituloAlta;
+        private System.Windows.Forms.Label subtituloAlta;
+        private System.Windows.Forms.Label tituloDatosAlta;
+        private System.Windows.Forms.Label tituloRolesAlta;
+        private System.Windows.Forms.Label ayudaRolAlta;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.TextBox txtEmail;
+        private ProyectoIS.UsuariosRoundedPanel datosAlta;
+        private ProyectoIS.UsuariosRoundedPanel rolesAlta;
+        private ProyectoIS.UsuariosRoundedPanel insigniaAlta;
+        private ProyectoIS.UsuariosRoundedPanel campoRolAlta;
+        private ProyectoIS.UsuariosRoundedPanel campoNombreAlta;
+        private ProyectoIS.UsuariosRoundedPanel campoApellidoAlta;
+        private ProyectoIS.UsuariosRoundedPanel campoDniAlta;
+        private ProyectoIS.UsuariosRoundedPanel campoEmailAlta;
+        private ProyectoIS.AltaGlyph iconoAlta;
+        private ProyectoIS.AltaGlyph iconoDatosAlta;
+        private ProyectoIS.AltaGlyph iconoRolesAlta;
+        private ProyectoIS.AltaGlyph iconoDniAlta;
+        private ProyectoIS.AltaGlyph iconoEmailAlta;
+        private ProyectoIS.UsuariosRoundedButton btnCrear;
+        private ProyectoIS.UsuariosRoundedButton cancelarAlta;
+        private ProyectoIS.UsuariosThemeSwitch temaAlta;
+        private System.Windows.Forms.ComboBox cmbRol;
     }
 }

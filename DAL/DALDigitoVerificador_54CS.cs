@@ -1,4 +1,4 @@
-﻿using Servicios;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ namespace DAL
 {
     public class DALDigitoVerificador_54CS
     {
-        private static readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        private static readonly string _connectionString = Conexion_54CS.Cadena;
 
         // Nombre de la tabla especial DV y de la fila que guarda el total de la BD
         public const string TablaDV = "DV_54CS";
@@ -63,7 +63,7 @@ namespace DAL
         // devuelve null si la tabla DV todavia no fue inicializada
         public static DigitoVerificadorBD_54CS LeerDVPersistido()
         {
-            DigitoVerificadorBD_54CS objetoDV = new DigitoVerificadorBD_54CS();
+            DigitoVerificadorBD_54CS objetoDV = new DigitoVerificadorBD_54CS { TieneTotal_54CS = false };
             bool tieneFilas = false;
             bool tieneTotal = false;
             using (SqlConnection conexion = new SqlConnection(_connectionString))
@@ -85,6 +85,7 @@ namespace DAL
                             objetoDV.DVHBaseDatos_54CS = dvh;
                             objetoDV.DVVBaseDatos_54CS = dvv;
                             tieneTotal = true;
+                            objetoDV.TieneTotal_54CS = true;
                         }
                         else
                         {
@@ -110,52 +111,48 @@ namespace DAL
             return objetoDV;
         }
 
-        // calculo:
-
-        private static DVTabla_54CS CalcularDVDeTabla(string nombreTabla, DataTable datos)
+        // Sumas posicionales: el orden físico de SQL no importa, pero sí la
+        // asociación de valores dentro de cada fila, sus tipos y sus posiciones.
+        public static DVTabla_54CS CalcularDVDeTabla(string nombreTabla, DataTable datos)
         {
-            long dvhTabla = 0;
-            foreach (DataRow registro in datos.Rows)
-            {
-                long dvhRegistro = 0;
-                for (int columna = 0; columna < datos.Columns.Count; columna++)
-                {
-                    dvhRegistro += CalcularValorCelda(registro[columna]) * (columna + 1);
-                }
-                dvhTabla += dvhRegistro; // suma de los DVH de todos los registros
-            }
-
-            long dvvTabla = 0;
+            var filas = datos.Rows.Cast<DataRow>()
+                .Select(r => r.ItemArray.Select(SerializarCelda).ToArray())
+                .OrderBy(r => string.Concat(r), StringComparer.Ordinal).ToList();
+            string esquema = SerializarCelda(nombreTabla) +
+                string.Concat(datos.Columns.Cast<DataColumn>().Select(c =>
+                    SerializarCelda(c.ColumnName) + SerializarCelda(c.DataType.FullName))) +
+                SerializarCelda(filas.Count);
+            var horizontal = new StringBuilder(esquema);
+            foreach (var fila in filas)
+                foreach (string celda in fila) horizontal.Append(celda);
+            var vertical = new StringBuilder(esquema);
             for (int columna = 0; columna < datos.Columns.Count; columna++)
-            {
-                long dvvColumna = 0;
-                foreach (DataRow registro in datos.Rows)
-                {
-                    dvvColumna += CalcularValorCelda(registro[columna]);
-                }
-                dvvTabla += dvvColumna; // suma de los DVV de todas las columnas
-            }
-
+                foreach (var fila in filas) vertical.Append(fila[columna]);
             return new DVTabla_54CS
             {
                 NombreTabla_54CS = nombreTabla,
-                DVH_54CS = dvhTabla,
-                DVV_54CS = dvvTabla
+                DVH_54CS = SumarPosiciones(horizontal.ToString(), 1000000007),
+                DVV_54CS = SumarPosiciones(vertical.ToString(), 1000000009)
             };
         }
 
-        private static long CalcularValorCelda(object valor)
+        private static string SerializarCelda(object valor)
         {
-            if (valor == null || valor == DBNull.Value)
-            {
-                return 0;
-            }
+            if (valor == null || valor == DBNull.Value) return "N;";
             string texto = ConvertirATextoCanonico(valor);
+            string tipo = valor.GetType().FullName;
+            return "V" + tipo.Length.ToString(CultureInfo.InvariantCulture) + ":" + tipo +
+                texto.Length.ToString(CultureInfo.InvariantCulture) + ":" + texto;
+        }
+
+        private static long SumarPosiciones(string texto, long modulo)
+        {
             long suma = 0;
-            foreach (char caracter in texto)
+            for (int i = 0; i < texto.Length; i++)
             {
-                string hexadecimal = ((int)caracter).ToString("X"); // equivalente hexadecimal del caracter
-                suma += Convert.ToInt64(hexadecimal, 16);            // valor numérico del hexadecimal
+                long posicion = (i + 1L) % modulo;
+                long peso = posicion * posicion % modulo;
+                suma = (suma + texto[i] * peso) % modulo;
             }
             return suma;
         }
@@ -164,7 +161,7 @@ namespace DAL
         {
             if (valor is DateTime fecha)
             {
-                return fecha.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+                return fecha.ToString("yyyy-MM-dd HH:mm:ss.fffffff", CultureInfo.InvariantCulture);
             }
             if (valor is bool logico)
             {

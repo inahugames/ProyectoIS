@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,7 +39,7 @@ namespace Servicios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar los idiomas disponibles: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al buscar los idiomas disponibles: ") + ex.Message, TraducirMensaje("Error Crítico"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return codigos.OrderBy(c => c).ToList();
         }
@@ -72,7 +72,7 @@ namespace Servicios
                 string rutaArchivo = Path.Combine(_carpetaIdiomas ?? string.Empty, $"{codigoIdioma}.json");
 
                 if (!File.Exists(rutaArchivo))
-                    throw new FileNotFoundException($"No se encontró el archivo de idioma en: {rutaArchivo}");
+                    throw new FileNotFoundException(string.Format(IdiomaManager_54CS.TraducirMensaje("No se encontró el archivo de idioma en: {0}"), rutaArchivo));
 
                 string json = File.ReadAllText(rutaArchivo);
                 _textos = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
@@ -80,7 +80,7 @@ namespace Servicios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el idioma: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(IdiomaManager_54CS.TraducirMensaje("Error al cargar el idioma: ") + ex.Message, TraducirMensaje("Error Crítico"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static void CambiarIdioma(string codigoIdioma)

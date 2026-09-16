@@ -1,4 +1,4 @@
-﻿using MPP;
+using MPP;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -33,8 +33,8 @@ namespace BLL_54CS
                 return true;
             }
 
-            bool consistente = generado.DVHBaseDatos_54CS == persistido.DVHBaseDatos_54CS
-                            && generado.DVVBaseDatos_54CS == persistido.DVVBaseDatos_54CS;
+            bool consistente = Coinciden(generado, persistido);
+            if (!consistente) SessionManager_54CS.IntegridadComprometida = true;
             if (!consistente)
             {
                 detalle = ArmarDetalleInconsistencia(generado, persistido);
@@ -42,9 +42,20 @@ namespace BLL_54CS
             return consistente;
         }
 
-        // REPARACIÓN - RECALCULAR EL DV: fuerza la GENERACIÓN del DV tal cual
-        // ocurre en cada persistencia. No resuelve la inconsistencia: la acepta
-        // como nuevo estado válido de los datos.
+        public static bool Coinciden(DigitoVerificadorBD_54CS generado, DigitoVerificadorBD_54CS persistido)
+        {
+            if (generado == null || persistido == null || !persistido.TieneTotal_54CS ||
+                generado.DVHBaseDatos_54CS != persistido.DVHBaseDatos_54CS ||
+                generado.DVVBaseDatos_54CS != persistido.DVVBaseDatos_54CS ||
+                generado.Tablas_54CS.Count != persistido.Tablas_54CS.Count)
+                return false;
+            if (persistido.Tablas_54CS.Select(t => t.NombreTabla_54CS).Distinct(StringComparer.Ordinal).Count() != persistido.Tablas_54CS.Count)
+                return false;
+            return generado.Tablas_54CS.All(t => persistido.Tablas_54CS.Any(p =>
+                p.NombreTabla_54CS == t.NombreTabla_54CS && p.DVH_54CS == t.DVH_54CS && p.DVV_54CS == t.DVV_54CS));
+        }
+
+        // REPARACIÓN - RECALCULAR EL DV
         public void RecalcularDV()
         {
             MPPdv.RecalcularDV();
@@ -99,6 +110,7 @@ namespace BLL_54CS
             detalle.AppendLine($"DVH de la BD -> Almacenado: {persistido.DVHBaseDatos_54CS} | Calculado: {generado.DVHBaseDatos_54CS}");
             detalle.AppendLine($"DVV de la BD -> Almacenado: {persistido.DVVBaseDatos_54CS} | Calculado: {generado.DVVBaseDatos_54CS}");
             detalle.AppendLine();
+            if (!persistido.TieneTotal_54CS) detalle.AppendLine("Falta el total de la base de datos.");
 
             foreach (DVTabla_54CS tabla in generado.Tablas_54CS)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +12,12 @@ namespace Servicios
 
         public override void Agregar(Rol_54CS rol)
         {
-            throw new Exception("No se puede agregar a un permiso.");
+            throw new Exception(IdiomaManager_54CS.TraducirMensaje("No se puede agregar a un permiso."));
         }
 
         public override void Remover(Rol_54CS rol)
         {
-            throw new Exception("No se puede eliminar un permiso");
+            throw new Exception(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar un permiso"));
         }
 
         public override IList<Rol_54CS> ObtenerHijos()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +12,7 @@ namespace DAL
     public class DALRoles_54CS
     {
 
-        private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        private readonly string _connectionString = Conexion_54CS.Cadena;
         private Conexion_54CS conexionSQL = new Conexion_54CS();
         public DataTable ObtenerRoles()
         {
@@ -34,21 +34,8 @@ namespace DAL
 
         public int InsertarRol(string descripcion)
         {
-            string query = "INSERT INTO Roles_54CS (Nombre_54CS) VALUES (@desc); SELECT SCOPE_IDENTITY();";
-
-            int idGenerado;
-            using (SqlConnection cx = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, cx))
-                {
-                    cmd.Parameters.AddWithValue("@desc", descripcion);
-                    cx.Open();
-
-                    idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-            }
-            DALDigitoVerificador_54CS.RecalcularYPersistir();
-            return idGenerado;
+            return conexionSQL.InsertarId("INSERT INTO Roles_54CS (Nombre_54CS) VALUES (@desc); SELECT SCOPE_IDENTITY();",
+                new Dictionary<string, object> { { "@desc", descripcion } });
         }
 
         public int InsertarRelacionRolFamilia(int idRol, int idFamilia)
@@ -141,17 +128,8 @@ namespace DAL
 
         public bool ExisteRolEnUso(int idRol)
         {
-            string query = "SELECT COUNT(1) FROM Usuario_Rol WHERE IdRol = @idRol";
-            using (SqlConnection cx = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, cx))
-                {
-                    cmd.Parameters.AddWithValue("@idRol", idRol);
-                    cx.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
+            return Convert.ToInt32(conexionSQL.Leer("SELECT COUNT(*) FROM Usuario_Rol WHERE IdRol=@id",
+                new Dictionary<string, object> { { "@id", idRol } }).Rows[0][0]) > 0;
         }
     }
 }

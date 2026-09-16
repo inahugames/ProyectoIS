@@ -2,187 +2,369 @@
 {
     partial class ModificarUsuario
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.Nombre = new System.Windows.Forms.Label();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtDNI = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tituloEdicion = new System.Windows.Forms.Label();
+            this.subtituloEdicion = new System.Windows.Forms.Label();
+            this.tituloDatosEdicion = new System.Windows.Forms.Label();
+            this.tituloRolesEdicion = new System.Windows.Forms.Label();
+            this.ayudaRolEdicion = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.datosEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.rolesEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.insigniaEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoRolEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoNombreEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoApellidoEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoDniEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoEmailEdicion = new ProyectoIS.UsuariosRoundedPanel();
+            this.iconoEdicion = new ProyectoIS.AltaGlyph();
+            this.iconoDatosEdicion = new ProyectoIS.AltaGlyph();
+            this.iconoRolesEdicion = new ProyectoIS.AltaGlyph();
+            this.iconoDniEdicion = new ProyectoIS.AltaGlyph();
+            this.iconoEmailEdicion = new ProyectoIS.AltaGlyph();
+            this.btnModificar = new ProyectoIS.UsuariosRoundedButton();
+            this.cancelarEdicion = new ProyectoIS.UsuariosRoundedButton();
+            this.temaEdicion = new ProyectoIS.UsuariosThemeSwitch();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 102);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Rol";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 80);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Email";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 57);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "DNI";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 34);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Apellido";
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSize = true;
-            this.Nombre.Location = new System.Drawing.Point(9, 12);
-            this.Nombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Nombre.Name = "Nombre";
-            this.Nombre.Size = new System.Drawing.Size(44, 13);
-            this.Nombre.TabIndex = 17;
-            this.Nombre.Text = "Nombre";
-            //
-            // cmbRol
-            //
-            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(73, 98);
-            this.cmbRol.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(121, 21);
-            this.cmbRol.TabIndex = 16;
-            this.cmbRol.DropDownWidth = 200;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(73, 75);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(76, 20);
-            this.txtEmail.TabIndex = 15;
-            // 
-            // txtDNI
-            // 
-            this.txtDNI.Location = new System.Drawing.Point(73, 52);
-            this.txtDNI.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDNI.Name = "txtDNI";
-            this.txtDNI.ReadOnly = true;
-            this.txtDNI.Size = new System.Drawing.Size(76, 20);
-            this.txtDNI.TabIndex = 14;
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(73, 29);
-            this.txtApellido.Margin = new System.Windows.Forms.Padding(2);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.ReadOnly = true;
-            this.txtApellido.Size = new System.Drawing.Size(76, 20);
-            this.txtApellido.TabIndex = 13;
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(11, 232);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(137, 89);
-            this.btnModificar.TabIndex = 12;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(73, 7);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.label1.Name = "label1";
+            this.label2.Name = "label2";
+            this.label3.Name = "label3";
+            this.label4.Name = "label4";
+            this.tituloEdicion.Name = "tituloEdicion";
+            this.subtituloEdicion.Name = "subtituloEdicion";
+            this.tituloDatosEdicion.Name = "tituloDatosEdicion";
+            this.tituloRolesEdicion.Name = "tituloRolesEdicion";
+            this.ayudaRolEdicion.Name = "ayudaRolEdicion";
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.ReadOnly = true;
-            this.txtNombre.Size = new System.Drawing.Size(76, 20);
-            this.txtNombre.TabIndex = 11;
-            // 
-            // ModificarUsuario
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(165, 336);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.Nombre);
-            this.Controls.Add(this.cmbRol);
-            this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.txtApellido);
+            this.txtApellido.Name = "txtApellido";
+            this.txtDNI.Name = "txtDNI";
+            this.txtEmail.Name = "txtEmail";
+            this.datosEdicion.Name = "datosEdicion";
+            this.rolesEdicion.Name = "rolesEdicion";
+            this.insigniaEdicion.Name = "insigniaEdicion";
+            this.campoRolEdicion.Name = "campoRolEdicion";
+            this.campoNombreEdicion.Name = "campoNombreEdicion";
+            this.campoApellidoEdicion.Name = "campoApellidoEdicion";
+            this.campoDniEdicion.Name = "campoDniEdicion";
+            this.campoEmailEdicion.Name = "campoEmailEdicion";
+            this.iconoEdicion.Name = "iconoEdicion";
+            this.iconoDatosEdicion.Name = "iconoDatosEdicion";
+            this.iconoRolesEdicion.Name = "iconoRolesEdicion";
+            this.iconoDniEdicion.Name = "iconoDniEdicion";
+            this.iconoEmailEdicion.Name = "iconoEmailEdicion";
+            this.btnModificar.Name = "btnModificar";
+            this.cancelarEdicion.Name = "cancelarEdicion";
+            this.temaEdicion.Name = "temaEdicion";
+            this.cmbRol.Name = "cmbRol";
+            this.insigniaEdicion.Location = new System.Drawing.Point(28, 24);
+            this.insigniaEdicion.Size = new System.Drawing.Size(70, 70);
+            this.insigniaEdicion.CornerRadius = 17;
+            this.insigniaEdicion.BackColor = System.Drawing.Color.White;
+            this.insigniaEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.insigniaEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaEdicion.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaEdicion.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.iconoEdicion.Location = new System.Drawing.Point(16, 16);
+            this.iconoEdicion.Size = new System.Drawing.Size(38, 38);
+            this.iconoEdicion.Kind = 4;
+            this.iconoEdicion.BackColor = System.Drawing.Color.Transparent;
+            this.insigniaEdicion.Controls.Add(this.iconoEdicion);
+            this.iconoEdicion.ForeColor = System.Drawing.Color.White;
+            this.tituloEdicion.Location = new System.Drawing.Point(116, 24);
+            this.tituloEdicion.Size = new System.Drawing.Size(365, 40);
+            this.tituloEdicion.Font = new System.Drawing.Font("Segoe UI", 23F, System.Drawing.FontStyle.Bold);
+            this.tituloEdicion.Text = "Modificar usuario";
+            this.subtituloEdicion.Location = new System.Drawing.Point(116, 70);
+            this.subtituloEdicion.Size = new System.Drawing.Size(480, 30);
+            this.subtituloEdicion.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.subtituloEdicion.Text = "Actualizá el email y el rol de la cuenta";
+            this.subtituloEdicion.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.temaEdicion.Location = new System.Drawing.Point(516, 25);
+            this.temaEdicion.Size = new System.Drawing.Size(96, 38);
+            this.temaEdicion.TabIndex = 4;
+            this.temaEdicion.Click += new System.EventHandler(this.temaAlta_Click);
+            this.datosEdicion.Location = new System.Drawing.Point(28, 120);
+            this.datosEdicion.Size = new System.Drawing.Size(584, 310);
+            this.datosEdicion.CornerRadius = 18;
+            this.datosEdicion.BackColor = System.Drawing.Color.White;
+            this.datosEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.datosEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.datosEdicion.TabIndex = 0;
+            this.rolesEdicion.Location = new System.Drawing.Point(28, 444);
+            this.rolesEdicion.Size = new System.Drawing.Size(584, 150);
+            this.rolesEdicion.CornerRadius = 18;
+            this.rolesEdicion.BackColor = System.Drawing.Color.White;
+            this.rolesEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.rolesEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.rolesEdicion.TabIndex = 1;
+            this.tituloDatosEdicion.Location = new System.Drawing.Point(56, 18);
+            this.tituloDatosEdicion.Size = new System.Drawing.Size(500, 30);
+            this.tituloDatosEdicion.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.tituloDatosEdicion.Text = "Datos personales";
+            this.tituloDatosEdicion.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.iconoDatosEdicion.Location = new System.Drawing.Point(22, 20);
+            this.iconoDatosEdicion.Size = new System.Drawing.Size(24, 24);
+            this.iconoDatosEdicion.Kind = 0;
+            this.iconoDatosEdicion.BackColor = System.Drawing.Color.Transparent;
+            this.datosEdicion.Controls.Add(this.iconoDatosEdicion);
+            this.datosEdicion.Controls.Add(this.tituloDatosEdicion);
+            this.tituloRolesEdicion.Location = new System.Drawing.Point(56, 18);
+            this.tituloRolesEdicion.Size = new System.Drawing.Size(500, 30);
+            this.tituloRolesEdicion.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.tituloRolesEdicion.Text = "Rol y acceso";
+            this.tituloRolesEdicion.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.iconoRolesEdicion.Location = new System.Drawing.Point(22, 20);
+            this.iconoRolesEdicion.Size = new System.Drawing.Size(24, 24);
+            this.iconoRolesEdicion.Kind = 3;
+            this.iconoRolesEdicion.BackColor = System.Drawing.Color.Transparent;
+            this.rolesEdicion.Controls.Add(this.iconoRolesEdicion);
+            this.rolesEdicion.Controls.Add(this.tituloRolesEdicion);
+            this.Nombre.Location = new System.Drawing.Point(22, 61);
+            this.Nombre.Size = new System.Drawing.Size(256, 23);
+            this.Nombre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.Nombre.Text = "Nombre";
+            this.Nombre.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoNombreEdicion.Location = new System.Drawing.Point(22, 87);
+            this.campoNombreEdicion.Size = new System.Drawing.Size(256, 42);
+            this.campoNombreEdicion.CornerRadius = 10;
+            this.campoNombreEdicion.BackColor = System.Drawing.Color.White;
+            this.campoNombreEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoNombreEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoNombreEdicion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoNombreEdicion.TabIndex = 0;
+            this.txtNombre.Location = new System.Drawing.Point(12, 11);
+            this.txtNombre.Size = new System.Drawing.Size(232, 24);
+            this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtNombre.TabIndex = 0;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtNombre.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtNombre.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtNombre.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoNombreEdicion.Controls.Add(this.txtNombre);
+            this.datosEdicion.Controls.Add(this.Nombre);
+            this.datosEdicion.Controls.Add(this.campoNombreEdicion);
+            this.label1.Location = new System.Drawing.Point(306, 61);
+            this.label1.Size = new System.Drawing.Size(256, 23);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label1.Text = "Apellido";
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoApellidoEdicion.Location = new System.Drawing.Point(306, 87);
+            this.campoApellidoEdicion.Size = new System.Drawing.Size(256, 42);
+            this.campoApellidoEdicion.CornerRadius = 10;
+            this.campoApellidoEdicion.BackColor = System.Drawing.Color.White;
+            this.campoApellidoEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoApellidoEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoApellidoEdicion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoApellidoEdicion.TabIndex = 1;
+            this.txtApellido.Location = new System.Drawing.Point(12, 11);
+            this.txtApellido.Size = new System.Drawing.Size(232, 24);
+            this.txtApellido.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtApellido.TabIndex = 0;
+            this.txtApellido.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtApellido.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtApellido.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtApellido.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtApellido.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoApellidoEdicion.Controls.Add(this.txtApellido);
+            this.datosEdicion.Controls.Add(this.label1);
+            this.datosEdicion.Controls.Add(this.campoApellidoEdicion);
+            this.label2.Location = new System.Drawing.Point(22, 141);
+            this.label2.Size = new System.Drawing.Size(540, 23);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label2.Text = "DNI";
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoDniEdicion.Location = new System.Drawing.Point(22, 167);
+            this.campoDniEdicion.Size = new System.Drawing.Size(540, 42);
+            this.campoDniEdicion.CornerRadius = 10;
+            this.campoDniEdicion.BackColor = System.Drawing.Color.White;
+            this.campoDniEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoDniEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoDniEdicion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoDniEdicion.TabIndex = 2;
+            this.txtDNI.Location = new System.Drawing.Point(42, 11);
+            this.txtDNI.Size = new System.Drawing.Size(486, 24);
+            this.txtDNI.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtDNI.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDNI.TabIndex = 0;
+            this.txtDNI.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtDNI.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtDNI.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtDNI.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtDNI.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoDniEdicion.Controls.Add(this.txtDNI);
+            this.datosEdicion.Controls.Add(this.label2);
+            this.datosEdicion.Controls.Add(this.campoDniEdicion);
+            this.iconoDniEdicion.Location = new System.Drawing.Point(12, 11);
+            this.iconoDniEdicion.Size = new System.Drawing.Size(22, 22);
+            this.iconoDniEdicion.Kind = 1;
+            this.iconoDniEdicion.BackColor = System.Drawing.Color.Transparent;
+            this.campoDniEdicion.Controls.Add(this.iconoDniEdicion);
+            this.label3.Location = new System.Drawing.Point(22, 221);
+            this.label3.Size = new System.Drawing.Size(540, 23);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label3.Text = "Email";
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.campoEmailEdicion.Location = new System.Drawing.Point(22, 247);
+            this.campoEmailEdicion.Size = new System.Drawing.Size(540, 42);
+            this.campoEmailEdicion.CornerRadius = 10;
+            this.campoEmailEdicion.BackColor = System.Drawing.Color.White;
+            this.campoEmailEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoEmailEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoEmailEdicion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoEmailEdicion.TabIndex = 3;
+            this.txtEmail.Location = new System.Drawing.Point(42, 11);
+            this.txtEmail.Size = new System.Drawing.Size(486, 24);
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmail.TabIndex = 0;
+            this.txtEmail.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtEmail.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtEmail.Enter += new System.EventHandler(this.campoAlta_Enter);
+            this.txtEmail.Leave += new System.EventHandler(this.campoAlta_Leave);
+            this.txtEmail.HandleCreated += new System.EventHandler(this.campoAlta_HandleCreated);
+            this.campoEmailEdicion.Controls.Add(this.txtEmail);
+            this.datosEdicion.Controls.Add(this.label3);
+            this.datosEdicion.Controls.Add(this.campoEmailEdicion);
+            this.iconoEmailEdicion.Location = new System.Drawing.Point(12, 11);
+            this.iconoEmailEdicion.Size = new System.Drawing.Size(22, 22);
+            this.iconoEmailEdicion.Kind = 2;
+            this.iconoEmailEdicion.BackColor = System.Drawing.Color.Transparent;
+            this.campoEmailEdicion.Controls.Add(this.iconoEmailEdicion);
+            this.label4.Location = new System.Drawing.Point(22, 54);
+            this.label4.Size = new System.Drawing.Size(540, 23);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.label4.Text = "Rol";
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.rolesEdicion.Controls.Add(this.label4);
+            this.campoRolEdicion.Location = new System.Drawing.Point(22, 78);
+            this.campoRolEdicion.Size = new System.Drawing.Size(540, 38);
+            this.campoRolEdicion.CornerRadius = 10;
+            this.campoRolEdicion.BackColor = System.Drawing.Color.White;
+            this.campoRolEdicion.BorderColor = System.Drawing.Color.FromArgb(208, 214, 225);
+            this.campoRolEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.campoRolEdicion.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.campoRolEdicion.TabIndex = 0;
+            this.cmbRol.Location = new System.Drawing.Point(10, 6);
+            this.cmbRol.Size = new System.Drawing.Size(520, 27);
+            this.cmbRol.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cmbRol.TabIndex = 0;
+            this.cmbRol.DropDownWidth = 520;
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRol.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRol.ItemHeight = 23;
+            this.cmbRol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbRol.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.cmbRol.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.cmbRol.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRol_DrawItem);
+            this.campoRolEdicion.Controls.Add(this.cmbRol);
+            this.rolesEdicion.Controls.Add(this.campoRolEdicion);
+            this.ayudaRolEdicion.Location = new System.Drawing.Point(22, 120);
+            this.ayudaRolEdicion.Size = new System.Drawing.Size(540, 24);
+            this.ayudaRolEdicion.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.ayudaRolEdicion.Text = "La asignación de roles requiere el permiso correspondiente.";
+            this.ayudaRolEdicion.ForeColor = System.Drawing.Color.FromArgb(103, 110, 124);
+            this.rolesEdicion.Controls.Add(this.ayudaRolEdicion);
+            this.btnModificar.Location = new System.Drawing.Point(402, 615);
+            this.btnModificar.Size = new System.Drawing.Size(210, 42);
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnModificar.TabIndex = 2;
+            this.btnModificar.Text = "Guardar cambios";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.cancelarEdicion.Location = new System.Drawing.Point(28, 615);
+            this.cancelarEdicion.Size = new System.Drawing.Size(172, 42);
+            this.cancelarEdicion.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cancelarEdicion.TabIndex = 3;
+            this.cancelarEdicion.Text = "Cancelar";
+            this.cancelarEdicion.Click += new System.EventHandler(this.cancelarAlta_Click);
+            this.btnModificar.Icon = ProyectoIS.UsuariosButtonIcon.Check;
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.FlatAppearance.BorderSize = 0;
+            this.cancelarEdicion.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelarEdicion.Tag = "secondary";
+            this.cancelarEdicion.BackColor = System.Drawing.Color.White;
+            this.cancelarEdicion.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarEdicion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.cancelarEdicion.FlatAppearance.BorderSize = 1;
+            this.Controls.Add(this.insigniaEdicion);
+            this.Controls.Add(this.tituloEdicion);
+            this.Controls.Add(this.subtituloEdicion);
+            this.Controls.Add(this.temaEdicion);
+            this.Controls.Add(this.datosEdicion);
+            this.Controls.Add(this.rolesEdicion);
             this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.cancelarEdicion);
+            this.AcceptButton = this.btnModificar;
+            this.CancelButton = this.cancelarEdicion;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(640, 674);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Name = "ModificarUsuario";
-            this.Text = "ModificarUsuario";
+            this.Text = "Modificar usuario";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtNombre.ReadOnly = true;
+            this.txtNombre.TabStop = false;
+            this.txtApellido.ReadOnly = true;
+            this.txtApellido.TabStop = false;
+            this.txtDNI.ReadOnly = true;
+            this.txtDNI.TabStop = false;
+            this.cmbRol.SelectionChangeCommitted += new System.EventHandler(this.cmbRol_SelectionChangeCommitted);
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
-        #endregion
-
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Nombre;
-        private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtDNI;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label tituloEdicion;
+        private System.Windows.Forms.Label subtituloEdicion;
+        private System.Windows.Forms.Label tituloDatosEdicion;
+        private System.Windows.Forms.Label tituloRolesEdicion;
+        private System.Windows.Forms.Label ayudaRolEdicion;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.TextBox txtEmail;
+        private ProyectoIS.UsuariosRoundedPanel datosEdicion;
+        private ProyectoIS.UsuariosRoundedPanel rolesEdicion;
+        private ProyectoIS.UsuariosRoundedPanel insigniaEdicion;
+        private ProyectoIS.UsuariosRoundedPanel campoRolEdicion;
+        private ProyectoIS.UsuariosRoundedPanel campoNombreEdicion;
+        private ProyectoIS.UsuariosRoundedPanel campoApellidoEdicion;
+        private ProyectoIS.UsuariosRoundedPanel campoDniEdicion;
+        private ProyectoIS.UsuariosRoundedPanel campoEmailEdicion;
+        private ProyectoIS.AltaGlyph iconoEdicion;
+        private ProyectoIS.AltaGlyph iconoDatosEdicion;
+        private ProyectoIS.AltaGlyph iconoRolesEdicion;
+        private ProyectoIS.AltaGlyph iconoDniEdicion;
+        private ProyectoIS.AltaGlyph iconoEmailEdicion;
+        private ProyectoIS.UsuariosRoundedButton btnModificar;
+        private ProyectoIS.UsuariosRoundedButton cancelarEdicion;
+        private ProyectoIS.UsuariosThemeSwitch temaEdicion;
+        private System.Windows.Forms.ComboBox cmbRol;
     }
 }

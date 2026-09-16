@@ -1,4 +1,4 @@
-﻿using MPP;
+using MPP;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -25,47 +25,58 @@ namespace BLL_54CS
         public void CrearFamilia(Familia_54CS nuevaFamilia, string descripcion)
         {
             if (string.IsNullOrWhiteSpace(nuevaFamilia.Nombre))
-                throw new ArgumentException("El nombre de la Familia no puede estar vacío.");
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre de la Familia no puede estar vacío."));
 
+            nuevaFamilia.Nombre = nuevaFamilia.Nombre.Trim();
+            if (nuevaFamilia.Nombre.Length > 100 || (descripcion ?? "").Length > 255)
+                throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("El nombre admite 100 caracteres y la descripción 255."));
             var hijos = nuevaFamilia.ObtenerHijos();
             if (hijos.Count == 0)
-                throw new InvalidOperationException("Una Familia debe contener al menos un permiso o una familia.");
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("Una Familia debe contener al menos un permiso o una familia."));
 
-            int idFamiliaGenerada = _mpp.InsertarFamilia(nuevaFamilia.Nombre, descripcion);
-
-            foreach (var hijo in hijos)
+            _mpp.EnTransaccion(() =>
             {
-                if (hijo is Permiso_54CS)
+                int idFamiliaGenerada = _mpp.InsertarFamilia(nuevaFamilia.Nombre, descripcion);
+
+                foreach (var hijo in hijos)
                 {
-                    _mpp.InsertarRelacionFamiliaPermiso(idFamiliaGenerada, hijo.ID);
+                    if (hijo is Permiso_54CS)
+                    {
+                        _mpp.InsertarRelacionFamiliaPermiso(idFamiliaGenerada, hijo.ID);
+                    }
+                    else if (hijo is Familia_54CS)
+                    {
+                        _mpp.InsertarRelacionFamiliaFamilia(idFamiliaGenerada, hijo.ID);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("Una Familia solo puede contener Permisos u otras Familias."));
+                    }
                 }
-                else if (hijo is Familia_54CS)
-                {
-                    _mpp.InsertarRelacionFamiliaFamilia(idFamiliaGenerada, hijo.ID);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Una Familia solo puede contener Permisos u otras Familias.");
-                }
-            }
+            });
         }
 
         public void AgregarPermisoAFamilia(Familia_54CS familia, Permiso_54CS permiso)
         {
-            if (familia == null) { throw new ArgumentException("Debe seleccionar una Familia."); }
-            if (permiso == null) { throw new ArgumentException("Debe seleccionar un Permiso."); }
-            if (familia.TienePermiso(permiso.Nombre)) { throw new InvalidOperationException($"El permiso '{permiso.Nombre}' ya pertenece a la familia '{familia.Nombre}'."); }
+            if (familia == null) { throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar una Familia.")); }
+            if (permiso == null) { throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Permiso.")); }
+            if (familia.TienePermiso(permiso.Nombre)) { throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("El permiso '{0}' ya pertenece a la familia '{1}'."), permiso.Nombre, familia.Nombre)); }
 
-            _mpp.InsertarRelacionFamiliaPermiso(familia.ID, permiso.ID);
+            _mpp.EnTransaccion(() =>
+            {
+                _mpp.InsertarRelacionFamiliaPermiso(familia.ID, permiso.ID);
+                _mpp.ObtenerFamiliasEnsambladas();
+                _mpp.ObtenerArbolDeRolesCompleto();
+            });
             familia.Agregar(permiso);
         }
 
         public void QuitarPermisoDeFamilia(Familia_54CS familia, Permiso_54CS permiso)
         {
-            if (familia == null) { throw new ArgumentException("Debe seleccionar una Familia."); }
-            if (permiso == null) { throw new ArgumentException("Debe seleccionar un Permiso."); }
-            if (!familia.ObtenerHijos().Any(h => h.Nombre.Equals(permiso.Nombre, StringComparison.OrdinalIgnoreCase))) { throw new InvalidOperationException($"El permiso '{permiso.Nombre}' no pertenece directamente a la familia '{familia.Nombre}'."); }
-            if (familia.ObtenerHijos().Count <= 1) { throw new InvalidOperationException("No se puede eliminar el último permiso de una Familia"); }
+            if (familia == null) { throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar una Familia.")); }
+            if (permiso == null) { throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Debe seleccionar un Permiso.")); }
+            if (!familia.ObtenerHijos().Any(h => h.Nombre.Equals(permiso.Nombre, StringComparison.OrdinalIgnoreCase))) { throw new InvalidOperationException(string.Format(IdiomaManager_54CS.TraducirMensaje("El permiso '{0}' no pertenece directamente a la familia '{1}'."), permiso.Nombre, familia.Nombre)); }
+            if (familia.ObtenerHijos().Count <= 1) { throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("No se puede eliminar el último permiso de una Familia")); }
             
             _mpp.EliminarRelacionFamiliaPermiso(familia.ID, permiso.ID);
             familia.Remover(permiso);
@@ -73,15 +84,19 @@ namespace BLL_54CS
 
         public void EliminarFamilia(int idFamilia)
         {
-            if (idFamilia <= 0) { throw new ArgumentException("Identificador de Familia inválido."); }
+            if (idFamilia <= 0) { throw new ArgumentException(IdiomaManager_54CS.TraducirMensaje("Identificador de Familia inválido.")); }
 
             // no se puede borrar una familia que algún rol u otra familia este usando
             if (_mpp.ExisteFamiliaEnUso(idFamilia))
             {
-                throw new InvalidOperationException( "No se puede eliminar la Familia porque está siendo utilizada por un rol u otra familia. " + "Eliminela primero de donde se esté usando.");
+                throw new InvalidOperationException( IdiomaManager_54CS.TraducirMensaje("No se puede eliminar la Familia porque está siendo utilizada por un rol u otra familia. ") + IdiomaManager_54CS.TraducirMensaje("Eliminela primero de donde se esté usando."));
             }
-            _mpp.EliminarRelacionesDeFamilia(idFamilia);
-            _mpp.EliminarFamilia(idFamilia);
+            _mpp.EnTransaccion(() =>
+            {
+                if (_mpp.ExisteFamiliaEnUso(idFamilia)) throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("La familia está en uso."));
+                _mpp.EliminarRelacionesDeFamilia(idFamilia);
+                if (!_mpp.EliminarFamilia(idFamilia)) throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("La familia ya no existe."));
+            });
         }
     }
 }

@@ -11,6 +11,7 @@ namespace MPP
 {
     public class MPPPermisos_54CS
     {
+        public void EnTransaccion(Action accion) => Conexion_54CS.EnTransaccion(accion);
         private DALFamilia_54CS _dalfam;
         private DALRoles_54CS _dalrol;
         private DALPermisos_54CS _dalperm;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,7 @@ namespace Servicios
 
     public class DigitoVerificadorBD_54CS
     {
+        public bool TieneTotal_54CS { get; set; } = true;
         public List<DVTabla_54CS> Tablas_54CS { get; set; } = new List<DVTabla_54CS>();
         public long DVHBaseDatos_54CS { get; set; }
         public long DVVBaseDatos_54CS { get; set; }

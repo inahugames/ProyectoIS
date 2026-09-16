@@ -1,64 +1,82 @@
-﻿using System;
+using Servicios;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace DAL
 {
     public class Conexion_54CS
     {
-        private readonly string _connectionString = "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        internal static string Cadena => System.Configuration.ConfigurationManager.ConnectionStrings["BDProyecto"]?.ConnectionString
+            ?? "Server=.;DataBase=BDProyecto;Integrated Security=True";
+        [ThreadStatic] private static SqlConnection conexionActual;
+        [ThreadStatic] private static SqlTransaction transaccionActual;
+
+        public static void EnTransaccion(Action accion)
+        {
+            if (transaccionActual != null) { accion(); return; }
+            if (SessionManager_54CS.IntegridadComprometida)
+                throw new InvalidOperationException(IdiomaManager_54CS.TraducirMensaje("Escritura bloqueada: se detectó una inconsistencia de datos pendiente de reparación."));
+            using (var conexion = new SqlConnection(Cadena))
+            {
+                conexion.Open();
+                using (var transaccion = conexion.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    conexionActual = conexion;
+                    transaccionActual = transaccion;
+                    try { accion(); transaccion.Commit(); }
+                    finally { transaccionActual = null; conexionActual = null; }
+                }
+            }
+            DALDigitoVerificador_54CS.RecalcularYPersistir();
+        }
+
+        private static SqlCommand Comando(string query, SqlConnection conexion, Dictionary<string, object> parametros)
+        {
+            var comando = new SqlCommand(query, conexion, transaccionActual);
+            if (parametros != null)
+                foreach (var p in parametros)
+                    comando.Parameters.AddWithValue(p.Key, p.Value ?? DBNull.Value);
+            return comando;
+        }
 
         public DataTable Leer(string query, Dictionary<string, object> parametros = null, bool StoredProcedure = false)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            using (SqlCommand cm = new SqlCommand(query, connection))
+            using (var propia = conexionActual == null ? new SqlConnection(Cadena) : null)
+            using (var comando = Comando(query, conexionActual ?? propia, parametros))
             {
-                if (parametros != null)
+                if (StoredProcedure) comando.CommandType = CommandType.StoredProcedure;
+                if (propia != null) propia.Open();
+                using (var adaptador = new SqlDataAdapter(comando))
                 {
-                    foreach (var p in parametros)
-                    {
-                        cm.Parameters.AddWithValue(p.Key, p.Value ?? DBNull.Value);
-                    }
-                }
-                connection.Open();
-                using (SqlDataAdapter da = new SqlDataAdapter(cm))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
+                    var tabla = new DataTable();
+                    adaptador.Fill(tabla);
+                    return tabla;
                 }
             }
         }
+
         public int Escribir(string query, Dictionary<string, object> parametros = null)
         {
-            if (Servicios.SessionManager_54CS.IntegridadComprometida)
+            int filas = 0;
+            EnTransaccion(() =>
             {
-                throw new InvalidOperationException("Escritura bloqueada: se detectó una inconsistencia de datos pendiente de reparación.");
-            }
+                using (var comando = Comando(query, conexionActual, parametros))
+                    filas = comando.ExecuteNonQuery();
+            });
+            return filas;
+        }
 
-            int filasAfectadas;
-            using (SqlConnection conexion = new SqlConnection(_connectionString))
-            using (SqlCommand cm = new SqlCommand(query, conexion))
+        public int InsertarId(string query, Dictionary<string, object> parametros)
+        {
+            int id = 0;
+            EnTransaccion(() =>
             {
-                if (parametros != null)
-                {
-                    foreach (var p in parametros)
-                    {
-                        cm.Parameters.AddWithValue(p.Key, p.Value ?? DBNull.Value);
-                    }
-                }
-                conexion.Open();
-                filasAfectadas = cm.ExecuteNonQuery();
-            }
-
-            DALDigitoVerificador_54CS.RecalcularYPersistir();
-
-            return filasAfectadas;
+                using (var comando = Comando(query, conexionActual, parametros))
+                    id = Convert.ToInt32(comando.ExecuteScalar());
+            });
+            return id;
         }
     }
 }

@@ -2,126 +2,255 @@
 {
     partial class RestaurarBD
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.lblArchivo = new System.Windows.Forms.Label();
-            this.txtRuta = new System.Windows.Forms.TextBox();
-            this.btnExaminar = new System.Windows.Forms.Button();
             this.lblAviso = new System.Windows.Forms.Label();
-            this.btnRestaurar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.tituloRestore = new System.Windows.Forms.Label();
+            this.subtituloRestore = new System.Windows.Forms.Label();
+            this.tituloArchivoRestore = new System.Windows.Forms.Label();
+            this.tituloAvisoRestore = new System.Windows.Forms.Label();
+            this.detalleAvisoRestore = new System.Windows.Forms.Label();
+            this.pieRestore = new System.Windows.Forms.Label();
+            this.insigniaRestore = new ProyectoIS.UsuariosRoundedPanel();
+            this.archivoRestore = new ProyectoIS.UsuariosRoundedPanel();
+            this.campoRestore = new ProyectoIS.UsuariosRoundedPanel();
+            this.avisoRestore = new ProyectoIS.UsuariosRoundedPanel();
+            this.iconoRestore = new ProyectoIS.RestoreGlyph();
+            this.iconoArchivoRestore = new ProyectoIS.RestoreGlyph();
+            this.iconoAvisoRestore = new ProyectoIS.RestoreGlyph();
+            this.btnExaminar = new ProyectoIS.UsuariosRoundedButton();
+            this.btnRestaurar = new ProyectoIS.UsuariosRoundedButton();
+            this.btnCancelar = new ProyectoIS.UsuariosRoundedButton();
+            this.temaRestore = new ProyectoIS.UsuariosThemeSwitch();
+            this.txtRuta = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            //
-            // lblArchivo
-            //
-            this.lblArchivo.AutoSize = true;
-            this.lblArchivo.Location = new System.Drawing.Point(12, 15);
             this.lblArchivo.Name = "lblArchivo";
-            this.lblArchivo.Size = new System.Drawing.Size(137, 13);
-            this.lblArchivo.TabIndex = 0;
-            this.lblArchivo.Text = "Archivo de backup (.bak):";
-            //
-            // txtRuta
-            //
-            this.txtRuta.Location = new System.Drawing.Point(15, 40);
-            this.txtRuta.Name = "txtRuta";
-            this.txtRuta.ReadOnly = true;
-            this.txtRuta.Size = new System.Drawing.Size(400, 20);
-            this.txtRuta.TabIndex = 1;
-            //
-            // btnExaminar
-            //
-            this.btnExaminar.Location = new System.Drawing.Point(425, 37);
-            this.btnExaminar.Name = "btnExaminar";
-            this.btnExaminar.Size = new System.Drawing.Size(80, 26);
-            this.btnExaminar.TabIndex = 2;
-            this.btnExaminar.Text = "Examinar...";
-            this.btnExaminar.UseVisualStyleBackColor = true;
-            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
-            //
-            // lblAviso
-            //
-            this.lblAviso.Location = new System.Drawing.Point(12, 75);
             this.lblAviso.Name = "lblAviso";
-            this.lblAviso.Size = new System.Drawing.Size(493, 55);
-            this.lblAviso.TabIndex = 3;
-            this.lblAviso.Text = "Se recomienda elegir el backup más reciente, de manera de perder la mínima canti" +
-    "dad de datos de las operaciones normales del sistema.";
-            //
-            // btnRestaurar
-            //
-            this.btnRestaurar.Location = new System.Drawing.Point(148, 140);
+            this.tituloRestore.Name = "tituloRestore";
+            this.subtituloRestore.Name = "subtituloRestore";
+            this.tituloArchivoRestore.Name = "tituloArchivoRestore";
+            this.tituloAvisoRestore.Name = "tituloAvisoRestore";
+            this.detalleAvisoRestore.Name = "detalleAvisoRestore";
+            this.pieRestore.Name = "pieRestore";
+            this.insigniaRestore.Name = "insigniaRestore";
+            this.archivoRestore.Name = "archivoRestore";
+            this.campoRestore.Name = "campoRestore";
+            this.avisoRestore.Name = "avisoRestore";
+            this.iconoRestore.Name = "iconoRestore";
+            this.iconoArchivoRestore.Name = "iconoArchivoRestore";
+            this.iconoAvisoRestore.Name = "iconoAvisoRestore";
+            this.btnExaminar.Name = "btnExaminar";
             this.btnRestaurar.Name = "btnRestaurar";
-            this.btnRestaurar.Size = new System.Drawing.Size(105, 35);
-            this.btnRestaurar.TabIndex = 4;
-            this.btnRestaurar.Text = "Restaurar";
-            this.btnRestaurar.UseVisualStyleBackColor = true;
-            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
-            //
-            // btnCancelar
-            //
-            this.btnCancelar.Location = new System.Drawing.Point(268, 140);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(105, 35);
-            this.btnCancelar.TabIndex = 5;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            //
-            // RestaurarBD
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 191);
-            this.Controls.Add(this.btnCancelar);
+            this.temaRestore.Name = "temaRestore";
+            this.txtRuta.Name = "txtRuta";
+            this.insigniaRestore.Location = new System.Drawing.Point(28, 26);
+            this.insigniaRestore.Size = new System.Drawing.Size(72, 72);
+            this.insigniaRestore.CornerRadius = 17;
+            this.insigniaRestore.BackColor = System.Drawing.Color.White;
+            this.insigniaRestore.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.archivoRestore.Location = new System.Drawing.Point(28, 161);
+            this.archivoRestore.Size = new System.Drawing.Size(624, 211);
+            this.archivoRestore.CornerRadius = 18;
+            this.archivoRestore.BackColor = System.Drawing.Color.White;
+            this.archivoRestore.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.campoRestore.Location = new System.Drawing.Point(20, 96);
+            this.campoRestore.Size = new System.Drawing.Size(584, 44);
+            this.campoRestore.CornerRadius = 10;
+            this.campoRestore.BackColor = System.Drawing.Color.White;
+            this.campoRestore.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.avisoRestore.Location = new System.Drawing.Point(28, 388);
+            this.avisoRestore.Size = new System.Drawing.Size(624, 159);
+            this.avisoRestore.CornerRadius = 16;
+            this.avisoRestore.BackColor = System.Drawing.Color.White;
+            this.avisoRestore.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.insigniaRestore.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.insigniaRestore.BorderColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.archivoRestore.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.archivoRestore.TabIndex = 0;
+            this.campoRestore.TabIndex = 0;
+            this.campoRestore.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.avisoRestore.BackColor = System.Drawing.Color.FromArgb(255, 247, 232);
+            this.avisoRestore.BorderColor = System.Drawing.Color.FromArgb(231, 191, 127);
+            this.avisoRestore.ForeColor = System.Drawing.Color.FromArgb(152, 91, 16);
+            this.iconoRestore.Location = new System.Drawing.Point(17, 16);
+            this.iconoRestore.Size = new System.Drawing.Size(38, 40);
+            this.iconoRestore.Kind = 0;
+            this.iconoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.insigniaRestore.Controls.Add(this.iconoRestore);
+            this.iconoArchivoRestore.Location = new System.Drawing.Point(22, 20);
+            this.iconoArchivoRestore.Size = new System.Drawing.Size(28, 28);
+            this.iconoArchivoRestore.Kind = 1;
+            this.iconoArchivoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.archivoRestore.Controls.Add(this.iconoArchivoRestore);
+            this.iconoAvisoRestore.Location = new System.Drawing.Point(20, 24);
+            this.iconoAvisoRestore.Size = new System.Drawing.Size(38, 38);
+            this.iconoAvisoRestore.Kind = 2;
+            this.iconoAvisoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.avisoRestore.Controls.Add(this.iconoAvisoRestore);
+            this.iconoRestore.ForeColor = System.Drawing.Color.White;
+            this.tituloRestore.Location = new System.Drawing.Point(116, 24);
+            this.tituloRestore.Size = new System.Drawing.Size(410, 86);
+            this.tituloRestore.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
+            this.tituloRestore.BackColor = System.Drawing.Color.Transparent;
+            this.tituloRestore.Text = "Restaurar base\nde datos";
+            this.tituloRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.tituloRestore);
+            this.subtituloRestore.Location = new System.Drawing.Point(116, 115);
+            this.subtituloRestore.Size = new System.Drawing.Size(530, 28);
+            this.subtituloRestore.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.subtituloRestore.BackColor = System.Drawing.Color.Transparent;
+            this.subtituloRestore.Text = "Recuperá la información desde un backup";
+            this.subtituloRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.subtituloRestore);
+            this.tituloArchivoRestore.Location = new System.Drawing.Point(60, 20);
+            this.tituloArchivoRestore.Size = new System.Drawing.Size(530, 30);
+            this.tituloArchivoRestore.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.tituloArchivoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.tituloArchivoRestore.Text = "Archivo de backup";
+            this.tituloArchivoRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.archivoRestore.Controls.Add(this.tituloArchivoRestore);
+            this.lblArchivo.Location = new System.Drawing.Point(22, 66);
+            this.lblArchivo.Size = new System.Drawing.Size(580, 25);
+            this.lblArchivo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblArchivo.BackColor = System.Drawing.Color.Transparent;
+            this.lblArchivo.Text = "Archivo de backup (.bak):";
+            this.lblArchivo.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.archivoRestore.Controls.Add(this.lblArchivo);
+            this.tituloAvisoRestore.Location = new System.Drawing.Point(74, 18);
+            this.tituloAvisoRestore.Size = new System.Drawing.Size(526, 30);
+            this.tituloAvisoRestore.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.tituloAvisoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.tituloAvisoRestore.Text = "Se reemplazarán los datos actuales";
+            this.tituloAvisoRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.avisoRestore.Controls.Add(this.tituloAvisoRestore);
+            this.detalleAvisoRestore.Location = new System.Drawing.Point(74, 52);
+            this.detalleAvisoRestore.Size = new System.Drawing.Size(526, 48);
+            this.detalleAvisoRestore.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.detalleAvisoRestore.BackColor = System.Drawing.Color.Transparent;
+            this.detalleAvisoRestore.Text = "La información actual se reemplazará por el contenido del backup seleccionado.";
+            this.detalleAvisoRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.avisoRestore.Controls.Add(this.detalleAvisoRestore);
+            this.lblAviso.Location = new System.Drawing.Point(74, 104);
+            this.lblAviso.Size = new System.Drawing.Size(526, 43);
+            this.lblAviso.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblAviso.BackColor = System.Drawing.Color.Transparent;
+            this.lblAviso.Text = "Elegí el backup más reciente para reducir la pérdida de información.";
+            this.lblAviso.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.avisoRestore.Controls.Add(this.lblAviso);
+            this.pieRestore.Location = new System.Drawing.Point(28, 567);
+            this.pieRestore.Size = new System.Drawing.Size(624, 28);
+            this.pieRestore.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.pieRestore.BackColor = System.Drawing.Color.Transparent;
+            this.pieRestore.Text = "Al finalizar, deberás volver a iniciar sesión.";
+            this.pieRestore.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.Controls.Add(this.pieRestore);
+            this.tituloAvisoRestore.ForeColor = System.Drawing.Color.FromArgb(152, 91, 16);
+            this.subtituloRestore.ForeColor = System.Drawing.Color.DimGray;
+            this.pieRestore.ForeColor = System.Drawing.Color.DimGray;
+            this.pieRestore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.temaRestore.Location = new System.Drawing.Point(556, 27);
+            this.temaRestore.Size = new System.Drawing.Size(96, 38);
+            this.temaRestore.TabIndex = 4;
+            this.temaRestore.Click += new System.EventHandler(this.temaRestore_Click);
+            this.txtRuta.Location = new System.Drawing.Point(12, 11);
+            this.txtRuta.Size = new System.Drawing.Size(558, 24);
+            this.txtRuta.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtRuta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtRuta.ReadOnly = true;
+            this.txtRuta.TabStop = true;
+            this.txtRuta.TabIndex = 0;
+            this.txtRuta.BackColor = System.Drawing.Color.FromArgb(249, 250, 252);
+            this.txtRuta.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
+            this.txtRuta.Enter += new System.EventHandler(this.txtRuta_Enter);
+            this.txtRuta.Leave += new System.EventHandler(this.txtRuta_Leave);
+            this.campoRestore.Controls.Add(this.txtRuta);
+            this.archivoRestore.Controls.Add(this.campoRestore);
+            this.btnExaminar.Location = new System.Drawing.Point(414, 157);
+            this.btnExaminar.Size = new System.Drawing.Size(190, 40);
+            this.btnExaminar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnExaminar.TabIndex = 1;
+            this.btnExaminar.Text = "Examinar...";
+            this.btnExaminar.Icon = ProyectoIS.UsuariosButtonIcon.Folder;
+            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
+            this.btnExaminar.FlatAppearance.BorderSize = 1;
+            this.btnExaminar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnExaminar.BackColor = System.Drawing.Color.White;
+            this.btnExaminar.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnExaminar.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.archivoRestore.Controls.Add(this.btnExaminar);
+            this.btnRestaurar.Location = new System.Drawing.Point(432, 612);
+            this.btnRestaurar.Size = new System.Drawing.Size(220, 42);
+            this.btnRestaurar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnRestaurar.TabIndex = 2;
+            this.btnRestaurar.Text = "Restaurar";
+            this.btnRestaurar.Icon = ProyectoIS.UsuariosButtonIcon.Database;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
+            this.btnRestaurar.FlatAppearance.BorderSize = 0;
+            this.btnRestaurar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnRestaurar.BackColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnRestaurar.ForeColor = System.Drawing.Color.White;
+            this.btnRestaurar.HoverBackColor = System.Drawing.Color.FromArgb(35, 78, 170);
             this.Controls.Add(this.btnRestaurar);
-            this.Controls.Add(this.lblAviso);
-            this.Controls.Add(this.btnExaminar);
-            this.Controls.Add(this.txtRuta);
-            this.Controls.Add(this.lblArchivo);
+            this.btnCancelar.Location = new System.Drawing.Point(28, 612);
+            this.btnCancelar.Size = new System.Drawing.Size(180, 42);
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Icon = ProyectoIS.UsuariosButtonIcon.None;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnCancelar.FlatAppearance.BorderSize = 1;
+            this.btnCancelar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(219, 223, 231);
+            this.btnCancelar.BackColor = System.Drawing.Color.White;
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(45, 96, 196);
+            this.btnCancelar.HoverBackColor = System.Drawing.Color.FromArgb(216, 230, 254);
+            this.Controls.Add(this.btnCancelar);
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Controls.Add(this.insigniaRestore);
+            this.Controls.Add(this.temaRestore);
+            this.Controls.Add(this.archivoRestore);
+            this.Controls.Add(this.avisoRestore);
+            this.CancelButton = this.btnCancelar;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ClientSize = new System.Drawing.Size(680, 670);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "RestaurarBD";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Name = "RestaurarBD";
             this.Text = "Restaurar Base de Datos";
+            this.BackColor = System.Drawing.Color.FromArgb(245, 246, 249);
+            this.ForeColor = System.Drawing.Color.FromArgb(35, 39, 45);
             this.Load += new System.EventHandler(this.RestaurarBD_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
-
-        #endregion
-
         private System.Windows.Forms.Label lblArchivo;
-        private System.Windows.Forms.TextBox txtRuta;
-        private System.Windows.Forms.Button btnExaminar;
         private System.Windows.Forms.Label lblAviso;
-        private System.Windows.Forms.Button btnRestaurar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label tituloRestore;
+        private System.Windows.Forms.Label subtituloRestore;
+        private System.Windows.Forms.Label tituloArchivoRestore;
+        private System.Windows.Forms.Label tituloAvisoRestore;
+        private System.Windows.Forms.Label detalleAvisoRestore;
+        private System.Windows.Forms.Label pieRestore;
+        private ProyectoIS.UsuariosRoundedPanel insigniaRestore;
+        private ProyectoIS.UsuariosRoundedPanel archivoRestore;
+        private ProyectoIS.UsuariosRoundedPanel campoRestore;
+        private ProyectoIS.UsuariosRoundedPanel avisoRestore;
+        private ProyectoIS.RestoreGlyph iconoRestore;
+        private ProyectoIS.RestoreGlyph iconoArchivoRestore;
+        private ProyectoIS.RestoreGlyph iconoAvisoRestore;
+        private ProyectoIS.UsuariosRoundedButton btnExaminar;
+        private ProyectoIS.UsuariosRoundedButton btnRestaurar;
+        private ProyectoIS.UsuariosRoundedButton btnCancelar;
+        private ProyectoIS.UsuariosThemeSwitch temaRestore;
+        private System.Windows.Forms.TextBox txtRuta;
     }
 }
